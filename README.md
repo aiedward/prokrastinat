@@ -1,4 +1,4 @@
 prokrastinat
 ============
 
-Študentski spletni portal (nartabolši)
+Študentski spletni portal (nartaboŁši)

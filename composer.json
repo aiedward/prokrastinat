@@ -1,0 +1,15 @@
+{
+    "name": "prokrastinat",
+    "description": "Študentski portal za FERI",
+    "license": "GPL 3",
+    "keywords": [
+        "framework",
+        "zf2"
+    ],
+    "homepage": "http://www.kreten.si/portal/",
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zendframework": ">2.1.3",
+	"doctrine/doctrine-orm-module": "dev-master"
+    }
+}

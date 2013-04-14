@@ -1,3 +1,4 @@
+<<<<<<< HEAD
   
 
 
@@ -618,3 +619,9 @@
   </body>
 </html>
 
+=======
+prokrastinat
+============
+
+Študentski spletni portal (nartabolši)
+>>>>>>> 0a20d7d834e172cbab9fb560f113dc389650a0e8

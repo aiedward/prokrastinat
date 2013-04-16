@@ -1,5 +1,5 @@
 <?php
-namespace Prokrastinat\Entities;
+namespace Prokrastinat\Entity;
 
 use Doctrine\ORM\Query\Expr\Base;
 
@@ -7,15 +7,14 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @author Jurij
- * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="Repository\User")
+ * @ORM\Entity
  */
 class User
 {
 	/**
 	 * @ORM\Id @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue(strategy="auto")
-	 * @ORM\SequenceGenerator(sequence_name="user_seq", initialValue=1000)
+	 * @ORM\GeneratedValue(strategy="SEQUENCE")
+	 * @ORM\SequenceGenerator(sequenceName="user_seq", initialValue=1000)
 	 */
 	protected $id;
 	

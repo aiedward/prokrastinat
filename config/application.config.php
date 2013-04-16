@@ -11,7 +11,9 @@ return array(
         'ZendDeveloperTools',
         'DoctrineModule',
         'DoctrineORMModule',
-        'User'
+        'User',
+    	'DluTwBootstrap',
+    	'DluTwBootstrapDemo'
         ),
     'module_listener_options' => array(
         'module_paths' => array(

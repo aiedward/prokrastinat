@@ -1,5 +1,5 @@
 <?php
-namespace User;
+namespace Prokrastinat;
 
 class Module
 {

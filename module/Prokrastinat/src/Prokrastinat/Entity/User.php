@@ -44,7 +44,7 @@ class User
 	protected $priimek;
 	
 	/**
-	 * @ORM\Column(type="int")
+	 * @ORM\Column(type="integer")
 	 */
 	protected $tip;
 	

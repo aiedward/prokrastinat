@@ -13,7 +13,7 @@ class User
 {
 	/**
 	 * @ORM\Id @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue(strategy="SEQUENCE")
+	 * @ORM\GeneratedValue(strategy="AUTO")
 	 * @ORM\SequenceGenerator(sequenceName="user_seq", initialValue=1000)
 	 */
 	protected $id;
@@ -44,7 +44,7 @@ class User
 	protected $priimek;
 	
 	/**
-	 * @ORM\Column(type="int")
+	 * @ORM\Column(type="integer")
 	 */
 	protected $tip;
 	

@@ -12,5 +12,6 @@
         "zendframework/zendframework": ">2.1.3",
 	"doctrine/doctrine-orm-module": "dev-master",
         "zendframework/zend-developer-tools": "dev-master",
+	"dlu/dlutwbootstrap": "dev-master"
     }
 }

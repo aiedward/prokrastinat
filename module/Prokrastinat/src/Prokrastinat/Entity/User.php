@@ -2,7 +2,6 @@
 namespace Prokrastinat\Entity;
 
 use Doctrine\ORM\Query\Expr\Base;
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,64 +17,39 @@ class User
 	 */
 	protected $id;
 	
-	/**
-	 * @ORM\Column(length=100)
-	 */
+	/** @ORM\Column(length=100) */
 	protected $email;
 	
-	/**
-	 * @ORM\Column(length=30)
-	 */
+	/** @ORM\Column(length=30) */
 	protected $username;
 	
-	/**
-	 * @ORM\Column(length=30, nullable=true)
-	 */
+	/** @ORM\Column(length=30, nullable=true) */
 	protected $vpisna_st;
 	
-	/**
-	 * @ORM\Column(length=30)
-	 */
+	/** @ORM\Column(length=30) */
 	protected $ime;
 	
-	/**
-	 * @ORM\Column(length=30)
-	 */
+	/** @ORM\Column(length=30) */
 	protected $priimek;
 	
-	/**
-	 * @ORM\Column(type="integer")
-	 */
+	/** @ORM\Column(type="integer") */
 	protected $tip;
 	
-	/**
-	 * @ORM\Column(length=32)
-	 */
+	/** @ORM\Column(length=32) */
 	protected $password_hash;
 	
-	/**
-	 * @ORM\Column(length=32)
-	 */
+	/** @ORM\Column(length=32) */
 	protected $password_salt;
 	
-	/**
-	 * @ORM\Column(type="datetime")
-	 */
+	/** @ORM\Column(type="datetime") */
 	protected $datum_registracije;
 	
-	/**
-	 * @ORM\Column(type="datetime")
-	 */
+	/** @ORM\Column(type="datetime") */
 	protected $datum_logina;
 	
-	/**
-	 * @ORM\Column(type="boolean")
-	 */
+	/** @ORM\Column(type="boolean") */
 	protected $enabled;
 	
-	/**
-	 * @ORM\Column(length=32, nullable=true)
-	 */
-	protected $confirmation;
-	
+	/** @ORM\Column(length=32, nullable=true) */
+	protected $confirmation;	
 }

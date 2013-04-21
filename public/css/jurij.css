@@ -1,0 +1,5 @@
+/* Popravim grd form */
+.form-actions {
+	background-color: inherit;
+	border-top: none;
+}

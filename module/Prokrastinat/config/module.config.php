@@ -18,6 +18,7 @@ return array(
 	'controllers' => array(
 		'invokables' => array(
 			'Prokrastinat\Controller\Index' => 'Prokrastinat\Controller\IndexController',
+			'Prokrastinat\Controller\User' => 'Prokrastinat\Controller\UserController',
 		),
 	),
 	'router' => array(

@@ -14,6 +14,7 @@ class UserController extends BaseController
 		$form = new \Prokrastinat\Form\Login();
 		
 		return new ViewModel (array(
-			'form' => $form));
+			'form' => $form,
+			'formType' => \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL));
 	}
 }

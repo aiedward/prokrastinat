@@ -1,7 +1,8 @@
 <?php
-namespace Prokrastinat\Controller;
+namespace Vprasanja\Controller;
 
-use Zend\View\Model\ViewModel;
+use Zend\View\Model\ViewModel,
+    Prokrastinat\Controller\BaseController;
 
 class VprasanjeController extends BaseController
 {

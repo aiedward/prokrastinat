@@ -1,8 +1,9 @@
 <?php
-namespace Prokrastinat\Entity;
+namespace Vprasanja\Entity;
 
 use Doctrine\ORM\Query\Expr\Base,
-    Doctrine\ORM\Mapping as ORM;
+    Doctrine\ORM\Mapping as ORM,
+    Prokrastinat\Entity\Komentar;
 
 /** @ORM\Entity */
 class Odgovor extends Komentar

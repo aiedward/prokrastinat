@@ -5,7 +5,8 @@ return array(
         'DoctrineModule',
         'DoctrineORMModule',
         'DluTwBootstrap',
-        'Prokrastinat'
+        'Prokrastinat',
+        'Vprasanja',
         ),
     'module_listener_options' => array(
         'module_paths' => array(

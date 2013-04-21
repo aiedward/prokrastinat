@@ -7,8 +7,6 @@ use Doctrine\ORM\Query\Expr\Base,
 /**
  * @ORM\Entity
  * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\DiscriminatorColumn(name="tip", type="integer")
- * @ORM\DiscriminatorMap({1 = "Vprasanje"})
  */
 class Objava
 {

@@ -2,7 +2,7 @@
 namespace Prokrastinat\Entity;
 
 use Doctrine\ORM\Query\Expr\Base,
-    Doctrine\ORM\Mapping as ORM;
+	Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
@@ -18,9 +18,9 @@ class Objava
 	protected $id;
 	
 	/**
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     */
+	 * @ORM\ManyToOne(targetEntity="User")
+	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+	 */
 	protected $user;
 	
 	/** @ORM\Column(length=30) */
@@ -28,6 +28,14 @@ class Objava
 	
 	/** @ORM\Column(length=512) */
 	protected $vsebina;
+
+	/** @ORM\Column(type="datetime") */
+	protected $datum_objave;
 	
-	// to-do: tags many to many
+	/**
+	 * @ORM\ManyToMany(targetEntity="Oznaka")
+	 * @ORM\JoinTable(name="Objava_Oznaka")
+	 * @ORM\JoinColumn(name="oznaka_id", referencedColumnName="id")
+	 */
+	protected $oznake;
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Prokrastinat;
+namespace Vprasanja;
 return array(
     'doctrine' => array(
         'driver' => array(
@@ -17,30 +17,21 @@ return array(
     ),
 	'controllers' => array(
 		'invokables' => array(
-			'Prokrastinat\Controller\Index' => 'Prokrastinat\Controller\IndexController',
+			'Vprasanja\Controller\Vprasanje' => 'Vprasanja\Controller\VprasanjeController',
 		),
 	),
 	'router' => array(
 		'routes' => array(
-			'home' => array(
-				'type' => 'literal',
-				'options' => array(
-					'route' => '/',
-					'defaults' => array(
-						'controller' => 'Prokrastinat\Controller\Index',
-						'action' => 'index',
-					),
-				),
-			),
-			'index' => array(
+			'vprasanje' => array(
 				'type' => 'segment',
 				'options' => array(
-					'route' => '/index[/:action]',
+					'route' => '/vprasanje[/:action][/:id]',
 					'constraints' => array(
-						'action' => '[a-zA-Z][a-zA-Z0-9]*'
+						'action' => '[a-zA-Z][a-zA-Z0-9]*',
+						'id'     => '[0-9]+',
 					),
 					'defaults' => array(
-						'controller' => 'Prokrastinat\Controller\Index',
+						'controller' => 'Vprasanja\Controller\Vprasanje',
 						'action' => 'index',
 					),
 				),
@@ -48,6 +39,9 @@ return array(
 		),
 	),
 	'view_manager' => array(
+		'template_map' => array(
+			'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+		),
 		'template_path_stack' => array(
 			__DIR__ . '/../view',
 		),

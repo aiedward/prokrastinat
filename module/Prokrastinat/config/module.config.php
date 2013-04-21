@@ -18,10 +18,13 @@ return array(
 	'controllers' => array(
 		'invokables' => array(
 			'Prokrastinat\Controller\Index' => 'Prokrastinat\Controller\IndexController',
+			'Prokrastinat\Controller\Vprasanje' => 'Prokrastinat\Controller\VprasanjeController',
 		),
 	),
 	'router' => array(
 		'routes' => array(
+
+			# /
 			'home' => array(
 				'type' => 'literal',
 				'options' => array(
@@ -32,6 +35,8 @@ return array(
 					),
 				),
 			),
+
+			# /index/
 			'index' => array(
 				'type' => 'segment',
 				'options' => array(
@@ -45,11 +50,35 @@ return array(
 					),
 				),
 			),
+
+			# /vprasanje/
+			'vprasanje' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route' => '/vprasanje[/:action][/:id]',
+					'constraints' => array(
+						'action' => '[a-zA-Z][a-zA-Z0-9]*',
+						'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+						'controller' => 'Prokrastinat\Controller\Vprasanje',
+						'action' => 'index',
+					),
+				),
+			),
 		),
 	),
 	'view_manager' => array(
+        'display_not_found_reason' => true,
+        'display_exceptions'       => true,
+        'not_found_template'       => 'error/404',
+        'exception_template'       => 'error/index',
+
 		'template_map' => array(
 			'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+
+			'error/404'               => __DIR__ . '/../view/error/404.phtml',
+            'error/index'             => __DIR__ . '/../view/error/index.phtml',
 		),
 		'template_path_stack' => array(
 			__DIR__ . '/../view',

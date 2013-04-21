@@ -1,0 +1,76 @@
+<?php echo $this->doctype(); ?>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <?php echo $this->headTitle($this->translate('Prokrastinat'))->setSeparator('::')->setAutoEscape(false) ?>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="container-fluid">
+    <div class="masthead">
+        <h3 class="muted">FERI</h3>
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="container">
+              <ul class="nav">
+                <li><a href="#">Menu entry</a></li>
+                <li><a href="#">Forum</a></li>
+                <li><a href="#">Webmail</a></li>
+                <li><a href="#">Eduroam</a></li>
+              </ul>
+            </div>
+          </div>
+        </div><!-- /.navbar -->
+      </div>
+
+    
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="active"><a href="#">Novice</a></li>
+              <li><a href="#">Splošne informacije</a></li>
+              <li><a href="#">Informacije za študente</a></li>
+              <li><a href="#">Informacije za dijake</a></li>
+              <li><a href="#">Študijski programi</a></li>
+              <li><a href="#">Izredni študij</a></li>
+              <li><a href="#">Podiplomski študij</a></li>
+              <li><a href="#">Obvladovanje kakovosti</a></li>
+              <li><a href="#">Raziskovalna dejavnost</a></li>
+              <li><a href="#">Javna naročila</a></li>
+              <li><a href="#">Alumni</a></li>
+              <li><a href="#">Oglasna deska</a></li>
+              <li class="nav-header">Sidebar</li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li class="nav-header">Sidebar</li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span9">
+          <div class="row-fluid">
+            <?= $this->content; ?>
+          </div><!--/row-->
+        </div><!--/span-->
+      </div><!--/row-->
+    </div><!--/.fluid-container-->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

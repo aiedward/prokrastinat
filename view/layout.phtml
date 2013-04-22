@@ -12,6 +12,12 @@ $this->headLink()->appendStylesheet($basePath . '/css/dlu-tw-bootstrap.css');
 //Twitter Bootstrap responsive styles
 $this->headLink()->appendStylesheet($basePath . '/css/bootstrap-responsive.min.css');
 
+// Jurijev css override
+$this->headLink()->appendStylesheet($basePath . '/css/jurij.css');
+
+// MaTTo css
+$this->headLink()->appendStylesheet($basePath .'/css/matto.css');
+
 //jQuery and Twitter Bootstrap JS libraries
 $this->inlineScript()->appendFile($basePath . '/js/jquery-1.8.0.min.js');
 $this->inlineScript()->appendFile($basePath . '/js/bootstrap.min.js');
@@ -67,7 +73,7 @@ echo $this->doctype(); ?>
               <li><a href="#">Raziskovalna dejavnost</a></li>
               <li><a href="#">Javna naročila</a></li>
               <li><a href="#">Alumni</a></li>
-              <li><a href="#">Oglasna deska</a></li>
+              <li><a href="<?php echo $this->url('deska');?>">Oglasna deska</a></li>
               <li class="nav-header">Sidebar</li>
               <li><a href="#">Link</a></li>
               <li><a href="#">Link</a></li>

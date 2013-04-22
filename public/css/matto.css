@@ -1,0 +1,13 @@
+/* MATTO CSS FILE */
+
+/* LINK: Dodaj oglas */
+#dodaj-oglas {
+    background-color: #5bc0de;
+    padding: 5px;
+    color: white;
+}
+    #dodaj-oglas:hover {
+        text-decoration: none;
+        color: black;
+    }
+

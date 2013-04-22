@@ -42,6 +42,19 @@ class DeskaForm extends Form
         // TODO: oznake
         
         $this->add(array(
+            'type' => 'Zend\Form\Element\Date',
+            'name' => 'datum-zapadlosti',
+            'options' => array(
+                'label' => 'Datum zapadlosti',
+            ),
+            'attributes' => array(
+                'min' => '01.01.2013',
+                'max' => '31.12.2013',
+                'step' => '1',
+            ),
+        ));
+        
+        $this->add(array(
            'name' => 'submit',
             'attributes' => array(
                 'type' => 'submit',

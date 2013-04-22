@@ -15,35 +15,35 @@ return array(
             )
         )
     ),
-	'controllers' => array(
-		'invokables' => array(
-			'Vprasanja\Controller\Vprasanje' => 'Vprasanja\Controller\VprasanjeController',
-		),
-	),
-	'router' => array(
-		'routes' => array(
-			'vprasanje' => array(
-				'type' => 'segment',
-				'options' => array(
-					'route' => '/vprasanje[/:action][/:id]',
-					'constraints' => array(
-						'action' => '[a-zA-Z][a-zA-Z0-9]*',
-						'id'     => '[0-9]+',
-					),
-					'defaults' => array(
-						'controller' => 'Vprasanja\Controller\Vprasanje',
-						'action' => 'index',
-					),
-				),
-			),
-		),
-	),
-	'view_manager' => array(
-		'template_map' => array(
-			'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
-		),
-		'template_path_stack' => array(
-			__DIR__ . '/../view',
-		),
-	),
+    'controllers' => array(
+        'invokables' => array(
+            'Vprasanja\Controller\Vprasanje' => 'Vprasanja\Controller\VprasanjeController',
+        ),
+    ),
+    'router' => array(
+        'routes' => array(
+            'vprasanje' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/vprasanje[/:action][/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9]*',
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Vprasanja\Controller\Vprasanje',
+                        'action' => 'index',
+                    ),
+                ),
+            ),
+        ),
+    ),
+    'view_manager' => array(
+        'template_map' => array(
+            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+        ),
+        'template_path_stack' => array(
+            __DIR__ . '/../view',
+        ),
+    ),
 );

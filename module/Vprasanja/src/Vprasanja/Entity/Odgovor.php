@@ -8,6 +8,6 @@ use Doctrine\ORM\Query\Expr\Base,
 /** @ORM\Entity */
 class Odgovor extends Komentar
 {
-	/** @ORM\Column(type="integer") */
-	protected $rating;
+    /** @ORM\Column(type="integer") */
+    protected $rating;
 }

@@ -35,7 +35,7 @@ class DeskaForm extends Form
                 'rows' => '10',
             ),
             'options' => array(
-                'label' => 'vsebina',
+                'label' => 'Vsebina',
             ),
         ));
         
@@ -47,6 +47,9 @@ class DeskaForm extends Form
                 'type' => 'submit',
                 'value' => 'Dodaj',
                 'id' => 'submitbutton',
+            ),
+            'options' => array(
+                'primary' => true,
             ),
         ));
     }

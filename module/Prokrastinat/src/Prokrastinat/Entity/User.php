@@ -48,5 +48,39 @@ class User
 	protected $enabled;
 	
 	/** @ORM\Column(length=32, nullable=true) */
-	protected $confirmation;	
+	protected $confirmation;
+        
+        /** @ORM\Column(length=64, nullable=true) */
+        protected $mesto;
+        
+        /** @ORM\Column(length=64, nullable=true) */
+        protected $drzava;
+        
+        /** @ORM\Column(length=8, nullable=true) */
+        protected $jezik = 'sl_SI';
+        
+        /** @ORM\Column(length=255, nullable=true) */
+        protected $opis;
+        
+        /** @ORM\Column(length=64, nullable=true) */
+        protected $splet;
+        
+        /** @ORM\Column(length=16, nullable=true) */
+        protected $icq;
+        
+        /** @ORM\Column(length=64, nullable=true) */
+        protected $skype;
+        
+        /** @ORM\Column(length=64, nullable=true) */
+        protected $aim;
+        
+        /** @ORM\Column(length=64, nullable=true) */
+        protected $yahoo;
+        
+        /** @ORM\Column(length=32, nullable=true) */
+        protected $telefon;
+        
+        /** @ORM\Column(length=64, nullable=true) */
+        protected $naslov;
+        
 }

@@ -15,6 +15,7 @@ return array(
 	'service_manager' => array(
 		'factories' => array(
 			'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
+                        'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
 		),
 	),
 	'translator' => array(
@@ -38,4 +39,12 @@ return array(
 		'not_found_template'		=> 'error/404',
 		'exception_template'		=> 'error/index',
 	),
+    
+        'db' => array(
+            'driver'         => 'Pdo',
+            'dsn'            => 'mysql:dbname=boris;host=localhost',
+            'driver_options' => array(
+                PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
+            ),
+        ),
 );

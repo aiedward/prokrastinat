@@ -8,7 +8,17 @@ use Prokrastinat\Entity\Objava;
 class Oglas extends Objava
 {
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string")
      */
     protected $datum_zapadlosti;
+    
+    public function setDatumZapadlosti($datum_zapadlosti)
+    {
+        $this->datum_zapadlosti = $datum_zapadlosti;
+    }
+    
+    public function getDatumZapadlosti()
+    {
+        return $this->datum_zapadlosti;
+    }
 }

@@ -2,12 +2,31 @@
 
 /* LINK: Dodaj oglas */
 #dodaj-oglas {
-    background-color: #5bc0de;
-    padding: 5px;
+    background-color: #0088cc;
+    padding: 7px;
     color: white;
 }
     #dodaj-oglas:hover {
         text-decoration: none;
         color: black;
     }
+    
+#form-textarea {
+    width: 450px;
+}
 
+
+#test #submitbutton {
+    border: none;
+    background-color: #0088cc;
+    color: white;
+    padding: 7px;
+}
+
+    #test #submitbutton:hover {
+        color: #999;
+    }
+
+#test label {
+    display: block;
+}

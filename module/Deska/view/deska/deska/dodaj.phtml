@@ -1,2 +1,21 @@
-<h3>Dodaj oglas</h3>
-<?= $this->form($this->form) ?>
+<?php
+    $title = 'Dodaj oglas';
+    $this->headtitle($title);
+?>
+
+    <h1><?= $this->escapeHtml($title); ?></h1>
+    <div id="test">
+    <?php
+        $form = $this->form;
+        $form->setAttribute('action', $this->url('deska', array('action' => 'dodaj')));
+        $form->prepare();
+
+        echo $this->form()->openTag($form);
+        echo $this->formRow($form->get('naslov'));
+        echo $this->formRow($form->get('datum-zapadlosti'));
+        echo $this->formRow($form->get('vsebina'));
+        echo "<br />";
+        echo $this->formSubmit($form->get('submit'));
+        echo $this->form()->closeTag();
+    ?>  
+    </div>

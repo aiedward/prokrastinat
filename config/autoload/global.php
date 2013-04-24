@@ -38,4 +38,14 @@ return array(
 		'not_found_template'		=> 'error/404',
 		'exception_template'		=> 'error/index',
 	),
+	'doctrine' => array(
+		'authentication' => array(
+			'orm_default' => array(
+				'object_manager' => 'Doctrine\ORM\EntityManager',
+				'identity_class' => 'Prokrastinat\Entity\User',
+				'identity_property' => 'username',
+				'credential_property' => 'password',
+			),
+		),
+	),
 );

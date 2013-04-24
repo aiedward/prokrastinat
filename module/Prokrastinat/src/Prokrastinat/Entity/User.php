@@ -33,10 +33,7 @@ class User
 	protected $tip;
 	
 	/** @ORM\Column(length=32) */
-	protected $password_hash;
-	
-	/** @ORM\Column(length=32) */
-	protected $password_salt;
+	protected $password;
 	
 	/** @ORM\Column(type="datetime") */
 	protected $datum_registracije;

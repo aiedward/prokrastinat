@@ -18,4 +18,15 @@ class Module
             ),
         );
     }
+    
+	public function getServiceConfig()
+	{
+		return array(
+			'factories' => array(
+				'Prokrastinat\Authentication\AuthenticationService' => function($serviceManager) {
+					return $serviceManager->get('doctrine.authenticationservice.orm_default');
+				}
+			)
+		);
+	}
 }

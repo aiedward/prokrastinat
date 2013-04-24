@@ -15,18 +15,6 @@
     width: 450px;
 }
 
-
-#test #submitbutton {
-    border: none;
-    background-color: #0088cc;
-    color: white;
-    padding: 7px;
-}
-
-    #test #submitbutton:hover {
-        color: #999;
-    }
-
 #test label {
     display: block;
 }
@@ -34,4 +22,8 @@
 #top-menu {
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+h3 {
+    color: #0081c2;
 }

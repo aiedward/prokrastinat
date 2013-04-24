@@ -62,6 +62,7 @@ class DeskaForm extends Form
                 'type' => 'submit',
                 'value' => 'Dodaj',
                 'id' => 'submitbutton',
+                'class' => 'btn btn-primary',
             ),
             'options' => array(
                 'primary' => true,

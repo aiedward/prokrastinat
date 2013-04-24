@@ -44,6 +44,16 @@ class Objava
 	{
 		return $this->id;
 	}
+        
+        public function getUser()
+        {
+            return $this->user;
+        }
+        
+        public function setUser($user)
+        {
+            $this->user = $user;
+        }
 
 	public function getNaslov()
 	{

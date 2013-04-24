@@ -4,13 +4,18 @@ namespace Deska\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Prokrastinat\Entity\Objava;
 
-/** @ORM\Entity */
+/** @ORM\Entity(repositoryClass="Deska\Repository\OglasRepository") */
 class Oglas extends Objava
 {
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="date")
      */
     protected $datum_zapadlosti;
+    
+     /**
+     * @ORM\Column(type="string")
+     */
+    protected $kategorija;
     
     public function setDatumZapadlosti($datum_zapadlosti)
     {
@@ -20,5 +25,15 @@ class Oglas extends Objava
     public function getDatumZapadlosti()
     {
         return $this->datum_zapadlosti;
+    }
+    
+    public function setKategorija($kategorija)
+    {
+        $this->kategorija = $kategorija;
+    }
+    
+    public function getKategorija()
+    {
+        return $this->kategorija;
     }
 }

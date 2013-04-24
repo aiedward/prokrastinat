@@ -6,22 +6,50 @@ use Zend\View\Model\ViewModel,
 
 class VprasanjeController extends BaseController
 {
-	public function indexAction()
-	{
-		return new ViewModel();
-	}
+    public function indexAction()
+    {
+        return new ViewModel();
+    }
 
-	public function dodajAction()
-	{
-	}
+    public function dodajAction()
+    {
+        $form = new \Vprasanja\Form\Vprasanje();
+        $request = $this->getRequest();
 
-	public function urediAction()
-	{
-		$id = (int) $this->params()->fromRoute('id', 0);
-	}
+        if ($request->isPost()) {
+            $form->setData($request->getPost());
+            $naslov  = $request->getPost('naslov');
+            $vsebina = $request->getPost('vsebina');
 
-	public function brisiAction()
-	{
-		$id = (int) $this->params()->fromRoute('id', 0);
-	}
+            if ($form->isValid()) {
+                $vprasanje = new \Vprasanja\Entity\Vprasanje();
+                $vprasanje->setNaslov($naslov);
+                $vprasanje->setVsebina($vsebina);
+                $vprasanje->setDatumObjave(new \DateTime("now"));
+
+                $this->getEntityManager()->persist($vprasanje);
+                $this->getEntityManager()->flush();
+
+                // success
+            }
+
+            // BAD
+        }
+
+        // ni blo POST
+
+        return new ViewModel(array(
+            'form' => $form
+        ));
+    }
+
+    public function urediAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+    }
+
+    public function brisiAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+    }
 }

@@ -8,6 +8,6 @@ use Doctrine\ORM\Query\Expr\Base,
 /** @ORM\Entity */
 class Vprasanje extends Objava
 {
-	/** @ORM\Column(type="integer") */
-	protected $rating;
+    /** @ORM\Column(type="integer") */
+    protected $rating;
 }

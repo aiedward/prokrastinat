@@ -16,3 +16,8 @@
 h3 {
 	color: #0081c2;
 }
+
+#oglas-vsebina {
+    word-wrap: break-word;
+    width: 450px;
+}

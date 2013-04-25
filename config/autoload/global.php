@@ -15,11 +15,11 @@ return array(
 	'service_manager' => array(
 		'factories' => array(
 			'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
-                        'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
+			'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
 		),
 	),
 	'translator' => array(
-		'locale' => 'en_US',
+		'locale' => 'sl_SI',
 		'translation_file_patterns' => array(
 			array(
 				'type'     => 'gettext',
@@ -30,7 +30,7 @@ return array(
 	),
 	'view_manager' => array(
 		'template_map' => array(
-			'layout/layouttwb'			=> 'view/layout.phtml',
+			'layout/layouttwb'		=> 'view/layout.phtml',
 			'error/404'				=> 'view/error/404.phtml',
 			'error/index'			=> __DIR__ . '/../../view/error/index.phtml',
 		),
@@ -46,14 +46,15 @@ return array(
 				'identity_class' => 'Prokrastinat\Entity\User',
 				'identity_property' => 'username',
 				'credential_property' => 'password',
+				'credentialCallable' => 'Prokrastinat\Repository\User::hashPassword'
 			),
 		),
 	),
-        'db' => array(
-            'driver'         => 'Pdo',
-            'dsn'            => 'mysql:dbname=feriprojekt;host=localhost',
-            'driver_options' => array(
-                PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
-            ),
-        ),
+	'db' => array(
+		'driver'         => 'Pdo',
+			'dsn'            => 'mysql:dbname=feriprojekt;host=localhost',
+			'driver_options' => array(
+			PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
+				),
+	),
 );

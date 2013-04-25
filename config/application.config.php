@@ -8,8 +8,8 @@ return array(
 		'Prokrastinat',
 		'Vprasanja',
 		'Deska',
-                'Datoteke',
-		),
+		'Datoteke',
+	),
 	'module_listener_options' => array(
 		'module_paths' => array(
 			'./module',

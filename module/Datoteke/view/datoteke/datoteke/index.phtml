@@ -3,30 +3,35 @@
 $title = 'Datoteke';
 $this->headTitle($title);
 ?>
-<h1><?php echo $this->escapeHtml($title); ?></h1>
+<h1>
+	<?php echo $this->escapeHtml($title); ?>
+</h1>
 <p>
-    <a href="<?php echo $this->url('datoteke', array('action'=>'add'));?>">Nalozi datoteko</a>
-    <a href="<?php echo $this->url('datoteke', array('action'=>'myFiles'));?>">Moje datoteke</a>
+	<a href="<?php echo $this->url('datoteke', array('action'=>'add'));?>">Nalozi
+		datoteko</a> <a
+		href="<?php echo $this->url('datoteke', array('action'=>'myFiles'));?>">Moje
+		datoteke</a>
 </p>
 
 <table class="table">
-<tr>
-    <th>Ime datoteke</th>
-    <th>Opis</th>
-    <th>Nalozeno</th>
-    <th>Preneseno</th>
-    <th>&nbsp;</th>
-</tr>
-<?php foreach ($datoteke as $datoteka) : ?>
-<tr>
-    <td><?php echo $this->escapeHtml($datoteka->imeDatoteke);?></td>
-    <td><?php echo $this->escapeHtml($datoteka->opis);?></td>
-    <td><?php echo $this->escapeHtml($datoteka->datum_uploada);?></td>
-    <td><?php echo $this->escapeHtml($datoteka->st_prenosov);?></td>
-    <td>
-        <a href="<?php echo $this->url('datoteke', array('action'=>'download', 'id'=>$datoteka->id, 'file'=>$datoteka->imeDatoteke));?>">Prenos</a>
-        <a href="<?php echo $this->url('datoteke', array('action'=>'delete', 'id'=>$datoteka->id, 'file'=>$datoteka->imeDatoteke));?>">Briši</a>
-    </td>
-</tr>
-<?php endforeach; ?>
+	<tr>
+		<th>Ime datoteke</th>
+		<th>Opis</th>
+		<th>Nalozeno</th>
+		<th>Preneseno</th>
+		<th>&nbsp;</th>
+	</tr>
+	<?php foreach ($datoteke as $datoteka) : ?>
+	<tr>
+		<td><?php echo $this->escapeHtml($datoteka->imeDatoteke);?></td>
+		<td><?php echo $this->escapeHtml($datoteka->opis);?></td>
+		<td><?php echo $this->escapeHtml($datoteka->datum_uploada);?></td>
+		<td><?php echo $this->escapeHtml($datoteka->st_prenosov);?></td>
+		<td><a
+			href="<?php echo $this->url('datoteke', array('action'=>'download', 'id'=>$datoteka->id, 'file'=>$datoteka->imeDatoteke));?>">Prenos</a>
+			<a
+			href="<?php echo $this->url('datoteke', array('action'=>'delete', 'id'=>$datoteka->id, 'file'=>$datoteka->imeDatoteke));?>">Briši</a>
+		</td>
+	</tr>
+	<?php endforeach; ?>
 </table>

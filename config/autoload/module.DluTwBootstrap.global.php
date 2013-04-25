@@ -1,10 +1,10 @@
 <?php
 /* ************************* NOTE ******************************
  * If you do not have your own layout view script referencing  *
- * the necessary Twitter Bootstrap and jQuery dependencies     *
- * move this file to <your project>/config/autoload directory  *
- * *************************************************************
- */
+* the necessary Twitter Bootstrap and jQuery dependencies     *
+* move this file to <your project>/config/autoload directory  *
+* *************************************************************
+*/
 
 /**
  * DluTwBootstrap - Global configuration override
@@ -18,7 +18,7 @@
  */
 
 return array(
-    'view_manager' => array(
-        'layout'                    => 'layout/layouttwb',
-    ),
+	'view_manager' => array(
+		'layout'                    => 'layout/layouttwb',
+	),
 );

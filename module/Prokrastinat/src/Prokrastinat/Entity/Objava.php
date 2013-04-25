@@ -2,7 +2,7 @@
 namespace Prokrastinat\Entity;
 
 use Doctrine\ORM\Query\Expr\Base,
-	Doctrine\ORM\Mapping as ORM;
+Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
@@ -16,22 +16,22 @@ class Objava
 	 * @ORM\SequenceGenerator(sequenceName="user_seq", initialValue=1000)
 	 */
 	protected $id;
-	
+
 	/**
 	 * @ORM\ManyToOne(targetEntity="User")
 	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
 	 */
 	protected $user;
-	
+
 	/** @ORM\Column(length=30) */
 	protected $naslov;
-	
+
 	/** @ORM\Column(length=512) */
 	protected $vsebina;
 
 	/** @ORM\Column(type="datetime") */
 	protected $datum_objave;
-	
+
 	/**
 	 * @ORM\ManyToMany(targetEntity="Oznaka")
 	 * @ORM\JoinTable(name="Objava_Oznaka")
@@ -44,16 +44,16 @@ class Objava
 	{
 		return $this->id;
 	}
-        
-        public function getUser()
-        {
-            return $this->user;
-        }
-        
-        public function setUser($user)
-        {
-            $this->user = $user;
-        }
+
+	public function getUser()
+	{
+		return $this->user;
+	}
+
+	public function setUser($user)
+	{
+		$this->user = $user;
+	}
 
 	public function getNaslov()
 	{

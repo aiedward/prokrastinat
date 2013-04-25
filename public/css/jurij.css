@@ -3,3 +3,9 @@
 	background-color: inherit;
 	border-top: none;
 }
+
+p.error {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	color: rgb(185, 74, 72);
+	font-size: 90%;
+}

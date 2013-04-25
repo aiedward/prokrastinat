@@ -2,8 +2,8 @@
 <hr />
 <div id="oglas-osnovni-podatki">
     Avtor: <?= $this->escapeHtml($oglas->getUser()) ?> <br />
-    Datum: <?= $this->escapeHtml($oglas->getDatumObjave()->format('Y-m-d')) ?> <br />
-    Zapade: <?= $this->escapeHtml($oglas->getDatumZapadlosti()->format('Y-m-d')) ?>
+    Datum: <?= $this->escapeHtml($oglas->getDatumObjave()->format('d-m-Y')) ?> <br />
+    Zapade: <?= $this->escapeHtml($oglas->getDatumZapadlosti()->format('d-m-Y')) ?>
 </div>
 <hr />
 <div id="oglas-vsebina">

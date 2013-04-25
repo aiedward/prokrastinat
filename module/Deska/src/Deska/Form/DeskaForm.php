@@ -49,10 +49,9 @@ class DeskaForm extends Form
 			),
 			'attributes' => array(
 				'id' => 'dp-zapadlost',
-				'min' => '01.01.2013',
-				'max' => '31.12.2013',
+				'min' => '2013-01-01',
+				'max' => '2013-12-12',
 				'step' => '1',
-				'value' => 'date("13.5.2013")'
 			),
 		));
 

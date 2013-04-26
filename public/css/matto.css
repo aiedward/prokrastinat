@@ -1,17 +1,5 @@
 /* MATTO CSS FILE */
 
-/* LINK: Dodaj oglas */
-#dodaj-oglas {
-	background-color: #0088cc;
-	padding: 7px;
-	color: white;
-}
-
-#dodaj-oglas:hover {
-	text-decoration: none;
-	color: black;
-}
-
 #form-textarea {
 	width: 450px;
 }
@@ -27,4 +15,9 @@
 
 h3 {
 	color: #0081c2;
+}
+
+#oglas-vsebina {
+    word-wrap: break-word;
+    width: 450px;
 }

@@ -1,11 +1,13 @@
-<h3>
-	<?= $this->escapeHtml($oglas->getNaslov()) ?>
-	<br />
-</h3>
-Avtor:
-<?= $this->escapeHtml($oglas->getUser()) ?>
-<br />
-<br />
-Vsebina:
-<br />
-<?= $this->escapeHtml($oglas->getVsebina()) ?>
+<h3><?= $this->escapeHtml($oglas->getNaslov()) ?></h3>
+<hr />
+<div id="oglas-osnovni-podatki">
+    Avtor: <?= $this->escapeHtml($oglas->getUser()) ?> <br />
+    Datum: <?= $this->escapeHtml($oglas->getDatumObjave()->format('d-m-Y')) ?> <br />
+    Zapade: <?= $this->escapeHtml($oglas->getDatumZapadlosti()->format('d-m-Y')) ?>
+</div>
+<hr />
+<div id="oglas-vsebina">
+    <?= $this->escapeHtml($oglas->getVsebina()) ?>
+</div>
+<hr />
+<a class="btn btn-primary" href="<?php echo $this->url('deska');?>">Nazaj</a>

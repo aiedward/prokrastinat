@@ -1,7 +1,6 @@
 <h1>Oglasna deska</h1>
 <div id="top-menu">
-	<a href="<?php echo $this->url('deska', array('action' => 'dodaj'));?>"
-		id="dodaj-oglas">Dodaj</a>
+    <a class="btn btn-primary" href="<?php echo $this->url('deska', array('action' => 'dodaj'));?>" id="dodaj-oglas">Dodaj</a>
 </div>
 <div id="user-menu"></div>
 <br />
@@ -11,7 +10,7 @@
 		<th>Avtor</th>
 		<th>Datum objave</th>
 		<th>Kategorija</th>
-		<th>Datum objave</th>
+		<th>Datum zapadlosti</th>
 	</tr>
 	<?php foreach ($oglasi as $oglas) : ?>
 	<tr>
@@ -19,10 +18,10 @@
 			href="<?php echo $this->url('deska', array('action' => 'preglej', 'id' => $oglas->getId())); ?>"><?php echo $this->escapeHtml($oglas->getNaslov());?>
 		</a></td>
 		<td><?php echo $this->escapeHtml($oglas->getUser());?></td>
-		<td><?php echo $this->escapeHtml($oglas->getDatumObjave()->format('Y-m-d')) ?>
+		<td><?php echo $this->escapeHtml($oglas->getDatumObjave()->format('d-m-Y')) ?>
 		</td>
 		<td><?php echo $this->escapeHtml($oglas->getKategorija()) ?></td>
-		<td><?php echo $this->escapeHtml($oglas->getDatumZapadlosti()->format('Y-m-d')) ?>
+		<td><?php echo $this->escapeHtml($oglas->getDatumZapadlosti()->format('d-m-Y')) ?>
 		</td>
 	</tr>
 	<?php endforeach; ?>

@@ -21,6 +21,11 @@ return array(
 			'Prokrastinat\Controller\User' => 'Prokrastinat\Controller\UserController',
 		),
 	),
+    'view_helpers' => array(
+        'invokables' => array(
+            'login_box' => 'Prokrastinat\View\Helper\LoginHelper',
+        )
+    ),
 	'router' => array(
 		'routes' => array(
 			'home' => array(

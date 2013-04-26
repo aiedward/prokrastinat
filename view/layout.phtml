@@ -40,24 +40,24 @@ echo $this->doctype(); ?>
   </head>
 
   <body>
-    <div class="container-fluid">
-    <div class="masthead">
-        <h3 class="muted">FERI</h3>
-        <div class="navbar">
-          <div class="navbar-inner">
-            <div class="container">
-              <ul class="nav">
-                <li><a href="#">Menu entry</a></li>
-                <li><a href="#">Forum</a></li>
-                <li><a href="#">Webmail</a></li>
-                <li><a href="#">Eduroam</a></li>
-              </ul>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner navbar-inner-center">
+            <div class="container-fluid">
+                <a class="brand" href="/">FERI</a>
+                <ul class="nav nav-center">
+                    <li><a href="#">AIPS</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="#">Forum</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="#">Webmail</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="#">Eduroam</a></li>
+                </ul>
+                <?= $this->login_box() ?>
             </div>
-          </div>
-        </div><!-- /.navbar -->
-      </div>
-
-    
+        </div>
+    </div>
+    <div class="container-fluid">
       <div class="row-fluid">
         <div class="span3">
           <div class="well sidebar-nav">

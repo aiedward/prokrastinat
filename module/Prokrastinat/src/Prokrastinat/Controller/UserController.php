@@ -40,7 +40,15 @@ class UserController extends BaseController
 			'formType' => \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL,
 		));
 	}
-
+	
+	public function logoutAction()
+	{
+		$authService = $this->getServiceLocator()->get('Prokrastinat\Authentication\AuthenticationService');
+		$authService->clearIdentity();
+		
+		return $this->redirect()->toRoute('index');
+	}
+	
 	public function editAction()
 	{
 		$form = new \Prokrastinat\Form\Edit();

@@ -9,3 +9,20 @@ p.error {
 	color: rgb(185, 74, 72);
 	font-size: 90%;
 }
+
+.navbar .nav-center,
+.navbar .nav-center > li {
+  float:none;
+  display:inline-block;
+  *display:inline; 
+  *zoom:1;
+  vertical-align: top;
+}
+
+.navbar-inner-center {
+  text-align:center;
+}
+
+body {
+	padding-top: 60px;
+}

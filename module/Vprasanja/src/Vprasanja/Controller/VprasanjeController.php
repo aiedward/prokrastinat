@@ -8,7 +8,7 @@ class VprasanjeController extends BaseController
 {
     public function indexAction()
     {
-        $query = $this->getEntityManager()->createQuery("SELECT o FROM Vprasanja\Entity\Vprasanje o");
+        $query = $this->getEntityManager()->createQuery("SELECT v FROM Vprasanja\Entity\Vprasanje v");
         $vprasanja = $query->getResult();
 
         return new ViewModel(array(

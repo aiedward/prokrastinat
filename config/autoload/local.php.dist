@@ -23,6 +23,7 @@ return array(
                     'user'     => 'username',
                     'password' => 'password',
                     'dbname'   => 'database',
+                    'charset'  => 'utf8',
                 )
             )
         )

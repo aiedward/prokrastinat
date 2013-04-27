@@ -6,50 +6,55 @@ Prokrastinat\Controller\BaseController;
 
 class VprasanjeController extends BaseController
 {
-	public function indexAction()
-	{
-		return new ViewModel();
-	}
+    public function indexAction()
+    {
+        $query = $this->getEntityManager()->createQuery("SELECT o FROM Vprasanja\Entity\Vprasanje o");
+        $vprasanja = $query->getResult();
 
-	public function dodajAction()
-	{
-		$form = new \Vprasanja\Form\Vprasanje();
-		$request = $this->getRequest();
+        return new ViewModel(array(
+            'vprasanja' => $vprasanja
+        ));
+    }
 
-		if ($request->isPost()) {
-			$form->setData($request->getPost());
-			$naslov  = $request->getPost('naslov');
-			$vsebina = $request->getPost('vsebina');
+    public function pregledAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+    }
 
-			if ($form->isValid()) {
-				$vprasanje = new \Vprasanja\Entity\Vprasanje();
-				$vprasanje->setNaslov($naslov);
-				$vprasanje->setVsebina($vsebina);
-				$vprasanje->setDatumObjave(new \DateTime("now"));
+    public function dodajAction()
+    {
+        $form = new \Vprasanja\Form\Vprasanje();
+        $request = $this->getRequest();
 
-				$this->getEntityManager()->persist($vprasanje);
-				$this->getEntityManager()->flush();
+        if ($request->isPost()) {
+            $form->setData($request->getPost());
 
-				// success
-			}
+            if ($form->isValid()) {
+                $vprasanje = new \Vprasanja\Entity\Vprasanje();
 
-			// BAD
-		}
+                $vprasanje->naslov = $form->get('naslov')->getValue();
+                $vprasanje->vsebina = $form->get('vsebina')->getValue();
+                $vprasanje->datum_objave = new \DateTime("now");
 
-		// ni blo POST
+                $this->getEntityManager()->persist($vprasanje);
+                $this->getEntityManager()->flush();
 
-		return new ViewModel(array(
-			'form' => $form
-		));
-	}
+                return $this->redirect()->toRoute('index');
+            }
+        }
 
-	public function urediAction()
-	{
-		$id = (int) $this->params()->fromRoute('id', 0);
-	}
+        return new ViewModel(array(
+            'form' => $form
+        ));
+    }
 
-	public function brisiAction()
-	{
-		$id = (int) $this->params()->fromRoute('id', 0);
-	}
+    public function urediAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+    }
+
+    public function brisiAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+    }
 }

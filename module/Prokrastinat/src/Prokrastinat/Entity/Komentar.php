@@ -2,13 +2,13 @@
 namespace Prokrastinat\Entity;
 
 use Doctrine\ORM\Query\Expr\Base,
-Doctrine\ORM\Mapping as ORM;
+	Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
  * @ORM\InheritanceType("SINGLE_TABLE")
  */
-class Komentar
+class Komentar extends BaseEntity
 {
 	/**
 	 * @ORM\Id @ORM\Column(type="integer")

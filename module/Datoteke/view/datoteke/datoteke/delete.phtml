@@ -3,27 +3,23 @@
 $title = 'Izbriši datoteko';
 $this->headTitle($title);
 ?>
-<h1>
-	<?php echo $this->escapeHtml($title); ?>
-</h1>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
 
-<p>
-	Ali ste prepričani, da želite izbrisati datoteko? '
-	<?php echo $this->escapeHtml($datoteke->imeDatoteke); ?>
-	'
+<p>Ali ste prepričani, da želite izbrisati datoteko?
+    '<?php echo $this->escapeHtml($datoteke->imeDatoteke); ?>'
 </p>
 <?php
 $url = $this->url('datoteke', array(
     'action' => 'delete',
     'id' => $datoteke->id,
     'file' => $datoteke->imeDatoteke,
-
+    
 ));
 ?>
 <form action="<?php echo $url; ?>" method="post">
-	<div>
-		<input type="hidden" name="id"
-			value="<?php echo (int) $datoteke->id; ?>" /> <input type="submit"
-			name="del" value="Da" /> <input type="submit" name="del" value="Ne" />
-	</div>
+<div>
+    <input type="hidden" name="id" value="<?php echo (int) $datoteke->id; ?>" />
+    <input type="submit" name="del" value="Da" />
+    <input type="submit" name="del" value="Ne" />
+</div>
 </form>

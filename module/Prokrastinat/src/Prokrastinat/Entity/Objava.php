@@ -32,6 +32,9 @@ class Objava extends BaseEntity
 	/** @ORM\Column(type="datetime") */
 	protected $datum_objave;
 
+	/** @ORM\OneToMany(targetEntity="Komentar", mappedBy="objava")
+	protected $komentarji;
+
 	/**
 	 * @ORM\ManyToMany(targetEntity="Oznaka")
 	 * @ORM\JoinTable(name="Objava_Oznaka")

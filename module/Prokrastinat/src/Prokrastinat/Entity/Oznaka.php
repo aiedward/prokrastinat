@@ -19,4 +19,11 @@ class Oznaka extends BaseEntity
 
 	/** @ORM\Column(length=30) */
 	protected $naslov;
+
+	/**
+	 * @ORM\ManyToMany(targetEntity="Objava")
+	 * @ORM\JoinTable(name="Objava_Oznaka")
+	 * @ORM\JoinColumn(name="objava_id", referencedColumnName="id")
+	 */
+	protected $objave;
 }

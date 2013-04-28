@@ -1,0 +1,5 @@
+<h3><?= $this->escapeHtml($vprasanje->naslov) ?></h3>
+<p><?= $this->escapeHtml($vprasanje->vsebina) ?></p>
+<?php foreach($vprasanje->komentarji as $komentar): ?>
+	<p><?= $komentar->vsebina ?></p>
+<?php endforeach ?>

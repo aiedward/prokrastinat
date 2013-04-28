@@ -10,11 +10,11 @@ class OglasRepository extends EntityRepository
         $em = $this->getEntityManager();
 
         //$oglas->setUser('test');
-        $oglas->setNaslov($data['naslov']);
-        $oglas->setVsebina($data['vsebina']);
-        $oglas->setDatumObjave(new \DateTime("now"));
-        $oglas->setDatumZapadlosti(\DateTime::createFromFormat('Y-m-d', $data['datum-zapadlosti']));
-        $oglas->setKategorija('kategorija-test');
+        $oglas->naslov = ($data['naslov']);
+        $oglas->vsebina = ($data['vsebina']);
+        $oglas->datum_objave = (new \DateTime("now"));
+        $oglas->datum_zapadlosti = (\DateTime::createFromFormat('Y-m-d', $data['datum-zapadlosti']));
+        $oglas->kategorija = ('kategorija-test');
 
         $em->persist($oglas);
         $em->flush();

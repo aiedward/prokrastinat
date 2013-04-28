@@ -15,13 +15,13 @@
 	<?php foreach ($oglasi as $oglas) : ?>
 	<tr>
 		<td><a
-			href="<?php echo $this->url('deska', array('action' => 'preglej', 'id' => $oglas->getId())); ?>"><?php echo $this->escapeHtml($oglas->getNaslov());?>
+			href="<?php echo $this->url('deska', array('action' => 'preglej', 'id' => $oglas->id)); ?>"><?php echo $this->escapeHtml($oglas->naslov);?>
 		</a></td>
-		<td><?php echo $this->escapeHtml($oglas->getUser());?></td>
-		<td><?php echo $this->escapeHtml($oglas->getDatumObjave()->format('d-m-Y')) ?>
+		<td><?php echo $this->escapeHtml($oglas->user);?></td>
+		<td><?php echo $this->escapeHtml($oglas->datum_objave->format('d-m-Y')) ?>
 		</td>
-		<td><?php echo $this->escapeHtml($oglas->getKategorija()) ?></td>
-		<td><?php echo $this->escapeHtml($oglas->getDatumZapadlosti()->format('d-m-Y')) ?>
+		<td><?php echo $this->escapeHtml($oglas->kategorija) ?></td>
+		<td><?php echo $this->escapeHtml($oglas->datum_zapadlosti->format('d-m-Y')) ?>
 		</td>
 	</tr>
 	<?php endforeach; ?>

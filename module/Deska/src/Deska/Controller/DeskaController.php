@@ -1,4 +1,5 @@
 <?php
+
 namespace Deska\Controller;
 
 use Prokrastinat\Controller\BaseController;
@@ -6,51 +7,52 @@ use Zend\View\Model\ViewModel;
 use Deska\Entity\Oglas;
 use Deska\Form\DeskaForm;
 
-class DeskaController extends BaseController
+class DeskaController extends BaseController 
 {
-	/**
-	 * @var Deska\Repository\Oglas
-	 */
-	protected $deska_repository;
 
-	public function indexAction()
-	{
-		$query = $this->getEntityManager()->createQuery("SELECT o FROM Deska\Entity\Oglas o");
-		$oglasi = $query->getResult();
+    /**
+     * @var Deska\Repository\Oglas
+     */
+    protected $deska_repository;
 
-		return new ViewModel(array('oglasi' => $oglasi));
-	}
+    public function indexAction() 
+    {
+        $query = $this->getEntityManager()->createQuery("SELECT o FROM Deska\Entity\Oglas o");
+        $oglasi = $query->getResult();
 
-	public function dodajAction()
-	{
-		$form = new DeskaForm();
-		$request = $this->getRequest();
-		$this->deska_repository = $this->getEntityManager()->getRepository('Deska\Entity\Oglas');
+        return new ViewModel(array('oglasi' => $oglasi));
+    }
 
-		if ($request->isPost())
-		{
-			$form->setData($request->getPost());
-			$oglas = new Oglas();
-			$vals = array(
-				'naslov' => "{$form->get('naslov')->getValue()}",
-				'vsebina' => "{$form->get('vsebina')->getValue()}",
-				'datum-zapadlosti' => "{$form->get('datum-zapadlosti')->getValue()}",
-			);
-			$this->deska_repository->saveOglas($oglas, $vals);
+    public function dodajAction() 
+    {
+        $form = new DeskaForm();
+        $request = $this->getRequest();
+        $this->deska_repository = $this->getEntityManager()->getRepository('Deska\Entity\Oglas');
 
-			return $this->redirect()->toRoute('deska');
-		}
+        if ($request->isPost()) {
+            $form->setData($request->getPost());
+            $oglas = new Oglas();
+            $vals = array(
+                'naslov' => "{$form->get('naslov')->getValue()}",
+                'vsebina' => "{$form->get('vsebina')->getValue()}",
+                'datum-zapadlosti' => "{$form->get('datum-zapadlosti')->getValue()}",
+            );
+            $this->deska_repository->saveOglas($oglas, $vals);
 
-		return array('form' => $form);
-	}
+            return $this->redirect()->toRoute('deska');
+        }
 
-	public function preglejAction()
-	{
-		$id = (int)$this->params()->fromRoute('id', 0);
-		$this->deska_repository = $this->getEntityManager()->getRepository('Deska\Entity\Oglas');
+        return array('form' => $form);
+    }
 
-		$oglas = $this->deska_repository->getOglasById($id);
+    public function preglejAction() 
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $this->deska_repository = $this->getEntityManager()->getRepository('Deska\Entity\Oglas');
 
-		return new ViewModel(array('oglas' => $oglas));
-	}
+        $oglas = $this->deska_repository->getOglasById($id);
+
+        return new ViewModel(array('oglas' => $oglas));
+    }
+
 }

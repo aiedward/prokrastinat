@@ -25,15 +25,15 @@ class LoginHelper extends AbstractHelper implements ServiceLocatorAwareInterface
         $translate = $this->getView()->plugin('translate');
         
         if ($auth->hasIdentity()) {
-            $id = $auth->getIdentity();
-            $ime = $id->ime . ' ' . $id->priimek;
+            $user = $auth->getIdentity();
+            $ime = $user->getPolnoIme();
             
             $menu = '<ul class="dropdown-menu">'
                 . '<li><a href="' . $url('user', array('action' => 'edit')) . '">Uredi podatke</a></li>'
                 . '<li><a href="' . $url('user', array('action' => 'logout')) . '">Izpis</a></li>'
                 . '</ul>';
             $button = '<div class="btn-group pull-right"><a class="btn dropdown-toggle" data-toggle="dropdown" href="#">'
-                . $escape($ime) . '<span class="caret"></span></a>' . $menu . '</div>';
+                . $escape($ime) . ' <span class="caret"></span></a>' . $menu . '</div>';
                 
             return $button;
         } else {

@@ -17,8 +17,8 @@
 	<?php $link = $this->url('preglej', array('action' => 'preglej', 'id' => $vprasanje->id)) ?>
 	<tr>
 		<td><a href="<?= $link ?>"><?= $this->escapeHtml($vprasanje->naslov) ?></a></td>
-		<td><?= $this->escapeHtml($vprasanje->user) ?></td>
-		<td><?= $this->dateFormat($vprasanje->datum_objave, IntlDateFormatter::MEDIUM) ?></td>
+		<td><?= $this->escapeHtml($vprasanje->user->getPolnoIme()) ?></td>
+		<td><?= $this->dateFormat($vprasanje->datum_objave, IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT) ?></td>
 	</tr>
 	<?php endforeach; ?>
 </table>

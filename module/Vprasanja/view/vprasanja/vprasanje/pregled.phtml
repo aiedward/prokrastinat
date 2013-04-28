@@ -1,5 +1,28 @@
-<h3><?= $this->escapeHtml($vprasanje->naslov) ?></h3>
-<p><?= $this->escapeHtml($vprasanje->vsebina) ?></p>
-<?php foreach($vprasanje->komentarji as $komentar): ?>
-	<p><?= $komentar->vsebina ?></p>
+<div class="btn-toolbar">
+        <button class="btn btn-primary"><i class="icon-pencil icon-white"></i> Odgovori</button>
+        <button class="btn"><i class="icon-star"></i> Označi</button> 
+    </div>
+
+<div class="well well-small">
+    <h3><?= $this->escapeHtml($vprasanje->naslov) ?></h3>
+    <p><?= $this->escapeHtml($vprasanje->vsebina) ?></p>
+
+    <p>
+        <i class="icon-user"></i> <a href="#"><?= $this->escapeHtml($vprasanje->user->getPolnoIme()) ?></a>
+        | <i class="icon-calendar"></i> <?= $this->dateFormat($vprasanje->datum_objave, IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT) ?>
+        | <i class="icon-comment"></i> <a href="#"><?= count($vprasanje->komentarji) ?> odgovorov</a>
+        <?php if (count($vprasanje->oznake) > 0): ?>
+            | <i class="icon-tags"></i> Oznake:
+            <?php foreach ($vprasanje->oznake as $oznaka): ?>
+                <a href="#"><span class="label label-info"><?= $oznaka->naslov ?></span></a>
+            <?php endforeach ?>
+        <?php endif ?>
+    </p>
+</div>
+
+<?php foreach ($vprasanje->komentarji as $komentar): ?>
+<div class="well well-small">
+    <p><?= $komentar->vsebina ?></p>
+</div>
 <?php endforeach ?>
+

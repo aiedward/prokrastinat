@@ -83,4 +83,9 @@ class User extends BaseEntity
 	/** @ORM\Column(length=64, nullable=true) */
 	protected $naslov;
 
+	public function getPolnoIme()
+	{
+		return $this->ime . ' ' . $this->priimek;
+	}
+
 }

@@ -30,13 +30,16 @@ class VprasanjeController extends BaseController
     {
         $form = new \Vprasanja\Form\Vprasanje();
         $request = $this->getRequest();
+        $auth = $this->getAuthService();
 
         if ($request->isPost()) {
+            // TO-DO: preveri če je logged in
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
                 $vprasanje = new \Vprasanja\Entity\Vprasanje();
 
+                $vprasanje->user = $auth->getIdentity();
                 $vprasanje->naslov = $form->get('naslov')->getValue();
                 $vprasanje->vsebina = $form->get('vsebina')->getValue();
                 $vprasanje->datum_objave = new \DateTime("now");
@@ -55,6 +58,7 @@ class VprasanjeController extends BaseController
 
     public function urediAction()
     {
+        // TO DO: pls
         $id = (int) $this->params()->fromRoute('id', 0);
         $vprasanje = $this->getEntityManager()->find('Vprasanja\Entity\Vprasanje', $id);
 
@@ -62,6 +66,7 @@ class VprasanjeController extends BaseController
         $request = $this->getRequest();
 
         if ($request->isPost()) {
+            // TO-DO: preveri če je logged in
             $form->setData($request->getPost());
 
             if ($form->isValid()) {

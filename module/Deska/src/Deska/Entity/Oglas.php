@@ -15,7 +15,7 @@ class Oglas extends Objava
 	/**
 	 * @ORM\Column(type="string")
 	 */
-	protected $kategorija;
+	protected $kategorija;	// to-do: uporabi entiteto Kategorija
 
 	public function setDatumZapadlosti($datum_zapadlosti)
 	{

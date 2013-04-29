@@ -16,15 +16,10 @@ class Komentar extends BaseEntity
      */
     protected $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     */
+    /** @ORM\ManyToOne(targetEntity="User") */
     protected $user;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Objava", inversedBy="komentarji")
-     */
+    /** @ORM\ManyToOne(targetEntity="Objava") */
     protected $objava;
 
     /** @ORM\Column(length=512) */

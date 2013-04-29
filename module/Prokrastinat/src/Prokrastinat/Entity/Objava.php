@@ -16,10 +16,7 @@ class Objava extends BaseEntity
      */
     protected $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     */
+    /** @ORM\ManyToOne(targetEntity="User") */
     protected $user;
 
     /** @ORM\Column(length=30) */
@@ -30,6 +27,9 @@ class Objava extends BaseEntity
 
     /** @ORM\Column(type="datetime") */
     protected $datum_objave;
+
+    /** @ORM\ManyToOne(targetEntity="Kategorija") */
+    protected $kategorija;
 
     /** @ORM\OneToMany(targetEntity="Komentar", mappedBy="objava") */
     protected $komentarji;

@@ -4,11 +4,8 @@ namespace Prokrastinat\Entity;
 use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- * @ORM\InheritanceType("SINGLE_TABLE")
- */
-class Oznaka extends BaseEntity
+/** @ORM\Entity */
+class Kategorija extends BaseEntity
 {
     /**
      * @ORM\Id @ORM\Column(type="integer")
@@ -17,11 +14,8 @@ class Oznaka extends BaseEntity
     protected $id;
 
     /** @ORM\Column(length=30) */
-    protected $naslov;
+    protected $ime;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Objava", inversedBy="oznake")
-     * @ORM\JoinTable(name="Objava_Oznaka")
-     */
+    /** @ORM\OneToMany(targetEntity="Objava", mappedBy="kategorija") */
     protected $objave;
 }

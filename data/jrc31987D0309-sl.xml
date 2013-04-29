@@ -1,0 +1,61 @@
+<TEI.2 id="jrc31987D0309-sl" n="31987D0309" lang="sl">
+  <teiHeader lang="en" date.created="2006-05-14">
+    <fileDesc>
+      <titleStmt>
+        <title>JRC-ACQUIS 31987D0309 Slovene</title>
+      </titleStmt>
+      <extent>35 paragraph segments</extent>
+      <publicationStmt>
+        <distributor>
+          <xref url="http://wt.jrc.it/lt/acquis/">http://wt.jrc.it/lt/acquis/</xref>
+        </distributor>
+      </publicationStmt>
+      <notesStmt>
+        <note>Only European Community legislation printed in the paper
+            edition of the Official Journal of the European Union is deemed authentic.</note>
+        <note>Originally published in the official languages of the European Union in the Official Journal of the European Union by the Office for Official Publications of the European Communities. Responsibility for the translation into Slovene from the original English edition lies entirely with [name of Slovene translation copyright holder].</note>
+      </notesStmt>
+      <sourceDesc>
+        <bibl>Downloaded from <xref url="http://europa.eu.int/eur-lex/lex/LexUriServ/LexUriServ.do?uri=CELEX:31987D0309:sl:HTML">http://europa.eu.int/eur-lex/lex/LexUriServ/LexUriServ.do?uri=CELEX:31987D0309:sl:HTML</xref> on <date>2006-02-22</date></bibl>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text id="jrc31987D0309-sl." lang="sl">
+    <body>
+      <p n="2">ODLOČBA KOMISIJE</p>
+      <p n="3">z dne 2. junija 1987</p>
+      <p n="4">o odobritvi neizbrisanega tiskanja predpisanih podatkov na embalažo semena nekaterih vrst krmnih rastlin</p>
+      <p n="5">(87/309/EGS)</p>
+      <p n="6">KOMISIJA EVROPSKIH SKUPNOSTI JE</p>
+      <p n="7">ob upoštevanju Pogodbe o ustanovitvi Evropske gospodarske skupnosti,</p>
+      <p n="8">ob upoštevanju Direktive Sveta 66/401/EGS z dne 14. junija 1966 o trženju semena krmnih rastlin [1], nazadnje spremenjene z Direktivo Komisije 87/120/EGS [2], in zlasti zadnjega stavka člena 10(1)(a) Direktive,</p>
+      <p n="9">ker se seme krmnih rastlin praviloma ne sme dati na trg, če embalaža ni označena z uradno etiketo v skladu z določbami Direktive 66/401/EGS;</p>
+      <p n="10">ker je za seme žit Odločba Komisije 80/755/EGS [3] odobrila neizbrisno tiskanje predpisanih podatkov na samo embalažo, na podlagi predpisanega vzorca za etiketo, pod nekaterimi pogoji, ki so zagotovili, da je bil za to pristojen organ za potrjevanje;</p>
+      <p n="11">ker se je navedeni sistem izkazal za uporabnega;</p>
+      <p n="12">ker je sedaj zaželeno, da se pod enakimi pogoji izda podobna odobritev za krmni grah in bob;</p>
+      <p n="13">ker so ukrepi, predvideni s to odločbo, v skladu z mnenjem Stalnega odbora za seme in razmnoževalni material za poljedelstvo, vrtnarstvo in gozdarstvo,</p>
+      <p n="14">SPREJELA NASLEDNJO ODLOČBO:</p>
+      <p n="15">Člen 1</p>
+      <p n="16">1. Države članice so pod pogoji iz odstavka 2 pooblaščene, da predvidijo tiskanje pod uradnim nadzorom predpisanih podatkov na embalažo semena krmnega graha in boba kategorij "osnovno seme" in "potrjeno seme".</p>
+      <p n="17">2. V zvezi s pooblastilom iz odstavka 1 veljajo naslednji pogoji:</p>
+      <p n="18">(a) predpisani podatki se neizbrisno natisnejo ali odtisnejo na embalažo;</p>
+      <p n="19">(b) razporeditev in barva tiska ali odtisa sta v skladu z vzorcem za etiketo, ki se uporablja v zadevni državi članici;</p>
+      <p n="20">(c) od predpisanih podatkov se vsaj tisti, predpisani v Prilogi IV(A)(a)(3), (3a) in (6) k Direktivi 66/401/EGS, natisnejo ali odtisnejo ob odvzemu vzorcev v skladu s členom 7(2) Direktive, tiskanje ali odtiskovanje pa se opravi uradno ali pod uradnim nadzorom;</p>
+      <p n="21">(d) poleg zahtevanih podatkov ima vsaka embalažna enota uradno dodeljeno lastno serijsko številko, ki jo nanjo neizbrisno natisne ali odtisne podjetje za tiskanje embalaže; navedeno podjetje obvesti organ za potrjevanje o količinah izdanih embalažnih enot, vključno z njihovimi serijskimi številkami;</p>
+      <p n="22">(e) organ za potrjevanje vodi evidenco tako označenih količin semena, vključno s številom in vsebino embalažnih enot vsake partije, pa tudi serijskih številk iz (d);</p>
+      <p n="23">(f) evidenca proizvajalca je predmet nadzora organa za potrjevanje.</p>
+      <p n="24">Člen 2</p>
+      <p n="25">Države članice obvestijo Komisijo o pogojih, pod katerimi uporabljajo pooblastilo iz člena 1. Komisija o teh pogojih obvesti druge države članice.</p>
+      <p n="26">Člen 3</p>
+      <p n="27">Ta odločba je naslovljena na države članice.</p>
+      <p n="28">V Bruslju, 2. junija 1987</p>
+      <p n="29">Za Komisijo</p>
+      <p n="30">Frans ANDRIESSEN</p>
+      <p n="31">Podpredsednik</p>
+      <p n="32">[1] UL 125, 11.7.1966, str. 2298/66.</p>
+      <p n="33">[2] UL L 49, 18.2.1987, str. 39.</p>
+      <p n="34">[3] UL L 207, 9.8.1980, str</p>
+      <p n="35">. 37.</p>
+    </body>
+  </text>
+</TEI.2>

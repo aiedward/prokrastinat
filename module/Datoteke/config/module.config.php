@@ -28,10 +28,9 @@ return array(
             'datoteke' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/datoteke[/:action][/:id][/:file]',
+                    'route'    => '/datoteke[/:action][/:id]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'file' => '.*',
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(

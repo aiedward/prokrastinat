@@ -23,7 +23,7 @@ class Datoteke implements InputFilterAwareInterface
         $this->id  = (isset($data['id']))  ? $data['id']     : null; 
         $this->datum_uploada  = (isset($data['datum_uploada']))  ? $data['datum_uploada']     : null; 
         $this->st_prenosov  = (isset($data['st_prenosov']))  ? $data['st_prenosov']     : null; 
-    } 
+    }
      
     public function setInputFilter(InputFilterInterface $inputFilter)
     {

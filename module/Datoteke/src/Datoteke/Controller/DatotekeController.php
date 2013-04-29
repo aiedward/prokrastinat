@@ -8,14 +8,11 @@ use Zend\Validator\File\Size;
 use Zend\View\Model\ViewModel;
 use Zend\Stdlib\DateTime;
 
-use Datoteke\Controller\BaseController;
+use Prokrastinat\Controller\BaseController;
  
 class DatotekeController extends BaseController
 {
-    /**
-     * @var Datoteke\Repository\Datoteka
-     */
-    protected $datoteka_Repository;
+
     public function addAction()
     {
         $form = new DatotekeForm();
@@ -48,7 +45,7 @@ class DatotekeController extends BaseController
                     }
                     $form->setMessages(array('fileupload'=>$error ));
                 } else {
-                    $adapter->setDestination(dirname(__DIR__).'/assets');
+                    $adapter->setDestination(dirname(dirname(dirname(dirname(dirname(__DIR__))))).'/data');
                     if ($adapter->receive($File['name'])) {
                         $datoteka->exchangeArray($form->getData());
                         //echo 'Datoteka '.$datoteka->fileupload. ' uspešno naložena!';
@@ -62,10 +59,10 @@ class DatotekeController extends BaseController
             ->get('Doctrine\ORM\EntityManager');
 
             $file= new \Datoteke\Entity\Datoteka();
-            $file->setOpis($form->get('opis')->getValue());
-            $file->setImeDatoteke($form->get('fileupload')->getValue());
-            $file->setDatum_uploada(new DateTime('now'));
-            $file->setSt_prenosov(0);
+            $file->opis = $form->get('opis')->getValue();
+            $file->imeDatoteke = $form->get('fileupload')->getValue();
+            $file->datum_uploada = new DateTime('now');
+            $file->st_prenosov = 0;
 
             $objectManager->persist($file);
             $objectManager->flush();
@@ -83,8 +80,6 @@ class DatotekeController extends BaseController
         $datoteke = $query->getResult();
         
         return new ViewModel(array('datoteke' => $datoteke));
-        /*return new ViewModel(array('datoteke' => $this->getDatotekeTable()->fetchAll(),
-        ));*/
     }
     
       public function deleteAction()
@@ -93,15 +88,19 @@ class DatotekeController extends BaseController
         if (!$id) {
             return $this->redirect()->toRoute('datoteke');
         }
+        
+        $em = $this->getEntityManager();
+        $datRep = $em->getRepository('Datoteke\Entity\Datoteka');
+        $dat = $datRep->find($id);
 
         $request = $this->getRequest();
         if ($request->isPost()) {
             $del = $request->getPost('del', 'Ne');
             if ($del == 'Da') {
-                $id = (int) $request->getPost('id');
-                $datoteka = $this->getEvent()->getRouteMatch()->getParam('file');
-                unlink(dirname(__DIR__).'/assets/'.$datoteka);
-                $this->getDatotekeTable()->deleteDatoteke($id);
+                $em->flush();
+                unlink(dirname(dirname(dirname(dirname(dirname(__DIR__))))).'\data\\'.$dat->imeDatoteke);
+                $datRep->deleteDatoteka($dat);
+                $em->flush();
             }
 
             return $this->redirect()->toRoute('datoteke');
@@ -109,30 +108,22 @@ class DatotekeController extends BaseController
 
         return array(
             'id'    => $id,
-            'datoteke' => $this->getDatotekeTable()->getDatoteke($id)
+            'datoteke' => $dat
         );
     }
-    
-    /*public function getDatotekeTable()
-    {
-        if (!$this->datotekeTable) {
-            $sm = $this->getServiceLocator();
-            $this->datotekeTable = $sm->get('Datoteke\Model\DatotekeTable');
-        }
-        return $this->datotekeTable;
-    }*/
+
     
     public function downloadAction()
     {
-        //$em = $this->getEntityManager();
-        $this->datoteka_Repository = $this->getEntityManager()->getRepository('Datoteke\Entity\Datoteka');
+        $datRep = $this->getEntityManager()->getRepository('Datoteke\Entity\Datoteka');
         $id = (int) $this->params()->fromRoute('id', 0);
-        $dat = $this->datoteka_Repository->find($id);
-        $this->datoteka_Repository->increaseCounter($dat);
+        $dat = $datRep->find($id);
         
-        $request = $this->getRequest();
-        $datoteka = $this->getEvent()->getRouteMatch()->getParam('file');
-        $file = dirname(__DIR__).'/assets/'.$datoteka;
+        $em = $this->getEntityManager();
+        $datRep->increaseCounter($dat);
+        $em->flush();
+        
+        $file = dirname(__DIR__).'/assets/'.$dat->imeDatoteke;
 
         $response = $this->getResponse();
         $response->getHeaders()
@@ -142,10 +133,13 @@ class DatotekeController extends BaseController
              ->addHeaderLine('content-disposition', "attachment; filename=\"".basename($file)."\"");
 
         $response->setContent(file_get_contents($file));
-                
-        
-        
+
         return $response;
     }
-}
+    
+    public function viewAction(){
+        return new ViewModel();        
+    }
+    
+    }
 

@@ -1,10 +1,10 @@
 <?php
 namespace Datoteke\Entity;
+use Prokrastinat\Entity\BaseEntity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @author Damjan
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Datoteke\Repository\DatotekaRepository")
  */
 class Datoteka extends BaseEntity
 {

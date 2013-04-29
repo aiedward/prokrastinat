@@ -4,12 +4,16 @@ namespace Datoteke\Repository;
 use Doctrine\ORM\EntityRepository;
 
 
-class Datoteka extends EntityRepository
+class DatotekaRepository extends EntityRepository
 {
     public function increaseCounter($datoteka) {
         $datoteka->st_prenosov += 1;
         $em = $this->getEntityManager();
         $em->persist($datoteka);
-        $em->flush();
+    }
+    
+    public function deleteDatoteka($datoteka) {
+        $em = $this->getEntityManager();
+        $em->remove($datoteka);
     }
 }

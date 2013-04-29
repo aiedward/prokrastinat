@@ -5,8 +5,8 @@ $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 
-<p>Ali ste prepričani, da želite izbrisati datoteko?
-    '<?php echo $this->escapeHtml($datoteke->imeDatoteke); ?>'
+<p>Ali ste prepričani, da želite izbrisati datoteko
+    >><?php echo $this->escapeHtml($datoteke->imeDatoteke); ?><< ?
 </p>
 <?php
 $url = $this->url('datoteke', array(

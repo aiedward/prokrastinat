@@ -2,14 +2,13 @@
 namespace Vprasanja\Controller;
 
 use Zend\View\Model\ViewModel,
-Prokrastinat\Controller\BaseController;
+    Prokrastinat\Controller\BaseController;
 
 class VprasanjeController extends BaseController
 {
     public function indexAction()
     {
-        $query = $this->getEntityManager()->createQuery('SELECT v FROM Vprasanja\Entity\Vprasanje v');
-        $vprasanja = $query->getResult();
+        $vprasanja = $this->em->getRepository('Vprasanja\Entity\Vprasanje')->findAll();
 
         return new ViewModel(array(
             'vprasanja' => $vprasanja
@@ -19,7 +18,7 @@ class VprasanjeController extends BaseController
     public function pregledAction()
     {
         $id = (int) $this->params()->fromRoute('id');
-        $vprasanje = $this->getEntityManager()->find('Vprasanja\Entity\Vprasanje', $id);
+        $vprasanje = $this->em->find('Vprasanja\Entity\Vprasanje', $id);
 
         return new ViewModel(array(
             'vprasanje' => $vprasanje
@@ -28,27 +27,28 @@ class VprasanjeController extends BaseController
 
     public function dodajAction()
     {
-        $form = new \Vprasanja\Form\Vprasanje();
-        $request = $this->getRequest();
-        $auth = $this->getAuthService();
+        $this->zahtevajLogin();
 
-        if ($request->isPost()) {
-            // TO-DO: preveri če je logged in
-            $form->setData($request->getPost());
+        $form = new \Vprasanja\Form\Vprasanje();
+
+        if ($this->request->isPost()) {
+            $form->setData($this->request->getPost());
 
             if ($form->isValid()) {
                 $vprasanje = new \Vprasanja\Entity\Vprasanje();
 
-                $vprasanje->user = $auth->getIdentity();
+                $vprasanje->user = $this->auth->getIdentity();
                 $vprasanje->naslov = $form->get('naslov')->getValue();
                 $vprasanje->vsebina = $form->get('vsebina')->getValue();
                 $vprasanje->datum_objave = new \DateTime("now");
 
-                $this->getEntityManager()->persist($vprasanje);
-                $this->getEntityManager()->flush();
+                $this->em->persist($vprasanje);
+                $this->em->flush();
 
-                return $this->redirect()->toRoute('index');
+                return $this->redirect()->toRoute('preglej', array('id' => $vprasanje->id));
             }
+
+            return $this->redirect()->toRoute('vprasanje');
         }
 
         return new ViewModel(array(
@@ -58,41 +58,50 @@ class VprasanjeController extends BaseController
 
     public function urediAction()
     {
-        // TO DO: pls
+        $this->zahtevajLogin();
+
         $id = (int) $this->params()->fromRoute('id', 0);
-        $vprasanje = $this->getEntityManager()->find('Vprasanja\Entity\Vprasanje', $id);
+        $vprasanje = $this->em->find('Vprasanja\Entity\Vprasanje', $id);
 
         $form = new \Vprasanja\Form\Vprasanje();
-        $request = $this->getRequest();
 
-        if ($request->isPost()) {
-            // TO-DO: preveri če je logged in
-            $form->setData($request->getPost());
+        if ($this->request->isPost()) {
+            $form->setData($this->request->getPost());
 
             if ($form->isValid()) {
                 $vprasanje->naslov = $form->get('naslov')->getValue();
                 $vprasanje->vsebina = $form->get('vsebina')->getValue();
-                $vprasanje->datum_objave = new \DateTime("now");
 
-                $this->getEntityManager()->persist($vprasanje);
-                $this->getEntityManager()->flush();
+                $this->em->persist($vprasanje);
+                $this->em->flush();
 
-                return $this->redirect()->toRoute('index');
+                return $this->redirect()->toRoute('preglej', array('id' => $vprasanje->id));
             }
-        } else {
-            $form->bind($vprasanje);
+
+            return $this->redirect()->toRoute('vprasanje');
         }
 
+        $form->setData(array(
+            'id' => $vprasanje->id,
+            'naslov' => $vprasanje->naslov,
+            'vsebina' => $vprasanje->vsebina
+        ));
+
         return new ViewModel(array(
-            'form' => $form,
-            'vprasanje' => $vprasanje
+            'form' => $form
         ));
     }
 
     public function brisiAction()
     {
-        $id = (int) $this->params()->fromRoute('id', 0);
+        $this->zahtevajLogin();
 
-        // PREVERI UPORABNIKA
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $vprasanje = $this->em->find('Vprasanja\Entity\Vprasanje', $id);
+
+        $this->em->remove($vprasanje);
+        $this->em->flush();
+
+        return $this->redirect()->toRoute('vprasanje');
     }
 }

@@ -26,7 +26,7 @@ class Objava extends BaseEntity
 	/** @ORM\Column(length=30) */
 	protected $naslov;
 
-	/** @ORM\Column(length=512) */
+	/** @ORM\Column(length=1000) */
 	protected $vsebina;
 
 	/** @ORM\Column(type="datetime") */

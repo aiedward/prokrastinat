@@ -2,25 +2,33 @@
 namespace Prokrastinat\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\EventManager\EventManagerInterface;
 
 abstract class BaseController extends AbstractActionController
 {
-    private $entity_manager;
-    private $auth_service;
+    protected $request;
+    protected $auth;
+    protected $em;
+
+    public function setEventManager(EventManagerInterface $events)
+    {
+        parent::setEventManager($events);
+
+        $this->request = $this->getRequest();
+        $this->auth = $this->getServiceLocator()->get('Prokrastinat\Authentication\AuthenticationService');
+        $this->em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+    }
 
     public function getEntityManager()
     {
-        if ($this->entity_manager === null) {
-            $this->entity_manager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        }
-        return $this->entity_manager;
+        return $em;
     }
 
-    public function getAuthService()
+    public function zahtevajLogin()
     {
-        if ($this->auth_service === null) {
-            $this->auth_service = $this->getServiceLocator()->get('Prokrastinat\Authentication\AuthenticationService');
+        if (!$this->auth->hasIdentity()) {
+            // to-do: zapomni si zadnji request in po uspešni prijavi redirectaj nazaj
+            return $this->redirect()->toRoute('user', array('action' => 'login'));
         }
-        return $this->auth_service;
     }
 }

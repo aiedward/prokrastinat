@@ -13,7 +13,6 @@ class Komentar extends BaseEntity
     /**
      * @ORM\Id @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\SequenceGenerator(sequenceName="user_seq", initialValue=1000)
      */
     protected $id;
 
@@ -24,8 +23,7 @@ class Komentar extends BaseEntity
     protected $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Objava")
-     * @ORM\JoinColumn(name="objava_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Objava", inversedBy="komentarji")
      */
     protected $objava;
 

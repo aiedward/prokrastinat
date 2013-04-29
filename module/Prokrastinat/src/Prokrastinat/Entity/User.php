@@ -10,7 +10,6 @@ class User extends BaseEntity
 	/**
 	 * @ORM\Id @ORM\Column(type="integer")
 	 * @ORM\GeneratedValue(strategy="AUTO")
-	 * @ORM\SequenceGenerator(sequenceName="user_seq", initialValue=1000)
 	 */
 	protected $id;
 

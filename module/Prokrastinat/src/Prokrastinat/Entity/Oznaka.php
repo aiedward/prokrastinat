@@ -13,7 +13,7 @@ class Oznaka extends BaseEntity
     /**
      * @ORM\Id @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\SequenceGenerator(sequenceName="user_seq", initialValue=1000)
+     * @ORM\SequenceGenerator(sequenceName="oznaka_seq", initialValue=1000)
      */
     protected $id;
 
@@ -21,9 +21,8 @@ class Oznaka extends BaseEntity
     protected $naslov;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Objava")
+     * @ORM\ManyToMany(targetEntity="Objava", inversedBy="oznake")
      * @ORM\JoinTable(name="Objava_Oznaka")
-     * @ORM\JoinColumn(name="objava_id", referencedColumnName="id")
      */
     protected $objave;
 }

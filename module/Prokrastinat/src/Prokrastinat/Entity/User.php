@@ -1,8 +1,8 @@
 <?php
 namespace Prokrastinat\Entity;
 
-use Doctrine\ORM\Query\Expr\Base,
-	Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Query\Expr\Base;
+use Doctrine\ORM\Mapping as ORM;
 
 /** @ORM\Entity */
 class User extends BaseEntity

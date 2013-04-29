@@ -1,8 +1,8 @@
 <?php
 namespace Prokrastinat\Entity;
 
-use Doctrine\ORM\Query\Expr\Base,
-	Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Query\Expr\Base;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
@@ -10,35 +10,35 @@ use Doctrine\ORM\Query\Expr\Base,
  */
 class Objava extends BaseEntity
 {
-	/**
-	 * @ORM\Id @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 * @ORM\SequenceGenerator(sequenceName="user_seq", initialValue=1000)
-	 */
-	protected $id;
+    /**
+     * @ORM\Id @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\SequenceGenerator(sequenceName="user_seq", initialValue=1000)
+     */
+    protected $id;
 
-	/**
-	 * @ORM\ManyToOne(targetEntity="User")
-	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-	 */
-	protected $user;
+    /**
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $user;
 
-	/** @ORM\Column(length=30) */
-	protected $naslov;
+    /** @ORM\Column(length=30) */
+    protected $naslov;
 
-	/** @ORM\Column(length=1000) */
-	protected $vsebina;
+    /** @ORM\Column(length=1000) */
+    protected $vsebina;
 
-	/** @ORM\Column(type="datetime") */
-	protected $datum_objave;
+    /** @ORM\Column(type="datetime") */
+    protected $datum_objave;
 
-	/** @ORM\OneToMany(targetEntity="Komentar", mappedBy="objava") */
-	protected $komentarji;
+    /** @ORM\OneToMany(targetEntity="Komentar", mappedBy="objava") */
+    protected $komentarji;
 
-	/**
-	 * @ORM\ManyToMany(targetEntity="Oznaka")
-	 * @ORM\JoinTable(name="Objava_Oznaka")
-	 * @ORM\JoinColumn(name="oznaka_id", referencedColumnName="id")
-	 */
-	protected $oznake;
+    /**
+     * @ORM\ManyToMany(targetEntity="Oznaka")
+     * @ORM\JoinTable(name="Objava_Oznaka")
+     * @ORM\JoinColumn(name="oznaka_id", referencedColumnName="id")
+     */
+    protected $oznake;
 }

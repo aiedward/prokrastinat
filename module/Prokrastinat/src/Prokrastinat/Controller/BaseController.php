@@ -21,7 +21,7 @@ abstract class BaseController extends AbstractActionController
 
     public function getEntityManager()
     {
-        return $em;
+        return $this->em;
     }
 
     public function zahtevajLogin()

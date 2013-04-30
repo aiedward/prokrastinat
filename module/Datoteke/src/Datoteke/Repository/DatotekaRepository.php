@@ -16,4 +16,5 @@ class DatotekaRepository extends EntityRepository
         $em = $this->getEntityManager();
         $em->remove($datoteka);
     }
+    
 }

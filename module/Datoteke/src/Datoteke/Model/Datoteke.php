@@ -1,6 +1,5 @@
 <?php
 
-// filename : module/Test/src/Test/Model/Profile.php
 namespace Datoteke\Model;
  
 use Zend\InputFilter\Factory as InputFactory;

@@ -3,6 +3,7 @@ namespace Datoteke\Controller;
  
 use Datoteke\Model\Datoteke;
 use Datoteke\Form\DatotekeForm;
+use Datoteke\Form\EditForm;
 use Datoteke\Entity\Datoteka;
 use Zend\Validator\File\Size;
 use Zend\View\Model\ViewModel;
@@ -76,7 +77,8 @@ class DatotekeController extends BaseController
     
     public function indexAction()
     {
-        $query = $this->getEntityManager()->createQuery("SELECT o FROM Datoteke\Entity\Datoteka o");
+        $em = $this->getEntityManager();
+        $query = $em->createQuery("SELECT o FROM Datoteke\Entity\Datoteka o");
         $datoteke = $query->getResult();
         
         return new ViewModel(array('datoteke' => $datoteke));
@@ -115,15 +117,15 @@ class DatotekeController extends BaseController
     
     public function downloadAction()
     {
-        $datRep = $this->getEntityManager()->getRepository('Datoteke\Entity\Datoteka');
+        $em = $this->getEntityManager();
+        $datRep = $em->getRepository('Datoteke\Entity\Datoteka');
         $id = (int) $this->params()->fromRoute('id', 0);
         $dat = $datRep->find($id);
         
-        $em = $this->getEntityManager();
         $datRep->increaseCounter($dat);
         $em->flush();
         
-        $file = dirname(__DIR__).'/assets/'.$dat->imeDatoteke;
+        $file = dirname(dirname(dirname(dirname(dirname(__DIR__))))).'\data\\'.$dat->imeDatoteke;
 
         $response = $this->getResponse();
         $response->getHeaders()
@@ -138,8 +140,37 @@ class DatotekeController extends BaseController
     }
     
     public function viewAction(){
-        return new ViewModel();        
+        $em = $this->getEntityManager();
+        $datRep = $em->getRepository('Datoteke\Entity\Datoteka');
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $dat = $datRep->find($id);
+        
+        return new ViewModel(array('datoteke' => $dat));        
     }
+    
+    public function editAction(){
+        
+        $form = new EditForm();
+        
+        //$form->setInputFilter($dat->getInputFilter());
+        
+        $request = $this->getRequest();  
+        $em = $this->getEntityManager();
+        $datRep = $em->getRepository('Datoteke\Entity\Datoteka');
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $dat = $datRep->find($id);
+        
+        $form->get('opis')->setValue($dat->opis);
+        
+        if ($request->isPost()) {
+            $dat->opis = $request->getPost('opis');
+            $em->persist($dat);
+            $em->flush();
+            return $this->redirect()->toRoute('datoteke');
+
+        }
+        return array('datoteke' => $dat, 'form' => $form, 'id' => $id);        
+        }
     
     }
 

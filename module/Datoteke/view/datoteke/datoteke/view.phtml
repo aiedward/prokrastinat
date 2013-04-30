@@ -5,8 +5,19 @@ $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 <p>
+    <a href="<?php echo $this->url('datoteke', array('action'=>'index'));?>">Vse datoteke</a>
     <a href="<?php echo $this->url('datoteke', array('action'=>'add'));?>">Nalozi datoteko</a>
     <a href="<?php echo $this->url('datoteke', array('action'=>'myFiles'));?>">Moje datoteke</a>
 </p>
-
-</table>
+<div id="datotekaView">
+    <div style="font:20px Tahoma bold; text-align: center"><?php echo $datoteke->imeDatoteke;?></div><p>
+    <div style="font:14px Tahoma bold;">
+    Avtor: <p>
+    Opis: <?php echo $datoteke->opis ?><p>
+    Datum uploada: <?php echo $datoteke->datum_uploada->format('d-m-Y') ?><p>
+    Velikost: <?php echo $datoteke->velikost ?><p>
+    Ogledi: <?php echo $datoteke->st_ogledov ?><p>
+    Prenosi: <?php echo $datoteke->st_prenosov ?><p>
+    Kategorija: <?php echo $datoteke->kategorija ?><p>
+    </div>
+</div>

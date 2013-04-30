@@ -4,7 +4,11 @@ $title = 'Izbriši datoteko';
 $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
-
+<p>
+    <a href="<?php echo $this->url('datoteke', array('action'=>'index'));?>">Vse datoteke</a>
+    <a href="<?php echo $this->url('datoteke', array('action'=>'add'));?>">Nalozi datoteko</a>
+    <a href="<?php echo $this->url('datoteke', array('action'=>'myFiles'));?>">Moje datoteke</a>
+</p>
 <p>Ali ste prepričani, da želite izbrisati datoteko
     >><?php echo $this->escapeHtml($datoteke->imeDatoteke); ?><< ?
 </p>

@@ -39,6 +39,11 @@ class Datoteka extends BaseEntity
 	 * @ORM\Column(type="integer", nullable=true)
 	 */
 	protected $st_prenosov;
+        
+        /**
+	 * @ORM\Column(type="integer", nullable=true)
+	 */
+	protected $st_ogledov;
 
         
         /**

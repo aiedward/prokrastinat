@@ -26,8 +26,8 @@ $this->headTitle($title);
     <td>
         <a href="<?php echo $this->url('datoteke', array('action'=>'view', 'id'=>$datoteka->id));?>">Podrobnosti</a>
         <a href="<?php echo $this->url('datoteke', array('action'=>'download', 'id'=>$datoteka->id));?>">Prenos</a>
-        <a href="<?php echo $this->url('datoteke', array('action'=>'delete', 'id'=>$datoteka->id));?>">Briši</a>
-        
+        <a href="<?php echo $this->url('datoteke', array('action'=>'edit', 'id'=>$datoteka->id));?>">Uredi</a>
+        <a href="<?php echo $this->url('datoteke', array('action'=>'delete', 'id'=>$datoteka->id));?>">Briši</a>     
     </td>
 </tr>
 <?php endforeach; ?>

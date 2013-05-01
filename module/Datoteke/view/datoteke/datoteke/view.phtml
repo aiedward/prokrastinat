@@ -12,12 +12,13 @@ $this->headTitle($title);
 <div id="datotekaView">
     <div style="font:20px Tahoma bold; text-align: center"><?php echo $datoteke->imeDatoteke;?></div><p>
     <div style="font:14px Tahoma bold;">
-    Avtor: <p>
-    Opis: <?php echo $datoteke->opis ?><p>
-    Datum uploada: <?php echo $datoteke->datum_uploada->format('d-m-Y') ?><p>
-    Velikost: <?php echo $datoteke->velikost ?><p>
-    Ogledi: <?php echo $datoteke->st_ogledov ?><p>
-    Prenosi: <?php echo $datoteke->st_prenosov ?><p>
-    Kategorija: <?php echo $datoteke->kategorija ?><p>
+        <p>
+        Avtor: <?php echo $datoteke->user->getPolnoIme() ?><p>
+        Opis: <?php echo $datoteke->opis ?><p>
+        Datum uploada: <?php echo $datoteke->datum_uploada->format('d-m-Y') ?><p>
+        Velikost: <?php echo $datoteke->velikost ?><p>
+        Ogledi: <?php echo $datoteke->st_ogledov ?><p>
+        Prenosi: <?php echo $datoteke->st_prenosov ?><p>
+        Kategorija: <?php echo $datoteke->kategorija ?><p>
     </div>
 </div>

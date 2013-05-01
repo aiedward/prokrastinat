@@ -6,8 +6,14 @@ use Doctrine\ORM\EntityRepository;
 
 class DatotekaRepository extends EntityRepository
 {
-    public function increaseCounter($datoteka) {
+    public function increaseDownloadCounter($datoteka) {
         $datoteka->st_prenosov += 1;
+        $em = $this->getEntityManager();
+        $em->persist($datoteka);
+    }
+    
+    public function increaseViewCounter($datoteka) {
+        $datoteka->st_ogledov += 1;
         $em = $this->getEntityManager();
         $em->persist($datoteka);
     }

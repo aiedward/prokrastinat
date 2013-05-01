@@ -10,8 +10,6 @@ use Zend\InputFilter\InputFilterInterface;
  
 class Datoteke implements InputFilterAwareInterface
 {
-    public $opis;
-    public $fileupload;
     protected $inputFilter;
      
     public function exchangeArray($data)
@@ -22,6 +20,8 @@ class Datoteke implements InputFilterAwareInterface
         $this->id  = (isset($data['id']))  ? $data['id']     : null; 
         $this->datum_uploada  = (isset($data['datum_uploada']))  ? $data['datum_uploada']     : null; 
         $this->st_prenosov  = (isset($data['st_prenosov']))  ? $data['st_prenosov']     : null; 
+        $this->st_ogledov  = (isset($data['st_ogledov']))  ? $data['st_ogledov']     : null; 
+        $this->user  = (isset($data['user']))  ? $data['user']     : null; 
     }
      
     public function setInputFilter(InputFilterInterface $inputFilter)

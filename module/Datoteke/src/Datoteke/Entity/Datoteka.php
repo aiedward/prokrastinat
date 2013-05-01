@@ -3,8 +3,11 @@ namespace Datoteke\Entity;
 use Prokrastinat\Entity\BaseEntity;
 use Doctrine\ORM\Mapping as ORM;
 
+use Prokrastinat\Entity\User;
+
 /**
  * @ORM\Entity(repositoryClass="Datoteke\Repository\DatotekaRepository")
+ * 
  */
 class Datoteka extends BaseEntity
 {
@@ -15,6 +18,9 @@ class Datoteka extends BaseEntity
 	 */
 	protected $id;
 	
+        /** @ORM\ManyToOne(targetEntity="Prokrastinat\Entity\User") */
+        protected $user;
+        
 	/**
 	 * @ORM\Column(length=100, nullable=true)
 	 */

@@ -46,7 +46,7 @@ class DatotekeController extends BaseController
                     }
                     $form->setMessages(array('fileupload'=>$error ));
                 } else {
-                    $adapter->setDestination(dirname(dirname(dirname(dirname(dirname(__DIR__))))).'/data');
+                    $adapter->setDestination(dirname(dirname(dirname(dirname(dirname(__DIR__))))).'/data/uploads');
                     if ($adapter->receive($File['name'])) {
                         $datoteka->exchangeArray($form->getData());
                         //echo 'Datoteka '.$datoteka->fileupload. ' uspešno naložena!';
@@ -64,6 +64,8 @@ class DatotekeController extends BaseController
             $file->imeDatoteke = $form->get('fileupload')->getValue();
             $file->datum_uploada = new DateTime('now');
             $file->st_prenosov = 0;
+            $file->st_ogledov = 0;
+            $file->user = $this->auth->getIdentity();
 
             $objectManager->persist($file);
             $objectManager->flush();
@@ -78,13 +80,13 @@ class DatotekeController extends BaseController
     public function indexAction()
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery("SELECT o FROM Datoteke\Entity\Datoteka o");
+        $query = $em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d");
         $datoteke = $query->getResult();
         
         return new ViewModel(array('datoteke' => $datoteke));
     }
     
-      public function deleteAction()
+    public function deleteAction()
     {
         $id = (int) $this->params()->fromRoute('id', 0);
         if (!$id) {
@@ -100,7 +102,7 @@ class DatotekeController extends BaseController
             $del = $request->getPost('del', 'Ne');
             if ($del == 'Da') {
                 $em->flush();
-                unlink(dirname(dirname(dirname(dirname(dirname(__DIR__))))).'\data\\'.$dat->imeDatoteke);
+                unlink(dirname(dirname(dirname(dirname(dirname(__DIR__))))).'\data\\uploads\\'.$dat->imeDatoteke);
                 $datRep->deleteDatoteka($dat);
                 $em->flush();
             }
@@ -122,10 +124,10 @@ class DatotekeController extends BaseController
         $id = (int) $this->params()->fromRoute('id', 0);
         $dat = $datRep->find($id);
         
-        $datRep->increaseCounter($dat);
+        $datRep->increaseDownloadCounter($dat);
         $em->flush();
         
-        $file = dirname(dirname(dirname(dirname(dirname(__DIR__))))).'\data\\'.$dat->imeDatoteke;
+        $file = dirname(dirname(dirname(dirname(dirname(__DIR__))))).'\data\\uploads\\'.$dat->imeDatoteke;
 
         $response = $this->getResponse();
         $response->getHeaders()
@@ -144,6 +146,9 @@ class DatotekeController extends BaseController
         $datRep = $em->getRepository('Datoteke\Entity\Datoteka');
         $id = (int) $this->params()->fromRoute('id', 0);
         $dat = $datRep->find($id);
+
+        $datRep->increaseViewCounter($dat);
+        $em->flush();
         
         return new ViewModel(array('datoteke' => $dat));        
     }
@@ -172,5 +177,13 @@ class DatotekeController extends BaseController
         return array('datoteke' => $dat, 'form' => $form, 'id' => $id);        
         }
     
+    public function myfilesAction()
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d WHERE d.user=".$this->auth->getIdentity()->id."");
+        $datoteke = $query->getResult();
+        
+        return new ViewModel(array('datoteke' => $datoteke));
     }
+}
 

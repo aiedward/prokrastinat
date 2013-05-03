@@ -29,17 +29,24 @@ class DeskaController extends BaseController
         $request = $this->getRequest();
         $this->deska_repository = $this->getEntityManager()->getRepository('Deska\Entity\Oglas');
 
-        if ($request->isPost()) {
+        if ($request->isPost()) 
+        {
+            $form->setInputFilter($form->getInputFilter());
             $form->setData($request->getPost());
-            $oglas = new Oglas();
-            $vals = array(
-                'naslov' => "{$form->get('naslov')->getValue()}",
-                'vsebina' => "{$form->get('vsebina')->getValue()}",
-                'datum-zapadlosti' => "{$form->get('datum-zapadlosti')->getValue()}",
-            );
-            $this->deska_repository->saveOglas($oglas, $vals);
+            
+            if ($form->isValid())
+            {
+                $oglas = new Oglas();
+                $vals = array(
+                    'user' => $this->auth->getIdentity(),
+                    'naslov' => "{$form->get('naslov')->getValue()}",
+                    'vsebina' => "{$form->get('vsebina')->getValue()}",
+                    'datum-zapadlosti' => "{$form->get('datum-zapadlosti')->getValue()}",
+                );
+                $this->deska_repository->saveOglas($oglas, $vals);
 
-            return $this->redirect()->toRoute('deska');
+                return $this->redirect()->toRoute('deska');
+            }
         }
 
         return array('form' => $form);

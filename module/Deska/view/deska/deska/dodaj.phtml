@@ -7,17 +7,18 @@ $this->headtitle($title);
 	<?= $this->escapeHtml($title); ?>
 </h1>
 <div id="test">
-	<?php
-	$form = $this->form;
-	$form->setAttribute('action', $this->url('deska', array('action' => 'dodaj')));
-	$form->prepare();
+    <?php
+        $form = $this->form;
+        $form->setAttribute('action', $this->url('deska', array('action' => 'dodaj')));
+        $form->prepare();
 
-	echo $this->form()->openTag($form);
-	echo $this->formRow($form->get('naslov'));
-	echo $this->formRow($form->get('datum-zapadlosti'));
-	echo $this->formRow($form->get('vsebina'));
-	echo "<br />";
-	echo $this->formSubmit($form->get('submit'));
-	echo $this->form()->closeTag();
-	?>
+        echo $this->form()->openTag($form);
+        echo $this->formRow($form->get('naslov'));
+        echo $this->formRow($form->get('datum-zapadlosti'));
+        echo $this->formRow($form->get('vsebina'));
+        echo "<br />";
+        echo $this->formSubmit($form->get('submit'));
+        echo $this->form()->closeTag();
+    ?>
+    <a class="btn btn-primary" href="<?php echo $this->url('deska');?>">Nazaj</a>
 </div>

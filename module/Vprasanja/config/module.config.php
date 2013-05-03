@@ -17,7 +17,8 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Vprasanja\Controller\Vprasanje' => 'Vprasanja\Controller\VprasanjeController',
+            'Vprasanje' => 'Vprasanja\Controller\VprasanjeController',
+            'Odgovor' => 'Vprasanja\Controller\OdgovorController'
         ),
     ),
     'router' => array(
@@ -25,14 +26,30 @@ return array(
             'vprasanje' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/vprasanje[/][:action][/:id]',
+                    'route' => '/vprasanje[/:action][/:id][/]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9]*',
-                        'id'     => '[0-9]+',
+                        'id'     => '[0-9]+'
                     ),
                     'defaults' => array(
-                        'controller' => 'Vprasanja\Controller\Vprasanje',
-                        'action' => 'index',
+                        'controller' => 'Vprasanje',
+                        'action' => 'index'
+                    ),
+                ),
+            ),
+
+            'odgovor' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/vprasanje/:ido/odgovor[/:action][/:id][/]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9]*',
+                        'ido'    => '[0-9]+',
+                        'id'     => '[0-9]+'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Odgovor',
+                        'action' => 'index'
                     ),
                 ),
             ),
@@ -40,13 +57,13 @@ return array(
             'preglej' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/vprasanje/:id',
+                    'route' => '/vprasanje/:id[/]',
                     'constraints' => array(
-                        'id'     => '[0-9]+',
+                        'id'     => '[0-9]+'
                     ),
                     'defaults' => array(
-                        'controller' => 'Vprasanja\Controller\Vprasanje',
-                        'action' => 'pregled',
+                        'controller' => 'Vprasanje',
+                        'action' => 'pregled'
                     ),
                 ),
             ),
@@ -54,10 +71,10 @@ return array(
     ),
     'view_manager' => array(
         'template_map' => array(
-            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml'
         ),
         'template_path_stack' => array(
-            __DIR__ . '/../view',
+            __DIR__ . '/../view'
         ),
     ),
 );

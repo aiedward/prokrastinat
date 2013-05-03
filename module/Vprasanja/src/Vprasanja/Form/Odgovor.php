@@ -8,10 +8,10 @@ use Zend\InputFilter\Factory;
 use Zend\InputFilter\InputFilter;
 use Zend\Validator;
 
-class Vprasanje extends Form {
+class Odgovor extends Form {
     public function __construct()
     {
-        parent::__construct('vprasanje');
+        parent::__construct('odgovor');
         $this->setAttribute('method', 'post');
 
         $this->add(array(
@@ -19,17 +19,8 @@ class Vprasanje extends Form {
             'type' => 'Hidden'));
 
         $this->add(array(
-            'name' => 'naslov',
-            'type' => 'Text',
-            'options' => array(
-                'label' => 'Naslov',
-                'required' => true
-
-            ),
-            'attributes' => array(
-                'class' => 'input-xxlarge'
-            )
-        ));
+            'name' => 'vprasanje_id',
+            'type' => 'Hidden'));
 
         $this->add(array(
             'name' => 'vsebina',
@@ -40,7 +31,7 @@ class Vprasanje extends Form {
             ),
             'attributes' => array(
                 'class' => 'input-xxlarge',
-                'rows' => 8
+                'rows' => 5
             )
         ));
 
@@ -60,23 +51,6 @@ class Vprasanje extends Form {
     {
         $fac = new Factory();
         $filter = new InputFilter();
-        
-        $filter->add($fac->createInput(array(
-            'name' => 'naslov',
-            'required' => true,
-            'filters' => array(
-                array('name' => 'StringTrim')
-            ),
-            'validators' => array(
-                array(
-                    'name' => 'StringLength',
-                    'options' => array(
-                        'min' => 10,
-                        'max' => 30,
-                    )
-                )
-            )
-        )));
         
         $filter->add($fac->createInput(array(
             'name' => 'vsebina',

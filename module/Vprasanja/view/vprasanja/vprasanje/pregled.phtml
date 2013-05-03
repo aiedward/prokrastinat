@@ -1,5 +1,5 @@
 <div class="btn-toolbar">
-        <button class="btn btn-primary"><i class="icon-pencil icon-white"></i> Odgovori</button>
+        <a href="#odgovori" class="btn btn-primary"><i class="icon-pencil icon-white"></i> Odgovori</a>
         <button class="btn"><i class="icon-star"></i> Označi</button> 
     </div>
 
@@ -8,9 +8,9 @@
     <p><?= $this->escapeHtml($vprasanje->vsebina) ?></p>
 
     <p>
-        <i class="icon-user"></i> <a href="#"><?= $this->escapeHtml($vprasanje->user->getPolnoIme()) ?></a>
-        | <i class="icon-calendar"></i> <?= $this->dateFormat($vprasanje->datum_objave, IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT) ?>
-        | <i class="icon-comment"></i> <a href="#"><?= count($vprasanje->komentarji) ?> odgovorov</a>
+        <i class="icon-user"></i> <a href="#"><?= $this->escapeHtml($vprasanje->user->getPolnoIme()) ?></a> |
+        <i class="icon-calendar"></i> <?= $this->dateFormat($vprasanje->datum_objave, IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT) ?> |
+        <i class="icon-comment"></i> <a href="#"><?= count($vprasanje->komentarji) ?> odgovorov</a>
         <?php if (count($vprasanje->oznake) > 0): ?>
             | <i class="icon-tags"></i> Oznake:
             <?php foreach ($vprasanje->oznake as $oznaka): ?>
@@ -20,9 +20,28 @@
     </p>
 </div>
 
-<?php foreach ($vprasanje->komentarji as $komentar): ?>
+<hr />
+<!-- to-do: premakni v svoj view -->
+<?php if (count($vprasanje->komentarji) === 0): ?>
+    <h5>Vprašanje še nima odgovorov.</h5>
+<?php endif ?>
+<?php foreach ($vprasanje->komentarji as $odgovor): ?>
+<a id="<?= $odgovor->id ?>"></a>
 <div class="well well-small">
-    <p><?= $komentar->vsebina ?></p>
+    <p><?= $odgovor->vsebina ?></p>
+    <p>
+        <i class="icon-user"></i> <a href="#"><?= $this->escapeHtml($vprasanje->user->getPolnoIme()) ?></a> |
+        <i class="icon-calendar"></i> <?= $this->dateFormat($vprasanje->datum_objave, IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT) ?>
+    </p>
 </div>
 <?php endforeach ?>
+
+<hr />
+
+<h3>Napiši odgovor</h3>
+<a id="odgovori"></a>
+<?= $this->formTwb($this->form, \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL) ?>
+
+
+
 

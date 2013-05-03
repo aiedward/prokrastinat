@@ -20,8 +20,13 @@ class VprasanjeController extends BaseController
         $id = (int) $this->params()->fromRoute('id');
         $vprasanje = $this->em->find('Vprasanja\Entity\Vprasanje', $id);
 
+        $form = new \Vprasanja\Form\Odgovor();
+        $form->setAttribute('action', $this->url()->fromRoute('odgovor', array('action' => 'dodaj', 'ido' => $id)));
+        $form->setData(array('vprasanje_id' => $id));
+
         return new ViewModel(array(
-            'vprasanje' => $vprasanje
+            'vprasanje' => $vprasanje,
+            'form' => $form
         ));
     }
 
@@ -32,6 +37,7 @@ class VprasanjeController extends BaseController
         $form = new \Vprasanja\Form\Vprasanje();
 
         if ($this->request->isPost()) {
+            $form->setInputFilter($form->getInputFilter());
             $form->setData($this->request->getPost());
 
             if ($form->isValid()) {
@@ -47,8 +53,6 @@ class VprasanjeController extends BaseController
 
                 return $this->redirect()->toRoute('preglej', array('id' => $vprasanje->id));
             }
-
-            return $this->redirect()->toRoute('vprasanje');
         }
 
         return new ViewModel(array(
@@ -66,6 +70,7 @@ class VprasanjeController extends BaseController
         $form = new \Vprasanja\Form\Vprasanje();
 
         if ($this->request->isPost()) {
+            $form->setInputFilter($form->getInputFilter());
             $form->setData($this->request->getPost());
 
             if ($form->isValid()) {
@@ -77,8 +82,6 @@ class VprasanjeController extends BaseController
 
                 return $this->redirect()->toRoute('preglej', array('id' => $vprasanje->id));
             }
-
-            return $this->redirect()->toRoute('vprasanje');
         }
 
         $form->setData(array(

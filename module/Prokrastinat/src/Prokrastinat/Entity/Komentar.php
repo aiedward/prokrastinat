@@ -24,4 +24,7 @@ class Komentar extends BaseEntity
 
     /** @ORM\Column(length=512) */
     protected $vsebina;
+
+    /** @ORM\Column(type="datetime") */
+    protected $datum_objave;
 }

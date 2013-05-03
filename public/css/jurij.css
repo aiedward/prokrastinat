@@ -2,6 +2,7 @@
 .form-actions {
 	background-color: inherit;
 	border-top: none;
+  padding: 0;
 }
 
 p.error {

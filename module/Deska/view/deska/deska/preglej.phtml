@@ -1,7 +1,7 @@
 <h3><?= $this->escapeHtml($oglas->naslov) ?></h3>
 <hr />
 <div id="oglas-osnovni-podatki">
-    Avtor: <?= $this->escapeHtml($oglas->user) ?> <br />
+    Avtor: <?= $this->escapeHtml($oglas->user->getPolnoIme()) ?> <br />
     Datum: <?= $this->escapeHtml($oglas->datum_objave->format('d-m-Y')) ?> <br />
     Zapade: <?= $this->escapeHtml($oglas->datum_zapadlosti->format('d-m-Y')) ?>
 </div>

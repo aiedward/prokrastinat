@@ -20,7 +20,10 @@ class DeskaController extends BaseController
         $query = $this->getEntityManager()->createQuery("SELECT o FROM Deska\Entity\Oglas o");
         $oglasi = $query->getResult();
 
-        return new ViewModel(array('oglasi' => $oglasi));
+        return new ViewModel(array(
+                'oglasi' => $oglasi,
+                'tip' => $this->auth->getIdentity()->tip,
+            ));
     }
 
     public function dodajAction() 

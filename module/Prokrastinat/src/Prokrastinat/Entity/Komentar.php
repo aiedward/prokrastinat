@@ -22,7 +22,7 @@ class Komentar extends BaseEntity
     /** @ORM\ManyToOne(targetEntity="Objava") */
     protected $objava;
 
-    /** @ORM\Column(length=1000) */
+    /** @ORM\Column(length=5000) */
     protected $vsebina;
 
     /** @ORM\Column(type="datetime") */

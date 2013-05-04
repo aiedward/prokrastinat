@@ -22,7 +22,7 @@ class DeskaController extends BaseController
 
         return new ViewModel(array(
                 'oglasi' => $oglasi,
-                'tip' => $this->auth->getIdentity()->tip,
+                'tip' => ($this->auth->hasIdentity()) ? $this->auth->getIdentity()->tip : 0,
             ));
     }
 

@@ -1,5 +1,5 @@
 <div class="well well-small">
-    <p><?= $odgovor->vsebina ?></p>
+    <p><?= $odgovor->getHTMLVsebina() ?></p>
     <p>
         <i class="icon-user"></i> <a href="#"><?= $this->escapeHtml($odgovor->user->getPolnoIme()) ?></a> |
         <i class="icon-calendar"></i> <?= $this->dateFormat($odgovor->datum_objave, IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT) ?>

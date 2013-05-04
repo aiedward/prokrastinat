@@ -72,7 +72,7 @@ class Vprasanje extends Form {
                     'name' => 'StringLength',
                     'options' => array(
                         'min' => 10,
-                        'max' => 30,
+                        'max' => 100,
                     )
                 )
             )

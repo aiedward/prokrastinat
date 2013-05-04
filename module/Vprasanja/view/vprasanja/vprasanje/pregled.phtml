@@ -6,7 +6,7 @@
 <!-- Vprašanje -->
 <div class="well well-small">
     <h3><?= $this->escapeHtml($vprasanje->naslov) ?></h3>
-    <p><?= $this->escapeHtml($vprasanje->vsebina) ?></p>
+    <p><?= $vprasanje->getHTMLVsebina() ?></p>
 
     <p>
         <i class="icon-user"></i> <a href="#"><?= $this->escapeHtml($vprasanje->user->getPolnoIme()) ?></a> |

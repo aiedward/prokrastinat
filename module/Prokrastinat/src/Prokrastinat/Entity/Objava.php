@@ -19,7 +19,7 @@ class Objava extends BaseEntity
     /** @ORM\ManyToOne(targetEntity="User") */
     protected $user;
 
-    /** @ORM\Column(length=30) */
+    /** @ORM\Column(length=100) */
     protected $naslov;
 
     /** @ORM\Column(length=1000) */
@@ -39,4 +39,10 @@ class Objava extends BaseEntity
      * @ORM\JoinTable(name="Objava_Oznaka")
      */
     protected $oznake;
+
+    public function getHTMLVsebina()
+    {
+        // to-do: escape html
+        return nl2br($this->vsebina);
+    }
 }

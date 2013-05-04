@@ -63,7 +63,7 @@ class Odgovor extends Form {
                     'name' => 'StringLength',
                     'options' => array(
                         'min' => 10,
-                        'max' => 1000,
+                        'max' => 5000,
                     )
                 )
             )

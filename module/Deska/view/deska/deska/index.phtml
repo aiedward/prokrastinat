@@ -5,7 +5,32 @@
         {
     ?>
         <a class="btn btn-primary" href="<?php echo $this->url('deska', array('action' => 'dodaj'));?>" id="dodaj-oglas">Dodaj</a>
-    <?php } ?>
+        <br /><br />
+        <table class="table">
+	<tr>
+		<th>Naslov</th>
+		<th>Avtor</th>
+		<th>Datum objave</th>
+		<th>Kategorija</th>
+		<th>Datum zapadlosti</th>
+                <th></th>
+	</tr>
+	<?php foreach ($oglasi as $oglas) : ?>
+	<tr>
+		<td><a
+			href="<?php echo $this->url('deska', array('action' => 'preglej', 'id' => $oglas->id)); ?>"><?php echo $this->escapeHtml($oglas->naslov);?>
+		</a></td>
+		<td><?php echo $this->escapeHtml($oglas->user->getPolnoIme());?></td>
+		<td><?php echo $this->escapeHtml($oglas->datum_objave->format('d-m-Y')) ?></td>
+		<td><?php echo $this->escapeHtml($oglas->kategorija) ?></td>
+		<td><?php echo $this->escapeHtml($oglas->datum_zapadlosti->format('d-m-Y')) ?></td>
+                <td>
+                    <a href="<?= $this->url('deska', array('action' => 'uredi', 'id' => $oglas->id)); ?>">Uredi</a>
+                </td>
+	</tr>
+	<?php endforeach; ?>
+</table>
+    <?php } else { ?>
 </div>
 
 <div id="user-menu"></div>
@@ -32,3 +57,4 @@
 	</tr>
 	<?php endforeach; ?>
 </table>
+    <?php } ?>

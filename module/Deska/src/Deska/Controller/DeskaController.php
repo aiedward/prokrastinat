@@ -29,13 +29,12 @@ class DeskaController extends BaseController
     public function dodajAction() 
     {
         $form = new DeskaForm();
-        $request = $this->getRequest();
         $this->deska_repository = $this->getEntityManager()->getRepository('Deska\Entity\Oglas');
 
-        if ($request->isPost()) 
+        if ($this->request->isPost()) 
         {
             $form->setInputFilter($form->getInputFilter());
-            $form->setData($request->getPost());
+            $form->setData($this->request->getPost());
             
             if ($form->isValid())
             {
@@ -46,8 +45,8 @@ class DeskaController extends BaseController
                     'vsebina' => "{$form->get('vsebina')->getValue()}",
                     'datum-zapadlosti' => "{$form->get('datum-zapadlosti')->getValue()}",
                 );
+                    
                 $this->deska_repository->saveOglas($oglas, $vals);
-
                 return $this->redirect()->toRoute('deska');
             }
         }
@@ -64,5 +63,47 @@ class DeskaController extends BaseController
 
         return new ViewModel(array('oglas' => $oglas));
     }
+    
+    public function urediAction()
+    {
+        $id = (int)$this->params()->fromRoute('id', 0);
+        $this->deska_repository = $this->getEntityManager()->getRepository('Deska\Entity\Oglas');
 
+        $oglas = $this->deska_repository->getOglasById($id);        
+        $form = new DeskaForm();
+        
+        $form->setData(array(
+            'id' => $oglas->id,
+            'naslov' => $oglas->naslov,
+            'vsebina' => $oglas->vsebina,
+            'datum-zapadlosti' => $oglas->datum_zapadlosti,
+        ));
+        
+        $form->get('submit')->setAttribute('value', 'Uredi');
+        
+        if ($this->request->isPost())
+        {
+            $form->setInputFilter($form->getInputFilter());
+            $form->setData($this->request->getPost());
+            
+            if ($form->isValid())
+            {
+                //$oglas = new Oglas();
+                $vals = array(
+                    'user' => $this->auth->getIdentity(),
+                    'naslov' => "{$form->get('naslov')->getValue()}",
+                    'vsebina' => "{$form->get('vsebina')->getValue()}",
+                    'datum-zapadlosti' => "{$form->get('datum-zapadlosti')->getValue()}",
+                );
+                    
+                $this->deska_repository->saveOglas($oglas, $vals);
+                return $this->redirect()->toRoute('deska');
+            }
+        }
+        
+        return array(
+            'id' => $id,
+            'form' => $form,
+        );
+    }
 }

@@ -1,1 +1,26 @@
 <h1>Dobrodošli v prokrastinatu</h1>
+<hr/>
+<h2>Oglasna deska</h2>
+
+<table class="table">
+	<tr>
+		<th>Naslov</th>
+		<th>Avtor</th>
+		<th>Datum objave</th>
+		<th>Kategorija</th>
+		<th>Datum zapadlosti</th>
+	</tr>
+	<?php foreach ($oglasi as $oglas) : ?>
+	<tr>
+		<td><a
+			href="<?php echo $this->url('deska', array('action' => 'preglej', 'id' => $oglas->id)); ?>"><?php echo $this->escapeHtml($oglas->naslov);?>
+		</a></td>
+		<td><?php echo $this->escapeHtml($oglas->user->getPolnoIme());?></td>
+		<td><?php echo $this->escapeHtml($oglas->datum_objave->format('d-m-Y')) ?>
+		</td>
+		<td><?php echo $this->escapeHtml($oglas->kategorija) ?></td>
+		<td><?php echo $this->escapeHtml($oglas->datum_zapadlosti->format('d-m-Y')) ?>
+		</td>
+	</tr>
+	<?php endforeach; ?>
+</table>

@@ -88,7 +88,6 @@ class DeskaController extends BaseController
             
             if ($form->isValid())
             {
-                //$oglas = new Oglas();
                 $vals = array(
                     'user' => $this->auth->getIdentity(),
                     'naslov' => "{$form->get('naslov')->getValue()}",
@@ -105,5 +104,13 @@ class DeskaController extends BaseController
             'id' => $id,
             'form' => $form,
         );
+    }
+    
+    public function brisiAction()
+    {
+        // TODO: Brisanje 
+        $id = (int)$this->params()->fromRoute('id', 0);
+        
+        
     }
 }

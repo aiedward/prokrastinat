@@ -28,7 +28,8 @@ class EditForm extends Form
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',
-                'value' => 'Uveljavi spremembe'
+                'value' => 'Uveljavi spremembe',
+                'class' => 'btn btn-primary'
             ),
         )); 
     }

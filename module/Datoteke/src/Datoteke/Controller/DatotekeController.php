@@ -5,17 +5,23 @@ use Datoteke\Model\Datoteke;
 use Datoteke\Form\DatotekeForm;
 use Datoteke\Form\EditForm;
 use Datoteke\Entity\Datoteka;
+use Prokrastinat\Entity\User;
 use Zend\Validator\File\Size;
 use Zend\View\Model\ViewModel;
 use Zend\Stdlib\DateTime;
 
 use Prokrastinat\Controller\BaseController;
- 
+
+define("upload_limit", 20000000);
+
 class DatotekeController extends BaseController
 {
-
     public function addAction()
     {
+        $user = $this->auth->getIdentity();
+        
+        $this->zahtevajLogin();
+        
         $form = new DatotekeForm();
         $request = $this->getRequest();  
         if ($request->isPost()) {
@@ -30,8 +36,18 @@ class DatotekeController extends BaseController
                  array('fileupload'=> $File['name'])
              );
             $form->setData($data);
-              
-            if ($form->isValid()) {
+            
+            
+            $skupna_velikost = $this->getUploadSize($user);
+            if(($skupna_velikost + $File['size']) > upload_limit)
+            {
+                print '<script type="text/javascript">'; 
+                print 'alert("Presegli ste limit uploada! Datoteke ni mogoče naložiti!")'; 
+                print '</script>';  
+            }
+            else
+            {
+                if ($form->isValid()) {
                  
                 $size = new Size(array('min'=>1));
                  
@@ -53,23 +69,25 @@ class DatotekeController extends BaseController
                     }
                 }  
              
-            $form->setInputFilter($datoteka->getInputFilter());
-             
-            $objectManager = $this
-            ->getServiceLocator()
-            ->get('Doctrine\ORM\EntityManager');
+                $form->setInputFilter($datoteka->getInputFilter());
 
-            $file= new \Datoteke\Entity\Datoteka();
-            $file->opis = $form->get('opis')->getValue();
-            $file->imeDatoteke = $form->get('fileupload')->getValue();
-            $file->datum_uploada = new DateTime('now');
-            $file->st_prenosov = 0;
-            $file->st_ogledov = 0;
-            $file->user = $this->auth->getIdentity();
+                $objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
 
-            $objectManager->persist($file);
-            $objectManager->flush();
-            return $this->redirect()->toRoute('datoteke');
+                $file= new \Datoteke\Entity\Datoteka();
+                $file->opis = $form->get('opis')->getValue();
+                $file->imeDatoteke = $form->get('fileupload')->getValue();
+                $file->datum_uploada = new DateTime('now');
+                $file->st_prenosov = 0;
+                $file->st_ogledov = 0;
+                $file->velikost = $File['size'];
+                $file->user = $this->auth->getIdentity();
+
+                $objectManager->persist($file);
+                $objectManager->flush();
+                clearstatcache();
+                return $this->redirect()->toRoute('datoteke');
+            }
+
             }
             
         }
@@ -79,8 +97,20 @@ class DatotekeController extends BaseController
     
     public function indexAction()
     {
+        $orderBy = array('imeDatoteke', 'datum_uploada', 'st_prenosov', 'opis', 'velikost');
+
+        $order = 'st_prenosov';
+        if (isset($_GET['orderBy']) && in_array($_GET['orderBy'], $orderBy)) {
+            $order = $_GET['orderBy'];
+        }      
+        $sort = array('asc', 'desc');
+        $sort1 = 'desc';
+        if (isset($_GET['sort']) && in_array($_GET['sort'], $sort)) {
+            $sort1 = $_GET['sort'];
+        }
+        
         $em = $this->getEntityManager();
-        $query = $em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d");
+        $query = $em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d ORDER BY d.".$order." ".$sort1);
         $datoteke = $query->getResult();
         
         return new ViewModel(array('datoteke' => $datoteke));
@@ -88,32 +118,42 @@ class DatotekeController extends BaseController
     
     public function deleteAction()
     {
-        $id = (int) $this->params()->fromRoute('id', 0);
-        if (!$id) {
-            return $this->redirect()->toRoute('datoteke');
-        }
+        $this->zahtevajLogin();
         
         $em = $this->getEntityManager();
         $datRep = $em->getRepository('Datoteke\Entity\Datoteka');
+        $id = (int) $this->params()->fromRoute('id', 0);
         $dat = $datRep->find($id);
-
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $del = $request->getPost('del', 'Ne');
-            if ($del == 'Da') {
-                $em->flush();
-                unlink(dirname(dirname(dirname(dirname(dirname(__DIR__))))).'\data\\uploads\\'.$dat->imeDatoteke);
-                $datRep->deleteDatoteka($dat);
-                $em->flush();
+        
+        if($dat->user == $this->auth->getIdentity()){ //da ni mogoče brisati tujih datotek
+                    
+            $id = (int) $this->params()->fromRoute('id', 0);
+            if (!$id) {
+                return $this->redirect()->toRoute('datoteke');
             }
 
-            return $this->redirect()->toRoute('datoteke');
+            $em = $this->getEntityManager();
+            $datRep = $em->getRepository('Datoteke\Entity\Datoteka');
+            $dat = $datRep->find($id);
+
+            $request = $this->getRequest();
+            if ($request->isPost()) {
+                $del = $request->getPost('del', 'Ne');
+                if ($del == 'Da') {
+                    $em->flush();
+                    unlink(dirname(dirname(dirname(dirname(dirname(__DIR__))))).'\data\\uploads\\'.$dat->imeDatoteke);
+                    $datRep->deleteDatoteka($dat);
+                    $em->flush();
+                }
+                return $this->redirect()->toRoute('datoteke');
+            }
+            return array(
+                'id'    => $id,
+                'datoteke' => $dat
+            );
+            
         }
 
-        return array(
-            'id'    => $id,
-            'datoteke' => $dat
-        );
     }
 
     
@@ -154,6 +194,7 @@ class DatotekeController extends BaseController
     }
     
     public function editAction(){
+        $this->zahtevajLogin();
         
         $form = new EditForm();
         
@@ -176,14 +217,48 @@ class DatotekeController extends BaseController
         }
         return array('datoteke' => $dat, 'form' => $form, 'id' => $id);        
         }
+       
     
     public function myfilesAction()
     {
+        $user = $this->auth->getIdentity();
+        $this->zahtevajLogin();
         $em = $this->getEntityManager();
-        $query = $em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d WHERE d.user=".$this->auth->getIdentity()->id."");
+        
+        $orderBy = array('imeDatoteke', 'datum_uploada', 'st_prenosov', 'opis', 'velikost');
+
+        $order = 'st_prenosov';
+        if (isset($_GET['orderBy']) && in_array($_GET['orderBy'], $orderBy)) {
+            $order = $_GET['orderBy'];
+        }      
+        $sort = array('asc', 'desc');
+        $sort1 = 'desc';
+        if (isset($_GET['sort']) && in_array($_GET['sort'], $sort)) {
+            $sort1 = $_GET['sort'];
+        }
+        
+        
+        $query = $em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d WHERE d.user=".$user->id."ORDER BY d.".$order." ".$sort1);
         $datoteke = $query->getResult();
         
-        return new ViewModel(array('datoteke' => $datoteke));
+        $skupna_velikost = $this->getUploadSize($user);
+        
+        return new ViewModel(array('datoteke' => $datoteke, 'velikost' => $skupna_velikost));
     }
+
+    public function getUploadSize($user)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d WHERE d.user=".$user->id);
+        $datoteke = $query->getResult(); 
+        $skupna_velikost = 0;
+        foreach ($datoteke as $row)
+        {
+            $skupna_velikost += $row->velikost;            
+        }
+        return $skupna_velikost;
+    }
+    
+    
 }
 

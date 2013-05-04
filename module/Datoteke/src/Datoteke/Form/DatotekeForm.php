@@ -38,7 +38,8 @@ class DatotekeForm extends Form
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',
-                'value' => 'Nalozi datoteko'
+                'value' => 'Nalozi datoteko',
+                'class' => 'btn btn-primary'
             ),
         )); 
     }

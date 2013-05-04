@@ -22,6 +22,7 @@ class Datoteke implements InputFilterAwareInterface
         $this->st_prenosov  = (isset($data['st_prenosov']))  ? $data['st_prenosov']     : null; 
         $this->st_ogledov  = (isset($data['st_ogledov']))  ? $data['st_ogledov']     : null; 
         $this->user  = (isset($data['user']))  ? $data['user']     : null; 
+        $this->velikost  = (isset($data['velikost']))  ? $data['velikost']     : null; 
     }
      
     public function setInputFilter(InputFilterInterface $inputFilter)

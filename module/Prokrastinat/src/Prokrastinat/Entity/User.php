@@ -64,18 +64,6 @@ class User extends BaseEntity
 	/** @ORM\Column(length=64, nullable=true) */
 	protected $splet;
 
-	/** @ORM\Column(length=16, nullable=true) */
-	protected $icq;
-
-	/** @ORM\Column(length=64, nullable=true) */
-	protected $skype;
-
-	/** @ORM\Column(length=64, nullable=true) */
-	protected $aim;
-
-	/** @ORM\Column(length=64, nullable=true) */
-	protected $yahoo;
-
 	/** @ORM\Column(length=32, nullable=true) */
 	protected $telefon;
 
@@ -87,4 +75,8 @@ class User extends BaseEntity
 		return $this->ime . ' ' . $this->priimek;
 	}
 
+        public function toArray()
+        {
+            return get_object_vars($this);
+        }
 }

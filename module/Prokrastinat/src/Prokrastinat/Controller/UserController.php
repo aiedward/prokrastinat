@@ -54,18 +54,27 @@ class UserController extends BaseController
 	
 	public function editAction()
 	{
-		$form = new \Prokrastinat\Form\Edit();
+            parent::zahtevajLogin();
+            $form = new \Prokrastinat\Form\Edit();
+            $authService = $this->getServiceLocator()->get('Prokrastinat\Authentication\AuthenticationService');
+            $user = $authService->getIdentity();
+            
+            $form->populateValues($user->toArray());
+  
+            
+            return new ViewModel (array(
+                'form' => $form,
+                'formType' => \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL));
 
-		return new ViewModel (array(
-			'form' => $form,
-			'formType' => \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL));
 	}
         
         public function viewAction()
         {
+            parent::zahtevajLogin();
             $id = $this->getEvent()->getRouteMatch()->getParam('id');
             $this->userRepository = $this->getEntityManager()->getRepository('Prokrastinat\Entity\User');
             $user = is_numeric($id) ? $this->userRepository->find($id) : null;
+            
             
             if($user == null)
                 throw new \Exception('Uporabnik ne obstaja');

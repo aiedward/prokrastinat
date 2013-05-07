@@ -4,6 +4,10 @@ namespace Prokrastinat\Form;
 use Zend\Form\Element;
 use Zend\Form\Form;
 
+use Zend\InputFilter\Factory;
+use Zend\InputFilter\InputFilter;
+use Zend\Validator;
+
 class Edit extends Form {
 	public function __construct () {
 		parent::__construct('Edit');
@@ -21,15 +25,6 @@ class Edit extends Form {
 				'label' => 'Ime*',
 				'required' => true,
 			),
-			'validators' => array(
-				array(
-					'name' => 'StringLength',
-					'options' => array(
-						'min' => 2,
-						'max' => 30,
-					),
-				),
-			),
 		));
 		//PRIIMEK
 		$this->add(array(
@@ -38,15 +33,6 @@ class Edit extends Form {
 			'options' => array(
 				'label' => 'Priimek*',
 				'required' => true,
-			),
-			'validators' => array(
-				array(
-					'name' => 'StringLength',
-					'options' => array(
-						'min' => 2,
-						'max' => 30,
-					),
-				),
 			),
 		));
 		//EMAIL
@@ -57,15 +43,6 @@ class Edit extends Form {
 				'label' => 'Email*',
 				'required' => true,
 			),
-			'validators' => array(
-				array(
-					'name' => 'StringLength',
-					'options' => array(
-						'min' => 6,
-						'max' => 100,
-					),
-				),
-			),
 		));
 		//NASLOV
 		$this->add(array(
@@ -73,14 +50,6 @@ class Edit extends Form {
 			'type' => 'Text',
 			'options' => array(
 				'label' => 'Naslov',
-			),
-			'validators' => array(
-				array(
-					'name' => 'StringLength',
-					'options' => array(
-						'max' => 64,
-					),
-				),
 			),
 		));
 		//MESTO
@@ -90,14 +59,6 @@ class Edit extends Form {
 			'options' => array(
 				'label' => 'Mesto',
 			),
-			'validators' => array(
-				array(
-					'name' => 'StringLength',
-					'options' => array(
-						'max' => 64,
-					),
-				),
-			),
 		));
 		//DRŽAVA
 		$this->add(array(
@@ -105,14 +66,6 @@ class Edit extends Form {
 			'type' => 'Text',
 			'options' => array(
 				'label' => 'Država',
-			),
-			'validators' => array(
-				array(
-					'name' => 'StringLength',
-					'options' => array(
-						'max' => 64,
-					),
-				),
 			),
 		));
 		//JEZIK
@@ -134,14 +87,10 @@ class Edit extends Form {
 			'options' => array(
 				'label' => 'Opis',
 			),
-			'validators' => array(
-				array(
-					'name' => 'StringLength',
-					'options' => array(
-						'max' => 255,
-					),
-				),
-			),
+                        'attributes' => array(
+                            'class' => 'input-xxlarge',
+                            'rows' => 5
+                        ),
 		));
 		//SPLETNA STRAN
 		$this->add(array(
@@ -150,78 +99,6 @@ class Edit extends Form {
 			'options' => array(
 				'label' => 'Spletna stran',
 			),
-			'validators' => array(
-				array(
-					'name' => 'StringLength',
-					'options' => array(
-						'max' => 64,
-					),
-				),
-			),
-		));
-		//ICQ
-		$this->add(array(
-			'name' => 'icq',
-			'type' => 'Text',
-			'options' => array(
-				'label' => 'ICQ',
-			),
-			'validators' => array(
-				array(
-					'name' => 'StringLength',
-					'options' => array(
-						'max' => 16,
-					),
-				),
-			),
-		));
-		//SKYPE
-		$this->add(array(
-			'name' => 'skype',
-			'type' => 'Text',
-			'options' => array(
-				'label' => 'Skype',
-			),
-			'validators' => array(
-				array(
-					'name' => 'StringLength',
-					'options' => array(
-						'max' => 64,
-					),
-				),
-			),
-		));
-		//AIM
-		$this->add(array(
-			'name' => 'aim',
-			'type' => 'Text',
-			'options' => array(
-				'label' => 'AIM',
-			),
-			'validators' => array(
-				array(
-					'name' => 'StringLength',
-					'options' => array(
-						'max' => 64,
-					),
-				),
-			),
-		));
-		//YAHOO
-		$this->add(array(
-			'name' => 'yahoo',
-			'type' => 'Text',
-			'options' => array(
-				'label' => 'Yahoo',
-			),
-			'validators' => array(
-				array(
-					'name' => 'StringLength',
-					'options' => array(
-						'max' => 64,
-					),
-				),
-			),
 		));
 		//TELEFON
 		$this->add(array(
@@ -229,14 +106,6 @@ class Edit extends Form {
 			'type' => 'Text',
 			'options' => array(
 				'label' => 'Telefon',
-			),
-			'validators' => array(
-				array(
-					'name' => 'StringLength',
-					'options' => array(
-						'max' => 32,
-					),
-				),
 			),
 		));
 		//GUMB

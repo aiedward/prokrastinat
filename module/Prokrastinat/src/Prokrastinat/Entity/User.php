@@ -4,7 +4,7 @@ namespace Prokrastinat\Entity;
 use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Mapping as ORM;
 
-/** @ORM\Entity */
+/** @ORM\Entity(repositoryClass="Prokrastinat\Repository\User") */
 class User extends BaseEntity
 {
 	/**

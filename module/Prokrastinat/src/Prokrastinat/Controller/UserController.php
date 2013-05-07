@@ -4,7 +4,7 @@ use Zend\View\Model\ViewModel;
 
 class UserController extends BaseController
 {
-        /** @var Prokrastinat\Repository\UserRepository */
+        /** @var Prokrastinat\Repository\User */
         protected $userRepository;
     
 	public function indexAction()

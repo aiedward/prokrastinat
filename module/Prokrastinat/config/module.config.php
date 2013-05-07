@@ -64,6 +64,19 @@ return array(
 					),
 				),
 			),
+                        'view' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route' => '/user/view/[:id]',
+					'constraints' => array(
+						'id' => '[0-9]+'
+					),
+					'defaults' => array(
+						'controller' => 'Prokrastinat\Controller\User',
+						'action' => 'view',
+					),
+				),
+			),
 		),
 	),
 	'view_manager' => array(

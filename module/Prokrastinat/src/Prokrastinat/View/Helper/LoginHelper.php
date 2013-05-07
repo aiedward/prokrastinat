@@ -29,6 +29,7 @@ class LoginHelper extends AbstractHelper implements ServiceLocatorAwareInterface
             $ime = $user->getPolnoIme();
             
             $menu = '<ul class="dropdown-menu">'
+                . '<li><a href="' . $url('view', array('id' => $user->id )) . '">Profil</a></li>'
                 . '<li><a href="' . $url('user', array('action' => 'edit')) . '">Uredi podatke</a></li>'
                 . '<li><a href="' . $url('user', array('action' => 'logout')) . '">Izpis</a></li>'
                 . '</ul>';

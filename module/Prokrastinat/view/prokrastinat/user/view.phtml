@@ -1,0 +1,28 @@
+<h1>Pregled uporabnika <i><?=$user->username?></i></h1>
+<table class="table">
+    <tr>
+        <th>Ime</th>
+        <td><?=$user->ime?></td>
+    </tr>
+    <tr>
+        <th>Priimek</th>
+        <td><?=$user->priimek?></td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td><?=$user->email?></td>
+    </tr>
+    <tr>
+        <th>Vpisna številka</th>
+        <td><?=$user->vpisna_st?></td>
+    </tr>
+    <tr>
+        <th>Datum registracije</th>
+        <td><?=$user->datum_registracije->format('d-m-Y')?></td>
+    </tr>
+    <tr>
+        <th>Datum zadnje prijave</th>
+        <td><?=$user->datum_logina->format('d-m-Y')?></td>
+    </tr>
+    
+</table>

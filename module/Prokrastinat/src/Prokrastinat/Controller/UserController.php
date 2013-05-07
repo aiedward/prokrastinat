@@ -4,6 +4,9 @@ use Zend\View\Model\ViewModel;
 
 class UserController extends BaseController
 {
+        /** @var Prokrastinat\Repository\UserRepository */
+        protected $userRepository;
+    
 	public function indexAction()
 	{
 		return new ViewModel();
@@ -57,4 +60,16 @@ class UserController extends BaseController
 			'form' => $form,
 			'formType' => \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL));
 	}
+        
+        public function viewAction()
+        {
+            $id = $this->getEvent()->getRouteMatch()->getParam('id');
+            $this->userRepository = $this->getEntityManager()->getRepository('Prokrastinat\Entity\User');
+            $user = is_numeric($id) ? $this->userRepository->find($id) : null;
+            
+            if($user == null)
+                throw new \Exception('Uporabnik ne obstaja');
+            
+            return new ViewModel(array('user' => $user));
+        }
 }

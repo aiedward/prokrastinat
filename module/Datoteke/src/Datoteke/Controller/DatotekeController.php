@@ -73,7 +73,7 @@ class DatotekeController extends BaseController
 
                 $objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
 
-                $file= new \Datoteke\Entity\Datoteka();
+                $file = new \Datoteke\Entity\Datoteka();
                 $file->opis = $form->get('opis')->getValue();
                 $file->imeDatoteke = $form->get('fileupload')->getValue();
                 $file->datum_uploada = new DateTime('now');
@@ -246,6 +246,28 @@ class DatotekeController extends BaseController
         return new ViewModel(array('datoteke' => $datoteke, 'velikost' => $skupna_velikost));
     }
 
+    public function searchAction()
+    {
+        $orderBy = array('imeDatoteke', 'datum_uploada', 'st_prenosov', 'opis', 'velikost');
+
+        $order = 'st_prenosov';
+        if (isset($_GET['orderBy']) && in_array($_GET['orderBy'], $orderBy)) {
+            $order = $_GET['orderBy'];
+        }      
+        $sort = array('asc', 'desc');
+        $sort1 = 'desc';
+        if (isset($_GET['sort']) && in_array($_GET['sort'], $sort)) {
+            $sort1 = $_GET['sort'];
+        }
+        $iskalniNiz = $this->getRequest()->getPost('isci', null);
+        $em = $this->getEntityManager();
+        $query = $em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d WHERE d.opis LIKE '%".$iskalniNiz."%' OR d.imeDatoteke LIKE '%".$iskalniNiz."%' ORDER BY d.".$order." ".$sort1);
+        $datoteke = $query->getResult();
+        
+        return new ViewModel(array('datoteke' => $datoteke));
+    }
+    
+    
     public function getUploadSize($user)
     {
         $em = $this->getEntityManager();

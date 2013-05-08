@@ -1,2 +1,4 @@
-DoctrineORMModule
-cache
+!.gitignore
+!cache
+!uploads
+*

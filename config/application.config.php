@@ -5,6 +5,7 @@ return array(
 		'DoctrineModule',
 		'DoctrineORMModule',
 		'DluTwBootstrap',
+		'ZfcRbac',
 		'Prokrastinat',
 		'Vprasanja',
 		'Deska',

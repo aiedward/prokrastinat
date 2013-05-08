@@ -9,6 +9,10 @@ use Deska\Form\DeskaForm;
 
 class DeskaController extends BaseController 
 {
+
+    /**
+     * @var Deska\Repository\Oglas
+     */
     protected $deska_repository;
 
     public function indexAction() 
@@ -18,7 +22,6 @@ class DeskaController extends BaseController
         return new ViewModel(array(
                 'oglasi' => $oglasi,
             ));
-        // test
     }
 
     public function dodajAction() 

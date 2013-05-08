@@ -82,9 +82,8 @@ class UserController extends BaseController
                 }
             }
             
-            
-            
-            $form->populateValues($user->toArray());
+            if($user)
+                $form->populateValues($user->toArray());
   
             
             return new ViewModel (array(

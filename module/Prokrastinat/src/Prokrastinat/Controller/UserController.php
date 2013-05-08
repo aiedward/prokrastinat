@@ -14,7 +14,7 @@ class UserController extends BaseController
 
 	public function loginAction()
 	{
-		$form = new \Prokrastinat\Form\Login();
+		$form = new \Prokrastinat\Form\LoginForm();
 		if ($this->getRequest()->isPost()) {
 			$data = $this->getRequest()->getPost();
 			

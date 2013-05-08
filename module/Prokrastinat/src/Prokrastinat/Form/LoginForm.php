@@ -8,7 +8,7 @@ use Zend\InputFilter\Factory;
 use Zend\InputFilter\InputFilter;
 use Zend\Validator;
 
-class Login extends Form {
+class LoginForm extends Form {
 	public function __construct () {
 		parent::__construct('login');
 		$this->setAttribute('method', 'post');

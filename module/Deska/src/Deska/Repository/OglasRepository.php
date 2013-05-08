@@ -2,10 +2,11 @@
 namespace Deska\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Deska\Entity\Oglas;
 
 class OglasRepository extends EntityRepository
 {
-    public function saveOglas($oglas, array $data) 
+    public function saveOglas(Oglas $oglas, array $data) 
     {
         $em = $this->getEntityManager();
 
@@ -17,14 +18,5 @@ class OglasRepository extends EntityRepository
         $oglas->kategorija = null;
 
         $em->persist($oglas);
-        $em->flush();
-    }
-
-    public function getOglasById($id) 
-    {
-        $em = $this->getEntityManager();
-        $oglas = $em->find('Deska\Entity\Oglas', $id);
-
-        return $oglas;
     }
 }

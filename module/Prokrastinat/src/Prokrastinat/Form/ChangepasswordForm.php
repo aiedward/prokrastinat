@@ -8,9 +8,9 @@ use Zend\InputFilter\Factory;
 use Zend\InputFilter\InputFilter;
 use Zend\Validator;
 
-class Changepw extends Form {
+class ChangepasswordForm extends Form {
 	public function __construct () {
-		parent::__construct('changepw');
+		parent::__construct('changepasswordForm');
 		$this->setAttribute('method', 'post');
                 
 		$this->add(array(

@@ -4,7 +4,7 @@ namespace Prokrastinat\Repository;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 
-class User extends EntityRepository
+class UserRepository extends EntityRepository
 {
     static function hashPassword($user, $password) {
         $bcrypt = new \Zend\Crypt\Password\Bcrypt();

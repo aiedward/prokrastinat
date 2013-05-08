@@ -23,6 +23,6 @@ class Role extends BaseEntity
      * @ORM\ManyToOne(targetEntity="Role")
      * @ORM\JoinColumn(name="parent_role_id", referencedColumnName="id")
      */
-    protected $parent_role_id;
+    protected $parent_role;
 }
     

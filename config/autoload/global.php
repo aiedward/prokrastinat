@@ -32,13 +32,14 @@ return array(
 		'template_map' => array(
 			'layout/layouttwb'		=> 'view/layout.phtml',
 			'error/404'				=> 'view/error/404.phtml',
-			'error/index'			=> __DIR__ . '/../../view/error/index.phtml',
-            'error/403'              => 'view/error/403.phtml',
+			'error/index'			=> 'view/error/index.phtml',
+            'error/403'             => 'view/error/403.phtml',
         ),
 		'display_not_found_reason'	=> true,
 		'display_exceptions'		=> true,
 		'not_found_template'		=> 'error/404',
 		'exception_template'		=> 'error/index',
+        'forbidden_template'        => 'error/403',
 	),
 	'doctrine' => array(
 		'authentication' => array(

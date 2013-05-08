@@ -13,8 +13,10 @@ return array(
             ),*/
             'ZfcRbac\Firewall\Route' => array(
                 array('route' => 'user/login', 'roles' => 'anonymous'),
-                array('route' => 'user/edit', 'roles' => 'member'),
-                //array('route' => 'datoteke/*', 'roles' => 'member'),
+                array('route' => 'deska/index', 'roles' => 'anonymous'),
+                //array('route' => 'user/*', 'roles' => 'member'),
+                array('route' => 'datoteke/*', 'roles' => 'member'),
+                array('route' => 'vprasanje/*', 'roles' => 'member'),
                 
             ),
         ),

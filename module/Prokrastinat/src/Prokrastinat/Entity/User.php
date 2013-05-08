@@ -58,21 +58,17 @@ class User extends BaseEntity
 	/** @ORM\Column(length=64, nullable=true) */
 	protected $naslov;
 
-        /** @ORM\ManyToMany(targetEntity="Role", inversedBy="user")
-         *  @ORM\JoinTable(name="rbac_user_roles") */
-        protected $roles;
+    /**
+     * @ORM\ManyToMany(targetEntity="Role", inversedBy="user")
+     * @ORM\JoinTable(name="rbac_user_roles")
+     */
+    protected $roles;
 
         public function __construct () {
             $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
         }
 
-        public function getPolnoIme()
-        {
-            return $this->ime . ' ' . $this->priimek;
-        }
-
-        public function toArray()
-        {
-            return get_object_vars($this);
-        }
+    public function getPolnoIme() {
+        return $this->ime . ' ' . $this->priimek;
+    }
 }

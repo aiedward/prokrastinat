@@ -47,7 +47,7 @@ return array(
 				'identity_class' => 'Prokrastinat\Entity\User',
 				'identity_property' => 'username',
 				'credential_property' => 'password',
-				'credentialCallable' => 'Prokrastinat\Repository\User::hashPassword'
+				'credentialCallable' => 'Prokrastinat\Repository\UserRepository::hashPassword'
 			),
 		),
 	),

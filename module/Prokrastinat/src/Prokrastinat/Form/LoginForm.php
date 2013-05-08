@@ -10,7 +10,7 @@ use Zend\Validator;
 
 class LoginForm extends Form {
 	public function __construct () {
-		parent::__construct('login');
+		parent::__construct('loginForm');
 		$this->setAttribute('method', 'post');
 		$this->add(array(
 			'name' => 'id',

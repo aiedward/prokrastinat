@@ -8,9 +8,9 @@ use Zend\InputFilter\Factory;
 use Zend\InputFilter\InputFilter;
 use Zend\Validator;
 
-class Edit extends Form {
+class EditForm extends Form {
 	public function __construct () {
-		parent::__construct('Edit');
+		parent::__construct('EditForm');
 		$this->setAttribute('method', 'post');
 		//ID
 		$this->add(array(

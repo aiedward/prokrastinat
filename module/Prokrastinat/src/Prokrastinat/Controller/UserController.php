@@ -4,7 +4,7 @@ use Zend\View\Model\ViewModel;
 
 class UserController extends BaseController
 {
-        /** @var Prokrastinat\Repository\User */
+        /** @var Prokrastinat\Repository\UserRepository */
         protected $userRepository;
     
 	public function indexAction()
@@ -60,7 +60,7 @@ class UserController extends BaseController
 	public function editAction()
 	{
             parent::zahtevajLogin();
-            $form = new \Prokrastinat\Form\Edit();
+            $form = new \Prokrastinat\Form\EditForm();
             $urejanje = false;
             $user = $this->auth->getIdentity();
             
@@ -112,10 +112,10 @@ class UserController extends BaseController
             return new ViewModel(array('user' => $user));
         }
         
-        public function changepwAction()
+        public function changepasswordAction()
         {
             parent::zahtevajLogin();
-            $form = new \Prokrastinat\Form\Changepw();
+            $form = new \Prokrastinat\Form\ChangepasswordForm();
             $sporocilo = false;
             $napaka = false;
             

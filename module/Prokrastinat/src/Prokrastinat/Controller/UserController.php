@@ -87,7 +87,7 @@ class UserController extends BaseController
             }
             
             if($user)
-                $form->populateValues($user->toArray());
+                $form->fill($user);
   
             
             return new ViewModel (array(

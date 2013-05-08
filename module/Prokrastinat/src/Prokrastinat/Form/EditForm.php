@@ -256,10 +256,17 @@ class EditForm extends Form {
                 return $filter;
         }
         
-        /*public function fill (\Prokrastinat\Entity\User $user) 
-        {
-            $this->ime->value = $user->ime;
-        }*/
+        public function fill (\Prokrastinat\Entity\User $user) {
+            $this->get('ime')->setValue($user->ime);
+            $this->get('priimek')->setValue($user->priimek);
+            $this->get('email')->setValue($user->email);
+            $this->get('naslov')->setValue($user->naslov);
+            $this->get('mesto')->setValue($user->mesto);
+            $this->get('drzava')->setValue($user->drzava);
+            $this->get('opis')->setValue($user->opis);
+            $this->get('splet')->setValue($user->splet);
+            $this->get('telefon')->setValue($user->telefon);
+        }
 }
 
 ?>

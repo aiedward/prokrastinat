@@ -7,57 +7,57 @@ class UserController extends BaseController
         /** @var Prokrastinat\Repository\UserRepository */
         protected $userRepository;
     
-	public function indexAction()
-	{
-		return new ViewModel();
-	}
+    public function indexAction()
+    {
+        return new ViewModel();
+    }
 
-	public function loginAction()
-	{
-		$form = new \Prokrastinat\Form\LoginForm();
-		if ($this->getRequest()->isPost()) {
-			$data = $this->getRequest()->getPost();
-			
-			$form->setInputFilter($form->getInputFilter());
-			$form->setData($data);
-			
-			if ($form->isValid()) {
-				$authService = $this->getServiceLocator()->get('Prokrastinat\Authentication\AuthenticationService');
-				$adapter = $authService->getAdapter();
-				$adapter->setIdentityValue($form->get('username')->getValue());
-				$adapter->setCredentialValue($form->get('password')->getValue());
-				$result = $authService->authenticate();
+    public function loginAction()
+    {
+        $form = new \Prokrastinat\Form\LoginForm();
+        if ($this->getRequest()->isPost()) {
+            $data = $this->getRequest()->getPost();
+            
+            $form->setInputFilter($form->getInputFilter());
+            $form->setData($data);
+            
+            if ($form->isValid()) {
+                $authService = $this->getServiceLocator()->get('Prokrastinat\Authentication\AuthenticationService');
+                $adapter = $authService->getAdapter();
+                $adapter->setIdentityValue($form->get('username')->getValue());
+                $adapter->setCredentialValue($form->get('password')->getValue());
+                $result = $authService->authenticate();
 
-				if ($result->isValid()) {
+                if ($result->isValid()) {
                     $user = $authService->getIdentity();
                     $user->datum_logina = new \DateTime("now");
                     $this->em->persist($user);
                     $this->em->flush();
-					return $this->redirect()->toRoute('index');
-				} else {
-					$form->get('password')->setMessages(array(
-						'Kombinacija uporabniškega imena in gesla je napačna'
-					));
-				}
-			}
-		}
+                    return $this->redirect()->toRoute('index');
+                } else {
+                    $form->get('password')->setMessages(array(
+                        'Kombinacija uporabniškega imena in gesla je napačna'
+                    ));
+                }
+            }
+        }
 
-		return new ViewModel (array(
-			'form' => $form,
-			'formType' => \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL,
-		));
-	}
-	
-	public function logoutAction()
-	{
-		$authService = $this->getServiceLocator()->get('Prokrastinat\Authentication\AuthenticationService');
-		$authService->clearIdentity();
-		
-		return $this->redirect()->toRoute('index');
-	}
-	
-	public function editAction()
-	{
+        return new ViewModel (array(
+            'form' => $form,
+            'formType' => \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL,
+        ));
+    }
+    
+    public function logoutAction()
+    {
+        $authService = $this->getServiceLocator()->get('Prokrastinat\Authentication\AuthenticationService');
+        $authService->clearIdentity();
+        
+        return $this->redirect()->toRoute('index');
+    }
+    
+    public function editAction()
+    {
             if (!$this->isGranted('member')) $this->dostopZavrnjen();
             $form = new \Prokrastinat\Form\EditForm();
             $urejanje = false;
@@ -94,7 +94,7 @@ class UserController extends BaseController
                 'formType' => \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL,
                 'urejanje' => $urejanje));
 
-	}
+    }
         
         public function viewAction()
         {
@@ -152,6 +152,6 @@ class UserController extends BaseController
                 'formType' => \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL,
                 'sporocilo' => $sporocilo,
                 'napaka' => $napaka
-			));
+            ));
         }
 }

@@ -10,11 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Role extends BaseEntity
 {
-	/**
-	 * @ORM\Id @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 */
-	protected $id;
+    /**
+     * @ORM\Id @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
     
     /** @ORM\Column(length=20, nullable=false, unique=true) */
     protected $name;

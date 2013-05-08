@@ -30,9 +30,9 @@ abstract class BaseController extends AbstractActionController
             // to-do: zapomni si zadnji request in po uspešni prijavi redirectaj nazaj
             return $this->redirect()->toRoute('user', array('action' => 'login'));
         } else {
-			$this->getResponse()->setStatusCode(403);
-			$model = new ViewModel();
-			return $model->setTemplate('forbidden_template');
-		}
+            $this->getResponse()->setStatusCode(403);
+            $model = new ViewModel();
+            return $model->setTemplate('forbidden_template');
+        }
     }
 }

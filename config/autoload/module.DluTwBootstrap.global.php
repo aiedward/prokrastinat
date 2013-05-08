@@ -18,7 +18,7 @@
  */
 
 return array(
-	'view_manager' => array(
-		'layout'                    => 'layout/layouttwb',
-	),
+    'view_manager' => array(
+        'layout'                    => 'layout/layouttwb',
+    ),
 );

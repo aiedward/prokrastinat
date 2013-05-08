@@ -10,11 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class PermissionAccess extends BaseEntity
 {
-	/**
-	 * @ORM\Id @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 */
-	protected $id;
+    /**
+     * @ORM\Id @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
     
     /**
      * @ORM\ManyToOne(targetEntity="Role")

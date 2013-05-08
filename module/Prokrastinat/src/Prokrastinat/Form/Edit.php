@@ -68,18 +68,6 @@ class Edit extends Form {
 				'label' => 'Država',
 			),
 		));
-		//JEZIK
-		$this->add(array(
-			'name' => 'jezik',
-			'type' => 'Select',
-			'options' => array(
-				'label' => 'Jezik strani*',
-				'value_options' => array(
-					'sl_SL' => 'Slovenščina',
-					'en_US' => 'English',
-				),
-			),
-		));
 		//OPIS
 		$this->add(array(
 			'name' => 'opis',
@@ -267,7 +255,11 @@ class Edit extends Form {
                 
                 return $filter;
         }
-
+        
+        /*public function fill (\Prokrastinat\Entity\User $user) 
+        {
+            $this->ime->value = $user->ime;
+        }*/
 }
 
 ?>

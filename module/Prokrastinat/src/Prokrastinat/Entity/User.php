@@ -32,9 +32,6 @@ class User extends BaseEntity
 	protected $password;
 
 	/** @ORM\Column(type="datetime") */
-	protected $datum_registracije;
-
-	/** @ORM\Column(type="datetime") */
 	protected $datum_logina;
 
 	/** @ORM\Column(type="boolean") */
@@ -49,9 +46,6 @@ class User extends BaseEntity
 	/** @ORM\Column(length=64, nullable=true) */
 	protected $drzava;
 
-	/** @ORM\Column(length=8, nullable=true) */
-	protected $jezik;
-
 	/** @ORM\Column(length=255, nullable=true) */
 	protected $opis;
 
@@ -64,21 +58,21 @@ class User extends BaseEntity
 	/** @ORM\Column(length=64, nullable=true) */
 	protected $naslov;
 
-    /** @ORM\ManyToMany(targetEntity="Role", inversedBy="user")
-     *  @ORM\JoinTable(name="rbac_user_roles") */
-    protected $roles;
-    
-    public function __construct () {
-        $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
-	public function getPolnoIme()
-	{
-		return $this->ime . ' ' . $this->priimek;
-	}
+        /** @ORM\ManyToMany(targetEntity="Role", inversedBy="user")
+         *  @ORM\JoinTable(name="rbac_user_roles") */
+        protected $roles;
 
-    public function toArray()
-    {
-        return get_object_vars($this);
-    }
+        public function __construct () {
+            $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
+        }
+
+        public function getPolnoIme()
+        {
+            return $this->ime . ' ' . $this->priimek;
+        }
+
+        public function toArray()
+        {
+            return get_object_vars($this);
+        }
 }

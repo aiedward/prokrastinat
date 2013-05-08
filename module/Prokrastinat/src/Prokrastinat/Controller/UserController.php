@@ -29,6 +29,11 @@ class UserController extends BaseController
 				$result = $authService->authenticate();
 
 				if ($result->isValid()) {
+                                        $user = $authService->getIdentity();
+                                        $user->datum_logina = new \DateTime("now");
+                                        
+                                        $this->em->persist($user);
+                                        $this->em->flush();
 					return $this->redirect()->toRoute('index');
 				} else {
 					$form->get('password')->setMessages(array(
@@ -82,9 +87,8 @@ class UserController extends BaseController
                 }
             }
             
-            
-            
-            $form->populateValues($user->toArray());
+            if($user)
+                $form->populateValues($user->toArray());
   
             
             return new ViewModel (array(

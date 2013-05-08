@@ -19,12 +19,4 @@ class OglasRepository extends EntityRepository
 
         $em->persist($oglas);
     }
-
-    public function getOglasById($id) 
-    {
-        $em = $this->getEntityManager();
-        $oglas = $em->find('Deska\Entity\Oglas', $id);
-
-        return $oglas;
-    }
 }

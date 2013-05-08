@@ -58,7 +58,7 @@ class DeskaController extends BaseController
         $id = (int) $this->params()->fromRoute('id', 0);
         $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
 
-        $oglas = $this->deska_repository->getOglasById($id);
+        $oglas = $this->deska_repository->find($id);
 
         return new ViewModel(array('oglas' => $oglas));
     }

@@ -64,10 +64,10 @@ class User extends BaseEntity
      */
     protected $roles;
 
-        public function __construct () {
-            $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
-        }
-
+    public function __construct () {
+        $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     public function getPolnoIme() {
         return $this->ime . ' ' . $this->priimek;
     }

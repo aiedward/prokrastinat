@@ -124,7 +124,7 @@ class EditForm extends Form {
 					'name' => 'StringLength',
 					'options' => array(
 						'min' => 2,
-                                                'max' => 30,
+                        'max' => 30,
 					)
 				)
 			)
@@ -141,7 +141,7 @@ class EditForm extends Form {
 					'name' => 'StringLength',
 					'options' => array(
 						'min' => 2,
-                                                'max' => 30,
+                        'max' => 30,
 					)
 				)
 			)
@@ -170,7 +170,7 @@ class EditForm extends Form {
 				array(
 					'name' => 'StringLength',
 					'options' => array(
-                                                'max' => 64,
+                        'max' => 64,
 					)
 				)
 			)
@@ -186,7 +186,7 @@ class EditForm extends Form {
 				array(
 					'name' => 'StringLength',
 					'options' => array(
-                                                'max' => 64,
+                        'max' => 64,
 					)
 				)
 			)
@@ -202,7 +202,7 @@ class EditForm extends Form {
 				array(
 					'name' => 'StringLength',
 					'options' => array(
-                                                'max' => 64,
+                        'max' => 64,
 					)
 				)
 			)
@@ -218,7 +218,7 @@ class EditForm extends Form {
 				array(
 					'name' => 'StringLength',
 					'options' => array(
-                                                'max' => 255,
+                        'max' => 255,
 					)
 				)
 			)
@@ -234,7 +234,7 @@ class EditForm extends Form {
 				array(
 					'name' => 'StringLength',
 					'options' => array(
-                                                'max' => 64,
+                        'max' => 64,
 					)
 				)
 			)
@@ -242,7 +242,7 @@ class EditForm extends Form {
                 
                 $filter->add($fac->createInput(array(
 			'name' => 'telefon',
-                        'required' => false,
+            'required' => false,
 			'filters' => array(
 				array('name' => 'StringTrim')
 			),
@@ -253,13 +253,20 @@ class EditForm extends Form {
 			)
 		)));
                 
-                return $filter;
+        return $filter;
         }
         
-        /*public function fill (\Prokrastinat\Entity\User $user) 
-        {
-            $this->ime->value = $user->ime;
-        }*/
+        public function fill (\Prokrastinat\Entity\User $user) {
+            $this->get('ime')->setValue($user->ime);
+            $this->get('priimek')->setValue($user->priimek);
+            $this->get('email')->setValue($user->email);
+            $this->get('naslov')->setValue($user->naslov);
+            $this->get('mesto')->setValue($user->mesto);
+            $this->get('drzava')->setValue($user->drzava);
+            $this->get('opis')->setValue($user->opis);
+            $this->get('splet')->setValue($user->splet);
+            $this->get('telefon')->setValue($user->telefon);
+        }
 }
 
 ?>

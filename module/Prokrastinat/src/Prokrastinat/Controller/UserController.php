@@ -75,7 +75,6 @@ class UserController extends BaseController
                     $user->naslov = $form->get('naslov')->getValue();
                     $user->mesto = $form->get('mesto')->getValue();
                     $user->drzava = $form->get('drzava')->getValue();
-                    $user->jezik = $form->get('jezik')->getValue();
                     $user->opis = $form->get('opis')->getValue();
                     $user->splet = $form->get('splet')->getValue();
                     $user->telefon = $form->get('telefon')->getValue();

@@ -18,11 +18,14 @@ class ProkrastinatIdentity implements \ZfcRbac\Identity\IdentityInterface
         $auth = $sm->get('Prokrastinat\Authentication\AuthenticationService');
         
         if (!$auth->hasIdentity())
-            return 'anonymous';
+            return (array) 'anonymous';
         
         $id = $auth->getIdentity();
         
-        $roles = $id->roles;
+        $roles = array();
+        foreach ($id->roles as $role) {
+            array_push($roles, $role->name);
+        }
         return $roles;
     }
 

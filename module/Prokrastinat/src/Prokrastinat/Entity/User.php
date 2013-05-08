@@ -46,9 +46,6 @@ class User extends BaseEntity
 	/** @ORM\Column(length=64, nullable=true) */
 	protected $drzava;
 
-	/** @ORM\Column(length=8, nullable=true) */
-	protected $jezik;
-
 	/** @ORM\Column(length=255, nullable=true) */
 	protected $opis;
 
@@ -69,10 +66,10 @@ class User extends BaseEntity
             $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
         }
 
-            public function getPolnoIme()
-            {
-                    return $this->ime . ' ' . $this->priimek;
-            }
+        public function getPolnoIme()
+        {
+            return $this->ime . ' ' . $this->priimek;
+        }
 
         public function toArray()
         {

@@ -56,15 +56,43 @@ class UserController extends BaseController
 	{
             parent::zahtevajLogin();
             $form = new \Prokrastinat\Form\Edit();
-            $authService = $this->getServiceLocator()->get('Prokrastinat\Authentication\AuthenticationService');
-            $user = $authService->getIdentity();
+            $urejanje = false;
+            $user = $this->auth->getIdentity();
+            
+            if ($this->request->isPost()) {
+                $form->setInputFilter($form->getInputFilter());
+                $form->setData($this->request->getPost());
+
+                if ($form->isValid()) {
+                    $user->ime = $form->get('ime')->getValue();
+                    $user->priimek = $form->get('priimek')->getValue();
+                    $user->email = $form->get('email')->getValue();
+                    $user->naslov = $form->get('naslov')->getValue();
+                    $user->mesto = $form->get('mesto')->getValue();
+                    $user->drzava = $form->get('drzava')->getValue();
+                    $user->jezik = $form->get('jezik')->getValue();
+                    $user->opis = $form->get('opis')->getValue();
+                    $user->splet = $form->get('splet')->getValue();
+                    $user->telefon = $form->get('telefon')->getValue();
+
+                    $this->em->persist($user);
+                    $this->em->flush();
+                    
+                    $urejanje = true;
+
+                    //return $this->redirect()->toRoute('user', array('action' => 'edit'));
+                }
+            }
+            
+            
             
             $form->populateValues($user->toArray());
   
             
             return new ViewModel (array(
                 'form' => $form,
-                'formType' => \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL));
+                'formType' => \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL,
+                'urejanje' => $urejanje));
 
 	}
         

@@ -1,2 +1,11 @@
 <h1>Urejanje profila</h1>
+<?php
+    if($this->urejanje)
+    {
+        echo '<div class="alert alert-success">';
+        echo 'Uspešno!';
+        echo '</div>';
+        
+    }
+?>
 <?= $this->formTwb($this->form) ?>

@@ -120,6 +120,153 @@ class Edit extends Form {
 			),
 		));
 	}
+        
+        public function getInputFilter () {
+		$fac = new Factory();
+		$filter = new InputFilter();
+		
+		$filter->add($fac->createInput(array(
+			'name' => 'ime',
+			'required' => true,
+			'filters' => array(
+				array('name' => 'StringTrim')
+			),
+			'validators' => array(
+				array(
+					'name' => 'StringLength',
+					'options' => array(
+						'min' => 2,
+                                                'max' => 30,
+					)
+				)
+			)
+		)));
+                
+                $filter->add($fac->createInput(array(
+			'name' => 'priimek',
+			'required' => true,
+			'filters' => array(
+				array('name' => 'StringTrim')
+			),
+			'validators' => array(
+				array(
+					'name' => 'StringLength',
+					'options' => array(
+						'min' => 2,
+                                                'max' => 30,
+					)
+				)
+			)
+		)));
+                
+                $filter->add($fac->createInput(array(
+			'name' => 'email',
+			'required' => true,
+			'filters' => array(
+				array('name' => 'StringTrim')
+			),
+			'validators' => array(
+				array(
+					'name' => 'EmailAddress'
+				)
+			)
+		)));
+                
+                $filter->add($fac->createInput(array(
+			'name' => 'naslov',
+                        'required' => false,
+			'filters' => array(
+				array('name' => 'StringTrim')
+			),
+			'validators' => array(
+				array(
+					'name' => 'StringLength',
+					'options' => array(
+                                                'max' => 64,
+					)
+				)
+			)
+		)));
+                
+                $filter->add($fac->createInput(array(
+			'name' => 'mesto',
+                        'required' => false,
+			'filters' => array(
+				array('name' => 'StringTrim')
+			),
+			'validators' => array(
+				array(
+					'name' => 'StringLength',
+					'options' => array(
+                                                'max' => 64,
+					)
+				)
+			)
+		)));
+                
+                $filter->add($fac->createInput(array(
+			'name' => 'drzava',
+                        'required' => false,
+			'filters' => array(
+				array('name' => 'StringTrim')
+			),
+			'validators' => array(
+				array(
+					'name' => 'StringLength',
+					'options' => array(
+                                                'max' => 64,
+					)
+				)
+			)
+		)));
+                
+                $filter->add($fac->createInput(array(
+			'name' => 'opis',
+                        'required' => false,
+			'filters' => array(
+				array('name' => 'StringTrim')
+			),
+			'validators' => array(
+				array(
+					'name' => 'StringLength',
+					'options' => array(
+                                                'max' => 255,
+					)
+				)
+			)
+		)));
+                
+                $filter->add($fac->createInput(array(
+			'name' => 'splet',
+                        'required' => false,
+			'filters' => array(
+				array('name' => 'StringTrim')
+			),
+			'validators' => array(
+				array(
+					'name' => 'StringLength',
+					'options' => array(
+                                                'max' => 64,
+					)
+				)
+			)
+		)));
+                
+                $filter->add($fac->createInput(array(
+			'name' => 'telefon',
+                        'required' => false,
+			'filters' => array(
+				array('name' => 'StringTrim')
+			),
+			'validators' => array(
+				array(
+					'name' => 'Digits',
+				)
+			)
+		)));
+                
+                return $filter;
+        }
 
 }
 

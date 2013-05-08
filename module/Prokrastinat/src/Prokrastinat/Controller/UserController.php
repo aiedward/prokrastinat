@@ -79,8 +79,6 @@ class UserController extends BaseController
                     $this->em->flush();
                     
                     $urejanje = true;
-
-                    //return $this->redirect()->toRoute('user', array('action' => 'edit'));
                 }
             }
             
@@ -108,5 +106,53 @@ class UserController extends BaseController
                 throw new \Exception('Uporabnik ne obstaja');
             
             return new ViewModel(array('user' => $user));
+        }
+        
+        public function changepwAction()
+        {
+            parent::zahtevajLogin();
+            $form = new \Prokrastinat\Form\Changepw();
+            $sporocilo = false;
+            $napaka = false;
+            
+            
+            
+            if ($this->request->isPost()) {
+                $form->setInputFilter($form->getInputFilter());
+                $form->setData($this->request->getPost());
+
+                if ($form->isValid()) {
+                    $bcrypt = new \Zend\Crypt\Password\Bcrypt();
+                    $user = $this->auth->getIdentity();
+                    
+                    if($bcrypt->verify($form->get('password')->getValue(), $user->password))
+                    {
+                        if(($form->get('password_novo')->getValue()) == ($form->get('password_novo_conf')->getValue()))
+                        {
+                            $hashed = $bcrypt->create($form->get('password_novo')->getValue());
+                            $user->password = $hashed;
+                            
+                            $this->em->persist($user);
+                            $this->em->flush();
+                            $sporocilo = "Uspešno!";
+                        }else
+                        {
+                            $sporocilo = "Potrditveno geslo se ne ujema!";
+                            $napaka = true;
+                        }
+                    }else
+                    {
+                        $sporocilo = "Napačno geslo!";
+                        $napaka = true;
+                    }
+                }
+            }
+            
+            
+            return new ViewModel (array(
+                'form' => $form,
+                'formType' => \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL,
+                'sporocilo' => $sporocilo,
+                'napaka' => $napaka));
         }
 }

@@ -1,0 +1,18 @@
+<h1>Sprememba gesla</h1>
+<?php
+    if($this->sporocilo)
+    {
+        if($this->napaka)
+        {
+            echo '<div class="alert alert-error"><strong>';
+            echo $this->sporocilo;
+            echo '</strong></div>';
+        }else{
+            echo '<div class="alert alert-success"><strong>';
+            echo $this->sporocilo;
+            echo '</strong></div>';
+        }
+        
+    }
+?>
+<?= $this->formTwb($this->form) ?>

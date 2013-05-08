@@ -48,6 +48,12 @@ class User extends \Prokrastinat\Entity\User implements \Doctrine\ORM\Proxy\Prox
         return parent::getPolnoIme();
     }
 
+    public function toArray()
+    {
+        $this->__load();
+        return parent::toArray();
+    }
+
     public function __get($name)
     {
         $this->__load();
@@ -63,7 +69,7 @@ class User extends \Prokrastinat\Entity\User implements \Doctrine\ORM\Proxy\Prox
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'email', 'username', 'vpisna_st', 'ime', 'priimek', 'tip', 'password', 'salt', 'datum_registracije', 'datum_logina', 'enabled', 'confirmation', 'mesto', 'drzava', 'jezik', 'opis', 'splet', 'icq', 'skype', 'aim', 'yahoo', 'telefon', 'naslov');
+        return array('__isInitialized__', 'id', 'email', 'username', 'vpisna_st', 'ime', 'priimek', 'tip', 'password', 'datum_registracije', 'datum_logina', 'enabled', 'confirmation', 'mesto', 'drzava', 'jezik', 'opis', 'splet', 'telefon', 'naslov', 'roles');
     }
 
     public function __clone()

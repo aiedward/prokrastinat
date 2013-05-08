@@ -16,6 +16,10 @@ class ProkrastinatIdentity implements \ZfcRbac\Identity\IdentityInterface
     public function __construct($sm)
     {
         $auth = $sm->get('Prokrastinat\Authentication\AuthenticationService');
+        
+        if (!$auth->hasIdentity())
+            return 'anonymous';
+        
         $id = $auth->getIdentity();
         
         $roles = $id->roles;

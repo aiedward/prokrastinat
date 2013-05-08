@@ -16,7 +16,7 @@ class Permission extends BaseEntity
 	 */
 	protected $id;
     
-    /** @ORM\Column(length=20) */
+    /** @ORM\Column(length=20, unique=true) */
     protected $name;
 }
     

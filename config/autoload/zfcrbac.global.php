@@ -12,8 +12,12 @@ return array(
                 array('controller' => 'index', 'actions' => 'index', 'roles' => 'guest')
             ),*/
             'ZfcRbac\Firewall\Route' => array(
-                array('route' => 'profiles/add', 'roles' => 'member'),
-                array('route' => 'admin/*', 'roles' => 'administrator')
+                array('route' => 'user/login', 'roles' => 'anonymous'),
+                array('route' => 'user/edit', 'roles' => 'member'),
+                array('route' => 'vprasanje/*', 'roles' => 'member'),
+                array('route' => 'datoteke/*', 'roles' => 'member'),
+                array('route' => 'user/login', 'roles' => 'anonymous'),
+                
             ),
         ),
         'providers' => array(
@@ -29,7 +33,7 @@ return array(
             'ZfcRbac\Provider\Generic\Permission\DoctrineDbal' => array(
                 'connection' => 'doctrine.connection.orm_default',
                 'options' => array(
-                    'permission_table'      => 'rbac_permissions',
+                    'permission_table'      => 'rbac_permission',
                     'permission_id_column'  => 'id',
                     'permission_name_column'=> 'name',
                     'permission_join_column'=> 'role_id',

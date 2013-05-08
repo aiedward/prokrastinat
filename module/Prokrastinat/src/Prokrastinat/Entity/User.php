@@ -28,9 +28,6 @@ class User extends BaseEntity
 	/** @ORM\Column(length=30) */
 	protected $priimek;
 
-	/** @ORM\Column(type="integer") */
-	protected $tip;
-
 	/** @ORM\Column(length=60) */
 	protected $password;
 

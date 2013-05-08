@@ -24,16 +24,17 @@ class DatotekaRepository extends EntityRepository
     }
     
     public function saveDatoteka(Datoteka $datoteka, array $data) {
-        $file = new \Datoteke\Entity\Datoteka();
-                    $file->opis = $form->get('opis')->getValue();
-                    $file->imeDatoteke = $form->get('fileupload')->getValue();
-                    $file->datum_uploada = new DateTime('now');
-                    $file->st_prenosov = 0;
-                    $file->st_ogledov = 0;
-                    $file->velikost = $File['size'];
-                    $file->user = $this->auth->getIdentity();
+        $em = $this->getEntityManager();
+        $datoteka = new \Datoteke\Entity\Datoteka();
+        $datoteka->opis = $form->get('opis')->getValue();
+        $datoteka->imeDatoteke = $form->get('fileupload')->getValue();
+        $datoteka->datum_uploada = new DateTime('now');
+        $datoteka->st_prenosov = 0;
+        $datoteka->st_ogledov = 0;
+        $datoteka->velikost = $File['size'];
+        $datoteka->user = $this->auth->getIdentity();
     
-                    $objectManager->persist($file);
+        $em->persist($datoteka);
     }
     
 }

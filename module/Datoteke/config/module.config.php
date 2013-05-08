@@ -19,7 +19,7 @@ return array(
     
     'controllers' => array(
         'invokables' => array(
-            'Datoteke\Controller\Datoteke' => 'Datoteke\Controller\DatotekeController',
+            'Datoteke\Controller\Datoteka' => 'Datoteke\Controller\DatotekaController',
         ),
     ),
 
@@ -34,7 +34,7 @@ return array(
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Datoteke\Controller\Datoteke',
+                        'controller' => 'Datoteke\Controller\Datoteka',
                         'action'     => 'index',
                     ),
                 ),
@@ -44,7 +44,7 @@ return array(
     
     'view_manager' => array(
         'template_path_stack' => array(
-            'datoteke' => __DIR__ . '/../view',
+            __DIR__ . '/../view',
         ),
     ),
 );

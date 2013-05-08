@@ -25,12 +25,13 @@ class DatotekaController extends BaseController
         $form = new DatotekaForm();
         $request = $this->getRequest();
         
+        $datoteka = new Datoteke();
+        
         if ($request->isPost()) {
             $form->setInputFilter($datoteka->getInputFilter());
             $form->setData($this->request->getPost());
             
             if ($form->isValid()) {
-                $datoteka = new Datoteke();
                 
                 $skupna_velikost = $this->getUploadSize($user);
                 if(($skupna_velikost + $File['size']) > upload_limit)
@@ -39,8 +40,6 @@ class DatotekaController extends BaseController
                     print 'alert("Presegli ste limit uploada! Datoteke ni mogoče naložiti!")'; 
                     print '</script>';  
                 }
-                    
-                     
                     $size = new Size(array('min'=>1));
                      
                     $adapter = new \Zend\File\Transfer\Adapter\Http(); 
@@ -57,10 +56,8 @@ class DatotekaController extends BaseController
                         $adapter->setDestination(dirname(dirname(dirname(dirname(dirname(__DIR__))))).'/data/uploads');
                         if ($adapter->receive($File['name'])) {
                             $datoteka->exchangeArray($form->getData());
-                            //echo 'Datoteka '.$datoteka->fileupload. ' uspešno naložena!';
                         }
                     }
-                    $objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
                     
                     $em = $this->getEntityManager();
                     $file = new \Datoteke\Entity\Datoteka();
@@ -72,15 +69,11 @@ class DatotekaController extends BaseController
                     $file->velikost = $File['size'];
                     $file->user = $this->auth->getIdentity();
     
-                    $objectManager->persist($file);
-                    $objectManager->flush();
+                    $em->flush();
                     
                     return $this->redirect()->toRoute('datoteke');
                 }
-
             }
-            
-        }
         return array('form' => $form);
     }
     
@@ -109,7 +102,7 @@ class DatotekaController extends BaseController
     public function deleteAction()
     {
         $this->zahtevajLogin();
-        
+    
         $em = $this->getEntityManager();
         $datRep = $em->getRepository('Datoteke\Entity\Datoteka');
         $id = (int) $this->params()->fromRoute('id', 0);

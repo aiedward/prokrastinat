@@ -141,7 +141,7 @@ class DatotekeController extends BaseController
                 $del = $request->getPost('del', 'Ne');
                 if ($del == 'Da') {
                     $em->flush();
-                    unlink(dirname(dirname(dirname(dirname(dirname(__DIR__))))).'\data\\uploads\\'.$dat->imeDatoteke);
+                    unlink(dirname(dirname(dirname(dirname(dirname(__DIR__))))).'/data/uploads/'.$dat->imeDatoteke);
                     $datRep->deleteDatoteka($dat);
                     $em->flush();
                 }

@@ -89,9 +89,9 @@ class DeskaController extends BaseController
             {
                 $vals = array(
                     'user' => $this->auth->getIdentity(),
-                    'naslov' => "{$form->get('naslov')->getValue()}",
-                    'vsebina' => "{$form->get('vsebina')->getValue()}",
-                    'datum-zapadlosti' => "{$form->get('datum-zapadlosti')->getValue()}",
+                    'naslov' => $form->get('naslov')->getValue(),
+                    'vsebina' => $form->get('vsebina')->getValue(),
+                    'datum-zapadlosti' => $form->get('datum-zapadlosti')->getValue(),
                 );
                     
                 $this->deska_repository->saveOglas($oglas, $vals);

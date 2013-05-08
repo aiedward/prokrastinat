@@ -14,9 +14,7 @@ return array(
             'ZfcRbac\Firewall\Route' => array(
                 array('route' => 'user/login', 'roles' => 'anonymous'),
                 array('route' => 'user/edit', 'roles' => 'member'),
-                array('route' => 'vprasanje/*', 'roles' => 'member'),
-                array('route' => 'datoteke/*', 'roles' => 'member'),
-                array('route' => 'user/login', 'roles' => 'anonymous'),
+                //array('route' => 'datoteke/*', 'roles' => 'member'),
                 
             ),
         ),

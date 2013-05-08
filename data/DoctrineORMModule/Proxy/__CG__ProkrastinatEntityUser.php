@@ -69,7 +69,7 @@ class User extends \Prokrastinat\Entity\User implements \Doctrine\ORM\Proxy\Prox
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'email', 'username', 'vpisna_st', 'ime', 'priimek', 'tip', 'password', 'datum_registracije', 'datum_logina', 'enabled', 'confirmation', 'mesto', 'drzava', 'jezik', 'opis', 'splet', 'telefon', 'naslov', 'roles');
+        return array('__isInitialized__', 'id', 'email', 'username', 'vpisna_st', 'ime', 'priimek', 'password', 'datum_registracije', 'datum_logina', 'enabled', 'confirmation', 'mesto', 'drzava', 'jezik', 'opis', 'splet', 'telefon', 'naslov', 'roles');
     }
 
     public function __clone()

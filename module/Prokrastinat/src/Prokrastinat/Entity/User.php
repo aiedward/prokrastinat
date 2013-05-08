@@ -70,9 +70,4 @@ class User extends BaseEntity
         {
             return $this->ime . ' ' . $this->priimek;
         }
-
-        public function toArray()
-        {
-            return get_object_vars($this);
-        }
 }

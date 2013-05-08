@@ -4,7 +4,7 @@ namespace Datoteke\Form;
  
 use Zend\Form\Form;
  
-class DatotekeForm extends Form
+class DatotekaForm extends Form
 {
     public function __construct($name = null)
     {

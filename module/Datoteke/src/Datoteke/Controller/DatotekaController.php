@@ -2,7 +2,7 @@
 namespace Datoteke\Controller;
  
 use Datoteke\Model\Datoteke;
-use Datoteke\Form\DatotekeForm;
+use Datoteke\Form\DatotekaForm;
 use Datoteke\Form\EditForm;
 use Datoteke\Entity\Datoteka;
 use Prokrastinat\Entity\User;
@@ -14,7 +14,7 @@ use Prokrastinat\Controller\BaseController;
 
 define("upload_limit", 20000000);
 
-class DatotekeController extends BaseController
+class DatotekaController extends BaseController
 {
     public function addAction()
     {
@@ -22,71 +22,61 @@ class DatotekeController extends BaseController
         
         $this->zahtevajLogin();
         
-        $form = new DatotekeForm();
-        $request = $this->getRequest();  
+        $form = new DatotekaForm();
+        $request = $this->getRequest();
+        
         if ($request->isPost()) {
-             
-            $datoteka = new Datoteke();
             $form->setInputFilter($datoteka->getInputFilter());
-             
-            $nonFile = $request->getPost()->toArray();
-            $File = $this->params()->fromFiles('fileupload');
-            $data = array_merge(
-                 $nonFile,
-                 array('fileupload'=> $File['name'])
-             );
-            $form->setData($data);
+            $form->setData($this->request->getPost());
             
-            
-            $skupna_velikost = $this->getUploadSize($user);
-            if(($skupna_velikost + $File['size']) > upload_limit)
-            {
-                print '<script type="text/javascript">'; 
-                print 'alert("Presegli ste limit uploada! Datoteke ni mogoče naložiti!")'; 
-                print '</script>';  
-            }
-            else
-            {
-                if ($form->isValid()) {
-                 
-                $size = new Size(array('min'=>1));
-                 
-                $adapter = new \Zend\File\Transfer\Adapter\Http(); 
-                $adapter->setValidators(array($size), $File['name']);
-                if (!$adapter->isValid()){
-                    $dataError = $adapter->getMessages();
-                    $error = array();
-                    foreach($dataError as $key=>$row)
-                    {
-                        $error[] = $row;
+            if ($form->isValid()) {
+                $datoteka = new Datoteke();
+                
+                $skupna_velikost = $this->getUploadSize($user);
+                if(($skupna_velikost + $File['size']) > upload_limit)
+                {
+                    print '<script type="text/javascript">'; 
+                    print 'alert("Presegli ste limit uploada! Datoteke ni mogoče naložiti!")'; 
+                    print '</script>';  
+                }
+                    
+                     
+                    $size = new Size(array('min'=>1));
+                     
+                    $adapter = new \Zend\File\Transfer\Adapter\Http(); 
+                    $adapter->setValidators(array($size), $File['name']);
+                    if (!$adapter->isValid()){
+                        $dataError = $adapter->getMessages();
+                        $error = array();
+                        foreach($dataError as $key=>$row)
+                        {
+                            $error[] = $row;
+                        }
+                        $form->setMessages(array('fileupload'=>$error ));
+                    } else {
+                        $adapter->setDestination(dirname(dirname(dirname(dirname(dirname(__DIR__))))).'/data/uploads');
+                        if ($adapter->receive($File['name'])) {
+                            $datoteka->exchangeArray($form->getData());
+                            //echo 'Datoteka '.$datoteka->fileupload. ' uspešno naložena!';
+                        }
                     }
-                    $form->setMessages(array('fileupload'=>$error ));
-                } else {
-                    $adapter->setDestination(dirname(dirname(dirname(dirname(dirname(__DIR__))))).'/data/uploads');
-                    if ($adapter->receive($File['name'])) {
-                        $datoteka->exchangeArray($form->getData());
-                        //echo 'Datoteka '.$datoteka->fileupload. ' uspešno naložena!';
-                    }
-                }  
-             
-                $form->setInputFilter($datoteka->getInputFilter());
-
-                $objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-
-                $file = new \Datoteke\Entity\Datoteka();
-                $file->opis = $form->get('opis')->getValue();
-                $file->imeDatoteke = $form->get('fileupload')->getValue();
-                $file->datum_uploada = new DateTime('now');
-                $file->st_prenosov = 0;
-                $file->st_ogledov = 0;
-                $file->velikost = $File['size'];
-                $file->user = $this->auth->getIdentity();
-
-                $objectManager->persist($file);
-                $objectManager->flush();
-                clearstatcache();
-                return $this->redirect()->toRoute('datoteke');
-            }
+                    $objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+                    
+                    $em = $this->getEntityManager();
+                    $file = new \Datoteke\Entity\Datoteka();
+                    $file->opis = $form->get('opis')->getValue();
+                    $file->imeDatoteke = $form->get('fileupload')->getValue();
+                    $file->datum_uploada = new DateTime('now');
+                    $file->st_prenosov = 0;
+                    $file->st_ogledov = 0;
+                    $file->velikost = $File['size'];
+                    $file->user = $this->auth->getIdentity();
+    
+                    $objectManager->persist($file);
+                    $objectManager->flush();
+                    
+                    return $this->redirect()->toRoute('datoteke');
+                }
 
             }
             

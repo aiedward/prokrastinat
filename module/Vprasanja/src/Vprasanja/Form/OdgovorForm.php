@@ -8,7 +8,9 @@ use Zend\InputFilter\Factory;
 use Zend\InputFilter\InputFilter;
 use Zend\Validator;
 
-class Odgovor extends Form {
+use Vprasanja\Entity\Odgovor;
+
+class OdgovorForm extends Form {
     public function __construct()
     {
         parent::__construct('odgovor');
@@ -70,5 +72,13 @@ class Odgovor extends Form {
         )));
         
         return $filter;
+    }
+
+    public function fill(Odgovor $odgovor) {
+        $this->setData(array(
+            'id' => $odgovor->id,
+            'vprasanje_id' => $odgovor->vprasanje_id,
+            'vsebina' => $odgovor->vsebina
+        ));
     }
 }

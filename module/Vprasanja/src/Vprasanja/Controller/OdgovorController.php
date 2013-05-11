@@ -2,7 +2,10 @@
 namespace Vprasanja\Controller;
 
 use Zend\View\Model\ViewModel;
+
 use Prokrastinat\Controller\BaseController;
+use Vprasanja\Entity\Odgovor;
+use Vprasanja\Form\OdgovorForm;
 
 class OdgovorController extends BaseController
 {
@@ -16,7 +19,7 @@ class OdgovorController extends BaseController
         $this->zahtevajLogin();
 
         if ($this->request->isPost()) {
-            $form = new \Vprasanja\Form\Odgovor();
+            $form = new OdgovorForm();
             $form->setInputFilter($form->getInputFilter());
             $form->setData($this->request->getPost());
 
@@ -24,8 +27,7 @@ class OdgovorController extends BaseController
                 $id = $form->get('vprasanje_id')->getValue();
                 $vprasanje = $this->em->find('Vprasanja\Entity\Vprasanje', $id);
 
-                $odgovor = new \Vprasanja\Entity\Odgovor();
-
+                $odgovor = new Odgovor();
                 $odgovor->user = $this->auth->getIdentity();
                 $odgovor->objava = $vprasanje;
                 $odgovor->vsebina = $form->get('vsebina')->getValue();
@@ -35,9 +37,13 @@ class OdgovorController extends BaseController
                 $this->em->flush();
 
                 $url = $this->url()->fromRoute('preglej', array('id' => $vprasanje->id));
-                return $this->redirect()->toUrl($url . "#{$odgovor->id}");
+                return $this->redirect()->toUrl($url . $odgovor->id);
             }
+
+            // to-do: form invalid
         }
+
+        // to-do: is not post
     }
 
     public function urediAction()

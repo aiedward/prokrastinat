@@ -2,7 +2,12 @@
 namespace Vprasanja\Controller;
 
 use Zend\View\Model\ViewModel;
+
 use Prokrastinat\Controller\BaseController;
+use Vprasanja\Entity\Vprasanje;
+use Vprasanja\Entity\Odgovor;
+use Vprasanja\Form\VprasanjeForm;
+use Vprasanja\Form\OdgovorForm;
 
 class VprasanjeController extends BaseController
 {
@@ -20,7 +25,7 @@ class VprasanjeController extends BaseController
         $id = (int) $this->params()->fromRoute('id');
         $vprasanje = $this->em->find('Vprasanja\Entity\Vprasanje', $id);
 
-        $form = new \Vprasanja\Form\Odgovor();
+        $form = new OdgovorForm();
         $form->setAttribute('action', $this->url()->fromRoute('odgovor', array('action' => 'dodaj', 'ido' => $id)));
         $form->setData(array('vprasanje_id' => $id));
 
@@ -34,15 +39,14 @@ class VprasanjeController extends BaseController
     {
         $this->zahtevajLogin();
 
-        $form = new \Vprasanja\Form\Vprasanje();
+        $form = new VprasanjeForm();
 
         if ($this->request->isPost()) {
             $form->setInputFilter($form->getInputFilter());
             $form->setData($this->request->getPost());
 
             if ($form->isValid()) {
-                $vprasanje = new \Vprasanja\Entity\Vprasanje();
-
+                $vprasanje = new Vprasanje();
                 $vprasanje->user = $this->auth->getIdentity();
                 $vprasanje->naslov = $form->get('naslov')->getValue();
                 $vprasanje->vsebina = $form->get('vsebina')->getValue();
@@ -67,7 +71,7 @@ class VprasanjeController extends BaseController
         $id = (int) $this->params()->fromRoute('id', 0);
         $vprasanje = $this->em->find('Vprasanja\Entity\Vprasanje', $id);
 
-        $form = new \Vprasanja\Form\Vprasanje();
+        $form = new VprasanjeForm();
 
         if ($this->request->isPost()) {
             $form->setInputFilter($form->getInputFilter());
@@ -84,11 +88,7 @@ class VprasanjeController extends BaseController
             }
         }
 
-        $form->setData(array(
-            'id' => $vprasanje->id,
-            'naslov' => $vprasanje->naslov,
-            'vsebina' => $vprasanje->vsebina
-        ));
+        $form->fill($vprasanje);
 
         return new ViewModel(array(
             'form' => $form

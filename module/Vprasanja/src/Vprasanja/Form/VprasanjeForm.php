@@ -8,6 +8,8 @@ use Zend\InputFilter\Factory;
 use Zend\InputFilter\InputFilter;
 use Zend\Validator;
 
+use Vprasanja\Entity\Vprasanje;
+
 class Vprasanje extends Form {
     public function __construct()
     {
@@ -96,5 +98,13 @@ class Vprasanje extends Form {
         )));
         
         return $filter;
+    }
+
+    public function fill(Vprasanje $vprasanje) {
+        $this->setData(array(
+            'id' => $odgovor->id,
+            'naslov' => $vprasanje->naslov,
+            'vsebina' => $vprasanje->vsebina
+        ));
     }
 }

@@ -10,11 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Role extends BaseEntity
 {
-	/**
-	 * @ORM\Id @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 */
-	protected $id;
+    /**
+     * @ORM\Id @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
     
     /** @ORM\Column(length=20, nullable=false, unique=true) */
     protected $name;
@@ -23,6 +23,6 @@ class Role extends BaseEntity
      * @ORM\ManyToOne(targetEntity="Role")
      * @ORM\JoinColumn(name="parent_role_id", referencedColumnName="id")
      */
-    protected $parent_role_id;
+    protected $parent_role;
 }
     

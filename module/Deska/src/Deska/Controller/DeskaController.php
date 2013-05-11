@@ -26,6 +26,7 @@ class DeskaController extends BaseController
 
     public function dodajAction() 
     {
+        if (!$this->isGranted('post_news')) $this->dostopZavrnjen();
         $form = new DeskaForm();
         $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
 

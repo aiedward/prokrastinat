@@ -1,10 +1,9 @@
-<?php 
-	$dodajLink = $this->url('vprasanje', array('action' => 'dodaj'));
-?>
 <h1>Vprašanja</h1>
-<div id="top-menu">
-    <a class="btn btn-primary" href="<?= $dodajLink ?>" id="dodaj-vprasanje">Dodaj</a>
-</div>
+<?php if ($this->hasPermission('post_news')): ?>
+    <div id="top-menu">
+        <a class="btn btn-primary" href="<?= $this->url('vprasanje', array('action' => 'dodaj')); ?>" id="dodaj-vprasanje">Dodaj</a>
+    </div>
+<?php endif; ?>
 <div id="user-menu"></div>
 <br />
 <table class="table">

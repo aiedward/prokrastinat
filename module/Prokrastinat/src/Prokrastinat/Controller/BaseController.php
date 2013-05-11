@@ -3,7 +3,7 @@ namespace Prokrastinat\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\EventManager\EventManagerInterface;
-
+use Zend\View\Model\ViewModel;
 abstract class BaseController extends AbstractActionController
 {
     protected $request;
@@ -24,11 +24,15 @@ abstract class BaseController extends AbstractActionController
         return $this->em;
     }
 
-    public function zahtevajLogin()
+    public function dostopZavrnjen()
     {
         if (!$this->auth->hasIdentity()) {
             // to-do: zapomni si zadnji request in po uspešni prijavi redirectaj nazaj
             return $this->redirect()->toRoute('user', array('action' => 'login'));
+        } else {
+            $this->getResponse()->setStatusCode(403);
+            $model = new ViewModel();
+            return $model->setTemplate('forbidden_template');
         }
     }
 }

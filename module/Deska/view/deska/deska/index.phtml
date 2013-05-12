@@ -27,6 +27,7 @@
 		<td><?php echo $this->escapeHtml($oglas->datum_zapadlosti->format('d-m-Y')) ?></td>
                 <td>
                     <a href="<?= $this->url('deska', array('action' => 'uredi', 'id' => $oglas->id)); ?>">Uredi</a>
+                    <a href="<?= $this->url('deska', array('action' => 'brisi', 'id' => $oglas->id)); ?>">Briši</a>
                 </td>
 	</tr>
 	<?php endforeach; ?>

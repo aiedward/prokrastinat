@@ -66,7 +66,8 @@ class DeskaController extends BaseController
     public function urediAction()
     {
         $id = (int)$this->params()->fromRoute('id', 0);
-        $oglas = $this->em->find('Deska\Entity\Oglas', $id);        
+        $oglas = $this->em->find('Deska\Entity\Oglas', $id);
+        $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
         $form = new DeskaForm();
         $form->fill($oglas);
         $form->get('submit')->setAttribute('value', 'Uredi');
@@ -85,6 +86,7 @@ class DeskaController extends BaseController
 
                 $this->deska_repository->saveOglas($oglas, $vals);
                 $this->em->flush();
+                
                 return $this->redirect()->toRoute('deska');
             }
         }
@@ -99,5 +101,24 @@ class DeskaController extends BaseController
     {
         // TODO: Brisanje 
         $id = (int)$this->params()->fromRoute('id', 0);
+        
+        if ($this->request->isPost()) {
+            $del = $this->request->getPost('del', 'No');
+            
+            if ($del == 'Yes') {
+                $id = (int) $this->request->getPost('id');
+                
+                $oglas = $this->em->find('Deska\Entity\Oglas', $id);
+                $this->em->remove($oglas);
+                $this->em->flush();
+            }
+            
+            return $this->redirect()->toRoute('deska');
+        }
+        
+        return array(
+            'id' => $id,
+            'oglas' => $this->em->find('Deska\Entity\Oglas', $id)
+        );
     }
 }

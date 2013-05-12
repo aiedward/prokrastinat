@@ -20,23 +20,23 @@ class DeskaController extends BaseController
         $oglasi = $this->em->getRepository('Deska\Entity\Oglas')->findAll();
 
         return new ViewModel(array(
-                'oglasi' => $oglasi,
-            ));
+            'oglasi' => $oglasi,
+        ));
     }
 
     public function dodajAction() 
     {
-        if (!$this->isGranted('post_news')) $this->dostopZavrnjen();
+        if (!$this->isGranted('post_news')) 
+            $this->dostopZavrnjen();
+        
         $form = new DeskaForm();
         $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
 
-        if ($this->request->isPost()) 
-        {
+        if ($this->request->isPost()) {
             $form->setInputFilter($form->getInputFilter());
             $form->setData($this->request->getPost());
             
-            if ($form->isValid())
-            {
+            if ($form->isValid()) {
                 $oglas = new Oglas();
                 $vals = array(
                     'user' => $this->auth->getIdentity(),
@@ -47,6 +47,7 @@ class DeskaController extends BaseController
                     
                 $this->deska_repository->saveOglas($oglas, $vals);
                 $this->getEntityManager()->flush();
+                
                 return $this->redirect()->toRoute('deska');
             }
         }
@@ -57,9 +58,7 @@ class DeskaController extends BaseController
     public function preglejAction() 
     {
         $id = (int) $this->params()->fromRoute('id', 0);
-        $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
-
-        $oglas = $this->deska_repository->find($id);
+        $oglas = $this->em->find('Deska\Entity\Oglas', $id);
 
         return new ViewModel(array('oglas' => $oglas));
     }
@@ -67,34 +66,23 @@ class DeskaController extends BaseController
     public function urediAction()
     {
         $id = (int)$this->params()->fromRoute('id', 0);
-        $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
-
-        $oglas = $this->deska_repository->getOglasById($id);        
+        $oglas = $this->em->find('Deska\Entity\Oglas', $id);        
         $form = new DeskaForm();
-        
-        $form->setData(array(
-            'id' => $oglas->id,
-            'naslov' => $oglas->naslov,
-            'vsebina' => $oglas->vsebina,
-            'datum-zapadlosti' => $oglas->datum_zapadlosti,
-        ));
-        
+        $form->fill($oglas);
         $form->get('submit')->setAttribute('value', 'Uredi');
         
-        if ($this->request->isPost())
-        {
+        if ($this->request->isPost()) {
             $form->setInputFilter($form->getInputFilter());
             $form->setData($this->request->getPost());
-            
-            if ($form->isValid())
-            {
+
+            if ($form->isValid()) {
                 $vals = array(
                     'user' => $this->auth->getIdentity(),
                     'naslov' => $form->get('naslov')->getValue(),
                     'vsebina' => $form->get('vsebina')->getValue(),
                     'datum-zapadlosti' => $form->get('datum-zapadlosti')->getValue(),
                 );
-                    
+
                 $this->deska_repository->saveOglas($oglas, $vals);
                 $this->em->flush();
                 return $this->redirect()->toRoute('deska');
@@ -111,7 +99,5 @@ class DeskaController extends BaseController
     {
         // TODO: Brisanje 
         $id = (int)$this->params()->fromRoute('id', 0);
-        
-        
     }
 }

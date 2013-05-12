@@ -4,7 +4,9 @@ namespace Deska\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Prokrastinat\Entity\Objava;
 
-/** @ORM\Entity(repositoryClass="Deska\Repository\OglasRepository") */
+/** 
+ * @ORM\Entity(repositoryClass="Deska\Repository\OglasRepository") 
+ */
 class Oglas extends Objava
 {
     /**

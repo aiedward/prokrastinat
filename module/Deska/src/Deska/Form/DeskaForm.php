@@ -4,6 +4,8 @@ namespace Deska\Form;
 
 use Zend\Form\Form;
 
+use Deska\Entity\Oglas;
+
 // za validacijo
 use Zend\InputFilter\Factory;
 use Zend\InputFilter\InputFilter;
@@ -118,12 +120,20 @@ class DeskaForm extends Form
                     'options' => array(
                         'messages' => array(
                             Validator\NotEmpty::IS_EMPTY => 'Vnesite vsebino oglasa!',
-                        ),
+                         ),
                     ),
                 ),
             ),
         )));
         
         return $filter;
+    }
+    
+    public function fill(Oglas $o)
+    {
+        $this->get('id')->setValue($o->id);
+        $this->get('naslov')->setValue($o->naslov);
+        $this->get('vsebina')->setValue($o->vsebina);
+        $this->get('datum-zapadlosti')->setValue($o->datum_zapadlosti);
     }
 }

@@ -8,7 +8,7 @@ class IndexController extends BaseController
 {
     public function indexAction() 
     {
-        $query = $this->getEntityManager()->createQuery("SELECT o FROM Deska\Entity\Oglas o");
+        $query = $this->em->createQuery("SELECT o FROM Deska\Entity\Oglas o WHERE o.datum_zapadlosti > CURRENT_DATE()");
         $oglasi = $query->getResult();
 
         return new ViewModel(array(

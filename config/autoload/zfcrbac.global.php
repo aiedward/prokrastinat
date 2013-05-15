@@ -15,8 +15,8 @@ return array(
                 array('route' => 'user/login', 'roles' => 'anonymous'),
                 array('route' => 'deska/index', 'roles' => 'anonymous'),
                 //array('route' => 'user/*', 'roles' => 'member'),
-                array('route' => 'datoteke/*', 'roles' => 'member'),
-                array('route' => 'vprasanje/*', 'roles' => 'member'),
+                //array('route' => 'datoteke/*', 'roles' => 'member'),
+                //array('route' => 'vprasanje/*', 'roles' => 'member'),
                 
             ),
         ),

@@ -17,8 +17,11 @@ class DeskaController extends BaseController
 
     public function indexAction() 
     {   
-        $oglasi = $this->em->getRepository('Deska\Entity\Oglas')->findAll();
-
+        // $oglasi = $this->em->getRepository('Deska\Entity\Oglas')->findAll();
+        
+        $query = $this->em->createQuery("SELECT o FROM Deska\Entity\Oglas o WHERE o.datum_zapadlosti > CURRENT_DATE()");
+        $oglasi = $query->getResult();
+        
         return new ViewModel(array(
             'oglasi' => $oglasi,
         ));
@@ -99,7 +102,6 @@ class DeskaController extends BaseController
     
     public function brisiAction()
     {
-        // TODO: Brisanje 
         $id = (int)$this->params()->fromRoute('id', 0);
         
         if ($this->request->isPost()) {

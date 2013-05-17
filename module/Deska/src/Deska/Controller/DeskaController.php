@@ -29,7 +29,7 @@ class DeskaController extends BaseController
 
     public function dodajAction() 
     {
-        if (!$this->isGranted('post_news')) 
+        if (!$this->isGranted('post')) 
             $this->dostopZavrnjen();
         
         $form = new DeskaForm();

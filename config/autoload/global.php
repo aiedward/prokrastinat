@@ -15,7 +15,6 @@ return array(
     'service_manager' => array(
         'factories' => array(
             'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
-            'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
         ),
     ),
     'translator' => array(
@@ -51,12 +50,5 @@ return array(
                 'credentialCallable' => 'Prokrastinat\Repository\UserRepository::hashPassword'
             ),
         ),
-    ),
-    'db' => array(
-        'driver'         => 'Pdo',
-            'dsn'            => 'mysql:dbname=feriprojekt;host=localhost',
-            'driver_options' => array(
-            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
-                ),
-    ),
+    )
 );

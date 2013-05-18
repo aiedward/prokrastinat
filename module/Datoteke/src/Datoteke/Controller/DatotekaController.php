@@ -12,69 +12,68 @@ use Zend\Stdlib\DateTime;
 
 use Prokrastinat\Controller\BaseController;
 
-define("upload_limit", 20000000);
-
 class DatotekaController extends BaseController
 {
     public function addAction()
     {
         $user = $this->auth->getIdentity();
         
-        $this->zahtevajLogin();
+        //$this->zahtevajLogin();
         
         $form = new DatotekaForm();
         $request = $this->getRequest();
-        
-        $datoteka = new Datoteke();
-        
-        if ($request->isPost()) {
-            $form->setInputFilter($datoteka->getInputFilter());
-            $form->setData($this->request->getPost());
+
+        if ($this->getRequest()->isPost()) {
+            $data = array_merge_recursive(
+                $this->getRequest()->getPost()->toArray(),
+                $this->getRequest()->getFiles()->toArray()
+            );
+            $form->setData($data);
             
+            $File = $this->params()->fromFiles('file');
+            $adapter = new \Zend\File\Transfer\Adapter\Http(); 
             if ($form->isValid()) {
-                
-                $skupna_velikost = $this->getUploadSize($user);
-                if(($skupna_velikost + $File['size']) > upload_limit)
-                {
-                    print '<script type="text/javascript">'; 
-                    print 'alert("Presegli ste limit uploada! Datoteke ni mogoče naložiti!")'; 
-                    print '</script>';  
-                }
-                    $size = new Size(array('min'=>1));
-                     
-                    $adapter = new \Zend\File\Transfer\Adapter\Http(); 
-                    $adapter->setValidators(array($size), $File['name']);
-                    if (!$adapter->isValid()){
-                        $dataError = $adapter->getMessages();
-                        $error = array();
-                        foreach($dataError as $key=>$row)
-                        {
-                            $error[] = $row;
-                        }
-                        $form->setMessages(array('fileupload'=>$error ));
-                    } else {
-                        $adapter->setDestination(dirname(dirname(dirname(dirname(dirname(__DIR__))))).'/data/uploads');
-                        if ($adapter->receive($File['name'])) {
-                            $datoteka->exchangeArray($form->getData());
-                        }
+
+                if(!$adapter->isValid()){
+                $dataError = $adapter->getMessages();
+                    $error = array();
+                    foreach($dataError as $key=>$row)
+                    {
+                        $error[] = $row;
+                    }
+                    $form->setMessages(array('file'=>$error ));
+                } else {
+                    $adapter->addFilter('File\Rename',
+                    array('target' => dirname(dirname(dirname(dirname(dirname(__DIR__))))).'/data/uploads/'.$File['name'],
+                        'randomize' => true,
+                        'overwrite' => true));
+                    $adapter->setDestination(dirname(dirname(dirname(dirname(dirname(__DIR__))))).'/data/uploads');
+                    if ($adapter->receive($File['name'])) {
+
+                    }
+                    else{ 
                     }
                     
                     $em = $this->getEntityManager();
                     $file = new \Datoteke\Entity\Datoteka();
-                    $file->opis = $form->get('opis')->getValue();
-                    $file->imeDatoteke = $form->get('fileupload')->getValue();
+                    $file->opis = "test";
+                    $file->imeDatoteke = $File['name'];
                     $file->datum_uploada = new DateTime('now');
                     $file->st_prenosov = 0;
                     $file->st_ogledov = 0;
                     $file->velikost = $File['size'];
                     $file->user = $this->auth->getIdentity();
-    
+                    //DODAJ CELOTNO IME
+                    //$file->uniqueName = $adapter->getFilter('File\Rename')->getFile();
+                    
+                    $em->persist($file);
                     $em->flush();
                     
                     return $this->redirect()->toRoute('datoteke');
-                }
             }
-        return array('form' => $form);
+        }
+        }
+    return array('form' => $form);
     }
     
     

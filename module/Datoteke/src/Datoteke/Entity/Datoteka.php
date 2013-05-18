@@ -18,13 +18,14 @@ class Datoteka extends BaseEntity
      */
     protected $id;
     
-        /** @ORM\ManyToOne(targetEntity="Prokrastinat\Entity\User") */
-        protected $user;
+    /** @ORM\ManyToOne(targetEntity="Prokrastinat\Entity\User") */
+    protected $user;
         
     /**
      * @ORM\Column(length=100, nullable=true)
      */
     protected $imeDatoteke;
+    
     
     /**
      * @ORM\Column(length=30, nullable=true)

@@ -1,5 +1,83 @@
 <?php
 
+$title = 'Datoteke';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('datoteke', array('action'=>'index'));?>">Vse datoteke</a>
+    <a href="<?php echo $this->url('datoteke', array('action'=>'add'));?>">Nalozi datoteko</a>
+    <a href="<?php echo $this->url('datoteke', array('action'=>'myfiles'));?>">Moje datoteke</a>
+</p>
+
+<?php
+// Init Form
+$form = $this->form;
+$form->setAttribute('class', 'form-horizontal');
+$form->prepare();
+
+// Configure Errors Helper
+$errorsHelper  = $this->plugin('formelementerrors');
+$errorsHelper
+    ->setMessageOpenFormat('<div class="help-block">')
+    ->setMessageSeparatorString('</div><div class="help-block">')
+    ->setMessageCloseString('</div>');
+?>
+<?php echo $this->form()->openTag($form); ?>
+<fieldset>
+    <?php
+    $elem = $form->get('text');
+    $elem->setLabelAttributes(array('class' => 'control-label'));
+    $errors = $elem->getMessages();
+    $errorClass = (!empty($errors)) ? ' error' : '';
+    ?>
+    <div class="control-group<?php echo $errorClass ?>">
+        <?php echo $this->formLabel($elem); ?>
+        <div class="controls">
+            <?php echo $this->formText($elem); ?>
+            <?php echo $errorsHelper($elem); ?>
+        </div>
+    </div>
+
+    <?php
+    $elem = $form->get('file');
+    $elem->setLabelAttributes(array('class' => 'control-label'));
+    $errors = $elem->getMessages();
+    $errorClass = (!empty($errors)) ? ' error' : '';
+    ?>
+    <div class="control-group<?php echo $errorClass ?>">
+        <?php echo $this->formLabel($elem); ?>
+        <div class="controls">
+            <?php echo $this->formFile($elem); ?>
+            <?php echo $errorsHelper($elem); ?>
+            <?php if (!empty($this->tempFiles)) { ?>
+                <!--
+                Note: You might not want to render the file input in this
+                case either, depending on your use-case.
+                -->
+                <div class="help-block">
+                    Uploaded: <ul>
+                    <?php foreach ($this->tempFiles as $tempFile) { ?>
+                        <li><?php echo $this->escapeHtml($tempFile['name']) ?></li>
+                    <?php } ?>
+                    </ul>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+            <button class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+
+</fieldset>
+<?php echo $this->form()->closeTag($form); ?>
+
+
+<?php
+/*
 $title = 'Dodaj datoteko';
 $this->headTitle($title);
 ?>
@@ -20,4 +98,5 @@ echo $this->formRow($form->get('opis'));
 echo $this->formRow($form->get('fileupload'));
  
 echo $this->formSubmit($form->get('submit'));
-echo $this->form()->closeTag();
+echo $this->form()->closeTag();*/
+

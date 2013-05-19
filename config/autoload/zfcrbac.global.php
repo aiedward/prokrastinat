@@ -36,12 +36,13 @@ return array(
                     'permission_table'      => 'rbac_permission',
                     'permission_id_column'  => 'id',
                     'permission_name_column'=> 'name',
-                    'permission_join_column'=> 'role_id',
+                    'permission_join_column'=> 'permission_id',
+
                     'role_table'            => 'rbac_role',
-                    'role_join_table'       => 'rbac_role_permission',
                     'role_id_column'        => 'id',
                     'role_name_column'      => 'name',
                     'role_join_column'      => 'role_id',
+                    'role_join_table'       => 'rbac_role_permission',
                 )
             ),
         ),

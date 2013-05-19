@@ -24,7 +24,10 @@ class ProkrastinatIdentity implements \ZfcRbac\Identity\IdentityInterface
         
         $roles = array();
         foreach ($id->roles as $role) {
-            array_push($roles, $role->name);
+            do {
+               array_push($roles, $role->name); 
+            }
+            while ($role = $role->parent_role);
         }
         $this->roles = $roles;
     }

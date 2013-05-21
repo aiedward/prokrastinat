@@ -61,23 +61,38 @@ class UserController extends BaseController
             if (!$this->isGranted('member')) $this->dostopZavrnjen();
             $form = new \Prokrastinat\Form\EditForm();
             $urejanje = false;
+            
+            $id = $this->getEvent()->getRouteMatch()->getParam('id');
+            $this->userRepository = $this->getEntityManager()->getRepository('Prokrastinat\Entity\User');
+            $userEdit = is_numeric($id) ? $this->userRepository->find($id) : null;
             $user = $this->auth->getIdentity();
             
-            if ($this->request->isPost()) {
-                $form->setInputFilter($form->getInputFilter());
-                $form->setData($this->request->getPost());
-
-                if ($form->isValid()) {
-                    $this->userRepository = $this->getEntityManager()->getRepository('Prokrastinat\Entity\User');
-                    $this->userRepository->updateUser($user, $form);
-                    $this->em->flush();
-                    
-                    $urejanje = true;
-                }
+            if($userEdit == null)
+            {
+                $this->dostopZavrnjen();
             }
             
-            if($user)
-                $form->fill($user);
+            if((!($user === $userEdit)&&($this->isGranted('user_uredi')))||($user === $userEdit))
+            {
+                if ($this->request->isPost()) {
+                    $form->setInputFilter($form->getInputFilter());
+                    $form->setData($this->request->getPost());
+
+                    if ($form->isValid()) {
+                        $this->userRepository = $this->getEntityManager()->getRepository('Prokrastinat\Entity\User');
+                        $this->userRepository->updateUser($userEdit, $form);
+                        $this->em->flush();
+
+                        $urejanje = true;
+                    }
+                }
+
+                if($userEdit)
+                    $form->fill($userEdit);
+            }else
+            {
+                $this->dostopZavrnjen();
+            }
   
             
             return new ViewModel (array(

@@ -14,7 +14,7 @@ class DeskaController extends BaseController
      * @var Deska\Repository\Oglas
      */
     protected $deska_repository;
-
+    
     public function indexAction() 
     {   
         // $oglasi = $this->em->getRepository('Deska\Entity\Oglas')->findAll();

@@ -1,12 +1,14 @@
 <h3><?= $this->escapeHtml($oglas->naslov) ?></h3>
 <hr />
-<div id="oglas-osnovni-podatki">
-    Avtor: <?= $this->escapeHtml($oglas->user->getPolnoIme()) ?> <br />
-    Datum: <?= $this->escapeHtml($oglas->datum_objave->format('d-m-Y')) ?> <br />
-    Zapade: <?= $this->escapeHtml($oglas->datum_zapadlosti->format('d-m-Y')) ?>
+<div id="oglas-osnovni-podatki" class="well well-small">
+    <p>
+        Avtor: <a href="<?= $this->url('user', array('action' => 'view', 'id' => $oglas->user->id))?>"><?= $this->escapeHtml($oglas->user->getPolnoIme()) ?> </a> <br />
+        Datum: <?= $this->escapeHtml($oglas->datum_objave->format('d-m-Y')) ?> <br />
+        Zapade: <?= $this->escapeHtml($oglas->datum_zapadlosti->format('d-m-Y')) ?>
+    </p>
 </div>
 <hr />
-<div id="oglas-vsebina">
+<div id="oglas-vsebina" class="well well-small">
     <?= $this->escapeHtml($oglas->vsebina) ?>
 </div>
 <hr />

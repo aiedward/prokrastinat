@@ -21,7 +21,7 @@
             <td>
                 <a href="<?php echo $this->url('deska', array('action' => 'preglej', 'id' => $oglas->id)); ?>"><?php echo $this->escapeHtml($oglas->naslov); ?></a>
             </td>
-            <td><?php echo $this->escapeHtml($oglas->user->getPolnoIme()); ?></td>
+            <td><a href="<?= $this->url('user', array('action' => 'view', 'id' => $oglas->user->id))?>"><?= $this->escapeHtml($oglas->user->getPolnoIme()) ?> </a></td>
             <td><?php echo $this->escapeHtml($oglas->datum_objave->format('d-m-Y')) ?></td>
             <td><?php echo $this->escapeHtml($oglas->kategorija) ?></td>
             <td><?php echo $this->escapeHtml($oglas->datum_zapadlosti->format('d-m-Y')) ?></td>

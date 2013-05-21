@@ -58,7 +58,7 @@ class UserController extends BaseController
     
     public function editAction()
     {
-            if (!$this->isGranted('member')) $this->dostopZavrnjen();
+            if (!$this->auth->hasIdentity()) $this->dostopZavrnjen();
             $form = new \Prokrastinat\Form\EditForm();
             $urejanje = false;
             
@@ -106,7 +106,7 @@ class UserController extends BaseController
         
         public function viewAction()
         {
-            if (!$this->isGranted('member')) $this->dostopZavrnjen();
+            if (!$this->auth->hasIdentity()) $this->dostopZavrnjen();
             $id = $this->getEvent()->getRouteMatch()->getParam('id');
             $this->userRepository = $this->getEntityManager()->getRepository('Prokrastinat\Entity\User');
             $user = is_numeric($id) ? $this->userRepository->find($id) : null;
@@ -123,7 +123,7 @@ class UserController extends BaseController
         
         public function changepasswordAction()
         {
-            if (!$this->isGranted('member')) $this->dostopZavrnjen();
+            if (!$this->auth->hasIdentity()) $this->dostopZavrnjen();
             $form = new \Prokrastinat\Form\ChangepasswordForm();
             $sporocilo = false;
             $napaka = false;

@@ -39,7 +39,7 @@ class OdgovorController extends BaseController
                 $this->em->flush();
 
                 $url = $this->url()->fromRoute('preglej', array('id' => $vprasanje->id));
-                return $this->redirect()->toUrl($url . $odgovor->id);
+                return $this->redirect()->toUrl($url . "#{$odgovor->id}");
             }
 
             // to-do: form invalid

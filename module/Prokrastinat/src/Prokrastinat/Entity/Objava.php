@@ -39,10 +39,4 @@ class Objava extends BaseEntity
      * @ORM\JoinTable(name="Objava_Oznaka")
      */
     protected $oznake;
-
-    public function getHTMLVsebina()
-    {
-        // to-do: escape html
-        return nl2br($this->vsebina);
-    }
 }

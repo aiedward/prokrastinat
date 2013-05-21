@@ -28,11 +28,10 @@ class OdgovorForm extends Form {
             'name' => 'vsebina',
             'type' => 'Textarea',
             'options' => array(
-                'label' => 'Besedilo',
                 'required' => true
             ),
             'attributes' => array(
-                'class' => 'input-xxlarge',
+                'class' => 'editor',
                 'rows' => 5
             )
         ));

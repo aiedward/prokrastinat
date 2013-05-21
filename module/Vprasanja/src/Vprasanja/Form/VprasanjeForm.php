@@ -41,8 +41,8 @@ class VprasanjeForm extends Form {
                 'required' => true
             ),
             'attributes' => array(
-                'class' => 'input-xxlarge',
-                'rows' => 8
+                'class' => 'editor',
+                'rows' => 15
             )
         ));
 

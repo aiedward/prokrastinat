@@ -6,7 +6,7 @@
 <!-- Vprašanje -->
 <div class="well well-small">
     <h3><?= $this->escapeHtml($vprasanje->naslov) ?></h3>
-    <p><?= $vprasanje->getHTMLVsebina() ?></p>
+    <p><?= $vprasanje->vsebina ?></p>
 
     <p>
         <i class="icon-user"></i> <a href="#"><?= $this->escapeHtml($vprasanje->user->getPolnoIme()) ?></a> |
@@ -31,11 +31,9 @@
 <?php endforeach ?>
 
 <!-- Form -->
-<hr />
-<h3>Napiši odgovor</h3>
-<a id="odgovori"></a>
-<?= $this->formTwb($this->form, \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL) ?>
-
-
-
-
+<?php if ($this->isGranted('odgovor_dodaj')): ?>
+    <hr />
+    <h3>Napiši odgovor</h3>
+    <a id="odgovori"></a>
+    <?= $this->formTwb($this->form, \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL) ?>
+<?php endif ?>

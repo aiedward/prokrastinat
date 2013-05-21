@@ -1,62 +1,36 @@
 <h1>Oglasna deska</h1>
 <div id="top-menu">
-    <?php 
-        if ($this->isGranted('post')):
-        //if (1)
-        //{
-    ?>
-        <a class="btn btn-primary" href="<?php echo $this->url('deska', array('action' => 'dodaj'));?>" id="dodaj-oglas">Dodaj</a>
-        <br /><br />
-        <table class="table">
-	<tr>
-		<th>Naslov</th>
-		<th>Avtor</th>
-		<th>Datum objave</th>
-		<th>Kategorija</th>
-		<th>Datum zapadlosti</th>
-                <th></th>
-	</tr>
-	<?php foreach ($oglasi as $oglas) : ?>
-	<tr>
-		<td><a
-			href="<?php echo $this->url('deska', array('action' => 'preglej', 'id' => $oglas->id)); ?>"><?php echo $this->escapeHtml($oglas->naslov);?>
-		</a></td>
-		<td><?php echo $this->escapeHtml($oglas->user->getPolnoIme());?></td>
-		<td><?php echo $this->escapeHtml($oglas->datum_objave->format('d-m-Y')) ?></td>
-		<td><?php echo $this->escapeHtml($oglas->kategorija) ?></td>
-		<td><?php echo $this->escapeHtml($oglas->datum_zapadlosti->format('d-m-Y')) ?></td>
+
+<?php if ($this->isGranted('post')): ?>
+    <a class="btn btn-primary" href="<?php echo $this->url('deska', array('action' => 'dodaj')); ?>" id="dodaj-oglas">Dodaj</a>
+<?php endif; ?>
+        
+<br /><br />
+<table class="table">
+    <tr>
+        <th>Naslov</th>
+        <th>Avtor</th>
+        <th>Datum objave</th>
+        <th>Kategorija</th>
+        <th>Datum zapadlosti</th>
+        <th></th>
+    </tr>
+    
+    <?php foreach ($oglasi as $oglas) : ?>
+        <tr>
+            <td>
+                <a href="<?php echo $this->url('deska', array('action' => 'preglej', 'id' => $oglas->id)); ?>"><?php echo $this->escapeHtml($oglas->naslov); ?></a>
+            </td>
+            <td><?php echo $this->escapeHtml($oglas->user->getPolnoIme()); ?></td>
+            <td><?php echo $this->escapeHtml($oglas->datum_objave->format('d-m-Y')) ?></td>
+            <td><?php echo $this->escapeHtml($oglas->kategorija) ?></td>
+            <td><?php echo $this->escapeHtml($oglas->datum_zapadlosti->format('d-m-Y')) ?></td>
+            <?php if ($this->isGranted('post')): ?>
                 <td>
                     <a href="<?= $this->url('deska', array('action' => 'uredi', 'id' => $oglas->id)); ?>">Uredi</a>
                     <a href="<?= $this->url('deska', array('action' => 'brisi', 'id' => $oglas->id)); ?>">Briši</a>
                 </td>
-	</tr>
-	<?php endforeach; ?>
+            <?php endif; ?>
+        </tr>
+    <?php endforeach; ?>
 </table>
-    <?php  else: ?>
-</div>
-
-<div id="user-menu"></div>
-<br />
-<table class="table">
-	<tr>
-		<th>Naslov</th>
-		<th>Avtor</th>
-		<th>Datum objave</th>
-		<th>Kategorija</th>
-		<th>Datum zapadlosti</th>
-	</tr>
-	<?php foreach ($oglasi as $oglas) : ?>
-	<tr>
-		<td><a
-			href="<?php echo $this->url('deska', array('action' => 'preglej', 'id' => $oglas->id)); ?>"><?php echo $this->escapeHtml($oglas->naslov);?>
-		</a></td>
-		<td><?php echo $this->escapeHtml($oglas->user->getPolnoIme());?></td>
-		<td><?php echo $this->escapeHtml($oglas->datum_objave->format('d-m-Y')) ?>
-		</td>
-		<td><?php echo $this->escapeHtml($oglas->kategorija) ?></td>
-		<td><?php echo $this->escapeHtml($oglas->datum_zapadlosti->format('d-m-Y')) ?>
-		</td>
-	</tr>
-	<?php endforeach; ?>
-</table>
-    <?php endif; ?>

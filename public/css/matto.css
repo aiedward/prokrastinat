@@ -21,3 +21,8 @@ h3 {
     word-wrap: break-word;
     width: 450px;
 }
+
+.izpisi-oglas {
+    border: 1px dotted black;
+    margin-bottom: 5px;
+}

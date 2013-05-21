@@ -1,4 +1,9 @@
 <h1>Pregled uporabnika <i><?=$user->username?></i></h1>
+
+<?php if ($this->isGranted('user_uredi')): ?>
+    <a class="btn btn-primary" href="<?php echo $this->url('user', array('action' => 'edit', 'id' => $user->id)); ?>" id="uredi-user">Uredi</a>
+<?php endif; ?>
+<br /><br />
 <table class="table">
     <tr>
         <th>Ime</th>
@@ -12,10 +17,60 @@
         <th>Email</th>
         <td><?=$user->email?></td>
     </tr>
+    <?php if ($this->isGranted('user_uredi')): ?>
     <tr>
         <th>Vpisna številka</th>
         <td><?=$user->vpisna_st?></td>
     </tr>
+    <?php endif; ?>
+    <?php if ($user->naslov != NULL): ?>
+    <?php if ($user->naslov !== ''): ?>
+    <tr>
+        <th>Naslov</th>
+        <td><?=$user->naslov?></td>
+    </tr>
+    <?php endif; ?>
+    <?php endif; ?>
+    <?php if ($user->mesto != NULL): ?>
+    <?php if ($user->mesto !== ''): ?>
+    <tr>
+        <th>Mesto</th>
+        <td><?=$user->mesto?></td>
+    </tr>
+    <?php endif; ?>
+    <?php endif; ?>
+    <?php if ($user->drzava != NULL): ?>
+    <?php if ($user->drzava !== ''): ?>
+    <tr>
+        <th>Država</th>
+        <td><?=$user->drzava?></td>
+    </tr>
+    <?php endif; ?>
+    <?php endif; ?>
+    <?php if ($user->opis != NULL): ?>
+    <?php if ($user->opis !== ''): ?>
+    <tr>
+        <th>Opis</th>
+        <td><?=$user->opis?></td>
+    </tr>
+    <?php endif; ?>
+    <?php endif; ?>
+    <?php if ($user->splet != NULL): ?>
+    <?php if ($user->splet !== ''): ?>
+    <tr>
+        <th>Spletna stran</th>
+        <td><?=$user->splet?></td>
+    </tr>
+    <?php endif; ?>
+    <?php endif; ?>
+    <?php if ($user->telefon != NULL): ?>
+    <?php if ($user->telefon !== ''): ?>
+    <tr>
+        <th>Telefon</th>
+        <td><?=$user->telefon?></td>
+    </tr>
+    <?php endif; ?>
+    <?php endif; ?>
     <tr>
         <th>Datum zadnje prijave</th>
         <td><?=$user->datum_logina->format('d-m-Y')?></td>

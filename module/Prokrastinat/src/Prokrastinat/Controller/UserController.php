@@ -113,7 +113,10 @@ class UserController extends BaseController
             
             
             if($user == null)
-                throw new \Exception('Uporabnik ne obstaja');
+            {
+                $view = $this->dostopZavrnjen();
+                return $view;
+            }
             
             return new ViewModel(array('user' => $user));
         }

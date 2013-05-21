@@ -19,13 +19,4 @@ class OglasRepository extends EntityRepository
 
         $em->persist($oglas);
     }
-    
-    public function getIdByCategoryName($kategorija)
-    {
-        $em = $this->getEntityManager();
-        $query = $em->createQuery("SELECT k.id FROM Prokrastinat\Entity\Kategorija k WHERE k.ime = {$kategorija}");
-        $id = $query->getResult();
-        
-        return $id;
-    }
 }

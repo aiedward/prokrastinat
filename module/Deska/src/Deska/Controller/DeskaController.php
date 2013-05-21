@@ -51,7 +51,7 @@ class DeskaController extends BaseController
                     'naslov' => $form->get('naslov')->getValue(),
                     'vsebina' => $form->get('vsebina')->getValue(),
                     'datum-zapadlosti' => $form->get('datum-zapadlosti')->getValue(),
-                    'kategorija' => $this->em->find('Prokrastinat\Entity\Kategorija', $this->deska_repository->getIdByCategoryName('Prevajalniki')),
+                    'kategorija' => $this->em->find('Prokrastinat\Entity\Kategorija', $form->get('kategorija')->getValue()),
                 );
                     
                 $this->deska_repository->saveOglas($oglas, $vals);

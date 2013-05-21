@@ -9,19 +9,19 @@ class DatotekaRepository extends EntityRepository
 {
     public function increaseDownloadCounter($datoteka) {
         $datoteka->st_prenosov += 1;
-        $em = $this->getEntityManager();
-        $em->persist($datoteka);
+        $this->em = $this->getEntityManager();
+        $this->em->persist($datoteka);
     }
     
     public function increaseViewCounter(Datoteka $datoteka) {
         $datoteka->st_ogledov += 1;
-        $em = $this->getEntityManager();
-        $em->persist($datoteka);
+        $this->em = $this->getEntityManager();
+        $this->em->persist($datoteka);
     }
     
     public function deleteDatoteka(Datoteka $datoteka) {
-        $em = $this->getEntityManager();
-        $em->remove($datoteka);
+        $this->em = $this->getEntityManager();
+        $this->em->remove($datoteka);
     }
     
     public function saveDatoteka($formData) {

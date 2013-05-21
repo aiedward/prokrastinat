@@ -33,7 +33,6 @@ class DatotekaController extends BaseController
             if ($form->isValid()) {
                     $formData = $form->getData();
                     $file = new \Datoteke\Entity\Datoteka();
-                    $em = $this->getEntityManager();
                     $file->opis = $formData['opis'];
                     $file->imeDatoteke = $formData['file']['name'];
                     $file->datum_uploada = new DateTime('now');
@@ -41,10 +40,9 @@ class DatotekaController extends BaseController
                     $file->st_ogledov = 0;
                     $file->velikost = $formData['file']['size'];
                     $file->user = $this->auth->getIdentity();
-                    //DODAJ CELOTNO IME
-                    //$file->uniqueName = $formData['file']['tmp_name'];
-                    $em->persist($file);
-                    $em->flush();              
+                    $file->randomImeDatoteke = $formData['file']['tmp_name'];
+                    $this->em->persist($file);
+                    $this->em->flush();              
                     return $this->redirect()->toRoute('datoteke');
             }
         }
@@ -65,9 +63,8 @@ class DatotekaController extends BaseController
         if (isset($_GET['sort']) && in_array($_GET['sort'], $sort)) {
             $sort1 = $_GET['sort'];
         }
-        
-        $em = $this->getEntityManager();
-        $query = $em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d ORDER BY d.".$order." ".$sort1);
+       
+        $query = $this->em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d ORDER BY d.".$order." ".$sort1);
         $datoteke = $query->getResult();
         
         return new ViewModel(array('datoteke' => $datoteke));
@@ -77,8 +74,7 @@ class DatotekaController extends BaseController
     {
         $this->zahtevajLogin();
     
-        $em = $this->getEntityManager();
-        $datRep = $em->getRepository('Datoteke\Entity\Datoteka');
+        $datRep = $this->em->getRepository('Datoteke\Entity\Datoteka');
         $id = (int) $this->params()->fromRoute('id', 0);
         $dat = $datRep->find($id);
         
@@ -89,18 +85,17 @@ class DatotekaController extends BaseController
                 return $this->redirect()->toRoute('datoteke');
             }
 
-            $em = $this->getEntityManager();
-            $datRep = $em->getRepository('Datoteke\Entity\Datoteka');
+            $datRep = $this->em->getRepository('Datoteke\Entity\Datoteka');
             $dat = $datRep->find($id);
 
             $request = $this->getRequest();
             if ($request->isPost()) {
                 $del = $request->getPost('del', 'Ne');
                 if ($del == 'Da') {
-                    $em->flush();
+                    $this->em->flush();
                     unlink(dirname(dirname(dirname(dirname(dirname(__DIR__))))).'/data/uploads/'.$dat->imeDatoteke);
                     $datRep->deleteDatoteka($dat);
-                    $em->flush();
+                    $this->em->flush();
                 }
                 return $this->redirect()->toRoute('datoteke');
             }
@@ -116,36 +111,43 @@ class DatotekaController extends BaseController
     
     public function downloadAction()
     {
-        $em = $this->getEntityManager();
-        $datRep = $em->getRepository('Datoteke\Entity\Datoteka');
+        $datRep = $this->em->getRepository('Datoteke\Entity\Datoteka');
         $id = (int) $this->params()->fromRoute('id', 0);
         $dat = $datRep->find($id);
         
         $datRep->increaseDownloadCounter($dat);
-        $em->flush();
+        $this->em->flush();
         
         $file = dirname(dirname(dirname(dirname(dirname(__DIR__))))).'\data\\uploads\\'.$dat->imeDatoteke;
+        $file2 = 'http://localhost/prokrastinat/data/uploads/Avto4_519bbb725f116.JPG';
+        
+        if(!is_file($file2)) {
+        print '<script type="text/javascript">'; 
+        print 'alert("The email address'.$file2.' is already registered")'; 
+        print '</script>';  
+    }
+    else{
 
         $response = $this->getResponse();
         $response->getHeaders()
              ->addHeaderLine('content-type', 'application/force-download')
-             ->addHeaderLine('content-length', filesize($file))
+             ->addHeaderLine('content-length', filesize($file2))
              ->addHeaderLine('content-Description','File Transfer')
-             ->addHeaderLine('content-disposition', "attachment; filename=\"".basename($file)."\"");
+             ->addHeaderLine('content-disposition', "attachment; filename=\"".basename($file2)."\"");
 
-        $response->setContent(file_get_contents($file));
+        $response->setContent(file_get_contents($file2));
 
         return $response;
     }
+    }
     
     public function viewAction(){
-        $em = $this->getEntityManager();
-        $datRep = $em->getRepository('Datoteke\Entity\Datoteka');
+        $datRep = $this->em->getRepository('Datoteke\Entity\Datoteka');
         $id = (int) $this->params()->fromRoute('id', 0);
         $dat = $datRep->find($id);
 
         $datRep->increaseViewCounter($dat);
-        $em->flush();
+        $this->em->flush();
         
         return new ViewModel(array('datoteke' => $dat));        
     }
@@ -158,8 +160,7 @@ class DatotekaController extends BaseController
         //$form->setInputFilter($dat->getInputFilter());
         
         $request = $this->getRequest();  
-        $em = $this->getEntityManager();
-        $datRep = $em->getRepository('Datoteke\Entity\Datoteka');
+        $datRep = $this->em->getRepository('Datoteke\Entity\Datoteka');
         $id = (int) $this->params()->fromRoute('id', 0);
         $dat = $datRep->find($id);
         
@@ -167,8 +168,8 @@ class DatotekaController extends BaseController
         
         if ($request->isPost()) {
             $dat->opis = $request->getPost('opis');
-            $em->persist($dat);
-            $em->flush();
+            $this->em->persist($dat);
+            $this->em->flush();
             return $this->redirect()->toRoute('datoteke');
 
         }
@@ -180,7 +181,6 @@ class DatotekaController extends BaseController
     {
         $user = $this->auth->getIdentity();
         $this->zahtevajLogin();
-        $em = $this->getEntityManager();
         
         $orderBy = array('imeDatoteke', 'datum_uploada', 'st_prenosov', 'opis', 'velikost');
 
@@ -195,7 +195,7 @@ class DatotekaController extends BaseController
         }
         
         
-        $query = $em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d WHERE d.user=".$user->id."ORDER BY d.".$order." ".$sort1);
+        $query = $this->em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d WHERE d.user=".$user->id."ORDER BY d.".$order." ".$sort1);
         $datoteke = $query->getResult();
         
         $skupna_velikost = $this->getUploadSize($user);
@@ -217,8 +217,7 @@ class DatotekaController extends BaseController
             $sort1 = $_GET['sort'];
         }
         $iskalniNiz = $this->getRequest()->getPost('isci', null);
-        $em = $this->getEntityManager();
-        $query = $em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d WHERE d.opis LIKE '%".$iskalniNiz."%' OR d.imeDatoteke LIKE '%".$iskalniNiz."%' ORDER BY d.".$order." ".$sort1);
+        $query = $this->em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d WHERE d.opis LIKE '%".$iskalniNiz."%' OR d.imeDatoteke LIKE '%".$iskalniNiz."%' ORDER BY d.".$order." ".$sort1);
         $datoteke = $query->getResult();
         
         return new ViewModel(array('datoteke' => $datoteke));
@@ -227,8 +226,7 @@ class DatotekaController extends BaseController
     
     public function getUploadSize($user)
     {
-        $em = $this->getEntityManager();
-        $query = $em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d WHERE d.user=".$user->id);
+        $query = $this->em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d WHERE d.user=".$user->id);
         $datoteke = $query->getResult(); 
         $skupna_velikost = 0;
         foreach ($datoteke as $row)

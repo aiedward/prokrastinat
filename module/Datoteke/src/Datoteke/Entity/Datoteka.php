@@ -26,6 +26,11 @@ class Datoteka extends BaseEntity
      */
     protected $imeDatoteke;
     
+    /**
+     * @ORM\Column(length=110, nullable=true)
+     */
+    protected $randomImeDatoteke;
+    
     
     /**
      * @ORM\Column(length=30, nullable=true)

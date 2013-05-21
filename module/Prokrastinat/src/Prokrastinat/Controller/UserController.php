@@ -68,17 +68,8 @@ class UserController extends BaseController
                 $form->setData($this->request->getPost());
 
                 if ($form->isValid()) {
-                    $user->ime = $form->get('ime')->getValue();
-                    $user->priimek = $form->get('priimek')->getValue();
-                    $user->email = $form->get('email')->getValue();
-                    $user->naslov = $form->get('naslov')->getValue();
-                    $user->mesto = $form->get('mesto')->getValue();
-                    $user->drzava = $form->get('drzava')->getValue();
-                    $user->opis = $form->get('opis')->getValue();
-                    $user->splet = $form->get('splet')->getValue();
-                    $user->telefon = $form->get('telefon')->getValue();
-
-                    $this->em->persist($user);
+                    $this->userRepository = $this->getEntityManager()->getRepository('Prokrastinat\Entity\User');
+                    $this->userRepository->updateUser($user, $form);
                     $this->em->flush();
                     
                     $urejanje = true;

@@ -22,4 +22,21 @@ class UserRepository extends EntityRepository
         $user->password = $hashed;
         $this->em->persist($user);
     }
+    
+    public function updateUser($user, $form)
+    {
+        $this->em = $this->getEntityManager();
+        
+        $user->ime = $form->get('ime')->getValue();
+        $user->priimek = $form->get('priimek')->getValue();
+        $user->email = $form->get('email')->getValue();
+        $user->naslov = $form->get('naslov')->getValue();
+        $user->mesto = $form->get('mesto')->getValue();
+        $user->drzava = $form->get('drzava')->getValue();
+        $user->opis = $form->get('opis')->getValue();
+        $user->splet = $form->get('splet')->getValue();
+        $user->telefon = $form->get('telefon')->getValue();
+
+        $this->em->persist($user);
+    }
 }

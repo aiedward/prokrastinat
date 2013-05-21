@@ -13,4 +13,13 @@ class UserRepository extends EntityRepository
         else
             return false;
     }
+    
+    public function changePass($user, $pass)
+    {
+        $this->em = $this->getEntityManager();
+        $bcrypt = new \Zend\Crypt\Password\Bcrypt();
+        $hashed = $bcrypt->create($pass);
+        $user->password = $hashed;
+        $this->em->persist($user);
+    }
 }

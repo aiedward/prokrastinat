@@ -129,10 +129,8 @@ class UserController extends BaseController
                     
                     if($bcrypt->verify($form->get('password')->getValue(), $user->password)) {
                         if(($form->get('password_novo')->getValue()) == ($form->get('password_novo_conf')->getValue())) {
-                            $hashed = $bcrypt->create($form->get('password_novo')->getValue());
-                            $user->password = $hashed;
-                            
-                            $this->em->persist($user);
+                            $this->userRepository = $this->getEntityManager()->getRepository('Prokrastinat\Entity\User');
+                            $this->userRepository->changePass($user, $form->get('password_novo')->getValue());
                             $this->em->flush();
                             $sporocilo = "Uspešno!";
                         } else {

@@ -17,8 +17,6 @@ class DeskaController extends BaseController
     
     public function indexAction() 
     {   
-        // $oglasi = $this->em->getRepository('Deska\Entity\Oglas')->findAll();
-        
         $query = $this->em->createQuery("SELECT o FROM Deska\Entity\Oglas o WHERE o.datum_zapadlosti > CURRENT_DATE()");
         $oglasi = $query->getResult();
         
@@ -29,10 +27,17 @@ class DeskaController extends BaseController
 
     public function dodajAction() 
     {
-        if (!$this->isGranted('post')) 
+        if (!$this->isGranted('deska_dodaj')) 
             $this->dostopZavrnjen();
         
-        $form = new DeskaForm();
+        $kategorija = $this->em->getRepository('Prokrastinat\Entity\Kategorija')->findAll();
+        $options = array();
+        
+        foreach ($kategorija as $kat) {
+            $options[$kat->id] = $kat->ime;
+        }
+        
+        $form = new DeskaForm($options);
         $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
 
         if ($this->request->isPost()) {
@@ -46,6 +51,7 @@ class DeskaController extends BaseController
                     'naslov' => $form->get('naslov')->getValue(),
                     'vsebina' => $form->get('vsebina')->getValue(),
                     'datum-zapadlosti' => $form->get('datum-zapadlosti')->getValue(),
+                    'kategorija' => $this->em->find('Prokrastinat\Entity\Kategorija', $this->deska_repository->getIdByCategoryName('Prevajalniki')),
                 );
                     
                 $this->deska_repository->saveOglas($oglas, $vals);

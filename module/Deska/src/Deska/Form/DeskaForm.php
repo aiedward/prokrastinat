@@ -13,7 +13,7 @@ use Zend\Validator;
 
 class DeskaForm extends Form 
 {
-    public function __construct() 
+    public function __construct($options) 
     {
         parent::__construct('dodaj_oglas');
         $this->setAttribute('method', 'post');
@@ -44,10 +44,21 @@ class DeskaForm extends Form
                 'id' => 'form-textarea',
                 'cols' => '250',
                 'rows' => '10',
+                'class' => 'editor input-xxlarge',
             ),
         ));
 
-        // TODO: oznake
+        $this->add(array(
+            'type' => 'Zend\Form\Element\Select',
+            'name' => 'kategorija',
+            'options' => array(
+                'label' => 'Kategorija: ',
+                'value_options' => $options,
+            ),
+            'attributes' => array(
+                'id' => 'select-kategorija',
+            ),
+        ));
 
         $this->add(array(
             'type' => 'Zend\Form\Element\Date',

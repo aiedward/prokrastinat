@@ -8,7 +8,7 @@
         <b>Datum:</b> <?= $this->escapeHtml($oglas->datum_objave->format('d-m-Y')); ?> <br />
         <b>Zapade: </b> <?= $this->escapeHtml($oglas->datum_zapadlosti->format('d-m-Y')); ?> <br />
         <b>Kategorija: </b> <?= $this->escapeHtml($oglas->kategorija); ?> <br /><br />
-        <p><?= $this->escapeHtml($oglas->vsebina); ?></p>
+        <p><?= ($oglas->vsebina); ?></p>
     </div>
 <?php endforeach; ?>
 <a class='btn btn-primary' href='<?= $this->url('deska')?>'>Vsi oglasi</a>

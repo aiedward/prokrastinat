@@ -15,8 +15,17 @@ class OglasRepository extends EntityRepository
         $oglas->vsebina = ($data['vsebina']);
         $oglas->datum_objave = (new \DateTime("now"));
         $oglas->datum_zapadlosti = (\DateTime::createFromFormat('Y-m-d', $data['datum-zapadlosti']));
-        $oglas->kategorija = null;
+        $oglas->kategorija = ($data['kategorija']);
 
         $em->persist($oglas);
+    }
+    
+    public function getIdByCategoryName($kategorija)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery("SELECT k.id FROM Prokrastinat\Entity\Kategorija k WHERE k.ime = {$kategorija}");
+        $id = $query->getResult();
+        
+        return $id;
     }
 }

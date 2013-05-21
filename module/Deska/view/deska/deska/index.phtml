@@ -1,7 +1,7 @@
 <h1>Oglasna deska</h1>
 <div id="top-menu">
 
-<?php if ($this->isGranted('post')): ?>
+<?php if ($this->isGranted('deska_dodaj')): ?>
     <a class="btn btn-primary" href="<?php echo $this->url('deska', array('action' => 'dodaj')); ?>" id="dodaj-oglas">Dodaj</a>
 <?php endif; ?>
         
@@ -23,9 +23,9 @@
             </td>
             <td><a href="<?= $this->url('user', array('action' => 'view', 'id' => $oglas->user->id))?>"><?= $this->escapeHtml($oglas->user->getPolnoIme()) ?> </a></td>
             <td><?php echo $this->escapeHtml($oglas->datum_objave->format('d-m-Y')) ?></td>
-            <td><?php echo $this->escapeHtml($oglas->kategorija) ?></td>
+            <td><?php echo $this->escapeHtml($oglas->kategorija->ime) ?></td>
             <td><?php echo $this->escapeHtml($oglas->datum_zapadlosti->format('d-m-Y')) ?></td>
-            <?php if ($this->isGranted('post')): ?>
+            <?php if ($this->isGranted('deska_dodaj')): ?>
                 <td>
                     <a href="<?= $this->url('deska', array('action' => 'uredi', 'id' => $oglas->id)); ?>">Uredi</a>
                     <a href="<?= $this->url('deska', array('action' => 'brisi', 'id' => $oglas->id)); ?>">Briši</a>

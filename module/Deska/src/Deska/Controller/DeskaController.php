@@ -24,22 +24,16 @@ class DeskaController extends BaseController
             'oglasi' => $oglasi,
         ));
     }
-
+    
     public function dodajAction() 
     {
         if (!$this->isGranted('deska_dodaj')) 
             $this->dostopZavrnjen();
         
-        $kategorija = $this->em->getRepository('Prokrastinat\Entity\Kategorija')->findAll();
-        $options = array();
-        
-        foreach ($kategorija as $kat) {
-            $options[$kat->id] = $kat->ime;
-        }
-        
-        $form = new DeskaForm($options);
         $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
-
+        $options = $this->deska_repository->getKategorije();
+        $form = new DeskaForm($options);
+        
         if ($this->request->isPost()) {
             $form->setInputFilter($form->getInputFilter());
             $form->setData($this->request->getPost());
@@ -74,10 +68,16 @@ class DeskaController extends BaseController
     
     public function urediAction()
     {
+        if (!$this->isGranted('deska_dodaj')) 
+            $this->dostopZavrnjen();
+        
         $id = (int)$this->params()->fromRoute('id', 0);
         $oglas = $this->em->find('Deska\Entity\Oglas', $id);
+        
         $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
-        $form = new DeskaForm();
+        $options = $this->deska_repository->getKategorije();
+        $form = new DeskaForm($options);
+        
         $form->fill($oglas);
         $form->get('submit')->setAttribute('value', 'Uredi');
         
@@ -91,6 +91,7 @@ class DeskaController extends BaseController
                     'naslov' => $form->get('naslov')->getValue(),
                     'vsebina' => $form->get('vsebina')->getValue(),
                     'datum-zapadlosti' => $form->get('datum-zapadlosti')->getValue(),
+                    'kategorija' => $this->em->find('Prokrastinat\Entity\Kategorija', $form->get('kategorija')->getValue()),
                 );
 
                 $this->deska_repository->saveOglas($oglas, $vals);
@@ -108,6 +109,9 @@ class DeskaController extends BaseController
     
     public function brisiAction()
     {
+        if (!$this->isGranted('deska_dodaj')) 
+            $this->dostopZavrnjen();
+        
         $id = (int)$this->params()->fromRoute('id', 0);
         
         if ($this->request->isPost()) {

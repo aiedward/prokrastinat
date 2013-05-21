@@ -19,4 +19,17 @@ class OglasRepository extends EntityRepository
 
         $em->persist($oglas);
     }
+    
+    public function getKategorije()
+    {
+        $em = $this->getEntityManager();
+        $kategorija = $em->getRepository('Prokrastinat\Entity\Kategorija')->findAll();
+        $options = array();
+
+        foreach ($kategorija as $kat) {
+            $options[$kat->id] = $kat->ime;
+        }
+        
+        return $options;
+    }
 }

@@ -15,6 +15,7 @@ $this->headtitle($title);
         echo $this->form()->openTag($form);
         echo $this->formRow($form->get('naslov'));
         echo $this->formRow($form->get('datum-zapadlosti'));
+        echo $this->formRow($form->get('kategorija'));
         echo $this->formRow($form->get('vsebina'));
         echo "<br />";
         echo $this->formSubmit($form->get('submit'));

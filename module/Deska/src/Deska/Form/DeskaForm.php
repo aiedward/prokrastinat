@@ -146,5 +146,6 @@ class DeskaForm extends Form
         $this->get('naslov')->setValue($o->naslov);
         $this->get('vsebina')->setValue($o->vsebina);
         $this->get('datum-zapadlosti')->setValue($o->datum_zapadlosti);
+        $this->get('kategorija')->setValue($o->kategorija->id);
     }
 }

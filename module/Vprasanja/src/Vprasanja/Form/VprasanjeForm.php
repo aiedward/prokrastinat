@@ -10,7 +10,7 @@ use Zend\Validator;
 
 use Vprasanja\Entity\Vprasanje;
 
-class Vprasanje extends Form {
+class VprasanjeForm extends Form {
     public function __construct()
     {
         parent::__construct('vprasanje');

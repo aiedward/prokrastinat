@@ -24,6 +24,14 @@ abstract class BaseController extends AbstractActionController
         return $this->em;
     }
 
+    public function zahtevajDovoljenje($permission)
+    {
+        if (!$this->isGranted($permission)) {
+            // to-do: zapomni si zadnji request in po uspešni prijavi redirectaj nazaj
+            return $this->redirect()->toRoute('user', array('action' => 'login'));
+        }
+    }
+
     public function dostopZavrnjen()
     {
         if (!$this->auth->hasIdentity()) {

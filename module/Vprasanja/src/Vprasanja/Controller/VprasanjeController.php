@@ -37,7 +37,7 @@ class VprasanjeController extends BaseController
 
     public function dodajAction()
     {
-        $this->zahtevajLogin();
+        $this->zahtevajDovoljenje('vprasanje_dodaj');
 
         $form = new VprasanjeForm();
 

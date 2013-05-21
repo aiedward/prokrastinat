@@ -13,6 +13,10 @@ class VprasanjeController extends BaseController
 {
     public function indexAction()
     {
+        if (!$this->isGranted('vprasanje_index')) {
+            return $this->dostopZavrnjen();
+        } 
+
         $vprasanja = $this->em->getRepository('Vprasanja\Entity\Vprasanje')->findAll();
 
         return new ViewModel(array(
@@ -22,6 +26,10 @@ class VprasanjeController extends BaseController
 
     public function pregledAction()
     {
+        if (!$this->isGranted('vprasanje_pregled')) {
+            return $this->dostopZavrnjen();
+        } 
+
         $id = (int) $this->params()->fromRoute('id');
         $vprasanje = $this->em->find('Vprasanja\Entity\Vprasanje', $id);
 
@@ -37,7 +45,9 @@ class VprasanjeController extends BaseController
 
     public function dodajAction()
     {
-        $this->zahtevajDovoljenje('vprasanje_dodaj');
+        if (!$this->isGranted('vprasanje_dodaj')) {
+            return $this->dostopZavrnjen();
+        } 
 
         $form = new VprasanjeForm();
 
@@ -66,10 +76,12 @@ class VprasanjeController extends BaseController
 
     public function urediAction()
     {
-        $this->zahtevajLogin();
-
         $id = (int) $this->params()->fromRoute('id', 0);
         $vprasanje = $this->em->find('Vprasanja\Entity\Vprasanje', $id);
+
+        if (!$this->isGranted('vprasanje_uredi') && !$this->jeAvtor($vprasanje->user)) {
+            return $this->dostopZavrnjen();
+        }
 
         $form = new VprasanjeForm();
 
@@ -97,10 +109,12 @@ class VprasanjeController extends BaseController
 
     public function brisiAction()
     {
-        $this->zahtevajLogin();
-
         $id = (int) $this->params()->fromRoute('id', 0);
         $vprasanje = $this->em->find('Vprasanja\Entity\Vprasanje', $id);
+
+        if (!$this->isGranted('vprasanje_brisi') && !$this->jeAvtor($vprasanje->user)) {
+            return $this->dostopZavrnjen();
+        }
 
         $this->em->remove($vprasanje);
         $this->em->flush();

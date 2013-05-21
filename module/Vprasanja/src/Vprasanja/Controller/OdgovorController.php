@@ -16,7 +16,9 @@ class OdgovorController extends BaseController
 
     public function dodajAction()
     {
-        $this->zahtevajLogin();
+        if (!$this->isGranted('odgovor_dodaj')) {
+            return $this->dostopZavrnjen();
+        }
 
         if ($this->request->isPost()) {
             $form = new OdgovorForm();

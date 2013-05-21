@@ -4,6 +4,7 @@ namespace Prokrastinat\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\EventManager\EventManagerInterface;
 use Zend\View\Model\ViewModel;
+
 abstract class BaseController extends AbstractActionController
 {
     protected $request;
@@ -24,14 +25,6 @@ abstract class BaseController extends AbstractActionController
         return $this->em;
     }
 
-    public function zahtevajDovoljenje($permission)
-    {
-        if (!$this->isGranted($permission)) {
-            // to-do: zapomni si zadnji request in po uspešni prijavi redirectaj nazaj
-            return $this->redirect()->toRoute('user', array('action' => 'login'));
-        }
-    }
-
     public function dostopZavrnjen()
     {
         if (!$this->auth->hasIdentity()) {
@@ -40,7 +33,12 @@ abstract class BaseController extends AbstractActionController
         } else {
             $this->getResponse()->setStatusCode(403);
             $model = new ViewModel();
-            return $model->setTemplate('forbidden_template');
+            return $model->setTemplate('error/403');
         }
+    }
+
+    public function jeAvtor($user)
+    {
+        return $this->auth->getIdentity() === $user;
     }
 }

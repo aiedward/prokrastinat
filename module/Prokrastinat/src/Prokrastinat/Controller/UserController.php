@@ -69,7 +69,8 @@ class UserController extends BaseController
             
             if($userEdit == null)
             {
-                $this->dostopZavrnjen();
+                $view = $this->dostopZavrnjen();
+                return $view;
             }
             
             if((!($user === $userEdit)&&($this->isGranted('user_uredi')))||($user === $userEdit))
@@ -91,7 +92,8 @@ class UserController extends BaseController
                     $form->fill($userEdit);
             }else
             {
-                $this->dostopZavrnjen();
+                $view = $this->dostopZavrnjen();
+                return $view;
             }
   
             

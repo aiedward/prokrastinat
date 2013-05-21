@@ -29,51 +29,26 @@ class DatotekaController extends BaseController
                 $this->getRequest()->getFiles()->toArray()
             );
             $form->setData($data);
-            
-            $File = $this->params()->fromFiles('file');
-            $adapter = new \Zend\File\Transfer\Adapter\Http(); 
+
             if ($form->isValid()) {
-
-                if(!$adapter->isValid()){
-                $dataError = $adapter->getMessages();
-                    $error = array();
-                    foreach($dataError as $key=>$row)
-                    {
-                        $error[] = $row;
-                    }
-                    $form->setMessages(array('file'=>$error ));
-                } else {
-                    $adapter->addFilter('File\Rename',
-                    array('target' => dirname(dirname(dirname(dirname(dirname(__DIR__))))).'/data/uploads/'.$File['name'],
-                        'randomize' => true,
-                        'overwrite' => true));
-                    $adapter->setDestination(dirname(dirname(dirname(dirname(dirname(__DIR__))))).'/data/uploads');
-                    if ($adapter->receive($File['name'])) {
-
-                    }
-                    else{ 
-                    }
-                    
-                    $em = $this->getEntityManager();
+                    $formData = $form->getData();
                     $file = new \Datoteke\Entity\Datoteka();
-                    $file->opis = "test";
-                    $file->imeDatoteke = $File['name'];
+                    $em = $this->getEntityManager();
+                    $file->opis = $formData['opis'];
+                    $file->imeDatoteke = $formData['file']['name'];
                     $file->datum_uploada = new DateTime('now');
                     $file->st_prenosov = 0;
                     $file->st_ogledov = 0;
-                    $file->velikost = $File['size'];
+                    $file->velikost = $formData['file']['size'];
                     $file->user = $this->auth->getIdentity();
                     //DODAJ CELOTNO IME
-                    //$file->uniqueName = $adapter->getFilter('File\Rename')->getFile();
-                    
+                    //$file->uniqueName = $formData['file']['tmp_name'];
                     $em->persist($file);
-                    $em->flush();
-                    
+                    $em->flush();              
                     return $this->redirect()->toRoute('datoteke');
             }
         }
-        }
-    return array('form' => $form);
+        return array('form' => $form);
     }
     
     

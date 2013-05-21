@@ -1,5 +1,5 @@
 <?php
-
+/*
 namespace Datoteke\Model;
  
 use Zend\InputFilter\Factory as InputFactory;
@@ -69,4 +69,4 @@ class Datoteke implements InputFilterAwareInterface
          
         return $this->inputFilter;
     }
-}
+}*/

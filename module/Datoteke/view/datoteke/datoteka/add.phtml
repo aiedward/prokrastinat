@@ -26,7 +26,7 @@ $errorsHelper
 <?php echo $this->form()->openTag($form); ?>
 <fieldset>
     <?php
-    $elem = $form->get('text');
+    $elem = $form->get('opis');
     $elem->setLabelAttributes(array('class' => 'control-label'));
     $errors = $elem->getMessages();
     $errorClass = (!empty($errors)) ? ' error' : '';
@@ -74,6 +74,7 @@ $errorsHelper
 
 </fieldset>
 <?php echo $this->form()->closeTag($form); ?>
+
 
 
 <?php

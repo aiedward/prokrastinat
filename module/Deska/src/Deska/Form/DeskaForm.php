@@ -3,7 +3,6 @@
 namespace Deska\Form;
 
 use Zend\Form\Form;
-
 use Deska\Entity\Oglas;
 
 // za validacijo

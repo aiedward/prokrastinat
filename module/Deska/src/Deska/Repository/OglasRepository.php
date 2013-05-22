@@ -32,4 +32,13 @@ class OglasRepository extends EntityRepository
         
         return $options;
     }
+    
+    public function getOglasiByKategorija($kategorija)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT o FROM Deska\Entity\Oglas o WHERE o.kategorija = :kategorija_id');
+        $query->setParameter('kategorija_id', $kategorija);
+        
+        return $query->getResult();
+    }
 }

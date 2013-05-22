@@ -6,6 +6,7 @@ use Prokrastinat\Controller\BaseController;
 use Zend\View\Model\ViewModel;
 use Deska\Entity\Oglas;
 use Deska\Form\DeskaForm;
+use Deska\Form\SortForm;
 
 class DeskaController extends BaseController 
 {
@@ -17,14 +18,17 @@ class DeskaController extends BaseController
     
     public function indexAction() 
     {   
-        $kategorije = $this->em->getRepository('Prokrastinat\Entity\Kategorija')->findAll();
+        $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
+        $options = $this->deska_repository->getKategorije();
+        
+        $form = new SortForm($options);
         
         $query = $this->em->createQuery("SELECT o FROM Deska\Entity\Oglas o WHERE o.datum_zapadlosti > CURRENT_DATE()");
         $oglasi = $query->getResult();
         
         return new ViewModel(array(
             'oglasi' => $oglasi,
-            'kategorije' => $kategorije,
+            'form' => $form,
         ));
     }
     
@@ -139,6 +143,14 @@ class DeskaController extends BaseController
     
     public function sortAction()
     {
+        $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
         
+        $kategorija = $this->request->getPost('kategorija');
+        // var_dump($kategorija); die;
+        $oglasi = $this->deska_repository->getOglasiByKategorija((int)$kategorija);
+                
+        return array(
+            'oglasi' => $oglasi,
+        );
     }
 }

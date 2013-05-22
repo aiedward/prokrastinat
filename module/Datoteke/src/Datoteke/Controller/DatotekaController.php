@@ -4,6 +4,7 @@ namespace Datoteke\Controller;
 use Datoteke\Model\Datoteke;
 use Datoteke\Form\DatotekaForm;
 use Datoteke\Form\EditForm;
+use Datoteke\Form\IsciForm;
 use Datoteke\Entity\Datoteka;
 use Prokrastinat\Entity\User;
 use Zend\Validator\File\Size;
@@ -73,11 +74,19 @@ class DatotekaController extends BaseController
         if (isset($_GET['sort']) && in_array($_GET['sort'], $sort)) {
             $sort1 = $_GET['sort'];
         }
-       
-        $query = $this->em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d ORDER BY d.".$order." ".$sort1);
-        $datoteke = $query->getResult();
+        $form = new IsciForm();
+        $isci = $this->request->getPost('iskalniNiz'); 
+        if (!$isci) {
+            $query = $this->em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d ORDER BY d.".$order." ".$sort1);
+            $datoteke = $query->getResult();
+        }
+        else {
+            $query = $this->em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d WHERE d.opis LIKE '%".$isci."%' OR d.imeDatoteke LIKE '%".$isci."%' ORDER BY d.".$order." ".$sort1);
+            $datoteke = $query->getResult();
+        }
         
-        return new ViewModel(array('datoteke' => $datoteke));
+        
+        return new ViewModel(array('datoteke' => $datoteke, 'form' => $form));
     }
     
     public function deleteAction()
@@ -131,28 +140,13 @@ class DatotekaController extends BaseController
         $dat = $datRep->find($id);
         
         $datRep->increaseDownloadCounter($dat);
+        
+        $response = $this->getResponse();
+        $datRep->downloadDatoteka($dat, $response);
+        
         $this->em->flush();
         
-        $file = $_SERVER['DOCUMENT_ROOT'] .'prokrastinat/data/uploads/'.$dat->randomImeDatoteke;
-
-        if(!file_exists($file)) {
-
-        }
-        else{
-            $fileContents = file_get_contents($file);
-
-            $response = $this->getResponse();
-            $response->setContent($fileContents);
-
-            $headers = $response->getHeaders();
-
-            $headers->clearHeaders()
-                ->addHeaderLine('Content-Type', 'application/octet-stream')
-                ->addHeaderLine('Content-Disposition', 'attachment; filename="' . $dat->imeDatoteke . '"')
-                ->addHeaderLine('Content-Length', strlen($fileContents));
-
-            return $this->response;
-        }
+        return $response;
     }
     
     public function viewAction(){
@@ -224,31 +218,7 @@ class DatotekaController extends BaseController
         $skupna_velikost = $this->getUploadSize($user);
         
         return new ViewModel(array('datoteke' => $datoteke, 'velikost' => $skupna_velikost));
-    }
-
-    public function searchAction()
-    {
-        if (!$this->isGranted('datoteke_index')) {
-            return $this->dostopZavrnjen();
-        } 
-        $orderBy = array('imeDatoteke', 'datum_uploada', 'st_prenosov', 'opis', 'velikost');
-
-        $order = 'st_prenosov';
-        if (isset($_GET['orderBy']) && in_array($_GET['orderBy'], $orderBy)) {
-            $order = $_GET['orderBy'];
-        }      
-        $sort = array('asc', 'desc');
-        $sort1 = 'desc';
-        if (isset($_GET['sort']) && in_array($_GET['sort'], $sort)) {
-            $sort1 = $_GET['sort'];
-        }
-        $iskalniNiz = $this->getRequest()->getPost('isci', null);
-        $query = $this->em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d WHERE d.opis LIKE '%".$iskalniNiz."%' OR d.imeDatoteke LIKE '%".$iskalniNiz."%' ORDER BY d.".$order." ".$sort1);
-        $datoteke = $query->getResult();
-        
-        return new ViewModel(array('datoteke' => $datoteke));
-    }
-    
+    }    
     
     public function getUploadSize($user)
     {

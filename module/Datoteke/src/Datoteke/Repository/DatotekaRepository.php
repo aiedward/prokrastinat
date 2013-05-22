@@ -24,8 +24,26 @@ class DatotekaRepository extends EntityRepository
         $this->em->remove($datoteka);
     }
     
-    public function downloadDatoteka($datoteka) {
+    public function downloadDatoteka($dat, &$response) {
+        $file = $_SERVER['DOCUMENT_ROOT'] .'prokrastinat/data/uploads/'.$dat->randomImeDatoteke;
 
+        if(!file_exists($file)) {
+
+        }
+        else{
+            $fileContents = file_get_contents($file);
+            
+            $response->setContent($fileContents);
+
+            $headers = $response->getHeaders();
+
+            $headers->clearHeaders()
+                ->addHeaderLine('Content-Type', 'application/octet-stream')
+                ->addHeaderLine('Content-Disposition', 'attachment; filename="' . $dat->imeDatoteke . '"')
+                ->addHeaderLine('Content-Length', strlen($fileContents));
+
+            return $response;
+        }
     }
     
     public function saveDatoteka($formData) {

@@ -11,10 +11,18 @@ $this->headTitle($title);
 <div id="iskanjeDiv" style="text-align: left; font-weight: bold; font-size: 14px">
 <p>
 <p>Iskanje datotek</p> 
-    <form  method="post" action="datoteke/search"  id="iskanjeform"> 
-        <input  type="text" name="isci"> <br>
-        <input  type="submit" name="submit" value="Isci"> 
-    </form> 
+        <div>
+        <?php
+            $form = $this->form;
+            $form->setAttribute('action', $this->url('datoteke', array('action' => 'index')));
+            $form->prepare();
+            
+            echo $this->form()->openTag($form);
+            echo $this->formRow($form->get('iskalniNiz')).'<br />';
+            echo $this->formSubmit($form->get('submit'));
+            echo $this->form()->closeTag();
+        ?>
+    </div>
 </div>
 <table class="table">
 <tr>
@@ -36,7 +44,11 @@ $this->headTitle($title);
     <td><?php echo $this->escapeHtml($datoteka->st_prenosov);?></td>
     <td>
         <a href="<?php echo $this->url('datoteke', array('action'=>'view', 'id'=>$datoteka->id));?>">Podrobnosti</a>
-        <a href="<?php echo $this->url('datoteke', array('action'=>'download', 'id'=>$datoteka->id));?>">Prenos</a>   
+        <a href="<?php echo $this->url('datoteke', array('action'=>'download', 'id'=>$datoteka->id));?>">Prenos</a>
+        <?php if ($this->isGranted('datoteke_edit')){ ?>
+        <a href="<?php echo $this->url('datoteke', array('action'=>'edit', 'id'=>$datoteka->id));?>">Uredi</a>
+        <a href="<?php echo $this->url('datoteke', array('action'=>'delete', 'id'=>$datoteka->id));?>">Briši</a>     
+        <?php } ?>
     </td>
 </tr>
 <?php endforeach; ?>

@@ -14,6 +14,7 @@ use Prokrastinat\Controller\BaseController;
 
 class DatotekaController extends BaseController
 {
+    
     public function addAction()
     {
         $user = $this->auth->getIdentity();
@@ -40,7 +41,12 @@ class DatotekaController extends BaseController
                     $file->st_ogledov = 0;
                     $file->velikost = $formData['file']['size'];
                     $file->user = $this->auth->getIdentity();
-                    $file->randomImeDatoteke = $formData['file']['tmp_name'];
+                    
+                    $keys = parse_url($formData['file']['tmp_name']);
+                    $path = explode("/", $keys['path']);
+                    $last = end($path);
+                    $file->randomImeDatoteke = $last;
+                    
                     $this->em->persist($file);
                     $this->em->flush();              
                     return $this->redirect()->toRoute('datoteke');
@@ -48,6 +54,7 @@ class DatotekaController extends BaseController
         }
         return array('form' => $form);
     }
+   
     
     
     public function indexAction()
@@ -118,27 +125,26 @@ class DatotekaController extends BaseController
         $datRep->increaseDownloadCounter($dat);
         $this->em->flush();
         
-        $file = dirname(dirname(dirname(dirname(dirname(__DIR__))))).'\data\\uploads\\'.$dat->imeDatoteke;
-        $file2 = 'http://localhost/prokrastinat/data/uploads/Avto4_519bbb725f116.JPG';
-        
-        if(!is_file($file2)) {
-        print '<script type="text/javascript">'; 
-        print 'alert("The email address'.$file2.' is already registered")'; 
-        print '</script>';  
-    }
-    else{
+        $file = $_SERVER['DOCUMENT_ROOT'] .'prokrastinat/data/uploads/'.$dat->randomImeDatoteke;
 
-        $response = $this->getResponse();
-        $response->getHeaders()
-             ->addHeaderLine('content-type', 'application/force-download')
-             ->addHeaderLine('content-length', filesize($file2))
-             ->addHeaderLine('content-Description','File Transfer')
-             ->addHeaderLine('content-disposition', "attachment; filename=\"".basename($file2)."\"");
+        if(!file_exists($file)) {
 
-        $response->setContent(file_get_contents($file2));
+        }
+        else{
+            $fileContents = file_get_contents($file);
 
-        return $response;
-    }
+            $response = $this->getResponse();
+            $response->setContent($fileContents);
+
+            $headers = $response->getHeaders();
+
+            $headers->clearHeaders()
+                ->addHeaderLine('Content-Type', 'application/octet-stream')
+                ->addHeaderLine('Content-Disposition', 'attachment; filename="' . $dat->imeDatoteke . '"')
+                ->addHeaderLine('Content-Length', strlen($fileContents));
+
+            return $this->response;
+        }
     }
     
     public function viewAction(){

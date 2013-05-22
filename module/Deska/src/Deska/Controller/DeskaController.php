@@ -18,17 +18,29 @@ class DeskaController extends BaseController
     
     public function indexAction() 
     {   
+        // $id = (int) $this->params()->fromRoute('id', 0);
+        
         $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
         $options = $this->deska_repository->getKategorije();
         
         $form = new SortForm($options);
+        $id = (int)$this->request->getPost('kategorija');
+        // var_dump($kat); 
         
-        $query = $this->em->createQuery("SELECT o FROM Deska\Entity\Oglas o WHERE o.datum_zapadlosti > CURRENT_DATE()");
-        $oglasi = $query->getResult();
+        if (!$id) {
+            $query = $this->em->createQuery("SELECT o FROM Deska\Entity\Oglas o WHERE o.datum_zapadlosti > CURRENT_DATE()");
+            $oglasi = $query->getResult();
+        }
+        else {
+            
+            // var_dump($kategorija); die;
+            $oglasi = $this->deska_repository->getOglasiByKategorija($id);
+        }
         
         return new ViewModel(array(
             'oglasi' => $oglasi,
             'form' => $form,
+            'id' => $id,
         ));
     }
     

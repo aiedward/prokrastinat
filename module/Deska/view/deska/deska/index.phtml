@@ -9,7 +9,7 @@
     <div>
         <?php
             $form = $this->form;
-            $form->setAttribute('action', $this->url('deska', array('action' => 'sort')));
+            $form->setAttribute('action', $this->url('deska', array('action' => 'index', 'id' => $id)));
             $form->prepare();
             
             echo $this->form()->openTag($form);

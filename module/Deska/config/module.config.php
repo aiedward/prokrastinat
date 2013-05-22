@@ -17,7 +17,7 @@ return array(
             'deska' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/deska[/][:action][/:id]',
+                    'route' => '/deska[/:action][/:id][/]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id' => '[0-9]+',

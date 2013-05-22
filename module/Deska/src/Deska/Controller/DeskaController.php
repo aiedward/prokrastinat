@@ -6,7 +6,7 @@ use Prokrastinat\Controller\BaseController;
 use Zend\View\Model\ViewModel;
 use Deska\Entity\Oglas;
 use Deska\Form\DeskaForm;
-use Deska\Form\SortForm;
+use Deska\Form\FilterForm;
 
 class DeskaController extends BaseController 
 {
@@ -23,7 +23,7 @@ class DeskaController extends BaseController
         $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
         $options = $this->deska_repository->getKategorije();
         
-        $form = new SortForm($options);
+        $form = new FilterForm($options);
         $id = (int)$this->request->getPost('kategorija');
         // var_dump($kat); 
         

@@ -7,7 +7,7 @@
         <b>Avtor:</b> <a href="<?= $this->url('user', array('action' => 'view', 'id' => $oglas->user->id));?>"> <?= $this->escapeHtml($oglas->user->getPolnoIme()); ?> </a><br />
         <b>Datum:</b> <?= $this->escapeHtml($oglas->datum_objave->format('d-m-Y')); ?> <br />
         <b>Zapade: </b> <?= $this->escapeHtml($oglas->datum_zapadlosti->format('d-m-Y')); ?> <br />
-        <b>Kategorija: </b> <?= $this->escapeHtml($oglas->kategorija); ?> <br /><br />
+        <b>Kategorija: </b> <?= $this->escapeHtml($oglas->kategorija->ime); ?> <br /><br />
         <p><?= ($oglas->vsebina); ?></p>
     </div>
 <?php endforeach; ?>

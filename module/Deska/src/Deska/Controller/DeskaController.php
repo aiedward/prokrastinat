@@ -17,11 +17,14 @@ class DeskaController extends BaseController
     
     public function indexAction() 
     {   
+        $kategorije = $this->em->getRepository('Prokrastinat\Entity\Kategorija')->findAll();
+        
         $query = $this->em->createQuery("SELECT o FROM Deska\Entity\Oglas o WHERE o.datum_zapadlosti > CURRENT_DATE()");
         $oglasi = $query->getResult();
         
         return new ViewModel(array(
             'oglasi' => $oglasi,
+            'kategorije' => $kategorije,
         ));
     }
     
@@ -132,5 +135,10 @@ class DeskaController extends BaseController
             'id' => $id,
             'oglas' => $this->em->find('Deska\Entity\Oglas', $id)
         );
+    }
+    
+    public function sortAction()
+    {
+        
     }
 }

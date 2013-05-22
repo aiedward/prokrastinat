@@ -26,7 +26,7 @@ class FilterForm extends Form
             'name' => 'submit',
             'attributes' => array(
                 'type' => 'submit',
-                'value' => 'Filtriranje',
+                'value' => 'Filtriraj',
                 'id' => 'submitbutton',
                 'class' => 'btn btn-primary',
             ),

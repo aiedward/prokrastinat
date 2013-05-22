@@ -10,30 +10,20 @@ use Deska\Form\FilterForm;
 
 class DeskaController extends BaseController 
 {
-
-    /**
-     * @var Deska\Repository\Oglas
-     */
     protected $deska_repository;
     
     public function indexAction() 
     {   
-        // $id = (int) $this->params()->fromRoute('id', 0);
-        
         $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
         $options = $this->deska_repository->getKategorije();
         
         $form = new FilterForm($options);
         $id = (int)$this->request->getPost('kategorija');
-        // var_dump($kat); 
         
         if (!$id) {
             $query = $this->em->createQuery("SELECT o FROM Deska\Entity\Oglas o WHERE o.datum_zapadlosti > CURRENT_DATE()");
             $oglasi = $query->getResult();
-        }
-        else {
-            
-            // var_dump($kategorija); die;
+        } else {
             $oglasi = $this->deska_repository->getOglasiByKategorija($id);
         }
         
@@ -150,19 +140,6 @@ class DeskaController extends BaseController
         return array(
             'id' => $id,
             'oglas' => $this->em->find('Deska\Entity\Oglas', $id)
-        );
-    }
-    
-    public function sortAction()
-    {
-        $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
-        
-        $kategorija = $this->request->getPost('kategorija');
-        // var_dump($kategorija); die;
-        $oglasi = $this->deska_repository->getOglasiByKategorija((int)$kategorija);
-                
-        return array(
-            'oglasi' => $oglasi,
         );
     }
 }

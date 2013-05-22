@@ -3,7 +3,7 @@ namespace Deska\Form;
 
 use Zend\Form\Form;
 
-class SortForm extends Form
+class FilterForm extends Form
 {
     public function __construct($options)
     {
@@ -26,7 +26,7 @@ class SortForm extends Form
             'name' => 'submit',
             'attributes' => array(
                 'type' => 'submit',
-                'value' => 'sortiraj',
+                'value' => 'Filtriranje',
                 'id' => 'submitbutton',
                 'class' => 'btn btn-primary',
             ),

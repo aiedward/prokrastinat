@@ -17,14 +17,13 @@ class DatotekaController extends BaseController
     
     public function addAction()
     {
-        $user = $this->auth->getIdentity();
-        
-        //$this->zahtevajLogin();
+        if (!$this->isGranted('datoteke_add')) {
+            return $this->dostopZavrnjen();
+        } 
         
         $form = new DatotekaForm();
         $request = $this->getRequest();
-
-        if ($this->getRequest()->isPost()) {
+        if ($request->isPost()) {
             $data = array_merge_recursive(
                 $this->getRequest()->getPost()->toArray(),
                 $this->getRequest()->getFiles()->toArray()
@@ -59,6 +58,10 @@ class DatotekaController extends BaseController
     
     public function indexAction()
     {
+        if (!$this->isGranted('datoteke_index')) {
+            return $this->dostopZavrnjen();
+        } 
+        
         $orderBy = array('imeDatoteke', 'datum_uploada', 'st_prenosov', 'opis', 'velikost');
 
         $order = 'st_prenosov';
@@ -79,7 +82,9 @@ class DatotekaController extends BaseController
     
     public function deleteAction()
     {
-        $this->zahtevajLogin();
+        if (!$this->isGranted('datoteke_delete')) {
+            return $this->dostopZavrnjen();
+        } 
     
         $datRep = $this->em->getRepository('Datoteke\Entity\Datoteka');
         $id = (int) $this->params()->fromRoute('id', 0);
@@ -118,6 +123,9 @@ class DatotekaController extends BaseController
     
     public function downloadAction()
     {
+        if (!$this->isGranted('datoteke_download')) {
+            return $this->dostopZavrnjen();
+        } 
         $datRep = $this->em->getRepository('Datoteke\Entity\Datoteka');
         $id = (int) $this->params()->fromRoute('id', 0);
         $dat = $datRep->find($id);
@@ -148,6 +156,9 @@ class DatotekaController extends BaseController
     }
     
     public function viewAction(){
+        if (!$this->isGranted('datoteke_view')) {
+            return $this->dostopZavrnjen();
+        } 
         $datRep = $this->em->getRepository('Datoteke\Entity\Datoteka');
         $id = (int) $this->params()->fromRoute('id', 0);
         $dat = $datRep->find($id);
@@ -159,7 +170,9 @@ class DatotekaController extends BaseController
     }
     
     public function editAction(){
-        $this->zahtevajLogin();
+        if (!$this->isGranted('datoteke_edit')) {
+            return $this->dostopZavrnjen();
+        } 
         
         $form = new EditForm();
         
@@ -185,8 +198,11 @@ class DatotekaController extends BaseController
     
     public function myfilesAction()
     {
+        if (!$this->isGranted('datoteke_myfiles')) {
+            return $this->dostopZavrnjen();
+        } 
         $user = $this->auth->getIdentity();
-        $this->zahtevajLogin();
+      //  $this->zahtevajLogin();
         
         $orderBy = array('imeDatoteke', 'datum_uploada', 'st_prenosov', 'opis', 'velikost');
 
@@ -211,6 +227,9 @@ class DatotekaController extends BaseController
 
     public function searchAction()
     {
+        if (!$this->isGranted('datoteke_index')) {
+            return $this->dostopZavrnjen();
+        } 
         $orderBy = array('imeDatoteke', 'datum_uploada', 'st_prenosov', 'opis', 'velikost');
 
         $order = 'st_prenosov';

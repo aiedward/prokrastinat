@@ -82,13 +82,13 @@ class DatotekaController extends BaseController
     
     public function deleteAction()
     {
-        if (!$this->isGranted('datoteke_delete')) {
-            return $this->dostopZavrnjen();
-        } 
-    
         $datRep = $this->em->getRepository('Datoteke\Entity\Datoteka');
         $id = (int) $this->params()->fromRoute('id', 0);
         $dat = $datRep->find($id);
+        
+        if (!(($this->isGranted('datoteke_delete'))||$this->jeAvtor($dat->user))) {
+            return $this->dostopZavrnjen();
+        } 
         
         if($dat->user == $this->auth->getIdentity()){ //da ni mogoče brisati tujih datotek
                     
@@ -170,18 +170,19 @@ class DatotekaController extends BaseController
     }
     
     public function editAction(){
-        if (!$this->isGranted('datoteke_edit')) {
+        $request = $this->getRequest();  
+        $datRep = $this->em->getRepository('Datoteke\Entity\Datoteka');
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $dat = $datRep->find($id);
+       
+        if (!(($this->isGranted('datoteke_edit'))||$this->jeAvtor($dat->user))) {
             return $this->dostopZavrnjen();
-        } 
+        }  
         
         $form = new EditForm();
         
         //$form->setInputFilter($dat->getInputFilter());
         
-        $request = $this->getRequest();  
-        $datRep = $this->em->getRepository('Datoteke\Entity\Datoteka');
-        $id = (int) $this->params()->fromRoute('id', 0);
-        $dat = $datRep->find($id);
         
         $form->get('opis')->setValue($dat->opis);
         

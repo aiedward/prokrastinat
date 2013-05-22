@@ -163,4 +163,17 @@ class UserController extends BaseController
                 'napaka' => $napaka
             ));
         }
+        
+        public function listAction()
+        {
+            if (!$this->isGranted('user_pregled')) $this->dostopZavrnjen();
+            
+            $this->userRepository = $this->getEntityManager()->getRepository('Prokrastinat\Entity\User');
+            $useri = $this->userRepository->findAll();
+            
+            return new ViewModel(array(
+                'useri' => $useri
+            ));
+            
+        }
 }

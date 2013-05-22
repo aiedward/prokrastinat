@@ -1,0 +1,26 @@
+<h1>Pregled uporabnikov</h1>
+<table class="table">
+    <tr>
+        <th>Uporabniško ime</th>
+        <th>Ime</th>
+        <th>Priimek</th>
+        <th>Email</th>
+        <th>Vpisna št.</th>
+        <?php if($this->isGranted('user_uredi')): ?>
+            <th>Uredi</th>
+        <?php endif; ?>
+    </tr>
+    
+    <?php foreach ($useri as $user): ?>
+        <tr>
+            <td><?=$user->username?></td>
+            <td><?=$user->ime?></td>
+            <td><?=$user->priimek?></td>
+            <td><?=$user->email?></td>
+            <td><?=$user->vpisna_st?></td>
+            <?php if($this->isGranted('user_uredi')): ?>
+                <td><a class="btn btn-primary" href="<?php echo $this->url('user', array('action' => 'edit', 'id' => $user->id)); ?>" id="uredi-user">Uredi</a></td>
+            <?php endif; ?>
+        </tr>
+    <?php endforeach; ?>
+</table>

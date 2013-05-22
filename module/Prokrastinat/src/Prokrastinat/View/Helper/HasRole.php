@@ -25,7 +25,7 @@ class HasRole extends AbstractHelper implements ServiceLocatorAwareInterface {
         
         if ($auth->hasIdentity()) {
             $user = $auth->getIdentity();
-            foreach ($user->roles as $role) {var_dump($role->name); die;
+            foreach ($user->roles as $role) {
                 $first = $role->id;
                 
                 do {

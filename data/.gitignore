@@ -1,4 +1,5 @@
 !.gitignore
 !cache
 !uploads
+!test.sql
 *

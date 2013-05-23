@@ -38,6 +38,21 @@ $errorsHelper
             <?php echo $errorsHelper($elem); ?>
         </div>
     </div>
+    
+    <?php
+    $elem = $form->get('kategorija');
+    $elem->setLabelAttributes(array('class' => 'control-label'));
+    $errors = $elem->getMessages();
+    $errorClass = (!empty($errors)) ? ' error' : '';
+    ?>
+    <div class="control-group<?php echo $errorClass ?>">
+        <?php echo $this->formLabel($elem); ?>
+        <div class="controls">
+            <?php echo $this->formSelect($elem); ?>
+            <?php echo $errorsHelper($elem); ?>
+        </div>
+    </div>
+    
 
     <?php
     $elem = $form->get('file');

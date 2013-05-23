@@ -32,15 +32,15 @@ class Datoteka extends BaseEntity
     protected $randomImeDatoteke;
     
     
-    /**
-     * @ORM\Column(length=30, nullable=true)
-     */
+    /** @ORM\ManyToOne(targetEntity="Prokrastinat\Entity\Kategorija") */
     protected $kategorija;
     
     /**
      * @ORM\Column(length=200, nullable=true)
      */
     protected $opis;
+    
+
     
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -62,6 +62,8 @@ class Datoteka extends BaseEntity
      * @ORM\Column(type="integer", nullable=true)
      */
     protected $velikost;
+    
+    
 
     
 }

@@ -2,8 +2,6 @@
 namespace Datoteke\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Prokrastinat\Entity\Datoteka;
-use Zend\Stdlib\DateTime;
 
 class DatotekaRepository extends EntityRepository
 {
@@ -48,6 +46,19 @@ class DatotekaRepository extends EntityRepository
     
     public function saveDatoteka($formData) {
 
+    }
+    
+    public function getUploadSize($user)
+    {
+        $this->em = $this->getEntityManager();
+        $query = $this->em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d WHERE d.user=".$user->id);
+        $datoteke = $query->getResult(); 
+        $skupna_velikost = 0;
+        foreach ($datoteke as $row)
+        {
+            $skupna_velikost += $row->velikost;            
+        }
+        return $skupna_velikost;
     }
     
 }

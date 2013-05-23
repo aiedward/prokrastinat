@@ -10,15 +10,6 @@ $this->headTitle($title);
     <a href="<?php echo $this->url('datoteke', array('action'=>'myfiles'));?>">Moje datoteke</a>
 </p>
 
+
+<?= $this->formTwb($this->form) ?>
 <?php
-
-$form = $this->form;
-$form->setAttribute('action', $this->url('datoteke', array('controller'=>'datoteke', 'action' => 'edit', 'id' =>$id))); 
-$form->prepare();
- 
-echo $this->form()->openTag($form);
-echo $this->formRow($form->get('opis'));
-echo $this->formSubmit($form->get('submit'));
-echo $this->form()->closeTag();
-
-?>

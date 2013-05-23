@@ -3,10 +3,11 @@
 namespace Datoteke\Form;
  
 use Zend\Form\Form;
+use Zend\InputFilter;
  
 class EditForm extends Form
 {
-    public function __construct($name = null)
+    public function __construct($options)
     {
         parent::__construct('Datoteke');
         $this->setAttribute('method', 'post');
@@ -21,6 +22,18 @@ class EditForm extends Form
                 'label' => 'Opis',
             ),
         ));
+        
+        $this->add(array(
+            'type' => 'Zend\Form\Element\Select',
+            'name' => 'kategorija',
+            'options' => array(
+                'label' => 'Kategorija: ',
+                'value_options' => $options,
+            ),
+            'attributes' => array(
+                'id' => 'select-kategorija',
+            ),
+        ));
  
 
          
@@ -32,6 +45,22 @@ class EditForm extends Form
                 'class' => 'btn btn-primary'
             ),
         )); 
+    }
+    public function getInputFilter()
+    {
+        $inputFilter = new InputFilter\InputFilter();
+
+        // Text Input
+        $text = new InputFilter\Input('opis');
+        $text->setRequired(true);
+        $inputFilter->add($text);
+        
+        // Kategorija Input
+        $kategorija = new InputFilter\Input('kategorija');
+        $kategorija->setRequired(true);
+        $inputFilter->add($kategorija);
+
+        return $inputFilter;
     }
 }
 ?>

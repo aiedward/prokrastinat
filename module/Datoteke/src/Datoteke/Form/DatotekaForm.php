@@ -9,19 +9,32 @@ use Zend\InputFilter;
 use Zend\Validator;
 
 class DatotekaForm extends Form {
-    public function __construct($name = null, $options = array())
+    public function __construct($options)
     {
-        parent::__construct($name, $options);
-        $this->addElements();
+        parent::__construct();
+        $this->addElements($options);
         $this->setInputFilter($this->createInputFilter());
     }
 
-    public function addElements()
+    public function addElements($options)
     {
         // Text Input
         $text = new Element\Text('opis');
         $text->setLabel('Opis');
         $this->add($text);
+        
+        $this->add(array(
+            'type' => 'Zend\Form\Element\Select',
+            'name' => 'kategorija',
+            'options' => array(
+                'label' => 'Kategorija: ',
+                'value_options' => $options,
+            ),
+            'attributes' => array(
+                'id' => 'select-kategorija',
+            ),
+        ));
+ 
         
                 // File Input
         $file = new Element\File('file');
@@ -69,6 +82,11 @@ class DatotekaForm extends Form {
         $text = new InputFilter\Input('opis');
         $text->setRequired(true);
         $inputFilter->add($text);
+        
+                // Kategorija Input
+        $kategorija = new InputFilter\Input('kategorija');
+        $kategorija->setRequired(true);
+        $inputFilter->add($kategorija);
 
         return $inputFilter;
     }

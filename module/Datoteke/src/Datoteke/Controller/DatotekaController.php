@@ -1,13 +1,9 @@
 <?php
 namespace Datoteke\Controller;
  
-use Datoteke\Model\Datoteke;
 use Datoteke\Form\DatotekaForm;
 use Datoteke\Form\EditForm;
 use Datoteke\Form\IsciForm;
-use Datoteke\Entity\Datoteka;
-use Prokrastinat\Entity\User;
-use Zend\Validator\File\Size;
 use Zend\View\Model\ViewModel;
 use Zend\Stdlib\DateTime;
 
@@ -22,7 +18,10 @@ class DatotekaController extends BaseController
             return $this->dostopZavrnjen();
         } 
         
-        $form = new DatotekaForm();
+        $deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
+        $options = $deska_repository->getKategorije();
+        
+        $form = new DatotekaForm($options);
         $request = $this->getRequest();
         if ($request->isPost()) {
             $data = array_merge_recursive(
@@ -41,6 +40,7 @@ class DatotekaController extends BaseController
                     $file->st_ogledov = 0;
                     $file->velikost = $formData['file']['size'];
                     $file->user = $this->auth->getIdentity();
+                    $file->kategorija = $this->em->find('Prokrastinat\Entity\Kategorija', $form->get('kategorija')->getValue());
                     
                     $keys = parse_url($formData['file']['tmp_name']);
                     $path = explode("/", $keys['path']);
@@ -62,8 +62,8 @@ class DatotekaController extends BaseController
         if (!$this->isGranted('datoteke_index')) {
             return $this->dostopZavrnjen();
         } 
-        
-        $orderBy = array('imeDatoteke', 'datum_uploada', 'st_prenosov', 'opis', 'velikost');
+
+        $orderBy = array('imeDatoteke', 'datum_uploada', 'st_prenosov', 'opis', 'velikost', 'kategorija');
 
         $order = 'st_prenosov';
         if (isset($_GET['orderBy']) && in_array($_GET['orderBy'], $orderBy)) {
@@ -83,9 +83,7 @@ class DatotekaController extends BaseController
         else {
             $query = $this->em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d WHERE d.opis LIKE '%".$isci."%' OR d.imeDatoteke LIKE '%".$isci."%' ORDER BY d.".$order." ".$sort1);
             $datoteke = $query->getResult();
-        }
-        
-        
+        }       
         return new ViewModel(array('datoteke' => $datoteke, 'form' => $form));
     }
     
@@ -123,12 +121,9 @@ class DatotekaController extends BaseController
             return array(
                 'id'    => $id,
                 'datoteke' => $dat
-            );
-            
+            );       
         }
-
     }
-
     
     public function downloadAction()
     {
@@ -164,6 +159,9 @@ class DatotekaController extends BaseController
     }
     
     public function editAction(){
+        $deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
+        $options = $deska_repository->getKategorije();
+        
         $request = $this->getRequest();  
         $datRep = $this->em->getRepository('Datoteke\Entity\Datoteka');
         $id = (int) $this->params()->fromRoute('id', 0);
@@ -173,15 +171,14 @@ class DatotekaController extends BaseController
             return $this->dostopZavrnjen();
         }  
         
-        $form = new EditForm();
-        
-        //$form->setInputFilter($dat->getInputFilter());
-        
-        
+        $form = new EditForm($options);     
         $form->get('opis')->setValue($dat->opis);
+        $form->get('kategorija')->setValue($dat->kategorija);
         
         if ($request->isPost()) {
+            $form->setInputFilter($form->getInputFilter());
             $dat->opis = $request->getPost('opis');
+            //$dat->kategorija = $this->em->find('Prokrastinat\Entity\Kategorija', $form->get('kategorija')->getValue());
             $this->em->persist($dat);
             $this->em->flush();
             return $this->redirect()->toRoute('datoteke');
@@ -197,10 +194,8 @@ class DatotekaController extends BaseController
             return $this->dostopZavrnjen();
         } 
         $user = $this->auth->getIdentity();
-      //  $this->zahtevajLogin();
         
-        $orderBy = array('imeDatoteke', 'datum_uploada', 'st_prenosov', 'opis', 'velikost');
-
+        $orderBy = array('imeDatoteke', 'datum_uploada', 'st_prenosov', 'opis', 'velikost', 'kategorija');
         $order = 'st_prenosov';
         if (isset($_GET['orderBy']) && in_array($_GET['orderBy'], $orderBy)) {
             $order = $_GET['orderBy'];
@@ -215,22 +210,12 @@ class DatotekaController extends BaseController
         $query = $this->em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d WHERE d.user=".$user->id."ORDER BY d.".$order." ".$sort1);
         $datoteke = $query->getResult();
         
-        $skupna_velikost = $this->getUploadSize($user);
+        $datRep = $this->em->getRepository('Datoteke\Entity\Datoteka');
+        $skupna_velikost = $datRep->getUploadSize($user);
         
         return new ViewModel(array('datoteke' => $datoteke, 'velikost' => $skupna_velikost));
     }    
     
-    public function getUploadSize($user)
-    {
-        $query = $this->em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d WHERE d.user=".$user->id);
-        $datoteke = $query->getResult(); 
-        $skupna_velikost = 0;
-        foreach ($datoteke as $row)
-        {
-            $skupna_velikost += $row->velikost;            
-        }
-        return $skupna_velikost;
-    }
     
     
 }

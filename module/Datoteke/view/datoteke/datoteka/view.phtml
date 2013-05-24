@@ -9,17 +9,19 @@ $this->headTitle($title);
     <a href="<?php echo $this->url('datoteke', array('action'=>'add'));?>">Nalozi datoteko</a>
     <a href="<?php echo $this->url('datoteke', array('action'=>'myfiles'));?>">Moje datoteke</a>
 </p>
-<div id="datotekaView">
-    <div style="font:20px Tahoma bold; text-align: center"><?php echo $datoteke->imeDatoteke;?></div><p>
-    <div style="font:14px Tahoma bold;">
-        <p>
-        Avtor: <?php echo $datoteke->user->getPolnoIme() ?><p>
-        Opis: <?php echo $datoteke->opis ?><p>
-        Datum uploada: <?php echo $datoteke->datum_uploada->format('d-m-Y') ?><p>
-        Velikost: <?php echo round($datoteke->velikost/1024/1024, 2) ?> MB<p>
-        Ogledi: <?php echo $datoteke->st_ogledov ?><p>
-        Prenosi: <?php echo $datoteke->st_prenosov ?><p>
-        Kategorija: <?php echo $datoteke->kategorija->ime ?><p>
+<div class="datotekaView">
+    <div style="font:22px Tahoma bold; text-align: center;"><?php echo $datoteke->imeDatoteke;?></div><p>
+    <p>
+    Avtor: <?php echo $datoteke->user->getPolnoIme() ?><p>
+    Opis: <?php echo $datoteke->opis ?><p>
+    Datum uploada: <?php echo $datoteke->datum_uploada->format('d-m-Y') ?><p>
+    Velikost: <?php echo round($datoteke->velikost/1024/1024, 2) ?> MB<p>
+    Ogledi: <?php echo $datoteke->st_ogledov ?><p>
+    Prenosi: <?php echo $datoteke->st_prenosov ?><p>
+    Kategorija: <?php echo $datoteke->kategorija->ime ?><p>
+    <div class="prenosTextInButton">
+        <a href="<?php echo $this->url('datoteke', array('action'=>'download', 'id'=>$datoteke->id));?>" >
+            Prenos<img style="width: 25px;" src ="http://localhost/prokrastinat/public/img/download.gif"/>
+        </a>
     </div>
-    <a href="<?php echo $this->url('datoteke', array('action'=>'download', 'id'=>$datoteke->id));?>" style="font-size: 24px; font-style: bold; text-decoration: underline">Prenos</a>
 </div>

@@ -15,20 +15,20 @@ $velikost_mb = $velikost/1024/1024;
 
 <table class="datotekeTable">
 <tr>
-    <th><a href="?orderBy=imeDatoteke&sort=asc"><img src ="http://localhost/prokrastinat/public/img/uparrow.png"/></a>Ime datoteke<a href="?orderBy=imeDatoteke&sort=DESC"><img src ="http://localhost/prokrastinat/public/img/downarrow.png"/></a></th>
-    <th><a href="?orderBy=user&sort=asc"><img src ="http://localhost/prokrastinat/public/img/uparrow.png"/></a>Avtor<a href="?orderBy=avtor&sort=desc"><img src ="http://localhost/prokrastinat/public/img/downarrow.png"/></a></th>
-    <th><a href="?orderBy=opis&sort=asc"><img src ="http://localhost/prokrastinat/public/img/uparrow.png"/></a>Opis<a href="?orderBy=opis&sort=desc"><img src ="http://localhost/prokrastinat/public/img/downarrow.png"/></a></th>
-    <th><a href="?orderBy=kategorija&sort=asc"><img src ="http://localhost/prokrastinat/public/img/uparrow.png"/></a>Kategorija<a href="?orderBy=kategorija&sort=desc"><img src ="http://localhost/prokrastinat/public/img/downarrow.png"/></a></th>
-    <th><a href="?orderBy=velikost&sort=asc"><img src ="http://localhost/prokrastinat/public/img/uparrow.png"/></a>Velikost<a href="?orderBy=velikost&sort=desc"><img src ="http://localhost/prokrastinat/public/img/downarrow.png"/></a></th>
-    <th><a href="?orderBy=datum_uploada&sort=asc"><img src ="http://localhost/prokrastinat/public/img/uparrow.png"/></a>Datum uploada<a href="?orderBy=datum_uploada&sort=desc"><img src ="http://localhost/prokrastinat/public/img/downarrow.png"/></a></th>
-    <th><a href="?orderBy=st_prenosov&sort=asc"><img src ="http://localhost/prokrastinat/public/img/uparrow.png"/></a>Preneseno<a href="?orderBy=st_prenosov&sort=desc"><img src ="http://localhost/prokrastinat/public/img/downarrow.png"/></a></th>
+    <th><a href="?orderBy=imeDatoteke&sort=asc"><img src ="/prokrastinat/public/img/uparrow.png"/></a>Ime datoteke<a href="?orderBy=imeDatoteke&sort=DESC"><img src ="/prokrastinat/public/img/downarrow.png"/></a></th>
+    <th><a href="?orderBy=user&sort=asc"><img src ="/prokrastinat/public/img/uparrow.png"/></a>Avtor<a href="?orderBy=avtor&sort=desc"><img src ="/prokrastinat/public/img/downarrow.png"/></a></th>
+    <th><a href="?orderBy=opis&sort=asc"><img src ="/prokrastinat/public/img/uparrow.png"/></a>Opis<a href="?orderBy=opis&sort=desc"><img src ="/prokrastinat/public/img/downarrow.png"/></a></th>
+    <th><a href="?orderBy=kategorija&sort=asc"><img src ="/prokrastinat/public/img/uparrow.png"/></a>Kategorija<a href="?orderBy=kategorija&sort=desc"><img src ="/prokrastinat/public/img/downarrow.png"/></a></th>
+    <th><a href="?orderBy=velikost&sort=asc"><img src ="/prokrastinat/public/img/uparrow.png"/></a>Velikost<a href="?orderBy=velikost&sort=desc"><img src ="/prokrastinat/public/img/downarrow.png"/></a></th>
+    <th><a href="?orderBy=datum_uploada&sort=asc"><img src ="/prokrastinat/public/img/uparrow.png"/></a>Datum uploada<a href="?orderBy=datum_uploada&sort=desc"><img src ="/prokrastinat/public/img/downarrow.png"/></a></th>
+    <th><a href="?orderBy=st_prenosov&sort=asc"><img src ="/prokrastinat/public/img/uparrow.png"/></a>Preneseno<a href="?orderBy=st_prenosov&sort=desc"><img src ="/prokrastinat/public/img/downarrow.png"/></a></th>
     <th>&nbsp;</th>
 </tr>
 <?php foreach ($datoteke as $datoteka) : ?>
 <tr>
     <td><?php echo $this->escapeHtml($datoteka->imeDatoteke);?>
         <a href="<?php echo $this->url('datoteke', array('action'=>'download', 'id'=>$datoteka->id));?>">
-           <img align="right" src ="http://localhost/prokrastinat/public/img/download.gif"/>
+           <img align="right" src ="/prokrastinat/public/img/download.gif"/>
         </a>
     </td>
     <td><?php echo $this->escapeHtml($datoteka->user->getPolnoIme());?></td>

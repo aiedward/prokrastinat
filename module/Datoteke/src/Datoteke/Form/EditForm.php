@@ -10,9 +10,14 @@ class EditForm extends Form
     public function __construct($options)
     {
         parent::__construct('Datoteke');
-        $this->setAttribute('method', 'post');
-        $this->setAttribute('enctype','multipart/form-data');
-         
+        $this->addElements($options);
+        $this->setInputFilter($this->getInputFilter());
+        /*$this->setAttribute('method', 'post');
+        $this->setAttribute('enctype','multipart/form-data');*/
+    }
+     
+    public function addElements($options)
+    {
         $this->add(array(
             'name' => 'opis',
             'attributes' => array(
@@ -34,9 +39,7 @@ class EditForm extends Form
                 'id' => 'select-kategorija',
             ),
         ));
- 
-
-         
+      
         $this->add(array(
             'name' => 'submit',
             'attributes' => array(

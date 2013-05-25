@@ -3,7 +3,6 @@ namespace Datoteke\Form;
 
 use Zend\Form\Element;
 use Zend\Form\Form;
-
 use Zend\InputFilter\Factory;
 use Zend\InputFilter;
 use Zend\Validator;
@@ -13,7 +12,7 @@ class DatotekaForm extends Form {
     {
         parent::__construct();
         $this->addElements($options);
-        $this->setInputFilter($this->createInputFilter());
+        $this->setInputFilter($this->getInputFilter());
     }
 
     public function addElements($options)
@@ -36,7 +35,7 @@ class DatotekaForm extends Form {
         ));
  
         
-                // File Input
+        // File Input
         $file = new Element\File('file');
         $file
             ->setLabel('Datoteka')
@@ -58,7 +57,7 @@ class DatotekaForm extends Form {
         ));
     }
 
-    public function createInputFilter()
+    public function getInputFilter()
     {
         $inputFilter = new InputFilter\InputFilter();
 
@@ -83,7 +82,7 @@ class DatotekaForm extends Form {
         $text->setRequired(true);
         $inputFilter->add($text);
         
-                // Kategorija Input
+        // Kategorija Input
         $kategorija = new InputFilter\Input('kategorija');
         $kategorija->setRequired(true);
         $inputFilter->add($kategorija);

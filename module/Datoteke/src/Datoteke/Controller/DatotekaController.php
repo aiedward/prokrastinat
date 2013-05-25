@@ -174,14 +174,17 @@ class DatotekaController extends BaseController
         $form = new EditForm($options);     
         $form->get('opis')->setValue($dat->opis);
         $form->get('kategorija')->setValue($dat->kategorija);
+        $form->setData($request->getPost());
         
         if ($request->isPost()) {
-            $form->setInputFilter($form->getInputFilter());
-            $dat->opis = $request->getPost('opis');
-            //$dat->kategorija = $this->em->find('Prokrastinat\Entity\Kategorija', $form->get('kategorija')->getValue());
-            $this->em->persist($dat);
-            $this->em->flush();
-            return $this->redirect()->toRoute('datoteke');
+            if($form->isValid()){
+                //$form->setInputFilter($form->getInputFilter());
+                $dat->opis = $request->getPost('opis');
+                $dat->kategorija = $this->em->find('Prokrastinat\Entity\Kategorija', $form->get('kategorija')->getValue());
+                $this->em->persist($dat);
+                $this->em->flush();
+                return $this->redirect()->toRoute('datoteke');
+            }
 
         }
         return array('datoteke' => $dat, 'form' => $form, 'id' => $id);        

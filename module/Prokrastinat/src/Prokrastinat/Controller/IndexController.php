@@ -16,4 +16,10 @@ class IndexController extends BaseController
                 'oglasi' => $oglasi, 
         ));
     }
+    
+    public function mapAction()
+    {
+        
+        return new ViewModel(array());
+    }
 }

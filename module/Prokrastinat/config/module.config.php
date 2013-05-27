@@ -65,7 +65,7 @@ return array(
                     ),
                 ),
             ),
-                        'view' => array(
+            'view' => array(
                 'type' => 'segment',
                 'options' => array(
                     'route' => '/user/view/[:id]',

@@ -19,7 +19,14 @@ class IndexController extends BaseController
     
     public function mapAction()
     {
-        
-        return new ViewModel(array());
+        $id = $this->getEvent()->getRouteMatch()->getParam('id');
+        if ($id > 6)
+        {
+            $id = NULL;
+        }
+            
+        return new ViewModel(array(
+            'id' => $id,
+        ));
     }
 }

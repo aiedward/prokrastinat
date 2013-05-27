@@ -52,6 +52,21 @@ return array(
                     ),
                 ),
             ),
+            'map' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/index/map[/:id][/:room]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9]*',
+                        'id' => '[0-9]+',
+                        'room' => '[a-zA-Z][a-zA-Z0-9]*'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Prokrastinat\Controller\Index',
+                        'action' => 'map',
+                    ),
+                ),
+            ),
             'user' => array(
                 'type' => 'segment',
                 'options' => array(

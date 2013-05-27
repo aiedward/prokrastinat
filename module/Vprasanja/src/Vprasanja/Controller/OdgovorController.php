@@ -73,6 +73,8 @@ class OdgovorController extends BaseController
                 $url = $this->url()->fromRoute('preglej', array('id' => $vprasanje->id));
                 return $this->redirect()->toUrl($url . "#{$odgovor->id}");
             }
+
+            // to-do: form invalid
         }
 
         $form->fill($odgovor);
@@ -93,6 +95,38 @@ class OdgovorController extends BaseController
 
         $this->em->remove($odgovor);
         $this->em->flush();
+
+        return $this->redirect()->toRoute('preglej', array('id' => $odgovor->objava->id));
+    }
+
+    public function voteAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $odgovor = $this->em->find('Vprasanja\Entity\Odgovor', $id);
+
+        $user = $this->auth->getIdentity();
+        if (!$odgovor->users_rated->contains($user)) {
+            $odgovor->users_rated->add($user);
+
+            $this->em->persist($odgovor);
+            $this->em->flush();
+        }
+
+        return $this->redirect()->toRoute('preglej', array('id' => $odgovor->objava->id));
+    }
+
+    public function unvoteAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $odgovor = $this->em->find('Vprasanja\Entity\Odgovor', $id);
+
+        $user = $this->auth->getIdentity();
+        if ($odgovor->users_rated->contains($user)) {
+            $odgovor->users_rated->removeElement($user);
+            
+            $this->em->persist($odgovor);
+            $this->em->flush();
+        }
 
         return $this->redirect()->toRoute('preglej', array('id' => $odgovor->objava->id));
     }

@@ -10,4 +10,10 @@ class Vprasanje extends Objava
 {
     /** @ORM\Column(type="integer") */
     protected $rating;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Prokrastinat\Entity\User")
+     * @ORM\JoinTable(name="Vprasanje_UserRated")
+     */
+    protected $users_rated;
 }

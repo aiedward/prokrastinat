@@ -9,14 +9,23 @@
     <p><?= $vprasanje->vsebina ?></p>
 
     <p>
-        <i class="icon-user"></i> <a href="#"><?= $this->escapeHtml($vprasanje->user->getPolnoIme()) ?></a> |
-        <i class="icon-calendar"></i> <?= $this->dateFormat($vprasanje->datum_objave, IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT) ?> |
-        <i class="icon-comment"></i> <a href="#"><?= count($vprasanje->komentarji) ?> odgovorov</a>
+        <i class="icon-user"></i> <a href="#"><?= $this->escapeHtml($vprasanje->user->getPolnoIme()) ?></a>
+        | <i class="icon-calendar"></i> <?= $this->dateFormat($vprasanje->datum_objave, IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT) ?>
+        | <i class="icon-comment"></i> <a href="#"><?= count($vprasanje->komentarji) ?> odgovorov</a>
+
         <?php if (count($vprasanje->oznake) > 0): ?>
             | <i class="icon-tags"></i> Oznake:
             <?php foreach ($vprasanje->oznake as $oznaka): ?>
                 <a href="#"><span class="label label-info"><?= $oznaka->naslov ?></span></a>
             <?php endforeach ?>
+        <?php endif ?>
+
+        <?php if($this->isGranted('vprasanje_uredi') || $this->jeAvtor($vprasanje->user)): ?>
+            | <a href="<?= $this->url('vprasanje', array('action' => 'uredi', 'id' => $vprasanje->id)) ?>"><?= $this->translate("Uredi") ?></a>
+        <?php endif ?>
+
+        <?php if($this->isGranted('vprasanje_brisi') || $this->jeAvtor($vprasanje->user)): ?>
+            | <a href="<?= $this->url('vprasanje', array('action' => 'brisi', 'id' => $vprasanje->id)) ?>"><?= $this->translate("Briši") ?></a>
         <?php endif ?>
     </p>
 </div>

@@ -20,6 +20,8 @@ INSERT INTO `rbac_permission` (`id`, `name`) VALUES
 (14, 'datoteke_download'),
 (15, 'deska_dodaj'),
 (16, 'user_pregled');
+(17, 'odgovor_uredi'),
+(18, 'odgovor_brisi'),
  
 INSERT INTO `rbac_role` (`id`, `parent_role_id`, `name`) VALUES
 (1, NULL, 'admin'),
@@ -44,6 +46,8 @@ INSERT INTO `rbac_role_permission` (`id`, `role_id`, `permission_id`) VALUES
 (14, 3, 14),
 (15, 2, 15),
 (16, 2, 16);
+(17, 2, 17),
+(18, 2, 18),
  
 INSERT INTO `rbac_user_roles` (`user_id`, `role_id`) VALUES
 (1, 1),

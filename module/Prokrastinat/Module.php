@@ -1,6 +1,8 @@
 <?php
 namespace Prokrastinat;
 
+use Prokrastinat\View\Helper\JeAvtor;
+
 class Module
 {
     public function getConfig()
@@ -16,6 +18,16 @@ class Module
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ),
             ),
+        );
+    }
+
+    public function getViewHelperConfig()   {
+        return array(
+            'factories' => array(
+                'jeAvtor' => function($sm) {
+                    return new JeAvtor($sm);
+                },
+            )
         );
     }
 

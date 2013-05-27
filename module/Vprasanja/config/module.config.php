@@ -41,7 +41,7 @@ return array(
             'odgovor' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/vprasanje/:ido/odgovor[/:action][/:id][/]',
+                    'route' => '/vprasanje/:ido[/:action][/:id][/]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9]*',
                         'ido'    => '[0-9]+',

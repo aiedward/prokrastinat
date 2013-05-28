@@ -11,7 +11,7 @@ class EditForm extends Form
     {
         parent::__construct('Datoteke');
         $this->addElements($options);
-        $this->setInputFilter($this->getInputFilter());
+        $this->setInputFilter($this->createInputFilter());
         /*$this->setAttribute('method', 'post');
         $this->setAttribute('enctype','multipart/form-data');*/
     }
@@ -49,7 +49,7 @@ class EditForm extends Form
             ),
         )); 
     }
-    public function getInputFilter()
+    public function createInputFilter()
     {
         $inputFilter = new InputFilter\InputFilter();
 

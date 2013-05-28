@@ -12,7 +12,7 @@ class DatotekaForm extends Form {
     {
         parent::__construct();
         $this->addElements($options);
-        $this->setInputFilter($this->getInputFilter());
+        $this->setInputFilter($this->createInputFilter());
     }
 
     public function addElements($options)
@@ -57,7 +57,7 @@ class DatotekaForm extends Form {
         ));
     }
 
-    public function getInputFilter()
+    public function createInputFilter()
     {
         $inputFilter = new InputFilter\InputFilter();
 

@@ -44,8 +44,25 @@ class DatotekaRepository extends EntityRepository
         }
     }
     
-    public function saveDatoteka($formData) {
-
+    public function saveDatoteka($formData, $user) {
+        $em = $this->getEntityManager();
+        $file = new \Datoteke\Entity\Datoteka();
+        $file->opis = $formData['opis'];
+        $file->imeDatoteke = $formData['file']['name'];
+        $file->datum_uploada = (new \DateTime("now"));
+        $file->st_prenosov = 0;
+        $file->st_ogledov = 0;
+        $file->velikost = $formData['file']['size'];
+        $file->user = $user;
+        $file->kategorija = $em->find('Prokrastinat\Entity\Kategorija', $formData['kategorija']);
+                    
+        $keys = parse_url($formData['file']['tmp_name']);
+        $path = explode("/", $keys['path']);
+        $last = end($path);
+        $file->randomImeDatoteke = $last;
+                    
+        $em->persist($file);
+                    
     }
     
     public function getUploadSize($user)

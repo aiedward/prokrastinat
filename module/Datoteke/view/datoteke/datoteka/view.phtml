@@ -2,6 +2,7 @@
 
 $title = 'Datoteke';
 $this->headTitle($title);
+$link = $_SERVER['DOCUMENT_ROOT'].$_SERVER['REQUEST_URI'] ;
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 <p>
@@ -24,4 +25,11 @@ $this->headTitle($title);
             Prenos<img style="width: 25px;" src ="http://localhost/prokrastinat/public/img/download.gif"/>
         </a>
     </div>
+</div>
+<div>
+<a href="http://www.facebook.com/sharer.php?s=100
+&p[url]=http://prokrastinat.kreten.si/
+&p[images][0]=http://upload.wikimedia.org/wikipedia/commons/c/c5/Logo_FC_Bayern_M%C3%BCnchen.svg
+&p[title]=Prokrastinat y0!
+&p[summary]=TADAM!">SHARE</a>
 </div>

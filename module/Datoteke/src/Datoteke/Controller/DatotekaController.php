@@ -32,22 +32,9 @@ class DatotekaController extends BaseController
 
             if ($form->isValid()) {
                     $formData = $form->getData();
-                    $file = new \Datoteke\Entity\Datoteka();
-                    $file->opis = $formData['opis'];
-                    $file->imeDatoteke = $formData['file']['name'];
-                    $file->datum_uploada = new DateTime('now');
-                    $file->st_prenosov = 0;
-                    $file->st_ogledov = 0;
-                    $file->velikost = $formData['file']['size'];
-                    $file->user = $this->auth->getIdentity();
-                    $file->kategorija = $this->em->find('Prokrastinat\Entity\Kategorija', $form->get('kategorija')->getValue());
-                    
-                    $keys = parse_url($formData['file']['tmp_name']);
-                    $path = explode("/", $keys['path']);
-                    $last = end($path);
-                    $file->randomImeDatoteke = $last;
-                    
-                    $this->em->persist($file);
+                    $user = $this->auth->getIdentity();
+                    $datRep = $this->em->getRepository('Datoteke\Entity\Datoteka');
+                    $datRep->saveDatoteka($formData, $user);
                     $this->em->flush();              
                     return $this->redirect()->toRoute('datoteke');
             }
@@ -96,33 +83,30 @@ class DatotekaController extends BaseController
         if (!(($this->isGranted('datoteke_delete'))||$this->jeAvtor($dat->user))) {
             return $this->dostopZavrnjen();
         } 
-        
-        if($dat->user == $this->auth->getIdentity()){ //da ni mogoče brisati tujih datotek
                     
-            $id = (int) $this->params()->fromRoute('id', 0);
-            if (!$id) {
-                return $this->redirect()->toRoute('datoteke');
-            }
-
-            $datRep = $this->em->getRepository('Datoteke\Entity\Datoteka');
-            $dat = $datRep->find($id);
-
-            $request = $this->getRequest();
-            if ($request->isPost()) {
-                $del = $request->getPost('del', 'Ne');
-                if ($del == 'Da') {
-                    $this->em->flush();
-                    unlink(dirname(dirname(dirname(dirname(dirname(__DIR__))))).'/data/uploads/'.$dat->imeDatoteke);
-                    $datRep->deleteDatoteka($dat);
-                    $this->em->flush();
-                }
-                return $this->redirect()->toRoute('datoteke');
-            }
-            return array(
-                'id'    => $id,
-                'datoteke' => $dat
-            );       
+        $id = (int) $this->params()->fromRoute('id', 0);
+        if (!$id) {
+            return $this->redirect()->toRoute('datoteke');
         }
+
+        $datRep = $this->em->getRepository('Datoteke\Entity\Datoteka');
+        $dat = $datRep->find($id);
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $del = $request->getPost('del', 'Ne');
+            if ($del == 'Da') {
+                $this->em->flush();
+                unlink(dirname(dirname(dirname(dirname(dirname(__DIR__))))).'/data/uploads/'.$dat->imeDatoteke);
+                $datRep->deleteDatoteka($dat);
+                $this->em->flush();
+            }
+            return $this->redirect()->toRoute('datoteke');
+         }
+         return array(
+            'id'    => $id,
+            'datoteke' => $dat
+         );       
     }
     
     public function downloadAction()

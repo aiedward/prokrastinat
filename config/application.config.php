@@ -16,6 +16,7 @@ return array(
         'Vprasanja',
         'Deska',
         'Datoteke',
+        'Aips',
     ),
     'module_listener_options' => array(
         'module_paths' => array(

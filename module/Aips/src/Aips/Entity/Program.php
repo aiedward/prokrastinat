@@ -11,5 +11,9 @@ use Prokrastinat\Entity\BaseEntity;
  */
 class Program extends BaseEntity
 {
-    
+     /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     */
+    protected $id;
 }

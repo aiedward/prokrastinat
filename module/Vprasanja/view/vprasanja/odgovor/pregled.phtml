@@ -3,6 +3,7 @@
     <p>
         <i class="icon-user"></i> <a href="<?= $this->url('user', array('action' => 'edit', 'id' => $odgovor->user->id)) ?>"><?= $this->escapeHtml($odgovor->user->getPolnoIme()) ?></a>
         | <i class="icon-calendar"></i> <?= $this->dateFormat($odgovor->datum_objave, IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT) ?>
+        | Rating: <?= $this->rating ?>
 
         <?php if($this->isGranted('odgovor_uredi') || $this->jeAvtor($odgovor->user)): ?>
             | <a href="<?= $this->url('odgovor', array('action' => 'uredi', 'ido' => $odgovor->objava->id, 'id' => $odgovor->id)) ?>"><?= $this->translate("Uredi") ?></a>
@@ -10,6 +11,12 @@
 
         <?php if($this->isGranted('odgovor_brisi') || $this->jeAvtor($odgovor->user)): ?>
             | <a href="<?= $this->url('odgovor', array('action' => 'brisi', 'ido' => $odgovor->objava->id, 'id' => $odgovor->id)) ?>"><?= $this->translate("Briši") ?></a>
+        <?php endif ?>
+
+        <?php if($this->has_rated): ?>
+            | <a href="<?= $this->url('odgovor', array('action' => 'unvote', 'ido' => $odgovor->objava->id, 'id' => $odgovor->id)) ?>"><?= $this->translate("-1") ?></a>
+        <?php else: ?>
+            | <a href="<?= $this->url('odgovor', array('action' => 'vote', 'ido' => $odgovor->objava->id, 'id' => $odgovor->id)) ?>"><?= $this->translate("+1") ?></a>
         <?php endif ?>
     </p>
 </div>

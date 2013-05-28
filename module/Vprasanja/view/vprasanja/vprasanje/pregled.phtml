@@ -12,6 +12,7 @@
         <i class="icon-user"></i> <a href="#"><?= $this->escapeHtml($vprasanje->user->getPolnoIme()) ?></a>
         | <i class="icon-calendar"></i> <?= $this->dateFormat($vprasanje->datum_objave, IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT) ?>
         | <i class="icon-comment"></i> <a href="#"><?= count($vprasanje->komentarji) ?> odgovorov</a>
+        | Rating: <?= $this->rating ?>
 
         <?php if (count($vprasanje->oznake) > 0): ?>
             | <i class="icon-tags"></i> Oznake:
@@ -36,7 +37,11 @@
     <h5>Vprašanje še nima odgovorov.</h5>
 <?php endif ?>
 <?php foreach ($vprasanje->komentarji as $odgovor): ?>
-    <?= $this->partial('odgovor/pregled', array('odgovor' => $odgovor)) ?>
+    <?= $this->partial('odgovor/pregled', array(
+        'odgovor' => $odgovor,
+        'rating' => count($odgovor->users_rated),
+        'has_rated' => $odgovor->users_rated->contains($this->user)
+    )) ?>
 <?php endforeach ?>
 
 <!-- Form -->

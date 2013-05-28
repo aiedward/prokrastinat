@@ -31,7 +31,11 @@ class VprasanjeController extends BaseController
         } 
 
         $id = (int) $this->params()->fromRoute('id');
+        $user = $this->auth->getIdentity();
+
         $vprasanje = $this->em->find('Vprasanja\Entity\Vprasanje', $id);
+        $rating = count($vprasanje->users_rated);
+        $has_rated = $vprasanje->users_rated->contains($user);
 
         $form = new OdgovorForm();
         $form->setAttribute('action', $this->url()->fromRoute('odgovor', array('action' => 'dodaj', 'ido' => $id)));
@@ -39,6 +43,9 @@ class VprasanjeController extends BaseController
 
         return new ViewModel(array(
             'vprasanje' => $vprasanje,
+            'rating' => $rating,
+            'has_rated' => $has_rated,
+            'user' => $user,
             'form' => $form
         ));
     }
@@ -120,5 +127,37 @@ class VprasanjeController extends BaseController
         $this->em->flush();
 
         return $this->redirect()->toRoute('vprasanje');
+    }
+
+    public function voteAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $vprasanje = $this->em->find('Vprasanja\Entity\Vprasanje', $id);
+
+        $user = $this->auth->getIdentity();
+        if (!$vprasanje->users_rated->contains($user)) {
+            $vprasanje->users_rated->add($user);
+
+            $this->em->persist($vprasanje);
+            $this->em->flush();
+        }
+
+        return $this->redirect()->toRoute('preglej', array('id' => $vprasanje->id));
+    }
+
+    public function unvoteAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $vprasanje = $this->em->find('Vprasanja\Entity\Vprasanje', $id);
+
+        $user = $this->auth->getIdentity();
+        if ($vprasanje->users_rated->contains($user)) {
+            $vprasanje->users_rated->removeElement($user);
+            
+            $this->em->persist($vprasanje);
+            $this->em->flush();
+        }
+
+        return $this->redirect()->toRoute('preglej', array('id' => $vprasanje->id));
     }
 }

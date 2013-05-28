@@ -9,7 +9,6 @@ use Prokrastinat\Entity\BaseEntity;
  * @ORM\Entity
  * @ORM\InheritanceType("SINGLE_TABLE")
  */
-
 class Profesor extends BaseEntity
 {
     /**

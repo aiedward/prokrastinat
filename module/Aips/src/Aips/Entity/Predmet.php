@@ -15,4 +15,7 @@ class Predmet extends BaseEntity
      * @ORM\Column(type="integer")
      */
     protected $id;
+    
+    /** @ORM\Column(length=100) */
+    protected $ime;
 }

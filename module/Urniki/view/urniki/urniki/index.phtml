@@ -5,6 +5,8 @@
     $form->prepare();
     
     echo $this->form()->openTag($form);
+    echo $this->formRow($form->get('program')).'<br />';
+    echo $this->formRow($form->get('letnik')).'<br />';
     echo $this->formRow($form->get('smer')).'<br />';
     echo $this->form()->closeTag();
 ?>

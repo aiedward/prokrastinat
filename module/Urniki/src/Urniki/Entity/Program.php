@@ -1,5 +1,5 @@
 <?php
-namespace Aips\Entity;
+namespace Urniki\Entity;
 
 use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Mapping as ORM;

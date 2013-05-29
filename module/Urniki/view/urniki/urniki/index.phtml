@@ -1,0 +1,10 @@
+<h1>Urniki</h1>
+
+<?php
+    $form = $this->form;
+    $form->prepare();
+    
+    echo $this->form()->openTag($form);
+    echo $this->formRow($form->get('smer')).'<br />';
+    echo $this->form()->closeTag();
+?>

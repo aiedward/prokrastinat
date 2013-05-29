@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Prokrastinat\Entity\BaseEntity;
 use Urniki\Entity\Program;
 
-/** @ORM\Entity */
+/** @ORM\Entity(repositoryClass="Urniki\Repository\SmerRepository") */
 class Smer extends BaseEntity
 {
     /**

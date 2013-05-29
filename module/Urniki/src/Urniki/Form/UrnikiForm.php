@@ -16,6 +16,7 @@ class UrnikiForm extends Form
             'type' => 'Zend\Form\Element\Select',
             'options' => array(
                 'label' => 'Izberi program: ',
+                'value_options' => $programi,
             ),
             'attributes' => array(
                 'id' => 'select-program',
@@ -27,6 +28,7 @@ class UrnikiForm extends Form
             'type' => 'Zend\Form\Element\Select',
             'options' => array(
                 'label' => 'Izberi letnik: ',
+                'value_options' => array(1 => 1, 2 => 2, 3 => 3),
             ),
             'attributes' => array(
                 'id' => 'select-letnik',
@@ -38,9 +40,23 @@ class UrnikiForm extends Form
             'type' => 'Zend\Form\Element\Select',
             'options' => array(
                 'label' => 'Izberi smer: ',
+                'value_options' => $smeri,
             ),
             'attributes' => array(
                 'id' => 'select-smer',
+            ),
+        ));
+        
+        $this->add(array(
+            'name' => 'submit',
+            'attributes' => array(
+                'type' => 'submit',
+                'value' => 'Prikaži',
+                'id' => 'submitbutton',
+                'class' => 'btn btn-primary',
+            ),
+            'options' => array(
+                'primary' => true,
             ),
         ));
     }

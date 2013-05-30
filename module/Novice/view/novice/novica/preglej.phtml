@@ -1,0 +1,11 @@
+<div class="novicaView">
+    <h2><?php echo $novica->naslov ?></h2>
+    <div class="novicaJedro">
+        <b>Avtor: </b> <?php echo $novica->user->getPolnoIme() ?>
+        <br/>
+        <b>Datum objave: </b> <?php echo $novica->datum_objave->format('d-m-Y') ?>
+        <div class="novicaVsebina">
+            <?php echo $novica->vsebina ?>
+        </div>
+    </div>
+</div>

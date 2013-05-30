@@ -50,3 +50,15 @@ root {
 .datotekeTable td{
     text-align: center;
 }
+/*
+.navbar, .navbar-inverse, .navbar-fixed-top, navbar-inner, navbar-inner-center{
+    border-bottom: 4px yellow solid;
+    height: 15%;
+    background: red;
+}
+
+.navbar .container-fluid{
+    border-bottom: 4px #0e90d2 solid;
+    line-height: 100%;
+    background: red;
+}*/

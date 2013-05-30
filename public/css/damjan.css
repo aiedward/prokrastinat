@@ -74,9 +74,10 @@ root {
     text-align: right;
 }
 
-.ikone > a > img{
-    width: 2%;
-    height: 2%;
+.ikona
+{
+    width: 25px;
+    height: 25px;
 }
 
 /*

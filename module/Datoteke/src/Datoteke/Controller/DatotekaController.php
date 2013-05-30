@@ -71,7 +71,10 @@ class DatotekaController extends BaseController
             $query = $this->em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d WHERE d.opis LIKE '%".$isci."%' OR d.imeDatoteke LIKE '%".$isci."%' ORDER BY d.".$order." ".$sort1);
             $datoteke = $query->getResult();
         }       
-        return new ViewModel(array('datoteke' => $datoteke, 'form' => $form));
+        
+        $user = $this->auth->getIdentity();
+        
+        return new ViewModel(array('datoteke' => $datoteke, 'form' => $form, 'user' => $user));
     }
     
     public function brisiAction()
@@ -200,7 +203,9 @@ class DatotekaController extends BaseController
         $datRep = $this->em->getRepository('Datoteke\Entity\Datoteka');
         $skupna_velikost = $datRep->getUploadSize($user);
         
-        return new ViewModel(array('datoteke' => $datoteke, 'velikost' => $skupna_velikost));
+        $user = $this->auth->getIdentity();
+        
+        return new ViewModel(array('datoteke' => $datoteke, 'velikost' => $skupna_velikost, 'user' => $user));
     }    
     
     

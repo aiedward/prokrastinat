@@ -26,9 +26,12 @@ $velikost_mb = $velikost/1024/1024;
 </tr>
 <?php foreach ($datoteke as $datoteka) : ?>
 <tr>
-    <td><?php echo $this->escapeHtml($datoteka->imeDatoteke);?>
+    <td>
+        <a href="<?php echo $this->url('datoteke', array('action'=>'pregled', 'id'=>$datoteka->id));?>">
+            <?php echo $this->escapeHtml($datoteka->imeDatoteke);?>
+        </a>
         <a href="<?php echo $this->url('datoteke', array('action'=>'download', 'id'=>$datoteka->id));?>">
-           <img align="right" src ="/prokrastinat/public/img/download.gif"/>
+           <img class="ikona" align="right" src ="/prokrastinat/public/img/download.gif"/>
         </a>
     </td>
     <td><?php echo $this->escapeHtml($datoteka->user->getPolnoIme());?></td>
@@ -38,9 +41,14 @@ $velikost_mb = $velikost/1024/1024;
     <td><?php echo $this->escapeHtml($datoteka->datum_uploada->format('d-m-Y'));?></td>
     <td><?php echo $this->escapeHtml($datoteka->st_prenosov);?></td>
     <td>
-        <a href="<?php echo $this->url('datoteke', array('action'=>'pregled', 'id'=>$datoteka->id));?>">Podrobnosti</a>
-        <a href="<?php echo $this->url('datoteke', array('action'=>'uredi', 'id'=>$datoteka->id));?>">Uredi</a>
-        <a href="<?php echo $this->url('datoteke', array('action'=>'brisi', 'id'=>$datoteka->id));?>">Briši</a>     
+        <?php if (($this->isGranted('datoteke_uredi')) || ($datoteka->user == $this->user)){ ?>
+            <a href="<?php echo $this->url('novice', array('action'=>'uredi', 'id'=>$datoteka->id));?>">
+                <img class="ikona" src="/prokrastinat/public/img/edit.png"/>
+            </a>
+            <a href="<?php echo $this->url('novice', array('action'=>'brisi', 'id'=>$datoteka->id));?>">
+                <img class="ikona" src="/prokrastinat/public/img/delete.png"/>
+            </a>
+        <?php } ?>
     </td>
 </tr>
 <?php endforeach; ?>

@@ -18,10 +18,10 @@ $this->headTitle($title);
         <?php if (($this->isGranted('novica_uredi')) || ($novica->user == $this->user)){ ?>
         <div class="ikone">
             <a href="<?php echo $this->url('novice', array('action'=>'uredi', 'id'=>$novica->id));?>">
-                <img src="/prokrastinat/public/img/edit.png"/>
+                <img class="ikona" src="/prokrastinat/public/img/edit.png"/>
             </a>
             <a href="<?php echo $this->url('novice', array('action'=>'brisi', 'id'=>$novica->id));?>">
-                <img src="/prokrastinat/public/img/delete.png"/>
+                <img class="ikona" src="/prokrastinat/public/img/delete.png"/>
             </a>
         </div>
         <?php } ?>

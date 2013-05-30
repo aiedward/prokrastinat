@@ -47,4 +47,12 @@ class NovicaController extends BaseController
             'form' => $form
         ));
     }
+    
+    public function preglejAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $novica = $this->em->find('Novice\Entity\Novica', $id);
+
+        return new ViewModel(array('novica' => $novica));
+    }
 }

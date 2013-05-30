@@ -5,9 +5,18 @@
 <?php foreach($novice as $novica): ?>
     <div class="well well-small">
         <b> <?= $this->escapeHtml($novica->datum_objave->format('d-m-Y')); ?></b> 
-        <b><a href="<?= $this->url('novice', array('action' => 'view', 'id' => $novica->id));?>"> <?= $novica->naslov; ?> </a><br />
+        <b><a href="<?= $this->url('novice', array('action' => 'preglej', 'id' => $novica->id));?>"> <?= $novica->naslov; ?> </a><br />
         <p><?= ($novica->vsebina); ?></p>
     </div>
 <?php endforeach; ?>
 <a class='btn btn-primary' href='<?= $this->url('novice')?>'>Vse novice</a>
+
+
+<h2>Objave</h2>
+<?php foreach($oglasi as $oglas): ?>
+    <div class="well well-small">
+        <b><a href="<?= $this->url('deska', array('action' => 'preglej', 'id' => $oglas->id));?>"> <?= $oglas->naslov; ?> </a><br />
+    </div>
+<?php endforeach; ?>
+<a class='btn btn-primary' href='<?= $this->url('deska')?>'>Oglasna deska</a>
 

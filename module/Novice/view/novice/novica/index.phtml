@@ -4,11 +4,16 @@ $title = 'Novice';
 $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php if ($this->isGranted('deska_dodaj')): ?>
+    <p>
+    <a class="btn btn-primary" href="<?php echo $this->url('novice', array('action' => 'dodaj')); ?>" id="dodaj-novico">Dodaj</a>
+    </p>
+<?php endif; ?>
 
 <?php foreach ($novice as $novica) : ?>
     <div class="well well-small">
         <b> <?= $this->escapeHtml($novica->datum_objave->format('d-m-Y')); ?></b> 
-        <b><a href="<?= $this->url('novice', array('action' => 'view', 'id' => $novica->id));?>"> <?= $novica->naslov; ?> </a><br />
+        <b><a href="<?= $this->url('novice', array('action' => 'preglej', 'id' => $novica->id));?>"> <?= $novica->naslov; ?> </a><br />
         <p><?= ($novica->vsebina); ?></p>
     </div>
 <?php endforeach; ?>

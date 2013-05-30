@@ -6,12 +6,16 @@ use Zend\View\Model\ViewModel;
 class IndexController extends BaseController
 {
     public function indexAction() 
-    {
+    {   
         $query = $this->em->createQuery("SELECT n FROM Novice\Entity\Novica n");
         $query->setMaxResults(5);
         $novice = $query->getResult();
         
-        return new ViewModel(array('novice' => $novice));
+        $query2 = $this->em->createQuery("SELECT o FROM Deska\Entity\Oglas o WHERE o.datum_zapadlosti > CURRENT_DATE()");
+        $query2->setMaxResults(5);
+        $oglasi = $query2->getResult();
+        
+        return new ViewModel(array('novice' => $novice, 'oglasi' => $oglasi));
     }
     
     public function mapAction()

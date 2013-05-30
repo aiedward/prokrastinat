@@ -22,10 +22,10 @@ return array(
     ),
     'router' => array(
         'routes' => array(
-            'novica' => array(
+            'novice' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/novica[/:action][/:id][/]',
+                    'route' => '/novice[/:action][/:id][/]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9]*',
                         'id'     => '[0-9]+'

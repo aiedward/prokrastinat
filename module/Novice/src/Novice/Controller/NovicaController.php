@@ -39,7 +39,7 @@ class NovicaController extends BaseController
                 $this->em->persist($novica);
                 $this->em->flush();
 
-                return $this->redirect()->toRoute('novica');
+                return $this->redirect()->toRoute('novice');
             }
         }
         

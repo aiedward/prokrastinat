@@ -12,7 +12,7 @@ use Prokrastinat\Controller\BaseController;
 class DatotekaController extends BaseController
 {
     
-    public function addAction()
+    public function dodajAction()
     {
         if (!$this->isGranted('datoteke_add')) {
             return $this->dostopZavrnjen();
@@ -74,7 +74,7 @@ class DatotekaController extends BaseController
         return new ViewModel(array('datoteke' => $datoteke, 'form' => $form));
     }
     
-    public function deleteAction()
+    public function brisiAction()
     {
         $datRep = $this->em->getRepository('Datoteke\Entity\Datoteka');
         $id = (int) $this->params()->fromRoute('id', 0);
@@ -128,7 +128,7 @@ class DatotekaController extends BaseController
         return $response;
     }
     
-    public function viewAction(){
+    public function pregledAction(){
         if (!$this->isGranted('datoteke_view')) {
             return $this->dostopZavrnjen();
         } 
@@ -142,7 +142,7 @@ class DatotekaController extends BaseController
         return new ViewModel(array('datoteke' => $dat));        
     }
     
-    public function editAction(){
+    public function urediAction(){
         $deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
         $options = $deska_repository->getKategorije();
         
@@ -175,7 +175,7 @@ class DatotekaController extends BaseController
         }
        
     
-    public function myfilesAction()
+    public function mojeAction()
     {
         if (!$this->isGranted('datoteke_myfiles')) {
             return $this->dostopZavrnjen();

@@ -1,15 +1,13 @@
 <h1>Dobrodošli v prokrastinatu</h1>
 <hr/>
-<h2>Oglasna deska</h2>
+<h2>Novice</h2>
 
-<?php foreach($oglasi as $oglas): ?>
+<?php foreach($novice as $novica): ?>
     <div class="well well-small">
-        <b>Avtor:</b> <a href="<?= $this->url('user', array('action' => 'view', 'id' => $oglas->user->id));?>"> <?= $this->escapeHtml($oglas->user->getPolnoIme()); ?> </a><br />
-        <b>Datum:</b> <?= $this->escapeHtml($oglas->datum_objave->format('d-m-Y')); ?> <br />
-        <b>Zapade: </b> <?= $this->escapeHtml($oglas->datum_zapadlosti->format('d-m-Y')); ?> <br />
-        <b>Kategorija: </b> <?= $this->escapeHtml($oglas->kategorija->ime); ?> <br /><br />
-        <p><?= ($oglas->vsebina); ?></p>
+        <b> <?= $this->escapeHtml($novica->datum_objave->format('d-m-Y')); ?></b> 
+        <b><a href="<?= $this->url('novice', array('action' => 'view', 'id' => $novica->id));?>"> <?= $novica->naslov; ?> </a><br />
+        <p><?= ($novica->vsebina); ?></p>
     </div>
 <?php endforeach; ?>
-<a class='btn btn-primary' href='<?= $this->url('deska')?>'>Vsi oglasi</a>
+<a class='btn btn-primary' href='<?= $this->url('novice')?>'>Vse novice</a>
 

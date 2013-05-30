@@ -4,20 +4,12 @@ $title = 'Novice';
 $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
-<table class="datotekeTable">
-<tr>
-    <th>Naslov</th>
-    <th>Vsebina</th>
-    <th>Datum objave</th>
-    <th>Uploader</th>
-    <th>&nbsp;</th>
-</tr>
+
 <?php foreach ($novice as $novica) : ?>
-<tr>
-    <td><?php echo $this->escapeHtml($novica->naslov);?></td>
-    <td><?php echo $this->escapeHtml($novica->vsebina);?></td>
-    <td><?php echo $this->escapeHtml($novica->datum_objave->format('d-m-Y'));?></td>
-    <td><?php echo $this->escapeHtml($novica->user->getPolnoIme());?></td>
-</tr>
+    <div class="well well-small">
+        <b> <?= $this->escapeHtml($novica->datum_objave->format('d-m-Y')); ?></b> 
+        <b><a href="<?= $this->url('novice', array('action' => 'view', 'id' => $novica->id));?>"> <?= $novica->naslov; ?> </a><br />
+        <p><?= ($novica->vsebina); ?></p>
+    </div>
 <?php endforeach; ?>
 </table>

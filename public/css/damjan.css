@@ -9,7 +9,7 @@
 root { 
     display: block;
 ;}
-
+/*********************PREGLED DATOTEKE********************/
 .datotekaView{
     font:14px Tahoma bold;
     border-top: 3px silver solid;
@@ -27,7 +27,7 @@ root {
 .prenosTextInButton a{
     color: #555555;
 }
-
+/*********************TABELA ZA DATOTEKE********************/
 .datotekeTable{
     width: 100%;
     border-top: 2px #0e90d2 solid;
@@ -69,6 +69,16 @@ root {
     width: 100%;
     margin-top: 2%;
 }
+/*********************IKONE********************/
+.ikone{
+    text-align: right;
+}
+
+.ikone > a > img{
+    width: 2%;
+    height: 2%;
+}
+
 /*
 .navbar, .navbar-inverse, .navbar-fixed-top, navbar-inner, navbar-inner-center{
     border-bottom: 4px yellow solid;

@@ -2,7 +2,7 @@
 namespace Datoteke\Controller;
  
 use Datoteke\Form\DatotekaForm;
-use Datoteke\Form\EditForm;
+use Datoteke\Form\UrediForm;
 use Datoteke\Form\IsciForm;
 use Zend\View\Model\ViewModel;
 use Zend\Stdlib\DateTime;
@@ -14,7 +14,7 @@ class DatotekaController extends BaseController
     
     public function dodajAction()
     {
-        if (!$this->isGranted('datoteke_add')) {
+        if (!$this->isGranted('datoteke_dodaj')) {
             return $this->dostopZavrnjen();
         } 
         
@@ -80,7 +80,7 @@ class DatotekaController extends BaseController
         $id = (int) $this->params()->fromRoute('id', 0);
         $dat = $datRep->find($id);
         
-        if (!(($this->isGranted('datoteke_delete'))||$this->jeAvtor($dat->user))) {
+        if (!(($this->isGranted('datoteke_brisi'))||$this->jeAvtor($dat->user))) {
             return $this->dostopZavrnjen();
         } 
                     
@@ -129,7 +129,7 @@ class DatotekaController extends BaseController
     }
     
     public function pregledAction(){
-        if (!$this->isGranted('datoteke_view')) {
+        if (!$this->isGranted('datoteke_pregled')) {
             return $this->dostopZavrnjen();
         } 
         $datRep = $this->em->getRepository('Datoteke\Entity\Datoteka');
@@ -151,11 +151,11 @@ class DatotekaController extends BaseController
         $id = (int) $this->params()->fromRoute('id', 0);
         $dat = $datRep->find($id);
        
-        if (!(($this->isGranted('datoteke_edit'))||$this->jeAvtor($dat->user))) {
+        if (!(($this->isGranted('datoteke_uredi'))||$this->jeAvtor($dat->user))) {
             return $this->dostopZavrnjen();
         }  
         
-        $form = new EditForm($options);     
+        $form = new UrediForm($options);     
         $form->get('opis')->setValue($dat->opis);
         $form->get('kategorija')->setValue($dat->kategorija);
         $form->setData($request->getPost());
@@ -172,12 +172,12 @@ class DatotekaController extends BaseController
 
         }
         return array('datoteke' => $dat, 'form' => $form, 'id' => $id);        
-        }
+    }
        
     
     public function mojeAction()
     {
-        if (!$this->isGranted('datoteke_myfiles')) {
+        if (!$this->isGranted('datoteke_moje')) {
             return $this->dostopZavrnjen();
         } 
         $user = $this->auth->getIdentity();

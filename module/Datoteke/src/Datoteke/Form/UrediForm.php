@@ -5,7 +5,7 @@ namespace Datoteke\Form;
 use Zend\Form\Form;
 use Zend\InputFilter;
  
-class EditForm extends Form
+class UrediForm extends Form
 {
     public function __construct($options)
     {

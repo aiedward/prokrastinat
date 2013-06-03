@@ -26,4 +26,10 @@ class Smer extends BaseEntity
     
     /** @ORM\Column(type="integer") */
     protected $leta;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="Predmet", mappedBy="smeri")
+     * @ORM\JoinTable(name="Smer_Predmet")
+     */
+    protected $predmet;
 }

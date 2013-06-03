@@ -18,4 +18,10 @@ class Predmet extends BaseEntity
     
     /** @ORM\Column(length=100) */
     protected $ime;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="Smer", mappedBy="predmeti")
+     * @ORM\JoinTable(name="Smer_Predmet")
+     */
+    protected $smer;
 }

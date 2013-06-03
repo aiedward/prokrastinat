@@ -80,6 +80,11 @@ root {
     height: 25px;
 }
 
+.well, .well-small{
+    max-height: 100px;
+    overflow: hidden;
+}
+
 /*
 .navbar, .navbar-inverse, .navbar-fixed-top, navbar-inner, navbar-inner-center{
     border-bottom: 4px yellow solid;

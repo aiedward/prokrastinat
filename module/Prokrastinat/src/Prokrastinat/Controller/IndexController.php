@@ -30,4 +30,6 @@ class IndexController extends BaseController
             'id' => $id,
         ));
     }
+    
+    
 }

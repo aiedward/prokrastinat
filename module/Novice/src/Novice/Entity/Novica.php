@@ -9,6 +9,9 @@ use Prokrastinat\Entity\User;
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="Novice\Repository\NovicaRepository") 
  * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="discr", type="string")
+ * @ORM\DiscriminatorMap({"novica" = "Novica", "dodatnanovica" = "DodatnaNovica"})
+ * @ORM\Table(name="novica")
  */
 class Novica extends BaseEntity
 {

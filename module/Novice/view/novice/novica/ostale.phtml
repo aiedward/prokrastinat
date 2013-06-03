@@ -1,0 +1,30 @@
+<?php
+
+$title = 'Študentske novice';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php if ($this->isGranted('novica_dodaj')): ?>
+    <p>
+    <a class="btn btn-primary" href="<?php echo $this->url('novice', array('action' => 'parse')); ?>" id="dodaj-novico">Dodaj novice</a>
+    </p>
+<?php endif; ?>
+
+<?php foreach ($novice as $novica) : ?>
+    <div class="well well-small">
+        <b> <?= $this->escapeHtml($novica->datum_objave->format('d-m-Y')); ?></b> 
+        <b><a href="<?= $this->url('novice', array('action' => 'ostalepregled', 'id' => $novica->id));?>"> <?= $novica->naslov; ?> </a><br />
+        <p><?= ($novica->opis); ?></p>
+        <?php if (($this->isGranted('novica_uredi')) || ($novica->user == $this->user)){ ?>
+        <div class="ikone">
+            <a href="<?php echo $this->url('novice', array('action'=>'uredi', 'id'=>$novica->id));?>">
+                <img class="ikona" src="/prokrastinat/public/img/edit.png"/>
+            </a>
+            <a href="<?php echo $this->url('novice', array('action'=>'brisi', 'id'=>$novica->id));?>">
+                <img class="ikona" src="/prokrastinat/public/img/delete.png"/>
+            </a>
+        </div>
+        <?php } ?>
+    </div>
+<?php endforeach; ?>
+</table>

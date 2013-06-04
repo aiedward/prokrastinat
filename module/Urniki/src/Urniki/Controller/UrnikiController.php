@@ -6,6 +6,8 @@ use Prokrastinat\Controller\BaseController;
 use Zend\View\Model\ViewModel;
 use Urniki\Form\UrnikiForm;
 
+use Zend;
+
 class UrnikiController extends BaseController
 {   
     protected $program_repository;
@@ -15,14 +17,15 @@ class UrnikiController extends BaseController
     
     public function indexAction()
     {
-        $this->program_repository = $this->em->getRepository('Urniki\Entity\Program');
+        /*$this->program_repository = $this->em->getRepository('Urniki\Entity\Program');
         $programi = $this->program_repository->getProgrami();
         
         $this->smer_repository = $this->em->getRepository('Urniki\Entity\Smer');
         $smeri = $this->smer_repository->getSmeri();
         
-        $form = new UrnikiForm($programi, $smeri, null);
-        
-        return new ViewModel(array('form' => $form));
+        $form = new UrnikiForm($programi, $smeri, null);*/
+        $form = null;
+        $test = $this->getServiceLocator()->get('doctrine.entitymanager.orm_urniki');
+        return new ViewModel(array('form' => $form, 'test' => $test));
     }
 }

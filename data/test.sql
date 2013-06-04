@@ -64,7 +64,7 @@ INSERT INTO `rbac_user_roles` (`user_id`, `role_id`) VALUES
 (2, 2),
 (3, 3);
 
-INSERT INTO `kategorija` (`id`, `ime`) VALUES
+INSERT INTO `Kategorija` (`id`, `ime`) VALUES
 (1, 'Računalniška omrežja'),
 (2, 'Podatkovne baze'),
 (3, 'Uporabniški vmesniki'),

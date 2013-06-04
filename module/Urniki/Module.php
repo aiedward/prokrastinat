@@ -18,4 +18,11 @@ class Module
             ),
         );
     }
+    /*
+    public function getServiceConfig()
+    {
+        return array(
+            'doctrine.entitymanager.urniki'        => new EntityManagerFactory('urniki'),
+        );
+    }*/
 }

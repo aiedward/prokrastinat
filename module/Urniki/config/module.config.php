@@ -2,6 +2,7 @@
 namespace Urniki;
 
 use DoctrineORMModule;
+use DoctrineModule;
 return array(
     'controllers' => array(
         'invokables' => array(
@@ -51,7 +52,7 @@ return array(
                 'paths' => array(__DIR__ . '/../src/' . __NAMESPACE__ . '/Entity')
             ),
             'orm_urniki' => array(
-                //'class' => 'Doctrine\ORM\Mapping\Driver\DriverChain',
+                'class' => 'Doctrine\ORM\Mapping\Driver\DriverChain',
                 'drivers' => array(
                     __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
                 )
@@ -59,15 +60,8 @@ return array(
         ),
         // urniki entity manager
         'entitymanager' => array(
-            /*'orm_default' => array(
-                'connection'    => 'orm_default',
-                'configuration' => 'orm_default',
-            ),*/
             'orm_urniki' => array(
                 'connection'    => 'orm_urniki',
- 
-                // configuration instance to use. The retrieved service name will
-                // be `doctrine.configuration.$thisSetting`
                 'configuration' => 'orm_urniki'
             )
         ),
@@ -77,6 +71,7 @@ return array(
             'doctrine.entitymanager.orm_urniki' => new DoctrineORMModule\Service\EntityManagerFactory('orm_urniki'),
             'doctrine.connection.orm_urniki' => new DoctrineORMModule\Service\DBALConnectionFactory('orm_urniki'),
             'doctrine.configuration.orm_urniki' => new DoctrineORMModule\Service\ConfigurationFactory('orm_urniki'),
+            'doctrine.driver.orm_urniki'       => new DoctrineModule\Service\DriverFactory('orm_urniki'),
         )
     )
 );

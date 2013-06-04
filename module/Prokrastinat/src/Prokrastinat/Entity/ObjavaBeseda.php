@@ -4,7 +4,10 @@ namespace Prokrastinat\Entity;
 use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Mapping as ORM;
 
-/** @ORM\Entity */
+/**
+ * @ORM\Entity
+ * @ORM\Table(options={"collate"="utf8_slovenian_ci"})
+ */
 class ObjavaBeseda extends BaseEntity
 {
     /**

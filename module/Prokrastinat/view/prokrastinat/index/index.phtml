@@ -6,7 +6,9 @@
     <div class="well well-small">
         <b> <?= $this->escapeHtml($novica->datum_objave->format('d-m-Y')); ?></b> 
         <b><a href="<?= $this->url('novice', array('action' => 'preglej', 'id' => $novica->id));?>"> <?= $novica->naslov; ?> </a><br />
-        <p><?= ($novica->vsebina); ?></p>
+        <p><?php if(property_exists($novica, 'opis')) { echo $novica->opis;} 
+                 else{ echo $novica->vsebina;} ?>
+        </p>
     </div>
 <?php endforeach; ?>
 <a class='btn btn-primary' href='<?= $this->url('novice')?>'>Vse novice</a>

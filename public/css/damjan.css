@@ -50,7 +50,7 @@ root {
 .datotekeTable td{
     text-align: center;
 }
-
+/*********************NOVICE********************/
 .novicaView{
     margin-left: auto;
     margin-right: auto;
@@ -69,9 +69,14 @@ root {
     width: 100%;
     margin-top: 2%;
 }
+
+.novicaHeader{
+    margin-top: 0px;
+}
 /*********************IKONE********************/
 .ikone{
     text-align: right;
+    float: right;
 }
 
 .ikona
@@ -79,6 +84,16 @@ root {
     width: 25px;
     height: 25px;
 }
+
+/********************FLASH MESSENGER********************/
+.flashMessages{
+    text-align: right;
+    color: red;
+    font-weight: bold;
+    font-size: 18px;
+    list-style-type: none;
+}
+
 
 .well, .well-small{
     max-height: 100px;

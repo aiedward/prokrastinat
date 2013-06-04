@@ -37,4 +37,23 @@ class Module
             ),
         );
     }
+    
+    public function getViewHelperConfig()
+    {
+        return array(
+            'factories' => array(
+                'flashMessages' => function($sm) {
+                    $flashmessenger = $sm->getServiceLocator()
+                        ->get('ControllerPluginManager')
+                        ->get('flashmessenger');
+ 
+                    $messages = new \Application\View\Helper\FlashMessages();
+                    $messages->setFlashMessenger($flashmessenger);
+ 
+                    return $messages;
+                }
+            ),
+        );
+    }
+    
 }

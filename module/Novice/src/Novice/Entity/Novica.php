@@ -27,7 +27,7 @@ class Novica extends BaseEntity
     /** @ORM\Column(length=100) */
     protected $naslov;
 
-    /** @ORM\Column(length=5000) */
+    /** @ORM\Column(length=10000) */
     protected $vsebina;
 
     /** @ORM\Column(type="datetime") */

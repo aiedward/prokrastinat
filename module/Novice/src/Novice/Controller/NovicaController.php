@@ -104,7 +104,7 @@ class NovicaController extends BaseController
             return $this->dostopZavrnjen();
         } 
         
-        $options = array('Ekskluzivno', 'Družba', 'Šport', 'Potovanja', 'Kultura', 'Zabava', 'Izobraževanje', 'Novice');
+        $options = array('Vse','Ekskluzivno', 'Družba', 'Šport', 'Potovanja', 'Kultura', 'Zabava', 'Izobraževanje', 'Novice');
         
         $form = new ParseForm($options);
         $request = $this->getRequest();
@@ -115,14 +115,14 @@ class NovicaController extends BaseController
                 $options = $form->get('kategorija')->getValueOptions();
                 $kategorija_ime = $options[$kategorija];
                 $client = new Zend\Soap\Client("http://localhost:63640/Service1.asmx?WSDL");
-                $result1 = $client->VrniNovice(array('kategorija' => $kategorija_ime))->vrniNoviceResult;
+                $result1 = $client->VrniNovice(array('kategorija' => $kategorija_ime, 'keywords'=>$form->get('isci')->getValue()))->vrniNoviceResult;
                 foreach($result1->Novica as $nov)
                 {
-                    /*$zeObstaja = false;
-                    $query = $this->em->createQuery("SELECT n FROM Novice\Entity\DodatnaNovica n");
+                    $zeObstaja = false;
+                    /*$query = $this->em->createQuery("SELECT n FROM Novice\Entity\DodatnaNovica n");
                     $novice = $query->getResult();*/
                     
-                    $novice = $this->em->getRepository('Novice\Entity\Novica')->findAll();
+                    $novice = $this->em->getRepository('Novice\Entity\DodatnaNovica')->findAll();
                     
                     foreach($novice as $staraNovica)
                     {
@@ -145,8 +145,9 @@ class NovicaController extends BaseController
                         $this->em->flush();
                     }
                 }
-                return $this->redirect()->toRoute('novice');
-            }
+                    $this->flashMessenger()->addMessage('Test flashmessenger.');
+                    return $this->redirect()->toRoute('novice', array('action' => 'ostale'));
+                }
         }
         return array('form' => $form);
     }
@@ -160,7 +161,7 @@ class NovicaController extends BaseController
         $novice = $query->getResult();
         $user = $this->auth->getIdentity();
         
-        return new ViewModel(array('novice' => $novice, 'action' => 'ostale', 'user' => $user));
+        return new ViewModel(array('novice' => $novice, 'action' => 'ostale', 'user' => $user,'flashMessages' => $this->flashMessenger()->getMessages()));
     }
     
     public function ostalepregledAction()

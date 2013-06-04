@@ -12,19 +12,27 @@ $this->headTitle($title);
 
 <?php foreach ($novice as $novica) : ?>
     <div class="well well-small">
-        <b> <?= $this->escapeHtml($novica->datum_objave->format('d-m-Y')); ?></b> 
-        <b><a href="<?= $this->url('novice', array('action' => 'pregled', 'id' => $novica->id));?>"> <?= $novica->naslov; ?> </a><br />
-        <p><?= ($novica->vsebina); ?></p>
-        <?php if (($this->isGranted('novica_uredi')) || ($novica->user == $this->user)){ ?>
-        <div class="ikone">
-            <a href="<?php echo $this->url('novice', array('action'=>'uredi', 'id'=>$novica->id));?>">
-                <img class="ikona" src="/prokrastinat/public/img/edit.png"/>
-            </a>
-            <a href="<?php echo $this->url('novice', array('action'=>'brisi', 'id'=>$novica->id));?>">
-                <img class="ikona" src="/prokrastinat/public/img/delete.png"/>
-            </a>
+        <div class="novicaHeader">
+            <b> <?= $this->escapeHtml($novica->datum_objave->format('d-m-Y')); ?></b> 
+            <b>
+                <a href="<?= $this->url('novice', array('action' => 'pregled', 'id' => $novica->id));?>">
+                    <?= $novica->naslov; ?>
+                </a>
+            </b>
+            <div class="ikone">
+               <?php if (($this->isGranted('novica_uredi')) || ($novica->user == $this->user)){ ?>
+                <a href="<?php echo $this->url('novice', array('action'=>'uredi', 'id'=>$novica->id));?>">
+                    <img class="ikona" src="/prokrastinat/public/img/edit.png"/>
+                </a>
+                <a href="<?php echo $this->url('novice', array('action'=>'brisi', 'id'=>$novica->id));?>">
+                    <img class="ikona" src="/prokrastinat/public/img/delete.png"/>
+                </a>
+               <?php } ?>
+            </div>
+            <br/>
         </div>
-        <?php } ?>
+        <p><?php if(property_exists($novica, 'opis')) { echo $novica->opis;} 
+                 else{ echo $novica->vsebina;} ?>
+        </p>
     </div>
 <?php endforeach; ?>
-</table>

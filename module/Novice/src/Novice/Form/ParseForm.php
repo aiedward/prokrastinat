@@ -28,6 +28,18 @@ class ParseForm extends Form {
                 'id' => 'select-kategorija',
             ),
         ));
+        
+        $this->add(array(
+            'name' => 'isci',
+            'type' => 'Text',
+            'attributes' => array(
+                'value' => '',
+                'id' => 'isci'
+            ),
+            'options' => array(
+                'label' => 'Ključne besede:',
+            ),
+        ));
  
         $this->add(array(
             'name' => 'submit',
@@ -50,6 +62,11 @@ class ParseForm extends Form {
         $kategorija = new InputFilter\Input('kategorija');
         $kategorija->setRequired(true);
         $inputFilter->add($kategorija);
+        
+        // Iskalni niz
+        $isci = new InputFilter\Input('isci');
+        $isci->setRequired(false);
+        $inputFilter->add($isci);
 
         return $inputFilter;
     }

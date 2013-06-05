@@ -40,7 +40,7 @@ root {
 
 .datotekeTable tr{
     border-top: 1px silver solid;
-    padding: 8px;
+    padding: 1%;
     line-height: 28px;
     vertical-align: top;
 }

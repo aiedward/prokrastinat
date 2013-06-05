@@ -35,6 +35,15 @@ class EditForm extends Form {
                 'required' => true,
             ),
         ));
+        // Vpisna številka
+        $this->add(array(
+            'name' => 'vpisna_st',
+            'type' => 'Text',
+            'options' => array(
+                'label' => 'Vpisna številka*',
+                'required' => true,
+            ),
+        ));
         //EMAIL
         $this->add(array(
             'name' => 'email',
@@ -130,7 +139,7 @@ class EditForm extends Form {
             )
         )));
                 
-                $filter->add($fac->createInput(array(
+        $filter->add($fac->createInput(array(
             'name' => 'priimek',
             'required' => true,
             'filters' => array(
@@ -146,8 +155,25 @@ class EditForm extends Form {
                 )
             )
         )));
+        
+        $filter->add($fac->createInput(array(
+            'name' => 'vpisna_st',
+            'required' => true,
+            'filters' => array(
+                array('name' => 'StringTrim')
+            ),
+            'validators' => array(
+                array(
+                    'name' => 'StringLength',
+                    'options' => array(
+                        'min' => 2,
+                        'max' => 30,
+                    )
+                )
+            )
+        )));
                 
-                $filter->add($fac->createInput(array(
+        $filter->add($fac->createInput(array(
             'name' => 'email',
             'required' => true,
             'filters' => array(

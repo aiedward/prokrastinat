@@ -57,7 +57,7 @@ return array(
             'preglej' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/vprasanje/:id[/]',
+                    'route' => '/vprasanje/:id',
                     'constraints' => array(
                         'id'     => '[0-9]+'
                     ),

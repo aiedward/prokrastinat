@@ -76,20 +76,30 @@ return array(
                     ),
                     'defaults' => array(
                         'controller' => 'Prokrastinat\Controller\User',
-                        'action' => 'index',
+                        'action' => 'list',
                     ),
                 ),
             ),
-            'view' => array(
+            'user_view' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/user/view/[:id]',
+                    'route' => '/user/view/:id',
                     'constraints' => array(
                         'id' => '[0-9]+'
                     ),
                     'defaults' => array(
                         'controller' => 'Prokrastinat\Controller\User',
                         'action' => 'view',
+                    ),
+                ),
+            ),
+            'user_list' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/user/list',
+                    'defaults' => array(
+                        'controller' => 'Prokrastinat\Controller\User',
+                        'action' => 'list',
                     ),
                 ),
             ),

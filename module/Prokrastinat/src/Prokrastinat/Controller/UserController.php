@@ -78,7 +78,10 @@ class UserController extends BaseController
                 if ($this->request->isPost()) {
                     $form->setInputFilter($form->getInputFilter());
                     $form->setData($this->request->getPost());
-
+					
+					if (!$this->isGranted('user_uredi')) {
+						$form->remove('vpisna_st');
+					}
                     if ($form->isValid()) {
                         $this->userRepository = $this->getEntityManager()->getRepository('Prokrastinat\Entity\User');
                         $this->userRepository->updateUser($userEdit, $form);
@@ -169,10 +172,10 @@ class UserController extends BaseController
             if (!$this->isGranted('user_pregled')) $this->dostopZavrnjen();
             
             $this->userRepository = $this->getEntityManager()->getRepository('Prokrastinat\Entity\User');
-            $useri = $this->userRepository->findAll();
+            $users = $this->userRepository->findAll();
             
             return new ViewModel(array(
-                'useri' => $useri
+                'users' => $users
             ));
             
         }

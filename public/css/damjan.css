@@ -9,6 +9,8 @@
 root { 
     display: block;
 ;}
+
+
 /*********************PREGLED DATOTEKE********************/
 .datotekaView{
     font:14px Tahoma bold;
@@ -86,9 +88,8 @@ root {
 }
 
 /********************FLASH MESSENGER********************/
-.flashMessages{
-    text-align: right;
-    color: red;
+.alert, alert-info{
+    text-align: left;
     font-weight: bold;
     font-size: 18px;
     list-style-type: none;
@@ -100,15 +101,8 @@ root {
     overflow: hidden;
 }
 
-/*
-.navbar, .navbar-inverse, .navbar-fixed-top, navbar-inner, navbar-inner-center{
-    border-bottom: 4px yellow solid;
-    height: 15%;
-    background: red;
+/********************DESNI SIDEBAR********************/
+.desni-sidebar{
+    border: 1px solid silver;
+    
 }
-
-.navbar .container-fluid{
-    border-bottom: 4px #0e90d2 solid;
-    line-height: 100%;
-    background: red;
-}*/

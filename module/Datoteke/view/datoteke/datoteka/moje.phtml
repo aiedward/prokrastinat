@@ -42,11 +42,11 @@ $velikost_mb = $velikost/1024/1024;
     <td><?php echo $this->escapeHtml($datoteka->st_prenosov);?></td>
     <td>
         <?php if (($this->isGranted('datoteke_uredi')) || ($datoteka->user == $this->user)){ ?>
-            <a href="<?php echo $this->url('novice', array('action'=>'uredi', 'id'=>$datoteka->id));?>">
+            <a href="<?php echo $this->url('datoteke', array('action'=>'uredi', 'id'=>$datoteka->id));?>">
                 <img class="ikona" src="/prokrastinat/public/img/edit.png"/>
             </a>
-            <a href="<?php echo $this->url('novice', array('action'=>'brisi', 'id'=>$datoteka->id));?>">
-                <img class="ikona" src="/prokrastinat/public/img/delete.png"/>
+            <a href="<?php echo $this->url('datoteke', array('action'=>'brisi', 'id'=>$datoteka->id));?>">
+                <img class="ikona" src="/prokrastinat/public/img/delete.png" />
             </a>
         <?php } ?>
     </td>

@@ -10,19 +10,19 @@ $this->headTitle($title);
     <a href="<?php echo $this->url('datoteke', array('action'=>'moje'));?>">Moje datoteke</a>
 </p>
 <p>Ali ste prepričani, da želite izbrisati datoteko
-    <?php echo $this->escapeHtml($datoteke->imeDatoteke); ?> ?
+    <?php echo $this->escapeHtml($datoteka->imeDatoteke); ?> ?
 </p>
 <?php
 $url = $this->url('datoteke', array(
     'action' => 'brisi',
-    'id' => $datoteke->id,
-    'file' => $datoteke->imeDatoteke,
+    'id' => $datoteka->id,
+    'file' => $datoteka->imeDatoteke,
     
 ));
 ?>
 <form action="<?php echo $url; ?>" method="post">
 <div>
-    <input type="hidden" name="id" value="<?php echo (int) $datoteke->id; ?>" />
+    <input type="hidden" name="id" value="<?php echo (int) $datoteka->id; ?>" />
     <input type="submit" name="del" value="Da" class="btn btn-primary"/>
     <input type="submit" name="del" value="Ne" class="btn btn-primary"/>
 </div>

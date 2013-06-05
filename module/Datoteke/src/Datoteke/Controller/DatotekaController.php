@@ -36,6 +36,7 @@ class DatotekaController extends BaseController
                     $datRep = $this->em->getRepository('Datoteke\Entity\Datoteka');
                     $datRep->saveDatoteka($formData, $user);
                     $this->em->flush();              
+                    $this->flashMessenger()->addMessage('Datoteka '. $formData['file']['name'] . ' je bila uspešno nalozena!');
                     return $this->redirect()->toRoute('datoteke');
             }
         }
@@ -74,7 +75,7 @@ class DatotekaController extends BaseController
         
         $user = $this->auth->getIdentity();
         
-        return new ViewModel(array('datoteke' => $datoteke, 'form' => $form, 'user' => $user));
+        return new ViewModel(array('datoteke' => $datoteke, 'form' => $form, 'user' => $user, 'flashMessages' => $this->flashMessenger()->getMessages()));
     }
     
     public function brisiAction()
@@ -87,13 +88,9 @@ class DatotekaController extends BaseController
             return $this->dostopZavrnjen();
         } 
                     
-        $id = (int) $this->params()->fromRoute('id', 0);
         if (!$id) {
             return $this->redirect()->toRoute('datoteke');
         }
-
-        $datRep = $this->em->getRepository('Datoteke\Entity\Datoteka');
-        $dat = $datRep->find($id);
 
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -104,11 +101,12 @@ class DatotekaController extends BaseController
                 $datRep->deleteDatoteka($dat);
                 $this->em->flush();
             }
+            $this->flashMessenger()->addMessage('Datoteka '. $dat->ime . ' je bila uspešno izbrisana!');
             return $this->redirect()->toRoute('datoteke');
          }
          return array(
             'id'    => $id,
-            'datoteke' => $dat
+            'datoteka' => $dat
          );       
     }
     

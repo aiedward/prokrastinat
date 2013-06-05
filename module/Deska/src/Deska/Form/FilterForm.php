@@ -16,6 +16,7 @@ class FilterForm extends Form
             'options' => array(
                 'label' => 'Kategorija',
                 'value_options' => $options,
+                'required' => true,
             ),
             'attributes' => array(
                 'id' => 'select-kategorija',

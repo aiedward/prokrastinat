@@ -32,6 +32,33 @@ class DeskaForm extends Form
                 'id' => 'txt-naslov',
             ),
         ));
+        
+        $this->add(array(
+            'type' => 'Zend\Form\Element\Select',
+            'name' => 'kategorija',
+            'options' => array(
+                'label' => 'Kategorija: ',
+                'value_options' => $options,
+            ),
+            'attributes' => array(
+                'id' => 'select-kategorija',
+            ),
+        ));
+
+        $this->add(array(
+            'type' => 'Zend\Form\Element\DateSelect',
+            'name' => 'datum-zapadlosti',
+            'options' => array(
+                'label' => 'Zapade ', //
+            ),
+            'attributes' => array(
+                'id' => 'dp-zapadlost',
+                'class' => 'input-append date',
+                'min' => '2013-01-01',
+                'max' => '2013-12-12',
+                'step' => '1',
+            ),
+        ));
 
         $this->add(array(
             'type' => 'Zend\Form\Element\Textarea',
@@ -48,36 +75,10 @@ class DeskaForm extends Form
         ));
 
         $this->add(array(
-            'type' => 'Zend\Form\Element\Select',
-            'name' => 'kategorija',
-            'options' => array(
-                'label' => 'Kategorija: ',
-                'value_options' => $options,
-            ),
-            'attributes' => array(
-                'id' => 'select-kategorija',
-            ),
-        ));
-
-        $this->add(array(
-            'type' => 'Zend\Form\Element\Date',
-            'name' => 'datum-zapadlosti',
-            'options' => array(
-                'label' => 'Zapade ', //
-            ),
-            'attributes' => array(
-                'id' => 'dp-zapadlost',
-                'min' => '2013-01-01',
-                'max' => '2013-12-12',
-                'step' => '1',
-            ),
-        ));
-
-        $this->add(array(
             'name' => 'submit',
             'attributes' => array(
                 'type' => 'submit',
-                'value' => 'Dodaj',
+                'value' => 'Oddaj',
                 'id' => 'submitbutton',
                 'class' => 'btn btn-primary',
             ),

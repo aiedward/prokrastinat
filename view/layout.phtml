@@ -26,6 +26,9 @@ $this->headLink()->appendStylesheet($basePath . '/css/bootstrap-responsive.min.c
 //jQuery and Twitter Bootstrap JS libraries
 $this->inlineScript()->appendFile($basePath . '/js/jquery-1.8.0.min.js');
 $this->inlineScript()->appendFile($basePath . '/js/bootstrap.min.js');
+// Datepicker
+$this->inlineScript()->appendFile($basePath . '/js/bootstrap-datepicker.js');
+$this->headLink()->appendStylesheet($basePath .'/css/datepicker.css');
 
 $this->inlineScript()->appendFile($basePath . '/js/tinymce.min.js');
 

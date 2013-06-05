@@ -25,6 +25,28 @@ return array(
                     'dbname'   => 'database',
                     'charset'  => 'utf8',
                 )
+            ),
+            // AIPS connection name
+            'orm_aips' => array(
+                'driverClass' => 'Prokrastinat\DBAL\Driver\PDOSqlsrv\Driver',
+                'params' => array(
+                    'host'     => 'studsrv.uni-mb.si',
+                    'port'     => '2152',
+                    'user'     => 'user',
+                    'password' => 'password',
+                    'dbname'   => 'Aips',
+                )
+            ),
+            // Urniki connection name
+            'orm_urniki' => array(
+                'driverClass' => 'Prokrastinat\DBAL\Driver\PDOSqlsrv\Driver',
+                'params' => array(
+                    'host'     => 'studsrv.uni-mb.si',
+                    'port'     => '2152',
+                    'user'     => 'user',
+                    'password' => 'password',
+                    'dbname'   => 'Urniki',
+                )
             )
         )
     ),

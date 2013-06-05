@@ -1,5 +1,5 @@
 <?php
-$title = 'Dodaj oglas';
+$title = 'Dodaj obvestilo';
 $this->headtitle($title);
 ?>
 
@@ -8,6 +8,7 @@ $this->headtitle($title);
 </h1>
 <div id="test">
     <?php
+    /*
         $form = $this->form;
         $form->setAttribute('action', $this->url('deska', array('action' => 'dodaj')));
         $form->prepare();
@@ -19,7 +20,8 @@ $this->headtitle($title);
         echo $this->formRow($form->get('vsebina'));
         echo "<br />";
         echo $this->formSubmit($form->get('submit'));
-        echo $this->form()->closeTag();
+        echo $this->form()->closeTag();*/
+        echo $this->formTwb($this->form, \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL);
     ?>
     <a class="btn btn-primary" href="<?php echo $this->url('deska');?>">Nazaj</a>
 </div>

@@ -2,7 +2,6 @@
 namespace Prokrastinat\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 
 class StudijRepository extends EntityRepository
 {

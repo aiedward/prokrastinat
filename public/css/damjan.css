@@ -47,10 +47,16 @@ root {
 
 .datotekeTable th{
     font-size: 15px;
+    white-space: nowrap; overflow: hidden;
 }
 
 .datotekeTable td{
+    white-space: nowrap; overflow: hidden;
     text-align: center;
+}
+
+.datotekeTable tr > td > a > i{
+    float: right;
 }
 /*********************NOVICE********************/
 .novicaView{
@@ -79,12 +85,11 @@ root {
 .ikone{
     text-align: right;
     float: right;
+    vertical-align:central;
 }
 
-.ikona
-{
-    width: 25px;
-    height: 25px;
+.ikone > i{
+    margin-top: 2px;
 }
 
 /********************FLASH MESSENGER********************/
@@ -104,5 +109,13 @@ root {
 /********************DESNI SIDEBAR********************/
 .desni-sidebar{
     border: 1px solid silver;
-    
+    width: 100%;
+}
+
+.sidebar-novica{
+    border-top: 2px solid #0e90d2;
+    height: 175px;
+    padding: 5px;
+    margin: 5px;
+    overflow: hidden;
 }

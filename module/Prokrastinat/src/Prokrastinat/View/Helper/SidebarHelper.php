@@ -4,6 +4,7 @@ namespace Prokrastinat\View\Helper;
 use Zend\View\Helper\AbstractHelper;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Novice\Entity\Novica;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -22,20 +23,18 @@ class SidebarHelper extends AbstractHelper implements ServiceLocatorAwareInterfa
     
     public function __invoke () {      
         $em = $this->getServiceLocator()->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $novicaRep = $em->getRepository('Novice\Entity\Novica');
         
-        $qb = new \Doctrine\ORM\QueryBuilder($em);
-        $q = $qb->select('n')
-            ->from('\Novice\Entity\Novica', 'n')
-            ->orderBy('n.datum_objave', 'DESC')
-            ->setMaxResults(1);
-        
-        $novice = $q->getResult();
-        
-        foreach($novice as $novica)
+        $novica = $novicaRep->getLastNovice(3);
+        foreach($novica as $nov)
         {
-            echo $novica->naslov;
+            ?>
+            <div class="sidebar-novica">
+                <b><a href=""><?php echo $nov->naslov;?></a></b>
+                <br>
+                <?php echo $nov->vsebina;?>
+            </div>
+        <?php
         }
-        
-        return 'SIDEBAR TEST';
     }
 }

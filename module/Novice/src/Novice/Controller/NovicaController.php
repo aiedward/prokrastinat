@@ -176,5 +176,32 @@ class NovicaController extends BaseController
         return new ViewModel(array('novica' => $novica));
     }
     
+    public function brisiAction()
+    {
+       if (!$this->isGranted('novica_brisi')) 
+            $this->dostopZavrnjen();
+        
+        $id = (int)$this->params()->fromRoute('id', 0);
+        
+        if ($this->request->isPost()) {
+            $del = $this->request->getPost('del', 'No');
+            
+            if ($del == 'Yes') {
+                $id = (int) $this->request->getPost('id');
+                
+                $novica = $this->em->find('Novice\Entity\Novica', $id);
+                $this->em->remove($novica);
+                $this->em->flush();
+            }
+            
+            return $this->redirect()->toRoute('novice');
+        }
+        
+        return array(
+            'id' => $id,
+            'novica' => $this->em->find('Novice\Entity\Novica', $id)
+        );
+    }
+    
 
 }

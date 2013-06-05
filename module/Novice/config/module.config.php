@@ -49,6 +49,32 @@ return array(
                     ),
                 ),
             ),
+            'novice_add' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/novice/dodaj/',
+                    'constraints' => array(
+                        'id'     => '[0-9]+'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Novica',
+                        'action' => 'dodaj'
+                    ),
+                ),
+            ),
+            'novice_delete' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/novice/brisi/:id',
+                    'constraints' => array(
+                        'id'     => '[0-9]+'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Novica',
+                        'action' => 'brisi'
+                    ),
+                ),
+            ),
         ),
     ),
     'view_manager' => array(

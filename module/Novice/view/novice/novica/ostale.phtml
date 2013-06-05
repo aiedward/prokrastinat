@@ -21,11 +21,13 @@ $this->headTitle($title);
             </b>
             <div class="ikone">
                <?php if (($this->isGranted('novica_uredi')) || ($novica->user == $this->user)){ ?>
-                <a href="<?php echo $this->url('novice', array('action'=>'uredi', 'id'=>$novica->id));?>">
-                    <img class="ikona" src="/prokrastinat/public/img/edit.png"/>
+                <a class="btn btn-mini" href="<?php echo $this->url('novice', array('action'=>'uredi', 'id'=>$novica->id));?>">
+                    <i class="icon-edit"></i>
+                    Uredi
                 </a>
-                <a href="<?php echo $this->url('novice', array('action'=>'brisi', 'id'=>$novica->id));?>">
-                    <img class="ikona" src="/prokrastinat/public/img/delete.png"/>
+                <a class="btn btn-mini" href="<?php echo $this->url('novice', array('action'=>'brisi', 'id'=>$novica->id));?>">
+                    <i class="icon-remove"></i>
+                    Izbriši
                 </a>
                <?php } ?>
             </div>

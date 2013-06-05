@@ -15,13 +15,12 @@ $velikost_mb = $velikost/1024/1024;
 
 <table class="datotekeTable">
 <tr>
-    <th><a href="?orderBy=imeDatoteke&sort=asc"><img src ="/prokrastinat/public/img/uparrow.png"/></a>Ime datoteke<a href="?orderBy=imeDatoteke&sort=DESC"><img src ="/prokrastinat/public/img/downarrow.png"/></a></th>
-    <th><a href="?orderBy=user&sort=asc"><img src ="/prokrastinat/public/img/uparrow.png"/></a>Avtor<a href="?orderBy=avtor&sort=desc"><img src ="/prokrastinat/public/img/downarrow.png"/></a></th>
-    <th><a href="?orderBy=opis&sort=asc"><img src ="/prokrastinat/public/img/uparrow.png"/></a>Opis<a href="?orderBy=opis&sort=desc"><img src ="/prokrastinat/public/img/downarrow.png"/></a></th>
-    <th><a href="?orderBy=kategorija&sort=asc"><img src ="/prokrastinat/public/img/uparrow.png"/></a>Kategorija<a href="?orderBy=kategorija&sort=desc"><img src ="/prokrastinat/public/img/downarrow.png"/></a></th>
-    <th><a href="?orderBy=velikost&sort=asc"><img src ="/prokrastinat/public/img/uparrow.png"/></a>Velikost<a href="?orderBy=velikost&sort=desc"><img src ="/prokrastinat/public/img/downarrow.png"/></a></th>
-    <th><a href="?orderBy=datum_uploada&sort=asc"><img src ="/prokrastinat/public/img/uparrow.png"/></a>Datum uploada<a href="?orderBy=datum_uploada&sort=desc"><img src ="/prokrastinat/public/img/downarrow.png"/></a></th>
-    <th><a href="?orderBy=st_prenosov&sort=asc"><img src ="/prokrastinat/public/img/uparrow.png"/></a>Preneseno<a href="?orderBy=st_prenosov&sort=desc"><img src ="/prokrastinat/public/img/downarrow.png"/></a></th>
+    <th><a href="?orderBy=imeDatoteke&sort=asc"><i class="icon-chevron-up"></i></a>Datoteka<a href="?orderBy=imeDatoteke&sort=DESC"><i class="icon-chevron-down"></i></a></th>
+    <th><a href="?orderBy=user&sort=asc"><i class="icon-chevron-up"></i></a>Avtor<a href="?orderBy=avtor&sort=desc"><i class="icon-chevron-down"></i></a></th>
+    <th><a href="?orderBy=kategorija&sort=asc"><i class="icon-chevron-up"></i></a>Kategorija<a href="?orderBy=kategorija&sort=desc"><i class="icon-chevron-down"></i></a></th>
+    <th><a href="?orderBy=velikost&sort=asc"><i class="icon-chevron-up"></i></a>Velikost<a href="?orderBy=velikost&sort=desc"><i class="icon-chevron-down"></i></a></th>
+    <th><a href="?orderBy=datum_uploada&sort=asc"><i class="icon-chevron-up"></i></a>Datum<a href="?orderBy=datum_uploada&sort=desc"><i class="icon-chevron-down"></i></a></th>
+    <th><a href="?orderBy=st_prenosov&sort=asc"><i class="icon-chevron-up"></i></a>Preneseno<a href="?orderBy=st_prenosov&sort=desc"><i class="icon-chevron-down"></i></a></th>
     <th>&nbsp;</th>
 </tr>
 <?php foreach ($datoteke as $datoteka) : ?>
@@ -31,22 +30,23 @@ $velikost_mb = $velikost/1024/1024;
             <?php echo $this->escapeHtml($datoteka->imeDatoteke);?>
         </a>
         <a href="<?php echo $this->url('datoteke', array('action'=>'download', 'id'=>$datoteka->id));?>">
-           <img class="ikona" align="right" src ="/prokrastinat/public/img/download.gif"/>
+           <i class="icon-download"></i>
         </a>
     </td>
     <td><?php echo $this->escapeHtml($datoteka->user->getPolnoIme());?></td>
-    <td><?php echo $this->escapeHtml($datoteka->opis);?></td>
     <td><?php echo $this->escapeHtml($datoteka->kategorija->ime);?></td>
     <td><?php echo $this->escapeHtml(round($datoteka->velikost/1024/1024, 2));?> MB</td>
     <td><?php echo $this->escapeHtml($datoteka->datum_uploada->format('d-m-Y'));?></td>
     <td><?php echo $this->escapeHtml($datoteka->st_prenosov);?></td>
     <td>
         <?php if (($this->isGranted('datoteke_uredi')) || ($datoteka->user == $this->user)){ ?>
-            <a href="<?php echo $this->url('datoteke', array('action'=>'uredi', 'id'=>$datoteka->id));?>">
-                <img class="ikona" src="/prokrastinat/public/img/edit.png"/>
+            <a class="btn btn-mini" href="<?php echo $this->url('datoteke', array('action'=>'uredi', 'id'=>$datoteka->id));?>">
+                <i class="icon-edit"></i>
+                Uredi
             </a>
-            <a href="<?php echo $this->url('datoteke', array('action'=>'brisi', 'id'=>$datoteka->id));?>">
-                <img class="ikona" src="/prokrastinat/public/img/delete.png" />
+            <a class="btn btn-mini" href="<?php echo $this->url('datoteke', array('action'=>'brisi', 'id'=>$datoteka->id));?>">
+                <i class="icon-trash"></i>
+                Izbriši
             </a>
         <?php } ?>
     </td>

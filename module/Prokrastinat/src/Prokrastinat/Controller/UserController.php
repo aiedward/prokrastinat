@@ -60,8 +60,19 @@ class UserController extends BaseController
     {
             if (!$this->auth->hasIdentity()) $this->dostopZavrnjen();
             $form = new \Prokrastinat\Form\EditForm();
+			$form->setInputFilter(new \Prokrastinat\Form\EditFilter());
             $urejanje = false;
-            
+			
+			if (!$this->isGranted('user_uredi')) {
+				$form->get('vpisna_st')->setAttributes(array('disabled' => true));
+				$form->get('ime')->setAttributes(array('disabled' => true));
+				$form->get('priimek')->setAttributes(array('disabled' => true));
+				
+				$form->getInputFilter()->remove('ime')
+					->remove('priimek')
+					->remove('vpisna_st');
+			}
+			
             $id = $this->getEvent()->getRouteMatch()->getParam('id');
             $this->userRepository = $this->getEntityManager()->getRepository('Prokrastinat\Entity\User');
             $userEdit = is_numeric($id) ? $this->userRepository->find($id) : null;
@@ -76,12 +87,8 @@ class UserController extends BaseController
             if((!($user === $userEdit)&&($this->isGranted('user_uredi')))||($user === $userEdit))
             {
                 if ($this->request->isPost()) {
-                    $form->setInputFilter($form->getInputFilter());
                     $form->setData($this->request->getPost());
 					
-					if (!$this->isGranted('user_uredi')) {
-						$form->remove('vpisna_st');
-					}
                     if ($form->isValid()) {
                         $this->userRepository = $this->getEntityManager()->getRepository('Prokrastinat\Entity\User');
                         $this->userRepository->updateUser($userEdit, $form);

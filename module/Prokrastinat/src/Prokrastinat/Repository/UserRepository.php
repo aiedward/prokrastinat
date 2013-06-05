@@ -27,8 +27,13 @@ class UserRepository extends EntityRepository
     {
         $this->em = $this->getEntityManager();
         
-        $user->ime = $form->get('ime')->getValue();
-        $user->priimek = $form->get('priimek')->getValue();
+        if ($val = $form->get('ime')->getValue())
+            $user->ime = $val;
+        if ($val = $form->get('priimek')->getValue())
+            $user->priimek = $val;
+        if ($val = $form->get('vpisna_st')->getValue())
+            $user->vpisna_st = $val;
+            
         $user->email = $form->get('email')->getValue();
         $user->naslov = $form->get('naslov')->getValue();
         $user->mesto = $form->get('mesto')->getValue();
@@ -36,7 +41,7 @@ class UserRepository extends EntityRepository
         $user->opis = $form->get('opis')->getValue();
         $user->splet = $form->get('splet')->getValue();
         $user->telefon = $form->get('telefon')->getValue();
-
+            
         $this->em->persist($user);
     }
 }

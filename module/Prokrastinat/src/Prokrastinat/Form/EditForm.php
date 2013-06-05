@@ -84,10 +84,10 @@ class EditForm extends Form {
             'options' => array(
                 'label' => 'Opis',
             ),
-                        'attributes' => array(
-                            'class' => 'input-xxlarge',
-                            'rows' => 5
-                        ),
+            'attributes' => array(
+                'class' => 'input-xxlarge',
+                'rows' => 5
+            ),
         ));
         //SPLETNA STRAN
         $this->add(array(
@@ -117,8 +117,8 @@ class EditForm extends Form {
             ),
         ));
     }
-        
-        public function getInputFilter () {
+        /*
+    public function getFilter () {
         $fac = new Factory();
         $filter = new InputFilter();
         
@@ -186,9 +186,9 @@ class EditForm extends Form {
             )
         )));
                 
-                $filter->add($fac->createInput(array(
+        $filter->add($fac->createInput(array(
             'name' => 'naslov',
-                        'required' => false,
+            'required' => false,
             'filters' => array(
                 array('name' => 'StringTrim')
             ),
@@ -202,9 +202,9 @@ class EditForm extends Form {
             )
         )));
                 
-                $filter->add($fac->createInput(array(
+        $filter->add($fac->createInput(array(
             'name' => 'mesto',
-                        'required' => false,
+            'required' => false,
             'filters' => array(
                 array('name' => 'StringTrim')
             ),
@@ -218,9 +218,9 @@ class EditForm extends Form {
             )
         )));
                 
-                $filter->add($fac->createInput(array(
+        $filter->add($fac->createInput(array(
             'name' => 'drzava',
-                        'required' => false,
+            'required' => false,
             'filters' => array(
                 array('name' => 'StringTrim')
             ),
@@ -234,9 +234,9 @@ class EditForm extends Form {
             )
         )));
                 
-                $filter->add($fac->createInput(array(
+        $filter->add($fac->createInput(array(
             'name' => 'opis',
-                        'required' => false,
+            'required' => false,
             'filters' => array(
                 array('name' => 'StringTrim')
             ),
@@ -250,9 +250,9 @@ class EditForm extends Form {
             )
         )));
                 
-                $filter->add($fac->createInput(array(
+        $filter->add($fac->createInput(array(
             'name' => 'splet',
-                        'required' => false,
+            'required' => false,
             'filters' => array(
                 array('name' => 'StringTrim')
             ),
@@ -266,7 +266,7 @@ class EditForm extends Form {
             )
         )));
                 
-                $filter->add($fac->createInput(array(
+        $filter->add($fac->createInput(array(
             'name' => 'telefon',
             'required' => false,
             'filters' => array(
@@ -280,19 +280,21 @@ class EditForm extends Form {
         )));
                 
         return $filter;
-        }
+    }*/
+       
+    public function fill (\Prokrastinat\Entity\User $user) {
+        $this->get('ime')->setValue($user->ime);
+        $this->get('priimek')->setValue($user->priimek);
+        $this->get('email')->setValue($user->email);
+        $this->get('naslov')->setValue($user->naslov);
+        $this->get('mesto')->setValue($user->mesto);
+        $this->get('drzava')->setValue($user->drzava);
+        $this->get('opis')->setValue($user->opis);
+        $this->get('splet')->setValue($user->splet);
+        $this->get('telefon')->setValue($user->telefon);
         
-        public function fill (\Prokrastinat\Entity\User $user) {
-            $this->get('ime')->setValue($user->ime);
-            $this->get('priimek')->setValue($user->priimek);
-            $this->get('email')->setValue($user->email);
-            $this->get('naslov')->setValue($user->naslov);
-            $this->get('mesto')->setValue($user->mesto);
-            $this->get('drzava')->setValue($user->drzava);
-            $this->get('opis')->setValue($user->opis);
-            $this->get('splet')->setValue($user->splet);
-            $this->get('telefon')->setValue($user->telefon);
-        }
+        if ($el = $this->get('vpisna_st')) $el->setValue($user->vpisna_st);
+    }
 }
 
 ?>

@@ -31,6 +31,7 @@
         <th>Letnik</th>
         <td><?= $user->vpisna_st ?></td>
     </tr>
+    <?php endif; ?>
     <?= (!empty($user->naslov)) ? '<tr><th>Naslov</th><td>' . $user->naslov . '</td></tr>' : null ?>
     <?= (!empty($user->mesto)) ? '<tr><th>Mesto</th><td>' . $user->mesto . '</td></tr>' : null ?>
     <?= (!empty($user->drzava)) ? '<tr><th>Država</th><td>' . $user->drzava . '</td></tr>' : null ?>

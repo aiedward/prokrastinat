@@ -19,8 +19,9 @@ return array(
                 'paths' => array(__DIR__ . '/../src/' . __NAMESPACE__ . '/EntityAips')
             ),
             'orm_aips' => array(
+                'class' => 'Doctrine\ORM\Mapping\Driver\DriverChain',
                 'drivers' => array(
-                    __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver_aips'
+                    __NAMESPACE__ . '\EntityAips' => __NAMESPACE__ . '_driver_aips'
                 )
             )
         )

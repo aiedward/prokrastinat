@@ -1,3 +1,4 @@
+
 <h1>Pregled uporabnika <i><?=$user->username?></i></h1>
 
 <?php if ($this->isGranted('user_uredi')): ?>
@@ -17,7 +18,19 @@
         <th>Email</th>
         <td><?=$user->email?></td>
     </tr>
-    <?= ($this->isGranted('user_pregled')) ? '<tr><th>Vpisna številka</th><td>' . $user->vpisna_st . '</td></tr>' : null ?>
+    <?php if ($this->isGranted('user_pregled') || $user->id === $uid): ?>
+    <tr>
+        <th>Vpisna številka</th>
+        <td><?= $user->vpisna_st ?></td>
+    </tr>
+    <tr>
+        <th>Program</th>
+        <td><?= $user->vpisna_st ?></td>
+    </tr>
+    <tr>
+        <th>Letnik</th>
+        <td><?= $user->vpisna_st ?></td>
+    </tr>
     <?= (!empty($user->naslov)) ? '<tr><th>Naslov</th><td>' . $user->naslov . '</td></tr>' : null ?>
     <?= (!empty($user->mesto)) ? '<tr><th>Mesto</th><td>' . $user->mesto . '</td></tr>' : null ?>
     <?= (!empty($user->drzava)) ? '<tr><th>Država</th><td>' . $user->drzava . '</td></tr>' : null ?>

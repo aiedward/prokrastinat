@@ -128,7 +128,7 @@ class UserController extends BaseController
                 return $view;
             }
             
-            return new ViewModel(array('user' => $user));
+            return new ViewModel(array('user' => $user, 'uid' => $this->auth->getIdentity()->id));
         }
         
         public function changepasswordAction()

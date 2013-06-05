@@ -17,63 +17,16 @@
         <th>Email</th>
         <td><?=$user->email?></td>
     </tr>
-    <?php if ($this->isGranted('user_pregled')): ?>
-    <tr>
-        <th>Vpisna številka</th>
-        <td><?=$user->vpisna_st?></td>
-    </tr>
-    <?php endif; ?>
-    <?php if ($user->naslov != NULL): ?>
-    <?php if ($user->naslov !== ''): ?>
-    <tr>
-        <th>Naslov</th>
-        <td><?=$user->naslov?></td>
-    </tr>
-    <?php endif; ?>
-    <?php endif; ?>
-    <?php if ($user->mesto != NULL): ?>
-    <?php if ($user->mesto !== ''): ?>
-    <tr>
-        <th>Mesto</th>
-        <td><?=$user->mesto?></td>
-    </tr>
-    <?php endif; ?>
-    <?php endif; ?>
-    <?php if ($user->drzava != NULL): ?>
-    <?php if ($user->drzava !== ''): ?>
-    <tr>
-        <th>Država</th>
-        <td><?=$user->drzava?></td>
-    </tr>
-    <?php endif; ?>
-    <?php endif; ?>
-    <?php if ($user->opis != NULL): ?>
-    <?php if ($user->opis !== ''): ?>
-    <tr>
-        <th>Opis</th>
-        <td><?=$user->opis?></td>
-    </tr>
-    <?php endif; ?>
-    <?php endif; ?>
-    <?php if ($user->splet != NULL): ?>
-    <?php if ($user->splet !== ''): ?>
-    <tr>
-        <th>Spletna stran</th>
-        <td><a href="http://<?=$user->splet?>"><?=$user->splet?></a></td>
-    </tr>
-    <?php endif; ?>
-    <?php endif; ?>
-    <?php if ($user->telefon != NULL): ?>
-    <?php if ($user->telefon !== ''): ?>
-    <tr>
-        <th>Telefon</th>
-        <td><?=$user->telefon?></td>
-    </tr>
-    <?php endif; ?>
-    <?php endif; ?>
+    <?= ($this->isGranted('user_pregled')) ? '<tr><th>Vpisna številka</th><td>' . $user->vpisna_st . '</td></tr>' : null ?>
+    <?= (!empty($user->naslov)) ? '<tr><th>Naslov</th><td>' . $user->naslov . '</td></tr>' : null ?>
+    <?= (!empty($user->mesto)) ? '<tr><th>Mesto</th><td>' . $user->mesto . '</td></tr>' : null ?>
+    <?= (!empty($user->drzava)) ? '<tr><th>Država</th><td>' . $user->drzava . '</td></tr>' : null ?>
+    <?= (!empty($user->opis)) ? '<tr><th>Opis</th><td>' . $user->opis . '</td></tr>' : null ?>
+    <?= (!empty($user->splet)) ? '<tr><th>Spletna stran</th><td><a href="http://' . $user->splet . '">' . $user->splet . '</a></td></tr>' : null ?>
+    <?= (!empty($user->telefon)) ? '<tr><th>Telefon</th><td>' . $user->telefon . '</td></tr>' : null ?>
     <tr>
         <th>Datum zadnje prijave</th>
-        <td><?=$user->datum_logina->format('d-m-Y')?></td>
+        <td><?= $this->dateFormat($user->datum_logina, IntlDateFormatter::LONG, IntlDateFormatter::NONE, 'sl_SI') ?></td>
     </tr>
     
 </table>

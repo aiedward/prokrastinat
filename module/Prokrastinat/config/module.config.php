@@ -25,6 +25,7 @@ return array(
         'invokables' => array(
             'login_box' => 'Prokrastinat\View\Helper\LoginHelper',
             'hasRole' => 'Prokrastinat\View\Helper\HasRole',
+            'sidebar' =>'Prokrastinat\View\Helper\SidebarHelper',
         )
     ),
     'router' => array(

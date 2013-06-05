@@ -128,7 +128,8 @@ class UserController extends BaseController
                 return $view;
             }
             
-            return new ViewModel(array('user' => $user, 'uid' => $this->auth->getIdentity()->id));
+			$studij = $this->getServiceLocator()->get('doctrine.entitymanager.orm_aips')->getRepository('\Prokrastinat\EntityAips\Studij');
+            return new ViewModel(array('user' => $user, 'uid' => $this->auth->getIdentity()->id, 'studij' => $studij));
         }
         
         public function changepasswordAction()

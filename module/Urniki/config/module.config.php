@@ -33,18 +33,6 @@ return array(
         ),
     ),
     'doctrine' => array(
-        'configuration' => array(
-            'orm_urniki' => array(
-                'metadata_cache'    => 'array',
-                'query_cache'       => 'array',
-                'result_cache'      => 'array',
-                'driver'            => 'orm_urniki',
-                'generate_proxies'  => true,
-                'proxy_dir'         => 'data/DoctrineORMModule/Proxy',
-                'proxy_namespace'   => 'DoctrineORMModule\Proxy',
-                'filters'           => array()
-            )
-        ),
         'driver' => array(
             __NAMESPACE__ . '_driver' => array(
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
@@ -59,19 +47,7 @@ return array(
             )
         ),
         // urniki entity manager
-        'entitymanager' => array(
-            'orm_urniki' => array(
-                'connection'    => 'orm_urniki',
-                'configuration' => 'orm_urniki'
-            )
-        ),
+        
     ),
-    'service_manager' => array(
-        'factories' => array(
-            'doctrine.entitymanager.orm_urniki' => new DoctrineORMModule\Service\EntityManagerFactory('orm_urniki'),
-            'doctrine.connection.orm_urniki' => new DoctrineORMModule\Service\DBALConnectionFactory('orm_urniki'),
-            'doctrine.configuration.orm_urniki' => new DoctrineORMModule\Service\ConfigurationFactory('orm_urniki'),
-            'doctrine.driver.orm_urniki'       => new DoctrineModule\Service\DriverFactory('orm_urniki'),
-        )
-    )
+    
 );

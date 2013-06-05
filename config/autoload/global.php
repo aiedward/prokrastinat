@@ -15,6 +15,14 @@ return array(
     'service_manager' => array(
         'factories' => array(
             'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
+            'doctrine.entitymanager.orm_urniki' => new DoctrineORMModule\Service\EntityManagerFactory('orm_urniki'),
+            'doctrine.connection.orm_urniki' => new DoctrineORMModule\Service\DBALConnectionFactory('orm_urniki'),
+            'doctrine.configuration.orm_urniki' => new DoctrineORMModule\Service\ConfigurationFactory('orm_urniki'),
+            'doctrine.driver.orm_urniki'       => new DoctrineModule\Service\DriverFactory('orm_urniki'),
+            'doctrine.entitymanager.orm_aips' => new DoctrineORMModule\Service\EntityManagerFactory('orm_aips'),
+            'doctrine.connection.orm_aips' => new DoctrineORMModule\Service\DBALConnectionFactory('orm_aips'),
+            'doctrine.configuration.orm_aips' => new DoctrineORMModule\Service\ConfigurationFactory('orm_aips'),
+            'doctrine.driver.orm_aips'       => new DoctrineModule\Service\DriverFactory('orm_aips'),
         ),
     ),
     'translator' => array(
@@ -41,6 +49,38 @@ return array(
         'forbidden_template'        => 'error/403',
     ),
     'doctrine' => array(
+        'configuration' => array(
+            'orm_urniki' => array(
+                'metadata_cache'    => 'array',
+                'query_cache'       => 'array',
+                'result_cache'      => 'array',
+                'driver'            => 'orm_urniki',
+                'generate_proxies'  => true,
+                'proxy_dir'         => 'data/DoctrineORMModule/Proxy',
+                'proxy_namespace'   => 'DoctrineORMModule\Proxy',
+                'filters'           => array()
+            ),
+            'orm_aips' => array(
+                'metadata_cache'    => 'array',
+                'query_cache'       => 'array',
+                'result_cache'      => 'array',
+                'driver'            => 'orm_aips',
+                'generate_proxies'  => true,
+                'proxy_dir'         => 'data/DoctrineORMModule/Proxy',
+                'proxy_namespace'   => 'DoctrineORMModule\Proxy',
+                'filters'           => array()
+            )
+        ),
+        'entitymanager' => array(
+            'orm_urniki' => array(
+                'connection'    => 'orm_urniki',
+                'configuration' => 'orm_urniki'
+            ),
+            'orm_aips' => array(
+                'connection'    => 'orm_aips',
+                'configuration' => 'orm_aips'
+            ),
+        ),
         'authentication' => array(
             'orm_default' => array(
                 'object_manager' => 'Doctrine\ORM\EntityManager',
@@ -50,5 +90,5 @@ return array(
                 'credentialCallable' => 'Prokrastinat\Repository\UserRepository::hashPassword'
             ),
         ),
-    )
+    ),
 );

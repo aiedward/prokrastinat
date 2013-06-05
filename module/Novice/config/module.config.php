@@ -25,7 +25,7 @@ return array(
             'novice' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/novice[/:action][/:id][/]',
+                    'route' => '/novice[/:action][/:id]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9]*',
                         'id'     => '[0-9]+'
@@ -33,6 +33,19 @@ return array(
                     'defaults' => array(
                         'controller' => 'Novica',
                         'action' => 'index'
+                    ),
+                ),
+            ),
+            'novice_view' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/novice/pregled/:id',
+                    'constraints' => array(
+                        'id'     => '[0-9]+'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Novica',
+                        'action' => 'pregled'
                     ),
                 ),
             ),

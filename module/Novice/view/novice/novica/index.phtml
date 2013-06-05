@@ -15,7 +15,7 @@ $this->headTitle($title);
         <div class="novicaHeader">
             <b> <?= $this->escapeHtml($novica->datum_objave->format('d-m-Y')); ?></b> 
             <b>
-                <a href="<?= $this->url('novice', array('action' => 'pregled', 'id' => $novica->id));?>">
+                <a href="<?= $this->url('novice_view', array('id' => $novica->id)) ?>">
                     <?= $novica->naslov; ?>
                 </a>
             </b>

@@ -7,7 +7,7 @@ use Prokrastinat\Entity\BaseEntity;
 
 /**
  * @ORM\Entity
- * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\Table(name="profesor")
  */
 class Profesor extends BaseEntity
 {

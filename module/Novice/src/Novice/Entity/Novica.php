@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Prokrastinat\Entity\User;
 
 /** 
- * @ORM\Entity
  * @ORM\Entity(repositoryClass="Novice\Repository\NovicaRepository") 
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="discr", type="string")

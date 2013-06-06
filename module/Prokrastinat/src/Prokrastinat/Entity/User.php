@@ -4,7 +4,10 @@ namespace Prokrastinat\Entity;
 use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Mapping as ORM;
 
-/** @ORM\Entity(repositoryClass="Prokrastinat\Repository\UserRepository") */
+/** 
+ * @ORM\Entity(repositoryClass="Prokrastinat\Repository\UserRepository")
+ * @ORM\Table(name="user")
+ */
 class User extends BaseEntity
 {
     /**
@@ -59,7 +62,7 @@ class User extends BaseEntity
     protected $naslov;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Role", inversedBy="user")
+     * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
      * @ORM\JoinTable(name="rbac_user_roles")
      */
     protected $roles;

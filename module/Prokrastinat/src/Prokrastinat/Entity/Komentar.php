@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(name="komentar")
  * @ORM\InheritanceType("SINGLE_TABLE")
  */
 class Komentar extends BaseEntity
@@ -19,7 +20,7 @@ class Komentar extends BaseEntity
     /** @ORM\ManyToOne(targetEntity="User") */
     protected $user;
 
-    /** @ORM\ManyToOne(targetEntity="Objava") */
+    /** @ORM\ManyToOne(targetEntity="Objava", inversedBy="komentarji") */
     protected $objava;
 
     /** @ORM\Column(length=5000) */

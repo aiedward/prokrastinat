@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(options={"collate"="utf8_slovenian_ci"})
+ * @ORM\Table(name="obajva_beseda", options={"collate"="utf8_slovenian_ci"})
  */
 class ObjavaBeseda extends BaseEntity
 {

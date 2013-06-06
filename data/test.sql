@@ -1,4 +1,4 @@
-INSERT INTO `User` (`id`, `email`, `username`, `vpisna_st`, `ime`, `priimek`, `password`, `datum_logina`, `enabled`, `confirmation`, `mesto`, `drzava`, `opis`, `splet`, `telefon`, `naslov`) VALUES
+INSERT INTO `user` (`id`, `email`, `username`, `vpisna_st`, `ime`, `priimek`, `password`, `datum_logina`, `enabled`, `confirmation`, `mesto`, `drzava`, `opis`, `splet`, `telefon`, `naslov`) VALUES
 (1, 'admin@borkovic.com', 'admin', 'E000000', 'Admin', 'Borkovič', '$2y$14$RFN75HJ0rK4V4fAJ5jnrdeXZsiLrHAdBCuhmQY.P4dGmBDSaYZvBi', '2013-05-21 20:36:57', 1, NULL, NULL, NULL, 'To je neki dolgi opis, kao', NULL, NULL, 'To je cesta 9'),
 (2, 'moderator@borkovic.com', 'moderator', 'E000001', 'Moderator', 'Borkovich', '$2y$14$RFN75HJ0rK4V4fAJ5jnrdeXZsiLrHAdBCuhmQY.P4dGmBDSaYZvBi', '2013-05-21 20:50:40', 1, NULL, NULL, 'Slovenija', NULL, NULL, '040932921', NULL),
 (3, 'student@borkovic.com', 'student', 'E000002', 'Študent', 'Borkovichevich', '$2y$14$RFN75HJ0rK4V4fAJ5jnrdeXZsiLrHAdBCuhmQY.P4dGmBDSaYZvBi', '2013-05-21 20:49:25', 1, NULL, 'Maribor', NULL, NULL, 'www.kreten.si', NULL, NULL);
@@ -68,7 +68,7 @@ INSERT INTO `rbac_user_roles` (`user_id`, `role_id`) VALUES
 (2, 2),
 (3, 3);
 
-INSERT INTO `Kategorija` (`id`, `ime`) VALUES
+INSERT INTO `kategorija` (`id`, `ime`) VALUES
 (1, 'Računalniška omrežja'),
 (2, 'Podatkovne baze'),
 (3, 'Uporabniški vmesniki'),

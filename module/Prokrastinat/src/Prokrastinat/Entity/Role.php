@@ -18,6 +18,12 @@ class Role extends BaseEntity
     
     /** @ORM\Column(length=20, nullable=false, unique=true) */
     protected $name;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="roles")
+     * @ORM\JoinTable(name="rbac_user_roles")
+     */
+    protected $users;
     
     /**
      * @ORM\ManyToOne(targetEntity="Role")

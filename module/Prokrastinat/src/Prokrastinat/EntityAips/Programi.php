@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Prokrastinat\Entity\BaseEntity;
 
 /** @ORM\Entity */
-class programi extends BaseEntity
+class Programi extends BaseEntity
 {
 	/** @ORM\Column(type="integer") */
 	protected $PredmetnikID;

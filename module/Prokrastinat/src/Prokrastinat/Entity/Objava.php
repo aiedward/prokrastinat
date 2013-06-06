@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(name="objava")
  * @ORM\InheritanceType("SINGLE_TABLE")
  */
 class Objava extends BaseEntity
@@ -28,7 +29,7 @@ class Objava extends BaseEntity
     /** @ORM\Column(type="datetime") */
     protected $datum_objave;
 
-    /** @ORM\ManyToOne(targetEntity="Kategorija") */
+    /** @ORM\ManyToOne(targetEntity="Kategorija", inversedBy="objave") */
     protected $kategorija;
 
     /** @ORM\OneToMany(targetEntity="Komentar", mappedBy="objava") */
@@ -36,7 +37,7 @@ class Objava extends BaseEntity
 
     /**
      * @ORM\ManyToMany(targetEntity="Oznaka", mappedBy="objave")
-     * @ORM\JoinTable(name="Objava_Oznaka")
+     * @ORM\JoinTable(name="objava_oznaka")
      */
     protected $oznake;
 }

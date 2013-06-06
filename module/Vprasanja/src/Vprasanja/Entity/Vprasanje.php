@@ -13,7 +13,7 @@ class Vprasanje extends Objava
 
     /**
      * @ORM\ManyToMany(targetEntity="Prokrastinat\Entity\User")
-     * @ORM\JoinTable(name="Vprasanje_UserRated")
+     * @ORM\JoinTable(name="vprasanje_user_rated")
      */
     protected $users_rated;
 }

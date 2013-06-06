@@ -14,7 +14,7 @@ class Odgovor extends Komentar
 
     /**
      * @ORM\ManyToMany(targetEntity="Prokrastinat\Entity\User")
-     * @ORM\JoinTable(name="Odgovor_UserRated")
+     * @ORM\JoinTable(name="odgovor_user_rated")
      */
     protected $users_rated;
 }

@@ -4,7 +4,10 @@ namespace Prokrastinat\Entity;
 use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Mapping as ORM;
 
-/** @ORM\Entity(repositoryClass="Prokrastinat\Repository\KategorijaRepository") */
+/**
+ * @ORM\Entity(repositoryClass="Prokrastinat\Repository\KategorijaRepository")
+ * @ORM\Table(name="kategorija")
+ */
 class Kategorija extends BaseEntity
 {
     /**

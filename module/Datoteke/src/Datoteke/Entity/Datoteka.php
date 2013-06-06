@@ -7,7 +7,7 @@ use Prokrastinat\Entity\User;
 
 /**
  * @ORM\Entity(repositoryClass="Datoteke\Repository\DatotekaRepository")
- * 
+ * @ORM\Table(name="datoteka")
  */
 class Datoteka extends BaseEntity
 {

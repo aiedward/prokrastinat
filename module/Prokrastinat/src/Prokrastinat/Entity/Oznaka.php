@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(name="oznaka")
  * @ORM\InheritanceType("SINGLE_TABLE")
  */
 class Oznaka extends BaseEntity
@@ -21,7 +22,7 @@ class Oznaka extends BaseEntity
 
     /**
      * @ORM\ManyToMany(targetEntity="Objava", inversedBy="oznake")
-     * @ORM\JoinTable(name="Objava_Oznaka")
+     * @ORM\JoinTable(name="objava_oznaka")
      */
     protected $objave;
 }

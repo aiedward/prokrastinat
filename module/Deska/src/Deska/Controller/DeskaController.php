@@ -42,6 +42,7 @@ class DeskaController extends BaseController
         if (!$this->isGranted('deska_dodaj')) 
             $this->dostopZavrnjen();
         
+        $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
         $this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
         $options = $this->kategorija_repository->getKategorijeInArray();
         $form = new DeskaForm($options);

@@ -26,7 +26,9 @@ INSERT INTO `rbac_permission` (`id`, `name`) VALUES
 (20, 'novica_pregled'),
 (21, 'novica_dodaj'),
 (22, 'novica_uredi'),
-(23, 'novica_brisi');
+(23, 'novica_brisi'),
+(24, 'kategorije_dodaj'),
+(25, 'kategorije_pregled');
  
 INSERT INTO `rbac_role` (`id`, `parent_role_id`, `name`) VALUES
 (1, NULL, 'admin'),
@@ -57,7 +59,9 @@ INSERT INTO `rbac_role_permission` (`id`, `role_id`, `permission_id`) VALUES
 (20, 4, 20),
 (21, 3, 21),
 (22, 2, 22),
-(23, 2, 23);
+(23, 2, 23),
+(24, 2, 24),
+(25, 2, 25);
  
 INSERT INTO `rbac_user_roles` (`user_id`, `role_id`) VALUES
 (1, 1),

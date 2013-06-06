@@ -33,6 +33,14 @@ class OglasRepository extends EntityRepository
         return $options;
     }
     
+        public function getKategorije2()
+    {
+        $em = $this->getEntityManager();
+        $kategorije = $em->getRepository('Prokrastinat\Entity\Kategorija')->findAll();
+        
+        return $kategorije;
+    }
+    
     public function getOglasiByKategorija($kategorija)
     {
         $em = $this->getEntityManager();

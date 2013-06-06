@@ -60,7 +60,7 @@ class UserController extends BaseController
     {
             if (!$this->auth->hasIdentity()) $this->dostopZavrnjen();
             $form = new \Prokrastinat\Form\EditForm();
-			$form->setInputFilter(new \Prokrastinat\Form\EditFilter());
+            $form->setInputFilter(new \Prokrastinat\Form\EditFilter());
             $urejanje = false;
 			
 			if (!$this->isGranted('user_uredi')) {

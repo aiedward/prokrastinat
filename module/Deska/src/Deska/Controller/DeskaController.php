@@ -7,6 +7,7 @@ use Zend\View\Model\ViewModel;
 use Deska\Entity\Oglas;
 use Deska\Form\DeskaForm;
 use Deska\Form\FilterForm;
+use Deska\Form\DodajKategorijoForm;
 
 class DeskaController extends BaseController 
 {
@@ -140,6 +141,30 @@ class DeskaController extends BaseController
         return array(
             'id' => $id,
             'oglas' => $this->em->find('Deska\Entity\Oglas', $id)
+        );
+    }
+    
+    public function kategorijeAction()
+    {
+        if (!$this->isGranted('kategorije_pregled')) 
+            $this->dostopZavrnjen();
+        
+        $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
+        $kategorije = $this->deska_repository->getKategorije2();
+        
+        return array('kategorije' => $kategorije);
+    }
+    
+    public function dodajkategorijoAction()
+    {
+        if (!$this->isGranted('kategorije_dodaj'))
+            $this->dostopZavrnjen();
+        
+        $form = new DodajKategorijoForm();
+        
+        return array(
+            'form' => $form,
+            'formType' => \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL,
         );
     }
 }

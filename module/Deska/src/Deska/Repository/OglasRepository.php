@@ -28,4 +28,13 @@ class OglasRepository extends EntityRepository
         
         return $query->getResult();
     }
+    
+    public function getLastOglasi()
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT o FROM Deska\Entity\Oglas o');
+        $query->setMaxResults(3);
+        
+        return $query->getResult();
+    }
 }

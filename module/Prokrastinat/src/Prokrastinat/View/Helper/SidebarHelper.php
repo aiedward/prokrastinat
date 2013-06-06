@@ -13,15 +13,18 @@ use Doctrine\Common\Collections\ArrayCollection;
 class SidebarHelper extends AbstractHelper implements ServiceLocatorAwareInterface {
     protected $serviceLocator;
     
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator) {
+    public function setServiceLocator(ServiceLocatorInterface $serviceLocator) 
+    {
         $this->serviceLocator = $serviceLocator;
     }
-    public function getServiceLocator() {
+    public function getServiceLocator() 
+    {
         return $this->serviceLocator;
     }
    
     
-    public function __invoke () {      
+    public function __invoke () 
+    {      
         $em = $this->getServiceLocator()->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $novicaRep = $em->getRepository('Novice\Entity\Novica');
         
@@ -35,6 +38,18 @@ class SidebarHelper extends AbstractHelper implements ServiceLocatorAwareInterfa
                 <?php echo $nov->vsebina;?>
             </div>
         <?php
+        }
+        
+        $deska_repository = $em->getRepository('Deska\Entity\Oglas');
+        $oglasi = $deska_repository->getLastOglasi();
+        
+        foreach ($oglasi as $oglas) {
+            ?>
+                <div class="sidebar-novica">
+                    <b><a href="<?= $this->url('deska', array('action' => 'preglej', 'id' => $oglas->id))?>"><?= $oglas->naslov;?></a></b>
+                    <br />
+                </div>
+            <?php
         }
     }
 }

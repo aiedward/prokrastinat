@@ -1,0 +1,18 @@
+<h2>Kategorije</h2>
+
+<a class="btn btn-primary" href="<?= $this->url('deska', array('action' => 'dodajkategorijo'))?>">Dodaj kategorijo</a>
+
+<h3>Pregled</h3>
+
+    <table class="table">
+        <tr>
+            <th>Ime</th>
+            <th></th>
+        </tr>
+        <?php foreach($kategorije as $kat): ?>
+            <tr>
+                <td><?= $this->escapeHtml($kat->ime)?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+

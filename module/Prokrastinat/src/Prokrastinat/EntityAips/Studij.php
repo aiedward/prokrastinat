@@ -5,7 +5,10 @@ use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Mapping as ORM;
 use Prokrastinat\Entity\BaseEntity;
 
-/** @ORM\Entity(repositoryClass="Prokrastinat\Repository\StudijRepository") */
+/**
+ * @ORM\Entity(repositoryClass="Prokrastinat\Repository\StudijRepository")
+ * @ORM\Table(name="pisum.Studij")
+ */
 class Studij extends BaseEntity
 {
 	/**
@@ -32,8 +35,8 @@ class Studij extends BaseEntity
 	/** @ORM\Column(length=1) */
 	protected $Stanje;
 
-	/** @ORM\Column(type="Datetime") */
-	protected $DatumZakljucka;
+	/** @ORM\Column(type="datetime") */
+	//protected $DatumZakljucka;
 
 	/** @ORM\Column(length=1) */
 	protected $VpisDiplomant;
@@ -50,14 +53,14 @@ class Studij extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $ReferentID;
 
-	/** @ORM\Column(type="Datetime") */
-	protected $ZadnjaSprememba;
+	/** @ORM\Column(type="datetime") */
+	//protected $ZadnjaSprememba;
 
 	/** @ORM\Column(length=40) */
 	protected $Geslo;
 
-	/** @ORM\Column(type="Datetime") */
-	protected $ZadnjaPrijava;
+	/** @ORM\Column(type="datetime") */
+	//protected $ZadnjaPrijava;
 
 	/** @ORM\Column(length=1) */
 	protected $BlokadaPrijave;

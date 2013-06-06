@@ -2,17 +2,12 @@
 namespace Prokrastinat\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 
 class StudijRepository extends EntityRepository
 {
-    public function getStudij($user) {
-        $qb = new \Doctrine\ORM\QueryBuilder();
-        $q = $qb->select('s')
-            ->from('\Prokrastinat\EntityAips\Studij', 's')
-            ->where('s.VpisnaStevilka = ?1')
-            ->setParameter(1, $user->vpisna_st);
-        
-        $result = $q->getResult();
-        return $result;
+    public function getStudij(\Prokrastinat\Entity\User $user)
+    {
+        return $this->findBy(array('VpisnaStevilka' => $user->vpisna_st));
     }
 }

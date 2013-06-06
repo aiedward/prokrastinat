@@ -16,7 +16,7 @@ class User extends BaseEntity
      */
     protected $id;
 
-    /** @ORM\Column(length=100) */
+    /** @ORM\Column(length=100, nullable=true) */
     protected $email;
 
     /** @ORM\Column(length=30) */
@@ -34,11 +34,11 @@ class User extends BaseEntity
     /** @ORM\Column(length=60) */
     protected $password;
 
-    /** @ORM\Column(type="datetime") */
+    /** @ORM\Column(type="datetime", nullable=true) */
     protected $datum_logina;
 
     /** @ORM\Column(type="boolean") */
-    protected $enabled;
+    protected $enabled = true;
 
     /** @ORM\Column(length=32, nullable=true) */
     protected $confirmation;

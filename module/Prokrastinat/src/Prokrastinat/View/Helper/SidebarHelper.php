@@ -10,7 +10,8 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 
 
-class SidebarHelper extends AbstractHelper implements ServiceLocatorAwareInterface {
+class SidebarHelper extends AbstractHelper implements ServiceLocatorAwareInterface 
+{
     protected $serviceLocator;
     
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator) 
@@ -40,13 +41,14 @@ class SidebarHelper extends AbstractHelper implements ServiceLocatorAwareInterfa
         <?php
         }
         
-        $deska_repository = $em->getRepository('Deska\Entity\Oglas');
-        $oglasi = $deska_repository->getLastOglasi();
+        $oglas_repo = $em->getRepository('Deska\Entity\Oglas');
+        $oglasi = $oglas_repo->getLastOglasi();
+        echo '<b style="margin-left: 6px">Zadnji oglasi</b>';
         
         foreach ($oglasi as $oglas) {
             ?>
                 <div class="sidebar-novica">
-                    <b><a href="<?= $this->url('deska', array('action' => 'preglej', 'id' => $oglas->id))?>"><?= $oglas->naslov;?></a></b>
+                    <b><a href=""><?= $oglas->naslov?></a></b>
                     <br />
                 </div>
             <?php

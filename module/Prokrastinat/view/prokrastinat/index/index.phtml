@@ -21,7 +21,9 @@
 <?php if (count($oglasi)): ?>
     <?php foreach($oglasi as $oglas): ?>
         <div class="well well-small">
+            <b> <?= $this->escapeHtml($oglas->datum_objave->format('d-m-Y')); ?></b> 
             <b><a href="<?= $this->url('deska', array('action' => 'preglej', 'id' => $oglas->id));?>"> <?= $oglas->naslov; ?> </a></b><br />
+            <p><?= $oglas->vsebina ?></p>
         </div>
     <?php endforeach; ?>
 <?php else: ?>

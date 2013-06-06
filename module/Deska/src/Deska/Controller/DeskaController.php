@@ -8,15 +8,17 @@ use Deska\Entity\Oglas;
 use Deska\Form\DeskaForm;
 use Deska\Form\FilterForm;
 use Deska\Form\DodajKategorijoForm;
+use Prokrastinat\Entity\Kategorija;
 
 class DeskaController extends BaseController 
 {
     protected $deska_repository;
+    protected $kategorija_repository;
     
     public function indexAction() 
     {   
-        $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
-        $options = $this->deska_repository->getKategorije();
+        $this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
+        $options = $this->kategorija_repository->getKategorijeInArray();
         
         $form = new FilterForm($options);
         $id = (int)$this->request->getPost('kategorija');
@@ -40,8 +42,8 @@ class DeskaController extends BaseController
         if (!$this->isGranted('deska_dodaj')) 
             $this->dostopZavrnjen();
         
-        $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
-        $options = $this->deska_repository->getKategorije();
+        $this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
+        $options = $this->kategorija_repository->getKategorijeInArray();
         $form = new DeskaForm($options);
         
         if ($this->request->isPost()) {
@@ -59,7 +61,7 @@ class DeskaController extends BaseController
                 );
                     
                 $this->deska_repository->saveOglas($oglas, $vals);
-                $this->getEntityManager()->flush();
+                $this->em->flush();
                 
                 return $this->redirect()->toRoute('deska');
             }
@@ -84,8 +86,8 @@ class DeskaController extends BaseController
         $id = (int)$this->params()->fromRoute('id', 0);
         $oglas = $this->em->find('Deska\Entity\Oglas', $id);
         
-        $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
-        $options = $this->deska_repository->getKategorije();
+        $this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
+        $options = $this->kategorija_repository->getKategorijeInArray();
         $form = new DeskaForm($options);
         
         $form->fill($oglas);
@@ -149,8 +151,8 @@ class DeskaController extends BaseController
         if (!$this->isGranted('kategorije_pregled')) 
             $this->dostopZavrnjen();
         
-        $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
-        $kategorije = $this->deska_repository->getKategorije2();
+        $this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
+        $kategorije = $this->deska_repository->getKategorije();
         
         return array('kategorije' => $kategorije);
     }
@@ -160,7 +162,24 @@ class DeskaController extends BaseController
         if (!$this->isGranted('kategorije_dodaj'))
             $this->dostopZavrnjen();
         
+        $this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
         $form = new DodajKategorijoForm();
+        
+        if ($this->request->isPost()) {
+            // set input filter
+            $form->setData($this->request->getPost());
+            
+            // is valid
+            $kategorija = new Kategorija();
+            $vals = array(
+                'ime' => $form->get('ime')->getValue(),
+            );
+            
+            $this->kategorija_repository->saveKategorija($kategorija, $vals);
+            $this->em->flush();
+            
+            return $this->redirect()->toRoute('deska');
+        }
         
         return array(
             'form' => $form,

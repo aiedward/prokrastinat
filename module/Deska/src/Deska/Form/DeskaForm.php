@@ -46,7 +46,7 @@ class DeskaForm extends Form
         ));
 
         $this->add(array(
-            'type' => 'Zend\Form\Element\DateSelect',
+            'type' => 'Zend\Form\Element\Date',
             'name' => 'datum-zapadlosti',
             'options' => array(
                 'label' => 'Zapade ', //

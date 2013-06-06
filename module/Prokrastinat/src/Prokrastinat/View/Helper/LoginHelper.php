@@ -43,7 +43,7 @@ class LoginHelper extends AbstractHelper implements ServiceLocatorAwareInterface
             return $button;
         } else {
             return '<p class="navbar-text pull-right">'
-                . '<a href="' . $url('user', array('action' => 'login', 'id' => 100)) . '">'
+                . '<a href="' . $url('user', array('action' => 'login')) . '">'
                 . $translate('Vpis') . '</a></p>';
         }
     }

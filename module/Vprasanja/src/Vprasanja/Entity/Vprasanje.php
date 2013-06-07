@@ -5,7 +5,7 @@ use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Mapping as ORM;
 use Prokrastinat\Entity\Objava;
 
-/** @ORM\Entity */
+/** @ORM\Entity(repositoryClass="Vprasanja\Repository\VprasanjeRepository") */
 class Vprasanje extends Objava
 {
     /** @ORM\Column(type="integer") */

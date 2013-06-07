@@ -26,7 +26,7 @@ return array(
             'vprasanje' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/vprasanje[/:action][/:id][/]',
+                    'route' => '/vprasanje[/:action][/:id]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9]*',
                         'id'     => '[0-9]+'
@@ -41,7 +41,7 @@ return array(
             'odgovor' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/vprasanje/:ido[/:action][/:id][/]',
+                    'route' => '/vprasanje/:ido[/:action][/:id]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9]*',
                         'ido'    => '[0-9]+',

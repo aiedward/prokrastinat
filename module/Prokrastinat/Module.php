@@ -2,6 +2,7 @@
 namespace Prokrastinat;
 
 use Prokrastinat\View\Helper\JeAvtor;
+use Prokrastinat\View\Helper\ImaPravico;
 
 class Module
 {
@@ -26,6 +27,9 @@ class Module
             'factories' => array(
                 'jeAvtor' => function($sm) {
                     return new JeAvtor($sm);
+                },
+                'imaPravico' => function($sm) {
+                    return new ImaPravico($sm);
                 },
             )
         );

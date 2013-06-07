@@ -1,6 +1,7 @@
 <?php
 namespace Vprasanja\Controller;
 
+use Zend\EventManager\EventManagerInterface;
 use Zend\View\Model\ViewModel;
 
 use Prokrastinat\Controller\BaseController;
@@ -11,13 +12,27 @@ use Vprasanja\Form\OdgovorForm;
 
 class VprasanjeController extends BaseController
 {
+    /** @var Vprasanja\Repository\VprasanjeRepository */
+    protected $vprasanjeRepository;
+
+    /** @var Vprasanja\Repository\OdgovorRepository */
+    protected $odgovorRepository;
+
+    public function setEventManager(EventManagerInterface $events)
+    {
+        parent::setEventManager($events);
+
+        $this->vprasanjeRepository = $this->em->getRepository('Vprasanja\Entity\Vprasanje');
+        $this->odgovorRepository = $this->em->getRepository('Vprasanja\Entity\Odgovor');
+     }
+
     public function indexAction()
     {
-        if (!$this->isGranted('vprasanje_index')) {
+        if (!$this->imaPravico('vprasanje_index')) {
             return $this->dostopZavrnjen();
         } 
 
-        $vprasanja = $this->em->getRepository('Vprasanja\Entity\Vprasanje')->findAll();
+        $vprasanja = $this->vprasanjeRepository->findAll();
 
         return new ViewModel(array(
             'vprasanja' => $vprasanja
@@ -26,15 +41,15 @@ class VprasanjeController extends BaseController
 
     public function pregledAction()
     {
-        if (!$this->isGranted('vprasanje_pregled')) {
+        if (!$this->imaPravico('vprasanje_pregled')) {
             return $this->dostopZavrnjen();
         } 
 
         $id = (int) $this->params()->fromRoute('id');
         $user = $this->auth->getIdentity();
 
-        $vprasanje = $this->em->find('Vprasanja\Entity\Vprasanje', $id);
-        $rating = count($vprasanje->users_rated);
+        $vprasanje = $this->vprasanjeRepository->find($id);
+        $rating = $vprasanje->users_rated->rating;
         $has_rated = $vprasanje->users_rated->contains($user);
 
         $form = new OdgovorForm();
@@ -52,7 +67,7 @@ class VprasanjeController extends BaseController
 
     public function dodajAction()
     {
-        if (!$this->isGranted('vprasanje_dodaj')) {
+        if (!$this->imaPravico('vprasanje_dodaj')) {
             return $this->dostopZavrnjen();
         } 
 
@@ -63,13 +78,10 @@ class VprasanjeController extends BaseController
             $form->setData($this->request->getPost());
 
             if ($form->isValid()) {
+                $user = $this->auth->getIdentity();
                 $vprasanje = new Vprasanje();
-                $vprasanje->user = $this->auth->getIdentity();
-                $vprasanje->naslov = $form->get('naslov')->getValue();
-                $vprasanje->vsebina = $form->get('vsebina')->getValue();
-                $vprasanje->datum_objave = new \DateTime("now");
 
-                $this->em->persist($vprasanje);
+                $this->vprasanjeRepository->dodaj($vprasanje, $user, $form);
                 $this->em->flush();
 
                 return $this->redirect()->toRoute('preglej', array('id' => $vprasanje->id));
@@ -84,9 +96,9 @@ class VprasanjeController extends BaseController
     public function urediAction()
     {
         $id = (int) $this->params()->fromRoute('id', 0);
-        $vprasanje = $this->em->find('Vprasanja\Entity\Vprasanje', $id);
+        $vprasanje = $this->vprasanjeRepository->find($id);
 
-        if (!$this->isGranted('vprasanje_uredi') && !$this->jeAvtor($vprasanje->user)) {
+        if (!$this->imaPravico('vprasanje_uredi', $vprasanje->user)) {
             return $this->dostopZavrnjen();
         }
 
@@ -97,10 +109,7 @@ class VprasanjeController extends BaseController
             $form->setData($this->request->getPost());
 
             if ($form->isValid()) {
-                $vprasanje->naslov = $form->get('naslov')->getValue();
-                $vprasanje->vsebina = $form->get('vsebina')->getValue();
-
-                $this->em->persist($vprasanje);
+                $this->vprasanjeRepository->uredi($vprasanje, $form);
                 $this->em->flush();
 
                 return $this->redirect()->toRoute('preglej', array('id' => $vprasanje->id));
@@ -117,13 +126,13 @@ class VprasanjeController extends BaseController
     public function brisiAction()
     {
         $id = (int) $this->params()->fromRoute('id', 0);
-        $vprasanje = $this->em->find('Vprasanja\Entity\Vprasanje', $id);
+        $vprasanje = $this->vprasanjeRepository->find($id);
 
-        if (!$this->isGranted('vprasanje_brisi') && !$this->jeAvtor($vprasanje->user)) {
+        if (!$this->imaPravico('vprasanje_brisi', $vprasanje->user)) {
             return $this->dostopZavrnjen();
         }
 
-        $this->em->remove($vprasanje);
+        $this->vprasanjeRepository->brisi($vprasanje);
         $this->em->flush();
 
         return $this->redirect()->toRoute('vprasanje');
@@ -131,32 +140,32 @@ class VprasanjeController extends BaseController
 
     public function voteAction()
     {
+        if (!$this->imaPravico('vprasanje_vote')) {
+            return $this->dostopZavrnjen();
+        }
+
         $id = (int) $this->params()->fromRoute('id', 0);
-        $vprasanje = $this->em->find('Vprasanja\Entity\Vprasanje', $id);
+        $vprasanje = $this->vprasanjeRepository->find($id);
 
         $user = $this->auth->getIdentity();
-        if (!$vprasanje->users_rated->contains($user)) {
-            $vprasanje->users_rated->add($user);
-
-            $this->em->persist($vprasanje);
-            $this->em->flush();
-        }
+        $this->vprasanjeRepository->vote($vprasanje, $user);
+        $this->em->flush();
 
         return $this->redirect()->toRoute('preglej', array('id' => $vprasanje->id));
     }
 
     public function unvoteAction()
     {
+        if (!$this->imaPravico('vprasanje_vote')) {
+            return $this->dostopZavrnjen();
+        }
+
         $id = (int) $this->params()->fromRoute('id', 0);
-        $vprasanje = $this->em->find('Vprasanja\Entity\Vprasanje', $id);
+        $vprasanje = $this->vprasanjeRepository->find($id);
 
         $user = $this->auth->getIdentity();
-        if ($vprasanje->users_rated->contains($user)) {
-            $vprasanje->users_rated->removeElement($user);
-            
-            $this->em->persist($vprasanje);
-            $this->em->flush();
-        }
+        $this->vprasanjeRepository->unvote($vprasanje, $user);
+        $this->em->flush();
 
         return $this->redirect()->toRoute('preglej', array('id' => $vprasanje->id));
     }

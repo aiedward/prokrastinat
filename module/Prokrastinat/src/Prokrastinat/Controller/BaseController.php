@@ -22,6 +22,7 @@ abstract class BaseController extends AbstractActionController
 
     public function getEntityManager()
     {
+        echo "zamenjaj $this->getEntityManager z $this->em";
         return $this->em;
     }
 
@@ -37,8 +38,14 @@ abstract class BaseController extends AbstractActionController
         }
     }
 
+    public function imaPravico($permission, $owner = null)
+    {
+        return $this->isGranted($permission) || $this->auth->getIdentity() === $owner;
+    }
+
     public function jeAvtor($user)
     {
+        echo "zamenjaj isGranted(permission) || jeAvtor(owner) z imaPravico(permission, owner)";
         return $this->auth->getIdentity() === $user;
     }
 }

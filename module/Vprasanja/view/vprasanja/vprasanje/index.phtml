@@ -1,5 +1,5 @@
 <h1>Vprašanja</h1>
-<?php if ($this->isGranted('vprasanje_dodaj')): ?>
+<?php if ($this->imaPravico('vprasanje_dodaj')): ?>
     <div id="top-menu">
         <a class="btn btn-primary" href="<?= $this->url('vprasanje', array('action' => 'dodaj')); ?>" id="dodaj-vprasanje">Dodaj</a>
     </div>

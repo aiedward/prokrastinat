@@ -1,22 +1,31 @@
 <div class="well well-small">
     <p><?= $odgovor->vsebina ?></p>
     <p>
-        <i class="icon-user"></i> <a href="<?= $this->url('user', array('action' => 'edit', 'id' => $odgovor->user->id)) ?>"><?= $this->escapeHtml($odgovor->user->getPolnoIme()) ?></a>
+        <i class="icon-user"></i>
+        <a href="<?= $this->url('user', array('action' => 'edit', 'id' => $odgovor->user->id)) ?>">
+        <?= $this->escapeHtml($odgovor->user->getPolnoIme()) ?></a>
+
         | <i class="icon-calendar"></i> <?= $this->dateFormat($odgovor->datum_objave, IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT) ?>
         | Rating: <?= $this->rating ?>
 
-        <?php if($this->isGranted('odgovor_uredi') || $this->jeAvtor($odgovor->user)): ?>
-            | <a href="<?= $this->url('odgovor', array('action' => 'uredi', 'ido' => $odgovor->objava->id, 'id' => $odgovor->id)) ?>"><?= $this->translate("Uredi") ?></a>
+        <?php if ($this->imaPravico('odgovor_uredi', $odgovor->user)): ?>
+            | <a href="<?= $this->url('odgovor', array('action' => 'uredi', 'ido' => $odgovor->objava->id, 'id' => $odgovor->id)) ?>">
+              <?= $this->translate("Uredi") ?></a>
         <?php endif ?>
 
-        <?php if($this->isGranted('odgovor_brisi') || $this->jeAvtor($odgovor->user)): ?>
-            | <a href="<?= $this->url('odgovor', array('action' => 'brisi', 'ido' => $odgovor->objava->id, 'id' => $odgovor->id)) ?>"><?= $this->translate("Briši") ?></a>
+        <?php if ($this->imaPravico('odgovor_brisi', $odgovor->user)): ?>
+            | <a href="<?= $this->url('odgovor', array('action' => 'brisi', 'ido' => $odgovor->objava->id, 'id' => $odgovor->id)) ?>">
+              <?= $this->translate("Briši") ?></a>
         <?php endif ?>
 
-        <?php if($this->has_rated): ?>
-            | <a href="<?= $this->url('odgovor', array('action' => 'unvote', 'ido' => $odgovor->objava->id, 'id' => $odgovor->id)) ?>"><?= $this->translate("-1") ?></a>
-        <?php else: ?>
-            | <a href="<?= $this->url('odgovor', array('action' => 'vote', 'ido' => $odgovor->objava->id, 'id' => $odgovor->id)) ?>"><?= $this->translate("+1") ?></a>
+        <?php if ($this->imaPravico('odgovor_vote')): ?>
+            <?php if ($this->has_rated): ?>
+                | <a href="<?= $this->url('odgovor', array('action' => 'unvote', 'ido' => $odgovor->objava->id, 'id' => $odgovor->id)) ?>">
+                  <?= $this->translate("-1") ?></a>
+            <?php else: ?>
+                | <a href="<?= $this->url('odgovor', array('action' => 'vote', 'ido' => $odgovor->objava->id, 'id' => $odgovor->id)) ?>">
+                  <?= $this->translate("+1") ?></a>
+            <?php endif ?>
         <?php endif ?>
     </p>
 </div>

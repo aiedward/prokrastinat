@@ -100,8 +100,8 @@ class DatotekaController extends BaseController
                 unlink(dirname(dirname(dirname(dirname(dirname(__DIR__))))).'/data/uploads/'.$dat->imeDatoteke);
                 $datRep->deleteDatoteka($dat);
                 $this->em->flush();
+                $this->flashMessenger()->addMessage('Datoteka '. $dat->ime . ' je bila uspešno izbrisana!');
             }
-            $this->flashMessenger()->addMessage('Datoteka '. $dat->ime . ' je bila uspešno izbrisana!');
             return $this->redirect()->toRoute('datoteke');
          }
          return array(
@@ -143,10 +143,7 @@ class DatotekaController extends BaseController
         return new ViewModel(array('datoteke' => $dat));        
     }
     
-    public function urediAction(){
-        $deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
-        $options = $deska_repository->getKategorije();
-        
+    public function urediAction(){        
         $request = $this->getRequest();  
         $datRep = $this->em->getRepository('Datoteke\Entity\Datoteka');
         $id = (int) $this->params()->fromRoute('id', 0);
@@ -155,6 +152,9 @@ class DatotekaController extends BaseController
         if (!(($this->isGranted('datoteke_uredi'))||$this->jeAvtor($dat->user))) {
             return $this->dostopZavrnjen();
         }  
+        
+        $this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
+        $options = $this->kategorija_repository->getKategorijeInArray();
         
         $form = new UrediForm($options);     
         $form->get('opis')->setValue($dat->opis);

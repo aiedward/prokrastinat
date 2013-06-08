@@ -103,7 +103,7 @@ root {
 }
 
 .sidebar-novica{
-    border-top: 2px solid #0e90d2;
+    border: 2px solid #0e90d2;
     height: 100px;
     padding: 5px;
     margin: 5px;

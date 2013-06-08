@@ -20,6 +20,6 @@ class ImaPravico extends AbstractHelper implements ServiceLocatorAwareInterface 
         $auth = $this->getServiceLocator()->getServiceLocator()->get('Prokrastinat\Authentication\AuthenticationService');
         $rbac = $this->getServiceLocator()->getServiceLocator()->get('ZfcRbac\Service\Rbac');
 
-        return $rbac->isGranted($permission) || $auth->getIdentity() === $user;
+        return $rbac->isGranted($permission) || $auth->getIdentity() === $owner;
     }
 }

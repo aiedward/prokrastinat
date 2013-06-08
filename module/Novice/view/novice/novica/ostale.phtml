@@ -20,7 +20,7 @@ $this->headTitle($title);
                 </a>
             </b>
             <div class="ikone">
-               <?php if (($this->isGranted('novica_uredi')) || ($novica->user == $this->user)){ ?>
+               <?php if ($this->imaPravico('novica_uredi', $novica->user)){ ?>
                 <a class="btn btn-mini" href="<?php echo $this->url('novice', array('action'=>'uredi', 'id'=>$novica->id));?>">
                     <i class="icon-edit"></i>
                     Uredi

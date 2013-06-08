@@ -28,30 +28,22 @@ class SidebarHelper extends AbstractHelper implements ServiceLocatorAwareInterfa
     {      
         $em = $this->getServiceLocator()->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $novicaRep = $em->getRepository('Novice\Entity\Novica');
-        
         $novica = $novicaRep->getLastNovice(3);
+        $koncni ='<div style="text-align: center;"><b>Zadnje novice</b></div>';
         foreach($novica as $nov)
         {
-            ?>
-            <div class="sidebar-novica">
-                <b><a href=""><?php echo $nov->naslov;?></a></b>
-                <br>
-                <?php echo $nov->vsebina;?>
-            </div>
-        <?php
+            $koncni = $koncni."<div class='sidebar-novica'><b><a href='/novice/pregled/".$nov->id."'>".$nov->naslov."</a></b><br>".$nov->vsebina."</div>";      
         }
+        
         
         $oglas_repo = $em->getRepository('Deska\Entity\Oglas');
         $oglasi = $oglas_repo->getLastOglasi();
-        echo '<b style="margin-left: 6px">Zadnji oglasi</b>';
+        $koncni = $koncni.'<hr/><div style="text-align: center;"><b>Zadnji oglasi</b></div>';
         
         foreach ($oglasi as $oglas) {
-            ?>
-                <div class="sidebar-novica">
-                    <b><a href=""><?= $oglas->naslov?></a></b>
-                    <br />
-                </div>
-            <?php
+            $koncni = $koncni."<div class='sidebar-novica'><b><a href='/deska/preglej/".$oglas->id."'>".$oglas->naslov."</a></b><br>".$oglas->vsebina."</div>";      
         }
+        
+        return $koncni;
     }
 }

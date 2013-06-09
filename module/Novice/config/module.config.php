@@ -25,7 +25,7 @@ return array(
             'novice' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/novice',
+                    'route' => '/novice/',
                     'defaults' => array(
                         'controller' => 'Novica',
                         'action' => 'index'

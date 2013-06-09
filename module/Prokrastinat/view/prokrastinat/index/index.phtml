@@ -3,11 +3,16 @@
 <a href="<?= $this->url('novice') ?>"><h2>Novice</h2></a>
 <?php if (count($novice) != 0): ?>
     <?php foreach($novice as $novica): ?>
-        <div class="well well-small">
+        <div class="well well-small novica">
             <b> <?= $this->escapeHtml($novica->datum_objave->format('d-m-Y')); ?></b> 
             <b><a href="<?= $this->url('novice', array('action' => 'preglej', 'id' => $novica->id));?>"> <?= $novica->naslov; ?> </a></b><br />
-            <p class="novicaVsebina"><?php if(property_exists($novica, 'opis')) { echo $novica->opis;} 
-                     else{ echo $novica->vsebina;} ?>
+            <p class="novicaVsebina">
+                <?php if(is_null($novica->opis)){
+                        echo $novica->vsebina;
+                    } 
+                    else{
+                        echo $novica->opis;
+                } ?>
             </p>
         </div>
     <?php endforeach; ?>
@@ -20,7 +25,7 @@
 <a href="<?= $this->url('deska') ?>"><h2>Objave</h2></a>
 <?php if (count($oglasi)): ?>
     <?php foreach($oglasi as $oglas): ?>
-        <div class="well well-small">
+        <div class="well well-small novica">
             <b> <?= $this->escapeHtml($oglas->datum_objave->format('d-m-Y')); ?></b> 
             <b><a href="<?= $this->url('deska', array('action' => 'preglej', 'id' => $oglas->id));?>"> <?= $oglas->naslov; ?> </a></b><br />
             <p><?= $oglas->vsebina ?></p>

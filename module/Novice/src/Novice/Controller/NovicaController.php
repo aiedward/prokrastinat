@@ -17,7 +17,7 @@ class NovicaController extends BaseController
         if (!$this->isGranted('novica_index')) {
             return $this->dostopZavrnjen();
         } 
-        $query = $this->em->createQuery("SELECT n FROM Novice\Entity\Novica n");
+        $query = $this->em->createQuery("SELECT n FROM Novice\Entity\Novica n ORDER BY n.datum_objave DESC");
         $novice = $query->getResult();
         $user = $this->auth->getIdentity();
         

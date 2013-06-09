@@ -28,18 +28,85 @@ return array(
             'datoteke' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/datoteke[/:action][/:id]',
-                    'constraints' => array(
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'id'     => '[0-9]+',
-                    ),
+                    'route'    => '/datoteke/',
                     'defaults' => array(
                         'controller' => 'Datoteke',
                         'action'     => 'index',
                     ),
                 ),
             ),
-           
+            'datoteke_dodaj' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/datoteke/dodaj/',
+                    'defaults' => array(
+                        'controller' => 'Datoteke',
+                        'action' => 'dodaj'
+                    ),
+                ),
+            ),
+            'datoteke_moje' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/datoteke/moje/',
+                    'defaults' => array(
+                        'controller' => 'Datoteke',
+                        'action' => 'moje'
+                    ),
+                ),
+            ),
+            'datoteke_pregled' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/datoteke/pregled/:id',
+                    'constraints' => array(
+                        'id'     => '[0-9]+'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Datoteke',
+                        'action' => 'pregled'
+                    ),
+                ),
+            ),
+            'datoteke_uredi' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/datoteke/uredi/:id',
+                    'constraints' => array(
+                        'id'     => '[0-9]+'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Datoteke',
+                        'action' => 'uredi'
+                    ),
+                ),
+            ),
+            'datoteke_download' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/datoteke/download/:id',
+                    'constraints' => array(
+                        'id'     => '[0-9]+'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Datoteke',
+                        'action' => 'download'
+                    ),
+                ),
+            ),
+            'datoteke_brisi' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/datoteke/brisi/:id',
+                    'constraints' => array(
+                        'id'     => '[0-9]+'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Datoteke',
+                        'action' => 'brisi'
+                    ),
+                ),
+            ),
         ),
     ),
     

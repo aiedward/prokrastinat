@@ -6,7 +6,7 @@ $this->headTitle($title);
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 <?php if ($this->isGranted('novica_dodaj')): ?>
     <p>
-    <a class="btn btn-primary" href="<?php echo $this->url('novice', array('action' => 'parse')); ?>" id="dodaj-novico">Dodaj novice</a>
+    <a class="btn btn-primary" href="<?php echo $this->url('novice_parse'); ?>" id="dodaj-novico">Dodaj novice</a>
     </p>
 <?php endif; ?>
 
@@ -15,13 +15,13 @@ $this->headTitle($title);
         <div class="novicaHeader">
             <b> <?= $this->escapeHtml($novica->datum_objave->format('d-m-Y')); ?></b> 
             <b>
-                <a href="<?= $this->url('novice', array('action' => 'pregled', 'id' => $novica->id));?>">
+                <a href="<?= $this->url('novice_pregled', array('id' => $novica->id));?>">
                     <?= $novica->naslov; ?>
                 </a>
             </b>
             <div class="ikone">
                <?php if ($this->imaPravico('novica_uredi', $novica->user)){ ?>
-                <a class="btn btn-mini" href="<?php echo $this->url('novice', array('action'=>'uredi', 'id'=>$novica->id));?>">
+                <a class="btn btn-mini" href="<?php echo $this->url('novic_uredi', array('id'=>$novica->id));?>">
                     <i class="icon-edit"></i>
                     Uredi
                 </a>

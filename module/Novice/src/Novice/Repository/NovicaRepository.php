@@ -13,7 +13,7 @@ class NovicaRepository extends EntityRepository
     public function getLastNovice($stevilo)
     {
         $this->em = $this->getEntityManager();
-        $query = $this->em->createQuery("SELECT n FROM Novice\Entity\Novica n");
+        $query = $this->em->createQuery("SELECT n FROM Novice\Entity\Novica n ORDER BY n.datum_objave DESC");
         $query->setMaxResults($stevilo);
         $novice = $query->getResult();
         return $novice;

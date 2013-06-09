@@ -11,7 +11,7 @@ $this->headTitle($title);
 <?php endif; ?>
 
 <?php foreach ($novice as $novica) : ?>
-    <div class="well well-small">
+    <div class="well well-small novica">
         <div class="novicaHeader">
             <b> <?= $this->escapeHtml($novica->datum_objave->format('d-m-Y')); ?></b> 
             <b>
@@ -33,8 +33,13 @@ $this->headTitle($title);
             </div>
             <br/>
         </div>
-        <p class="novicaVsebina"><?php if(property_exists($novica, 'opis')) { echo $novica->opis;} 
-                 else{ echo $novica->vsebina;} ?>
+        <p class="novicaVsebina">
+            <?php if(is_null($novica->opis)){
+                        echo $novica->vsebina;
+                    } 
+                    else{
+                        echo $novica->opis;
+            } ?>
         </p>
     </div>
 <?php endforeach; ?>

@@ -6,8 +6,8 @@ $velikost_mb = $velikost/1024/1024;
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 <p>
-    <a href="<?php echo $this->url('datoteke', array('action'=>'index'));?>">Vse datoteke</a>
-    <a href="<?php echo $this->url('datoteke', array('action'=>'dodaj'));?>">Nalozi datoteko</a>
+    <a href="<?php echo $this->url('datoteke');?>">Vse datoteke</a>
+    <a href="<?php echo $this->url('datoteke_dodaj');?>">Nalozi datoteko</a>
 </p>
 <div id="kvota" style="text-align: right; font-weight: bold; font-size: 14px">
         <?php echo $this->escapeHtml(round($velikost_mb, 2));?> / 20MB
@@ -26,10 +26,10 @@ $velikost_mb = $velikost/1024/1024;
 <?php foreach ($datoteke as $datoteka) : ?>
 <tr>
     <td>
-        <a href="<?php echo $this->url('datoteke', array('action'=>'pregled', 'id'=>$datoteka->id));?>">
+        <a href="<?php echo $this->url('datoteke_pregled', array('id'=>$datoteka->id));?>">
             <?php echo $this->escapeHtml($datoteka->imeDatoteke);?>
         </a>
-        <a href="<?php echo $this->url('datoteke', array('action'=>'download', 'id'=>$datoteka->id));?>">
+        <a href="<?php echo $this->url('datoteke_download', array('id'=>$datoteka->id));?>">
            <i class="icon-download"></i>
         </a>
     </td>
@@ -40,11 +40,11 @@ $velikost_mb = $velikost/1024/1024;
     <td><?php echo $this->escapeHtml($datoteka->st_prenosov);?></td>
     <td>
         <?php if ($this->imaPravico('datoteke_uredi', $datoteka->user)){ ?>
-            <a class="btn btn-mini" href="<?php echo $this->url('datoteke', array('action'=>'uredi', 'id'=>$datoteka->id));?>">
+            <a class="btn btn-mini" href="<?php echo $this->url('datoteke_uredi', array('id'=>$datoteka->id));?>">
                 <i class="icon-edit"></i>
                 Uredi
             </a>
-            <a class="btn btn-mini" href="<?php echo $this->url('datoteke', array('action'=>'brisi', 'id'=>$datoteka->id));?>">
+            <a class="btn btn-mini" href="#brisiPotrditev" role="button" class="btn" data-toggle="modal">
                 <i class="icon-trash"></i>
                 Izbriši
             </a>
@@ -53,3 +53,16 @@ $velikost_mb = $velikost/1024/1024;
 </tr>
 <?php endforeach; ?>
 </table>
+<div id="brisiPotrditev" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Briši datoteko</h3>
+  </div>
+  <div class="modal-body">
+    <p>Ali ste prepričani da želite izbrisati to datoteko?</p>
+  </div>
+  <div class="modal-footer">
+    <a data-dismiss="modal" class="btn">Ne</a>
+    <a href="<?php echo $this->url('datoteke_brisi', array('id'=>$datoteka->id));?>" class="btn btn-primary">Da</a>
+  </div>
+</div>

@@ -21,11 +21,11 @@ $this->headTitle($title);
             </b>
             <div class="ikone">
                <?php if ($this->imaPravico('novica_uredi', $novica->user)){ ?>
-                <a class="btn btn-mini" href="<?php echo $this->url('novic_uredi', array('id'=>$novica->id));?>">
+                <a class="btn btn-mini" href="<?php echo $this->url('novice_uredi', array('id'=>$novica->id));?>">
                     <i class="icon-edit"></i>
                     Uredi
                 </a>
-                <a class="btn btn-mini" href="<?php echo $this->url('novice', array('action'=>'brisi', 'id'=>$novica->id));?>">
+                <a class="btn btn-mini" href="<?php echo $this->url('novice_brisi', array('id'=>$novica->id));?>">
                     <i class="icon-remove"></i>
                     Izbriši
                 </a>

@@ -87,18 +87,10 @@ class DatotekaController extends BaseController
         if (!($this->imaPravico('datoteke_brisi', $dat->user))) {
             return $this->dostopZavrnjen();
         } 
-
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $del = $request->getPost('del', 'Ne');
-            if ($del == 'Da') {
-                $datRep->deleteDatoteka($dat);
-                $this->em->flush();
-                $this->flashMessenger()->addMessage('Datoteka je bila uspešno izbrisana!');
-            }
-            return $this->redirect()->toRoute('datoteke');
-         }
-         return array('id' => $id,'datoteka' => $dat);       
+            $datRep->deleteDatoteka($dat);
+            $this->em->flush();
+            $this->flashMessenger()->addMessage('Datoteka je bila uspešno izbrisana!');
+            return $this->redirect()->toRoute('datoteke');    
     }
     
     public function downloadAction()
@@ -185,13 +177,12 @@ class DatotekaController extends BaseController
             $sort1 = $_GET['sort'];
         }
      
-        $query = $this->em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d WHERE d.user=".$user->id."ORDER BY d.".$order." ".$sort1);
+        $query = $this->em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d WHERE d.user=?1 ORDER BY d.".$order." ".$sort1);
+        $query->setParameter(1, $user->id);
         $datoteke = $query->getResult();
         
         $datRep = $this->em->getRepository('Datoteke\Entity\Datoteka');
         $skupna_velikost = $datRep->getUploadSize($user);
-        
-        $user = $this->auth->getIdentity();
         
         return new ViewModel(array('datoteke' => $datoteke, 'velikost' => $skupna_velikost, 'user' => $user));
     }    

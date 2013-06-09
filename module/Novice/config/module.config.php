@@ -121,6 +121,19 @@ return array(
                     ),
                 ),
             ),
+            'novice_pregled' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/novice/pregled/:id',
+                    'constraints' => array(
+                        'id'     => '[0-9]+'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Novica',
+                        'action' => 'pregled'
+                    ),
+                ),
+            ),
         ),
     ),
     'view_manager' => array(

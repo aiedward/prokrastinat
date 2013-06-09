@@ -21,7 +21,7 @@ class NovicaController extends BaseController
         $novice = $query->getResult();
         $user = $this->auth->getIdentity();
         
-        return new ViewModel(array('novice' => $novice, 'user' => $user));
+        return new ViewModel(array('novice' => $novice, 'user' => $user, 'flashMessages' => $this->flashMessenger()->getMessages()));
     }
     
     public function dodajAction()
@@ -115,6 +115,7 @@ class NovicaController extends BaseController
                 $kategorija_ime = $options[$kategorija];
                 $client = new Zend\Soap\Client("http://localhost:63640/Service1.asmx?WSDL");
                 $result1 = $client->VrniNovice(array('kategorija' => $kategorija_ime, 'keywords'=>$form->get('isci')->getValue()))->vrniNoviceResult;
+                $stevec = 0;
                 foreach($result1->Novica as $nov)
                 {
                     $zeObstaja = false;
@@ -140,9 +141,10 @@ class NovicaController extends BaseController
                         $novica->datum_objave = new \DateTime("now");
                         $this->em->persist($novica);
                         $this->em->flush();
+                        $stevec++;
                     }
                 }
-                    $this->flashMessenger()->addMessage('Test flashmessenger.');
+                    $this->flashMessenger()->addMessage('Dodanih je bilo '.$stevec. ' novic.');
                     return $this->redirect()->toRoute('novice', array('action' => 'ostale'));
                 }
         }
@@ -194,17 +196,10 @@ class NovicaController extends BaseController
         if (!($this->imaPravico('novica_brisi', $novica->user))) {
             return $this->dostopZavrnjen();
         } 
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $del = $request->getPost('del', 'Ne');
-            if ($del == 'Da') {
-                $novRep->deleteNovica($novica);
-                $this->em->flush();
-                $this->flashMessenger()->addMessage('Novica je bila uspešno izbrisana!');
-            }
-            return $this->redirect()->toRoute('novice');
-         }
-        return array('id' => $id, 'novica' => $novica);
+        $novRep->deleteNovica($novica);
+        $this->em->flush();
+        $this->flashMessenger()->addMessage('Novica je bila uspešno izbrisana!');
+        return $this->redirect()->toRoute('novice');
     }
     
 

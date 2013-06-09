@@ -18,8 +18,8 @@ class DatotekaController extends BaseController
             return $this->dostopZavrnjen();
         } 
         
-        $deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
-        $options = $deska_repository->getKategorije();
+        $this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
+        $options = $this->kategorija_repository->getKategorijeInArray();
         
         $form = new DatotekaForm($options);
         $request = $this->getRequest();
@@ -84,30 +84,21 @@ class DatotekaController extends BaseController
         $id = (int) $this->params()->fromRoute('id', 0);
         $dat = $datRep->find($id);
         
-        if (!(($this->isGranted('datoteke_brisi'))||$this->jeAvtor($dat->user))) {
+        if (!($this->imaPravico('datoteke_brisi', $dat->user))) {
             return $this->dostopZavrnjen();
         } 
-                    
-        if (!$id) {
-            return $this->redirect()->toRoute('datoteke');
-        }
 
         $request = $this->getRequest();
         if ($request->isPost()) {
             $del = $request->getPost('del', 'Ne');
             if ($del == 'Da') {
-                $this->em->flush();
-                unlink(dirname(dirname(dirname(dirname(dirname(__DIR__))))).'/data/uploads/'.$dat->imeDatoteke);
                 $datRep->deleteDatoteka($dat);
                 $this->em->flush();
-                $this->flashMessenger()->addMessage('Datoteka '. $dat->ime . ' je bila uspešno izbrisana!');
+                $this->flashMessenger()->addMessage('Datoteka je bila uspešno izbrisana!');
             }
             return $this->redirect()->toRoute('datoteke');
          }
-         return array(
-            'id'    => $id,
-            'datoteka' => $dat
-         );       
+         return array('id' => $id,'datoteka' => $dat);       
     }
     
     public function downloadAction()
@@ -149,7 +140,7 @@ class DatotekaController extends BaseController
         $id = (int) $this->params()->fromRoute('id', 0);
         $dat = $datRep->find($id);
        
-        if (!(($this->isGranted('datoteke_uredi'))||$this->jeAvtor($dat->user))) {
+        if (!($this->imaPravico('datoteke_uredi', $dat->user))) {
             return $this->dostopZavrnjen();
         }  
         
@@ -193,8 +184,7 @@ class DatotekaController extends BaseController
         if (isset($_GET['sort']) && in_array($_GET['sort'], $sort)) {
             $sort1 = $_GET['sort'];
         }
-        
-        
+     
         $query = $this->em->createQuery("SELECT d FROM Datoteke\Entity\Datoteka d WHERE d.user=".$user->id."ORDER BY d.".$order." ".$sort1);
         $datoteke = $query->getResult();
         

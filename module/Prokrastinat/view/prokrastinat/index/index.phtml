@@ -6,7 +6,7 @@
         <div class="well well-small">
             <b> <?= $this->escapeHtml($novica->datum_objave->format('d-m-Y')); ?></b> 
             <b><a href="<?= $this->url('novice', array('action' => 'preglej', 'id' => $novica->id));?>"> <?= $novica->naslov; ?> </a></b><br />
-            <p><?php if(property_exists($novica, 'opis')) { echo $novica->opis;} 
+            <p class="novicaVsebina"><?php if(property_exists($novica, 'opis')) { echo $novica->opis;} 
                      else{ echo $novica->vsebina;} ?>
             </p>
         </div>

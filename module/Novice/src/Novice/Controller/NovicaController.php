@@ -26,7 +26,6 @@ class NovicaController extends BaseController
     
     public function dodajAction()
     {
-        
         if (!$this->isGranted('novica_dodaj')) {
             return $this->dostopZavrnjen();
         } 
@@ -76,7 +75,7 @@ class NovicaController extends BaseController
         $id = (int) $this->params()->fromRoute('id', 0);
         $novica = $novicaRep->find($id);
         
-        if (!(($this->isGranted('novica_uredi'))||$this->jeAvtor($novica->user))) {
+        if (!($this->imaPravico('novica_uredi', $novica->user))) {
             return $this->dostopZavrnjen();
         } 
          
@@ -119,8 +118,6 @@ class NovicaController extends BaseController
                 foreach($result1->Novica as $nov)
                 {
                     $zeObstaja = false;
-                    /*$query = $this->em->createQuery("SELECT n FROM Novice\Entity\DodatnaNovica n");
-                    $novice = $query->getResult();*/
                     
                     $novice = $this->em->getRepository('Novice\Entity\DodatnaNovica')->findAll();
                     
@@ -164,6 +161,18 @@ class NovicaController extends BaseController
         return new ViewModel(array('novice' => $novice, 'action' => 'ostale', 'user' => $user,'flashMessages' => $this->flashMessenger()->getMessages()));
     }
     
+    public function studentskeAction()
+    {
+        if (!$this->isGranted('novica_index')) {
+            return $this->dostopZavrnjen();
+        } 
+        $query = $this->em->createQuery("SELECT n FROM Novice\Entity\DodatnaNovica n");
+        $novice = $query->getResult();
+        $user = $this->auth->getIdentity();
+        
+        return new ViewModel(array('novice' => $novice, 'action' => 'ostale', 'user' => $user,'flashMessages' => $this->flashMessenger()->getMessages()));
+    }
+    
     public function ostalepregledAction()
     {
         if (!$this->isGranted('novica_pregled')) {
@@ -178,29 +187,24 @@ class NovicaController extends BaseController
     
     public function brisiAction()
     {
-       if (!$this->isGranted('novica_brisi')) 
-            $this->dostopZavrnjen();
+        $novRep = $this->em->getRepository('Novice\Entity\Novica');
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $novica = $novRep->find($id);
         
-        $id = (int)$this->params()->fromRoute('id', 0);
-        
-        if ($this->request->isPost()) {
-            $del = $this->request->getPost('del', 'No');
-            
-            if ($del == 'Yes') {
-                $id = (int) $this->request->getPost('id');
-                
-                $novica = $this->em->find('Novice\Entity\Novica', $id);
-                $this->em->remove($novica);
+        if (!($this->imaPravico('novica_brisi', $novica->user))) {
+            return $this->dostopZavrnjen();
+        } 
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $del = $request->getPost('del', 'Ne');
+            if ($del == 'Da') {
+                $novRep->deleteNovica($novica);
                 $this->em->flush();
+                $this->flashMessenger()->addMessage('Novica je bila uspešno izbrisana!');
             }
-            
             return $this->redirect()->toRoute('novice');
-        }
-        
-        return array(
-            'id' => $id,
-            'novica' => $this->em->find('Novice\Entity\Novica', $id)
-        );
+         }
+        return array('id' => $id, 'novica' => $novica);
     }
     
 

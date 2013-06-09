@@ -19,7 +19,7 @@ return array(
     
     'controllers' => array(
         'invokables' => array(
-            'Datoteke\Controller\Datoteka' => 'Datoteke\Controller\DatotekaController',
+            'Datoteke' => 'Datoteke\Controller\DatotekaController',
         ),
     ),
 
@@ -34,11 +34,12 @@ return array(
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Datoteke\Controller\Datoteka',
+                        'controller' => 'Datoteke',
                         'action'     => 'index',
                     ),
                 ),
             ),
+           
         ),
     ),
     

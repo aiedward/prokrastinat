@@ -1,6 +1,6 @@
 <?php
 
-$title = 'Študentske novice';
+$title = 'Ostale novice';
 $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
@@ -9,31 +9,12 @@ $this->headTitle($title);
     <a class="btn btn-primary" href="<?php echo $this->url('novice', array('action' => 'parse')); ?>" id="dodaj-novico">Dodaj novice</a>
     </p>
 <?php endif; ?>
-
-<?php foreach ($novice as $novica) : ?>
-    <div class="well well-small">
-        <div class="novicaHeader">
-            <b> <?= $this->escapeHtml($novica->datum_objave->format('d-m-Y')); ?></b> 
-            <b>
-                <a href="<?= $this->url('novice', array('action' => 'pregled', 'id' => $novica->id));?>">
-                    <?= $novica->naslov; ?>
-                </a>
-            </b>
-            <div class="ikone">
-               <?php if ($this->imaPravico('novica_uredi', $novica->user)){ ?>
-                <a class="btn btn-mini" href="<?php echo $this->url('novice', array('action'=>'uredi', 'id'=>$novica->id));?>">
-                    <i class="icon-edit"></i>
-                    Uredi
-                </a>
-                <a class="btn btn-mini" href="<?php echo $this->url('novice', array('action'=>'brisi', 'id'=>$novica->id));?>">
-                    <i class="icon-remove"></i>
-                    Izbriši
-                </a>
-               <?php } ?>
+    
+    <div class="well well-small izbiraNovic">
+        <a href="studentske/">
+            <h1 class="bazaZnanjaNaslov">Študentske novice</h1>
+            <div class="ostaleNoviceSlika">
+                <img style="float: right;" src="/img/studentske_novice.png"/>
             </div>
-            <br/>
-        </div>
-        <p><?= ($novica->opis); ?></p>
+        </a>
     </div>
-<?php endforeach; ?>
-

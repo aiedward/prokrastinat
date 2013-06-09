@@ -11,6 +11,14 @@ root {
 ;}
 
 
+.leftSidebar{
+
+}
+
+.leftSidebar li{
+    background-color: #f5f5f5;
+}
+
 /*********************PREGLED DATOTEKE********************/
 .datotekaView{
     font:14px Tahoma bold;
@@ -66,6 +74,7 @@ root {
 .novicaVsebina{
     width: 100%;
     margin-top: 2%;
+    word-wrap:break-word;
 }
 
 .novicaHeader{
@@ -92,7 +101,7 @@ root {
 
 
 .well, .well-small{
-    max-height: 100px;
+    max-height: 125px;
     overflow: hidden;
 }
 
@@ -100,12 +109,34 @@ root {
 .desni-sidebar{
     border: 1px solid silver;
     width: 100%;
+    background-color: #f5f5f5;
 }
 
 .sidebar-novica{
-    border: 2px solid #0e90d2;
-    height: 100px;
+    word-wrap:break-word;
+    border-top: 2px solid #0e90d2;
+    max-height: 100px;
     padding: 5px;
     margin: 5px;
     overflow: hidden;
+}
+
+
+/********************OSTALE NOVICE********************/
+.ostaleNoviceSlika{
+    
+}
+
+.izbiraNovic{
+     position: relative;
+}
+
+
+.bazaZnanjaNaslov{
+    word-wrap:break-word;
+    position: absolute;
+    bottom: 0;
+    color: #0e90d2;
+    margin-left: 4%;
+    font-size: 3em;
 }

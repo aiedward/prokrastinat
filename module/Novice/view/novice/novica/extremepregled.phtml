@@ -1,2 +1,15 @@
-<h1>Preglej</h1>
-<?= $this->id ?>
+<h1 style="color: #0044cc"><?= $novica->naslov ?></h1>
+<hr />
+<div class="well well-small">
+    <p>
+        <b>Avtor:</b> <?= $novica->avtor; ?> <br />
+        <b>Kategorija:</b> <?= $novica->kategorija; ?> <br />
+        <b>Povezava:</b> <a href="<?= $novica->povezava ?>"><?= $novica->povezava; ?></a>
+    </p>
+</div>
+<hr />
+<div style="">
+    <p>
+        <?= $novica->vsebina ?>
+    </p>
+</div>

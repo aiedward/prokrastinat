@@ -155,7 +155,7 @@ class DeskaController extends BaseController
             $this->dostopZavrnjen();
         
         $this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
-        $kategorije = $this->deska_repository->getKategorije();
+        $kategorije = $this->kategorija_repository->getKategorije();
         
         return array('kategorije' => $kategorije);
     }

@@ -10,6 +10,8 @@ use Novice\Form\UrediForm;
 use Novice\Form\ParseForm;
 use Zend;
 use Novice\Entity\ExtremeNovica;
+use Novice\Form\KategorijaForm;
+use Novice\Form\IskanjeForm;
 
 class NovicaController extends BaseController
 {
@@ -207,17 +209,27 @@ class NovicaController extends BaseController
     // eXtreme tech novice - MaTTo
     public function extremeAction()
     {
-        $client = new Zend\Soap\Client("http://localhost:57158/Service1.asmx?WSDL");
-        //$rezultat = $client->getAll()->getAllResult;
-        $rezultat3 = $client->getNovicaByKategorija(array('kategorija' => 'gaming'))->getNovicaByKategorijaResult;
-        var_dump($rezultat3);
-        exit;
-        return array('novice' => $rezultat);
+        $client = new Zend\Soap\Client("http://localhost:59491/Service1.asmx?WSDL");
+        $novice = $client->getAll()->getAllResult;
+        
+        $kategorije = array('gaming', 'deals', 'mobile', 'computing', 'extreme', 'vse');
+        $form_kategorija = new KategorijaForm($kategorije);
+        $form_iskanje = new IskanjeForm();
+        
+        return array(
+            'novice' => $novice, 
+            'form_kategorija' => $form_kategorija,
+            'form_iskanje' => $form_iskanje,
+        );
     }
     
     public function extremepregledAction()
     {
         $id = (int) $this->params()->fromRoute('id', 0);
-        return array('id' => $id);
+        //$client = new Zend\Soap\Client("http://localhost:59491/Service1.asmx?WSDL");
+        //$novica = $client->getNovicaById(array('id' => $id))->getNovicaByIdResult;
+        $novica = $this->em->find('Novice\Entity\ExtremeNovica', $id);
+        
+        return array('novica' => $novica);
     }
 }

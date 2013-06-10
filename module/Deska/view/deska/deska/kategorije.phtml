@@ -12,6 +12,10 @@
         <?php foreach($kategorije as $kat): ?>
             <tr>
                 <td><?= $this->escapeHtml($kat->ime)?></td>
+                <td>
+                    <a class="btn-small btn" href="<?= $this->url('deska', array('action' => 'uredikategorijo', 'id' => $kat->id))?>"><i class="icon-edit"></i>Uredi</a>
+                    <a class="btn-small btn" href="<?= $this->url('deska', array('action' => 'brisikategorijo', 'id' => $kat->id))?>"><i class="icon-remove"></i>Briši</a>
+                </td>
             </tr>
         <?php endforeach; ?>
     </table>

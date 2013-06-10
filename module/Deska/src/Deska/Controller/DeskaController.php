@@ -191,4 +191,38 @@ class DeskaController extends BaseController
             'formType' => \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL,
         );
     }
+    
+    public function uredikategorijoAction()
+    {
+        if (!$this->isGranted('kategorije_uredi'))
+            $this->dostopZavrnjen();
+        
+        $id = (int)$this->params()->fromRoute('id', 0);
+        $kategorija = $this->em->find('Prokrastinat\Entity\Kategorija', $id);
+        
+        $this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
+        $options = $this->kategorija_repository->getKategorijeInArray();
+        $form = new DodajKategorijoForm();
+        $form->fill($kategorija);
+        
+        if ($this->request->isPost()) {
+            // set input filter
+            $form->setData($this->request->getPost());
+            
+            // form is valid
+            $vals = array(
+                'ime' => $form->get('ime')->getValue(),
+            );
+            
+            $this->kategorija_repository->saveKategorija($kategorija, $vals);
+            $this->em->flush();
+            
+            return $this->redirect()->toRoute('deska');
+        }
+        
+        return array(
+            'form' => $form,
+            'formType' => \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL,
+        );
+    }
 }

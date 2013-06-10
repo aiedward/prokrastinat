@@ -212,9 +212,29 @@ class NovicaController extends BaseController
         $client = new Zend\Soap\Client("http://localhost:59491/Service1.asmx?WSDL");
         $novice = $client->getAll()->getAllResult;
         
-        $kategorije = array('gaming', 'deals', 'mobile', 'computing', 'extreme', 'vse');
+        $kategorije = array('vse', 'gaming', 'deals', 'mobile', 'computing', 'extreme');
         $form_kategorija = new KategorijaForm($kategorije);
         $form_iskanje = new IskanjeForm();
+        
+        if ($this->request->isPost()) {
+            $id = (int)$this->request->getPost('kategorija');
+            
+            if (!$id) {
+                // selectam glede na iskalni niz
+                $iskalni_niz = $this->request->getPost('iskalni_niz');
+                $novice = $client->getNoviceByIskalniNiz(array('iskalni_niz' => $iskalni_niz))->getNoviceByIskalniNizResult;
+            } else {
+                // selectam kategorijo
+                $kategorija_index = $this->request->getPost('kategorija');
+                //var_dump($kategorija_index);
+                //exit;
+                $kategorija = $kategorije[$kategorija_index];
+                //var_dump($kategorija);
+                //exit;
+                
+                $novice = $client->getNoviceByKategorija(array('kategorija' => $kategorija))->getNoviceByKategorijaResult;
+            }
+        }     
         
         return array(
             'novice' => $novice, 

@@ -2,7 +2,20 @@
 
 <div id="user-pannel" class="row">
     <div class="span5 offset1">
-        <?= $this->formTwb($this->form_kategorija, \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL) ?>
+        <?= $this->formTwb($this->form_kategorija, \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL) ?> 
+        
+        <!--
+        <?php
+            $form_kategorija = $this->form_kategorija;
+            $form_kategorija->setAttribute('action', $this->url('novice_extreme', array('action' => 'extreme')));
+            $form_kategorija->prepare();
+            
+            echo $this->form()->openTag($form_kategorija);
+            echo $this->formRow($form_kategorija->get('kategorija'));
+            echo $this->formSubmit($form_kategorija->get('submit'));
+            echo $this->form()->closeTag();
+        ?>
+        -->
     </div>
     <div class="span5 offset1">
         <?= $this->formTwb($this->form_iskanje, \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL) ?>

@@ -23,6 +23,8 @@ class DeskaController extends BaseController
         
         $form = new FilterForm($options);
         $id = (int)$this->request->getPost('kategorija');
+        //var_dump($id);
+        //exit;
         
         if (!$id) {
             $query = $this->em->createQuery("SELECT o FROM Deska\Entity\Oglas o WHERE o.datum_zapadlosti > CURRENT_DATE() ORDER BY o.datum_objave DESC");

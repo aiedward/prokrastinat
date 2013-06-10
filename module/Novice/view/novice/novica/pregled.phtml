@@ -1,18 +1,20 @@
-<?php
-function curPageURL() {
- $pageURL = 'http';
- if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
- $pageURL .= "://";
- if ($_SERVER["SERVER_PORT"] != "80") {
-  $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
- } else {
-  $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
- }
- return $pageURL;
-}
-?>
 <div class="novicaView">
     <h2><?php echo $novica->naslov ?></h2>
+      <a style="width: 120px;" class="btn btn-primary btn-small" href="https://www.facebook.com/dialog/feed?
+        app_id=517777868280656&
+        link=http://prokrastinat.kreten.si/<?php echo $this->url;?>&
+        picture=http://pridi-na-feri.si/ui/v2/logo-feri.png&
+        name=Prokrastinat&
+        caption=<?php echo $novica->naslov?>&
+        description=<?php if(is_null($novica->opis)){echo $novica->vsebina;} else{echo $novica->opis;}?>&
+        redirect_uri=http://prokrastinat.kreten.si/<?php echo $this->url;?>" target="_blank">
+        <i class="icon-white icon-thumbs-up"></i> 
+        Deli na Facebooku
+      </a>
+    <p></p>
+    <a style="width: 120px;" class="btn btn-info btn-small" target="_blank" href="http://twitter.com/home?status=Pravkar berem: http://prokrastinat.kreten.si/<?php echo $this->url;?> <?php echo $novica->naslov;?>" title="Click to share this post on Twitter"><i class="icon-white icon-plus-sign"></i> Deli na Twitterju  </a></a>
+    
+    
     <div class="novicaJedro">
         <b>Avtor: </b> <?php echo $novica->user->getPolnoIme() ?>
         <br/>
@@ -23,7 +25,3 @@ function curPageURL() {
     </div>
 </div>
 <br/>
-<a class='btn btn-primary' href='<?= $this->url('novice', array('action' => 'uredi', 'id' => $novica->id))?>'>Uredi</a>
-<a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost/novice/pregled/5" target="_blank">
-  Share on Facebook
-</a>

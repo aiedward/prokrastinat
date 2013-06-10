@@ -6,7 +6,7 @@ use Zend\View\Model\ViewModel;
 class IndexController extends BaseController
 {    
     public function indexAction() 
-    {           
+    {              
         $query = $this->em->createQuery("SELECT n FROM Novice\Entity\Novica n ORDER BY n.datum_objave DESC");
         $query->setMaxResults(5);
         $novice = $query->getResult();

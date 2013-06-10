@@ -63,8 +63,9 @@ class NovicaController extends BaseController
         
         $id = (int) $this->params()->fromRoute('id', 0);
         $novica = $this->em->find('Novice\Entity\Novica', $id);
+        $url = $this->getRequest()->getRequestUri();
 
-        return new ViewModel(array('novica' => $novica));
+        return new ViewModel(array('novica' => $novica, 'url' => $url));
     }
     
     

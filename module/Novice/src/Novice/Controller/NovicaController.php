@@ -9,6 +9,7 @@ use Prokrastinat\Controller\BaseController;
 use Novice\Form\UrediForm;
 use Novice\Form\ParseForm;
 use Zend;
+use Novice\Entity\ExtremeNovica;
 
 class NovicaController extends BaseController
 {
@@ -203,5 +204,20 @@ class NovicaController extends BaseController
         return $this->redirect()->toRoute('novice');
     }
     
-
+    // eXtreme tech novice - MaTTo
+    public function extremeAction()
+    {
+        $client = new Zend\Soap\Client("http://localhost:57158/Service1.asmx?WSDL");
+        //$rezultat = $client->getAll()->getAllResult;
+        $rezultat3 = $client->getNovicaByKategorija(array('kategorija' => 'gaming'))->getNovicaByKategorijaResult;
+        var_dump($rezultat3);
+        exit;
+        return array('novice' => $rezultat);
+    }
+    
+    public function extremepregledAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        return array('id' => $id);
+    }
 }

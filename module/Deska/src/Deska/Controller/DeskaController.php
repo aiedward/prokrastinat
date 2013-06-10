@@ -17,6 +17,7 @@ class DeskaController extends BaseController
     
     public function indexAction() 
     {   
+        $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
         $this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
         $options = $this->kategorija_repository->getKategorijeInArray();
         
@@ -24,7 +25,7 @@ class DeskaController extends BaseController
         $id = (int)$this->request->getPost('kategorija');
         
         if (!$id) {
-            $query = $this->em->createQuery("SELECT o FROM Deska\Entity\Oglas o WHERE o.datum_zapadlosti > CURRENT_DATE()");
+            $query = $this->em->createQuery("SELECT o FROM Deska\Entity\Oglas o WHERE o.datum_zapadlosti > CURRENT_DATE() ORDER BY o.datum_objave DESC");
             $oglasi = $query->getResult();
         } else {
             $oglasi = $this->deska_repository->getOglasiByKategorija($id);

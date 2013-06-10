@@ -134,6 +134,29 @@ return array(
                     ),
                 ),
             ),
+            'novice_extreme' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/novice/ostale/extreme/',
+                    'defaults' => array(
+                        'controller' => 'Novica',
+                        'action' => 'extreme'
+                    ),
+                ),
+            ),
+            'novice_extreme_pregled' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/novice/ostale/extreme/pregled/[:id]',
+                    'constraints' => array(
+                        'id' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Novica',
+                        'action' => 'extremepregled',
+                    ),
+                ),
+            ),
         ),
     ),
     'view_manager' => array(

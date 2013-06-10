@@ -1,0 +1,19 @@
+<h1>eXtreme tech novice</h1>
+
+<table class="table">
+    <tr>
+        <th>NASLOV</th>
+        <th>AVTOR</th>
+        <th>POVEZAVA</th>
+        <th>KATEGORIJA</th>
+    </tr>
+    <?php foreach($novice->Novica as $novica): ?>
+    <tr>        
+        <td><a href="<?= $this->url('novice_extreme_pregled', array('action' => 'extremepregled', 'id' => $novica->id));?>"><?= $novica->naslov ?></a></td>
+        <td><?= $novica->avtor ?></td>
+        <td><a href="<?= $novica->povezava?>"><?= $novica->povezava ?></a></td>
+        <td><?= $novica->kategorija ?></td>
+        
+    </tr>
+    <?php endforeach; ?>
+</table>

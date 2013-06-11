@@ -8,10 +8,13 @@ use Prokrastinat\Entity\BaseEntity;
 /** @ORM\Entity */
 class TBSettings extends BaseEntity
 {
-	/** @ORM\Column(length=40) */
-	protected $Name;
+    /**
+     * @ORM\Id
+     * @ORM\Column(length=40)
+     */
+    protected $Name;
 
-	/** @ORM\Column(length=40) */
-	protected $Value;
+    /** @ORM\Column(length=40) */
+    protected $Value;
 
 }

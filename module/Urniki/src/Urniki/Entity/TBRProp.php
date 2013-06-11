@@ -8,10 +8,13 @@ use Prokrastinat\Entity\BaseEntity;
 /** @ORM\Entity */
 class TBRProp extends BaseEntity
 {
-	/** @ORM\Column(type="integer") */
-	protected $RProp_Id;
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     */
+    protected $RProp_Id;
 
-	/** @ORM\Column(length=40) */
-	protected $Name;
+    /** @ORM\Column(length=40) */
+    protected $Name;
 
 }

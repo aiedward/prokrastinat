@@ -8,10 +8,13 @@ use Prokrastinat\Entity\BaseEntity;
 /** @ORM\Entity */
 class TBReservation_Groups extends BaseEntity
 {
-	/** @ORM\Column(type="integer") */
-	protected $Reservation_Id;
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     */
+    protected $Reservation_Id;
 
-	/** @ORM\Column(type="integer") */
-	protected $Groups_Id;
+    /** @ORM\Column(type="integer") */
+    protected $Groups_Id;
 
 }

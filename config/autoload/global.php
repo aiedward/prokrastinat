@@ -60,7 +60,8 @@ return array(
                 'proxy_namespace'   => 'DoctrineORMModule\Proxy',
                 'filters'           => array(),
                 'types' => array(
-                    'msdatetime' => 'Prokrastinat\DBAL\Types\MSDateTimeType'
+                    'msdatetime' => 'Prokrastinat\DBAL\Types\MSDateTimeType',
+                    'string1252' => 'Prokrastinat\DBAL\Types\String1252Type'
                 )
             ),
             'orm_aips' => array(
@@ -73,7 +74,8 @@ return array(
                 'proxy_namespace'   => 'DoctrineORMModule\Proxy',
                 'filters'           => array(),
                 'types' => array(
-                    'msdatetime' => 'Prokrastinat\DBAL\Types\MSDateTimeType'
+                    'msdatetime' => 'Prokrastinat\DBAL\Types\MSDateTimeType',
+                    'string1252' => 'Prokrastinat\DBAL\Types\String1252Type'
                 )
             )
         ),

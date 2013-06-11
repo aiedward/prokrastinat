@@ -20,10 +20,10 @@ class Vpis extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $Leto;
 
-	/** @ORM\Column(length=2) */
+	/** @ORM\Column(type="string1252", length=2) */
 	protected $ZavodID;
 
-	/** @ORM\Column(length=2) */
+	/** @ORM\Column(type="string1252", length=2) */
 	protected $MaticnaFakultetaID;
 
 	/** @ORM\Column(type="integer") */
@@ -35,7 +35,7 @@ class Vpis extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $IzbirnaSkupinaID;
 
-	/** @ORM\Column(length=3) */
+	/** @ORM\Column(type="string1252", length=3) */
 	protected $StudentskaSkupina;
 
 	/** @ORM\Column(type="integer") */
@@ -47,13 +47,13 @@ class Vpis extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $VrstaStudijaID;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $StudijNaDaljavo;
 
 	/** @ORM\Column(type="integer") */
 	protected $NacinStudijaID;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $UgodnostiStudenta;
 
 	/** @ORM\Column(type="msdatetime") */
@@ -65,7 +65,7 @@ class Vpis extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $CenterStudijaID;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $VpisPogojni;
 
 	/** @ORM\Column(type="msdatetime") */
@@ -80,7 +80,7 @@ class Vpis extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $TutorId;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $PlaciloSolnine;
 
 	/** @ORM\Column(type="integer") */
@@ -98,7 +98,7 @@ class Vpis extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $SolninaObrokov;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $OIVLDovoljeno;
 
 	/** @ORM\Column(type="integer") */
@@ -116,16 +116,16 @@ class Vpis extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $MVZTTujecSolnina;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $MVZTPrehod;
 
-	/** @ORM\Column(length=4) */
+	/** @ORM\Column(type="string1252", length=4) */
 	protected $MVZTRaziskovalecID;
 
-	/** @ORM\Column(length=4) */
+	/** @ORM\Column(type="string1252", length=4) */
 	protected $MVZTMirovanjeID;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $MVZTSofinanciranje;
 
 	/** @ORM\Column(type="real") */

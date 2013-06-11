@@ -23,7 +23,7 @@ class NosilecPredmeta extends BaseEntity
 	/** @ORM\Column(type="decimal") */
 	protected $ZaporednaStevilka;
 
-	/** @ORM\Column(length=50) */
+	/** @ORM\Column(type="string1252", length=50) */
 	protected $Funkcija;
 
 }

@@ -77,19 +77,19 @@ class PredmetP extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $UrePRAC;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $IzbirniPredmet;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $IzbirniPredmetZaKS;
 
 	/** @ORM\Column(type="integer") */
 	protected $StStudentovZaKS;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $PogojniPredmet;
 
-	/** @ORM\Column(length=2) */
+	/** @ORM\Column(type="string1252", length=2) */
 	protected $NosilecPredmetaID;
 
 	/** @ORM\Column(type="integer") */

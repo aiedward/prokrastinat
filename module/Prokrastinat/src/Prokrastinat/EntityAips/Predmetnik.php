@@ -11,7 +11,7 @@ class Predmetnik extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $PredmetnikID;
 
-	/** @ORM\Column(length=2) */
+	/** @ORM\Column(type="string1252", length=2) */
 	protected $ZavodID;
 
 	/** @ORM\Column(type="integer") */
@@ -29,22 +29,22 @@ class Predmetnik extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $ProgramID;
 
-	/** @ORM\Column(length=60) */
+	/** @ORM\Column(type="string1252", length=60) */
 	protected $NazivPredmetnika;
 
-	/** @ORM\Column(length=20) */
+	/** @ORM\Column(type="string1252", length=20) */
 	protected $KraticaPredmetnika;
 
 	/** @ORM\Column(type="integer") */
 	protected $Zaporedje;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $SeIzvaja;
 
 	/** @ORM\Column(type="text") */
 	protected $Opombe;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $ObjaviNaSpletu;
 
 }

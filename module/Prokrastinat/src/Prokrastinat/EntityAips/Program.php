@@ -11,25 +11,25 @@ class Program extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $ProgramID;
 
-	/** @ORM\Column(length=10) */
+	/** @ORM\Column(type="string1252", length=10) */
 	protected $SifraPrograma;
 
-	/** @ORM\Column(length=60) */
+	/** @ORM\Column(type="string1252", length=60) */
 	protected $NazivPrograma;
 
-	/** @ORM\Column(length=2) */
+	/** @ORM\Column(type="string1252", length=2) */
 	protected $NosilecProgramaID;
 
 	/** @ORM\Column(type="integer") */
 	protected $VrstaStudijaID;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $VrstaPrograma;
 
 	/** @ORM\Column(type="integer") */
 	protected $TipProgramaID;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $PedagoskiProgram;
 
 	/** @ORM\Column(type="integer") */
@@ -47,7 +47,7 @@ class Program extends BaseEntity
 	/** @ORM\Column(type="msdatetime") */
 	protected $DatumSprejetja3;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $InterdisciplinarniP;
 
 	/** @ORM\Column(type="integer") */
@@ -56,22 +56,22 @@ class Program extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $StSemestrov;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $Aktiven;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $ProgramBP;
 
-	/** @ORM\Column(length=2) */
+	/** @ORM\Column(type="string1252", length=2) */
 	protected $MaticnaFakultetaID;
 
-	/** @ORM\Column(length=150) */
+	/** @ORM\Column(type="string1252", length=150) */
 	protected $DolgiNazivPrograma;
 
-	/** @ORM\Column(length=150) */
+	/** @ORM\Column(type="string1252", length=150) */
 	protected $DolgiNazivProgramaA;
 
-	/** @ORM\Column(length=40) */
+	/** @ORM\Column(type="string1252", length=40) */
 	protected $PoimenovanjeSmeri;
 
 	/** @ORM\Column(type="integer") */

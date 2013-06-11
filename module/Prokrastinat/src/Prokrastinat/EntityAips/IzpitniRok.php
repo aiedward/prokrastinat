@@ -11,7 +11,7 @@ class IzpitniRok extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $IzpitniRokID;
 
-	/** @ORM\Column(length=2) */
+	/** @ORM\Column(type="string1252", length=2) */
 	protected $ZavodID;
 
 	/** @ORM\Column(type="integer") */
@@ -26,19 +26,19 @@ class IzpitniRok extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $ProfesorID;
 
-	/** @ORM\Column(length=10) */
+	/** @ORM\Column(type="string1252", length=10) */
 	protected $KrajIzvajanja;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $TipRoka;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $Komisijski;
 
 	/** @ORM\Column(type="integer") */
 	protected $VrstaStudijaID;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $DoPodiplomski;
 
 	/** @ORM\Column(type="integer") */
@@ -47,7 +47,7 @@ class IzpitniRok extends BaseEntity
 	/** @ORM\Column(type="msdatetime") */
 	protected $UraIzvedbe;
 
-	/** @ORM\Column(length=100) */
+	/** @ORM\Column(type="string1252", length=100) */
 	protected $Opomba;
 
 	/** @ORM\Column(type="msdatetime") */
@@ -59,7 +59,7 @@ class IzpitniRok extends BaseEntity
 	/** @ORM\Column(type="msdatetime") */
 	protected $DatumObjaveRezultata;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $ObjaviNaSpletu;
 
 }

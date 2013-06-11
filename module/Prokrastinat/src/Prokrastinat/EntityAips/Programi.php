@@ -26,22 +26,22 @@ class Programi extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $ProgramID;
 
-	/** @ORM\Column(length=60) */
+	/** @ORM\Column(type="string1252", length=60) */
 	protected $NazivPredmetnika;
 
-	/** @ORM\Column(length=20) */
+	/** @ORM\Column(type="string1252", length=20) */
 	protected $KraticaPredmetnika;
 
-	/** @ORM\Column(length=4) */
+	/** @ORM\Column(type="string1252", length=4) */
 	protected $Zaporedje;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $SeIzvaja;
 
-	/** @ORM\Column(length=150) */
+	/** @ORM\Column(type="string1252", length=150) */
 	protected $Opombe;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $ObjaviNaSpletu;
 
 }

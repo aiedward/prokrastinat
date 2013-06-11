@@ -11,16 +11,16 @@ class Predmet extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $PredmetID;
 
-	/** @ORM\Column(length=10) */
+	/** @ORM\Column(type="string1252", length=10) */
 	protected $SifraPredmeta;
 
-	/** @ORM\Column(length=150) */
+	/** @ORM\Column(type="string1252", length=150) */
 	protected $NazivPredmeta;
 
-	/** @ORM\Column(length=40) */
+	/** @ORM\Column(type="string1252", length=40) */
 	protected $KratekNazivPredmeta;
 
-	/** @ORM\Column(length=2) */
+	/** @ORM\Column(type="string1252", length=2) */
 	protected $ZavodID;
 
 	/** @ORM\Column(type="integer") */
@@ -65,16 +65,16 @@ class Predmet extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $TipProgramaID;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $PedagoskiProgram;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $Aktiven;
 
 	/** @ORM\Column(type="integer") */
 	protected $VrstaPredmeta;
 
-	/** @ORM\Column(length=2) */
+	/** @ORM\Column(type="string1252", length=2) */
 	protected $ZavodIzvajalecID;
 
 	/** @ORM\Column(type="integer") */
@@ -83,16 +83,16 @@ class Predmet extends BaseEntity
 	/** @ORM\Column(type="msdatetime") */
 	protected $VeljavnostDo;
 
-	/** @ORM\Column(length=3) */
+	/** @ORM\Column(type="string1252", length=3) */
 	protected $OriginalnaSifra;
 
-	/** @ORM\Column(length=10) */
+	/** @ORM\Column(type="string1252", length=10) */
 	protected $Kratica;
 
-	/** @ORM\Column(length=2) */
+	/** @ORM\Column(type="string1252", length=2) */
 	protected $MaticnaFakultetaID;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $SkupniPredmetPEF;
 
 	/** @ORM\Column(type="integer") */
@@ -101,13 +101,13 @@ class Predmet extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $VrstaPrakticnegaDelaID;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $PredmetBP;
 
-	/** @ORM\Column(length=10) */
+	/** @ORM\Column(type="string1252", length=10) */
 	protected $SifraPredmetaBP;
 
-	/** @ORM\Column(length=150) */
+	/** @ORM\Column(type="string1252", length=150) */
 	protected $NazivPredmetaA;
 
 	/** @ORM\Column(type="integer") */
@@ -122,19 +122,19 @@ class Predmet extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $UreESEM;
 
-	/** @ORM\Column(length=10) */
+	/** @ORM\Column(type="string1252", length=10) */
 	protected $JezikPredmetaP;
 
-	/** @ORM\Column(length=10) */
+	/** @ORM\Column(type="string1252", length=10) */
 	protected $JezikPredmetaV;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $ObjavaNaSpletu;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $PonujenoZaIzbiroMaticnim;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $PonujenoZaIzbiroTujim;
 
 	/** @ORM\Column(type="integer") */
@@ -143,10 +143,10 @@ class Predmet extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $KvotaZaIzbiroTujim;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $IzbirniPredmet;
 
-	/** @ORM\Column(length=1) */
+	/** @ORM\Column(type="string1252", length=1) */
 	protected $PrioritetniPredmet;
 
 	/** @ORM\Column(type="integer") */

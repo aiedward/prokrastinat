@@ -51,9 +51,9 @@ class UserRepository extends EntityRepository
         $user->username = $aips_user->VpisnaStevilka;
         $user->vpisna_st = $aips_user->VpisnaStevilka;
 
-        // to-do: pls unbork thx
-        $user->ime = strtok($aips_user->PriimekIme, " ");
-        $user->priimek = $aips_user->PriimekIme; // fuck php
+        $p = explode(' ', $aips_user->PriimekIme);
+        $user->ime = mb_convert_case(array_pop($p), MB_CASE_TITLE, "UTF-8");
+        $user->priimek = mb_convert_case(implode(' ', $p), MB_CASE_TITLE, "UTF-8");
 
         $this->changePass($user, $aips_user->Geslo);
         $this->em->persist($user);

@@ -20,34 +20,34 @@ class Studij extends BaseEntity
     /** @ORM\Column(type="integer") */
     protected $StudentID;
 
-    /** @ORM\Column(length=60) */
+    /** @ORM\Column(type="string1252", length=60) */
     protected $PriimekIme;
 
-    /** @ORM\Column(length=8) */
+    /** @ORM\Column(type="string1252", length=8) */
     protected $VpisnaStevilka;
 
-    /** @ORM\Column(length=2) */
+    /** @ORM\Column(type="string1252", length=2) */
     protected $ZavodID;
 
     /** @ORM\Column(type="integer") */
     protected $LetoPrvegaVpisa;
 
-    /** @ORM\Column(length=1) */
+    /** @ORM\Column(type="string1252", length=1) */
     protected $Stanje;
 
     /** @ORM\Column(type="msdatetime") */
     protected $DatumZakljucka;
 
-    /** @ORM\Column(length=1) */
+    /** @ORM\Column(type="string1252", length=1) */
     protected $VpisDiplomant;
 
     /** @ORM\Column(type="integer") */
     protected $Izkaznica;
 
-    /** @ORM\Column(length=1) */
+    /** @ORM\Column(type="string1252", length=1) */
     protected $SocasnostStudija;
 
-    /** @ORM\Column(length=2) */
+    /** @ORM\Column(type="string1252", length=2) */
     protected $SocasniStudijFakultetaID;
 
     /** @ORM\Column(type="integer") */
@@ -56,16 +56,16 @@ class Studij extends BaseEntity
     /** @ORM\Column(type="msdatetime") */
     protected $ZadnjaSprememba;
 
-    /** @ORM\Column(length=40) */
+    /** @ORM\Column(type="string1252", length=40) */
     protected $Geslo;
 
     /** @ORM\Column(type="msdatetime") */
     protected $ZadnjaPrijava;
 
-    /** @ORM\Column(length=1) */
+    /** @ORM\Column(type="string1252", length=1) */
     protected $BlokadaPrijave;
 
-    /** @ORM\Column(length=1) */
+    /** @ORM\Column(type="string1252", length=1) */
     protected $BlokadaPrijaveIzpit;
 
     /** @ORM\Column(type="integer") */
@@ -74,19 +74,19 @@ class Studij extends BaseEntity
     /** @ORM\Column(type="integer") */
     protected $MISVrstaProgramaID;
 
-    /** @ORM\Column(length=20) */
+    /** @ORM\Column(type="string1252", length=20) */
     protected $StevPogodbe;
 
     /** @ORM\Column(type="text") */
     protected $Opombe;
 
-    /** @ORM\Column(length=2) */
+    /** @ORM\Column(type="string1252", length=2) */
     protected $MaticnaFakultetaID;
 
-    /** @ORM\Column(length=2) */
+    /** @ORM\Column(type="string1252", length=2) */
     protected $FakultetaVpisaID;
 
-    /** @ORM\Column(length=1) */
+    /** @ORM\Column(type="string1252", length=1) */
     protected $VzporedniStudij;
 
     /** @ORM\Column(type="integer") */

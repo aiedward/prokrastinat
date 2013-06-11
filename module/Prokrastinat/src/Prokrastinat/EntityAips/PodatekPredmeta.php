@@ -17,7 +17,7 @@ class PodatekPredmeta extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $JezikID;
 
-	/** @ORM\Column(length=150) */
+	/** @ORM\Column(type="string1252", length=150) */
 	protected $KratkoBesedilo;
 
 	/** @ORM\Column(type="text") */

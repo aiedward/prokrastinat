@@ -8,14 +8,6 @@ class MSDateTimeType extends DateTimeType
 {
     private $datetimeFormat = 'M j Y h:i:s:uA';
 
-    /* zaenkrat ni potrebno
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
-    {
-        return ($value !== null)
-            ? $value->format($platform->getDateTimeFormatString()) : null;
-    }
-    */
-
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
         

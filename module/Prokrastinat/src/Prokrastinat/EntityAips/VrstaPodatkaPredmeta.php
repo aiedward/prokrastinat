@@ -11,10 +11,10 @@ class VrstaPodatkaPredmeta extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $VrstaPodatkaID;
 
-	/** @ORM\Column(length=10) */
+	/** @ORM\Column(type="string1252", length=10) */
 	protected $KraticaVrstePodatka;
 
-	/** @ORM\Column(length=40) */
+	/** @ORM\Column(type="string1252", length=40) */
 	protected $NazivVrstePodatka;
 
 }

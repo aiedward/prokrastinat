@@ -11,16 +11,16 @@ class LetnikStudija extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $LetnikStudijaID;
 
-	/** @ORM\Column(length=10) */
+	/** @ORM\Column(type="string1252", length=10) */
 	protected $KodaLetnikaStudija;
 
-	/** @ORM\Column(length=50) */
+	/** @ORM\Column(type="string1252", length=50) */
 	protected $OpisLetnikaStudija;
 
-	/** @ORM\Column(length=10) */
+	/** @ORM\Column(type="string1252", length=10) */
 	protected $KodaLetnikaStudijaA;
 
-	/** @ORM\Column(length=50) */
+	/** @ORM\Column(type="string1252", length=50) */
 	protected $OpisLetnikaStudijaA;
 
 }

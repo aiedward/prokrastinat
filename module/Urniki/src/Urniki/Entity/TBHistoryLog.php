@@ -8,10 +8,10 @@ use Prokrastinat\Entity\BaseEntity;
 /** @ORM\Entity */
 class TBHistoryLog extends BaseEntity
 {
-	/** @ORM\Column(type="Integer") */
+	/** @ORM\Column(type="integer") */
 	protected $HistoryLog_Id;
 
-	/** @ORM\Column(type="Datetime") */
+	/** @ORM\Column(type="msdatetime") */
 	protected $ChangeDate;
 
 	/** @ORM\Column(length=100) */
@@ -20,7 +20,7 @@ class TBHistoryLog extends BaseEntity
 	/** @ORM\Column(length=250) */
 	protected $Description;
 
-	/** @ORM\Column(type="Integer") */
+	/** @ORM\Column(type="integer") */
 	protected $EventType;
 
 }

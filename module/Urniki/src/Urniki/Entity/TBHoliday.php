@@ -11,16 +11,16 @@ class TBHoliday extends BaseEntity
 	/** @ORM\Column(length=40) */
 	protected $Value;
 
-	/** @ORM\Column(type="Integer") */
+	/** @ORM\Column(type="integer") */
 	protected $D;
 
-	/** @ORM\Column(type="Integer") */
+	/** @ORM\Column(type="integer") */
 	protected $M;
 
-	/** @ORM\Column(type="Integer") */
+	/** @ORM\Column(type="integer") */
 	protected $Begins_At;
 
-	/** @ORM\Column(type="Integer") */
+	/** @ORM\Column(type="integer") */
 	protected $Duration;
 
 }

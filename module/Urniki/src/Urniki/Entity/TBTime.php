@@ -8,7 +8,7 @@ use Prokrastinat\Entity\BaseEntity;
 /** @ORM\Entity */
 class TBTime extends BaseEntity
 {
-	/** @ORM\Column(type="Integer") */
+	/** @ORM\Column(type="integer") */
 	protected $Time_Id;
 
 	/** @ORM\Column(length=20) */

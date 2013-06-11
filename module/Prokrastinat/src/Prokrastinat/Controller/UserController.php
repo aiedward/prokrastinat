@@ -90,12 +90,12 @@ class UserController extends BaseController
     
     public function editAction()
     {
-            if (!$this->auth->hasIdentity()) $this->dostopZavrnjen();
+        if (!$this->auth->hasIdentity()) $this->dostopZavrnjen();
             $form = new \Prokrastinat\Form\EditForm();
             $form->setInputFilter(new \Prokrastinat\Form\EditFilter());
             $urejanje = false;
             
-            if (!$this->isGranted('user_uredi')) {
+            if (!$this->imaPravico('user_uredi')) {
                 $form->get('vpisna_st')->setAttributes(array('disabled' => true));
                 $form->get('ime')->setAttributes(array('disabled' => true));
                 $form->get('priimek')->setAttributes(array('disabled' => true));
@@ -109,7 +109,7 @@ class UserController extends BaseController
             $id = $this->getEvent()->getRouteMatch()->getParam('id');
             $user = $this->userRepository->find($id);
             
-            if ($this->isGranted('user_uredi') || $this->jeAvtor($user))
+            if ($this->imaPravico('user_uredi', $user))
             {
                 if ($this->request->isPost()) {
                     $form->setData($this->request->getPost());
@@ -192,7 +192,7 @@ class UserController extends BaseController
         
         public function listAction()
         {
-            if (!$this->isGranted('user_pregled')) $this->dostopZavrnjen();
+            if (!$this->imaPravico('user_pregled')) $this->dostopZavrnjen();
             $users = $this->userRepository->findAll();
             
             return new ViewModel(array(

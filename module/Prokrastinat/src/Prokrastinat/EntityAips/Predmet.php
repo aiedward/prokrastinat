@@ -80,7 +80,7 @@ class Predmet extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $OsnovniPredmetID;
 
-	/** @ORM\Column(type="Datetime") */
+	/** @ORM\Column(type="msdatetime") */
 	protected $VeljavnostDo;
 
 	/** @ORM\Column(length=3) */

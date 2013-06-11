@@ -8,7 +8,7 @@ use Prokrastinat\Entity\BaseEntity;
 /** @ORM\Entity */
 class TBCity extends BaseEntity
 {
-	/** @ORM\Column(type="Integer") */
+	/** @ORM\Column(type="integer") */
 	protected $City_Id;
 
 	/** @ORM\Column(length=60) */

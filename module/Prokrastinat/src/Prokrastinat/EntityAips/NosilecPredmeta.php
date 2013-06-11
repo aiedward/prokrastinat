@@ -8,19 +8,19 @@ use Prokrastinat\Entity\BaseEntity;
 /** @ORM\Entity */
 class NosilecPredmeta extends BaseEntity
 {
-	/** @ORM\Column(type="Decimal") */
+	/** @ORM\Column(type="decimal") */
 	protected $NosilecPredmetaID;
 
-	/** @ORM\Column(type="Decimal") */
+	/** @ORM\Column(type="decimal") */
 	protected $ZavodID;
 
-	/** @ORM\Column(type="Decimal") */
+	/** @ORM\Column(type="decimal") */
 	protected $PredmetID;
 
-	/** @ORM\Column(type="Decimal") */
+	/** @ORM\Column(type="decimal") */
 	protected $ZaposleniID;
 
-	/** @ORM\Column(type="Decimal") */
+	/** @ORM\Column(type="decimal") */
 	protected $ZaporednaStevilka;
 
 	/** @ORM\Column(length=50) */

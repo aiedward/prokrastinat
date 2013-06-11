@@ -17,10 +17,10 @@ class IzpitniRok extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $SolskoLeto;
 
-	/** @ORM\Column(type="Datetime") */
+	/** @ORM\Column(type="msdatetime") */
 	protected $DatumRoka;
 
-	/** @ORM\Column(type="Datetime") */
+	/** @ORM\Column(type="msdatetime") */
 	protected $RokPrijave;
 
 	/** @ORM\Column(type="integer") */
@@ -44,19 +44,19 @@ class IzpitniRok extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $IzvajalecID;
 
-	/** @ORM\Column(type="Datetime") */
+	/** @ORM\Column(type="msdatetime") */
 	protected $UraIzvedbe;
 
 	/** @ORM\Column(length=100) */
 	protected $Opomba;
 
-	/** @ORM\Column(type="Datetime") */
+	/** @ORM\Column(type="msdatetime") */
 	protected $DatumOdjave;
 
 	/** @ORM\Column(type="integer") */
 	protected $StariIRID;
 
-	/** @ORM\Column(type="Datetime") */
+	/** @ORM\Column(type="msdatetime") */
 	protected $DatumObjaveRezultata;
 
 	/** @ORM\Column(length=1) */

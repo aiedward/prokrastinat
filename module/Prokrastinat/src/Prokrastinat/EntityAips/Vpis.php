@@ -56,7 +56,7 @@ class Vpis extends BaseEntity
 	/** @ORM\Column(length=1) */
 	protected $UgodnostiStudenta;
 
-	/** @ORM\Column(type="Datetime") */
+	/** @ORM\Column(type="msdatetime") */
 	protected $UgodSpremembaCas;
 
 	/** @ORM\Column(type="integer") */
@@ -68,10 +68,10 @@ class Vpis extends BaseEntity
 	/** @ORM\Column(length=1) */
 	protected $VpisPogojni;
 
-	/** @ORM\Column(type="Datetime") */
+	/** @ORM\Column(type="msdatetime") */
 	protected $DatumVpisa;
 
-	/** @ORM\Column(type="Datetime") */
+	/** @ORM\Column(type="msdatetime") */
 	protected $VpisDo;
 
 	/** @ORM\Column(type="integer") */
@@ -92,7 +92,7 @@ class Vpis extends BaseEntity
 	/** @ORM\Column(type="float") */
 	protected $SolninaZnesek;
 
-	/** @ORM\Column(type="Datetime") */
+	/** @ORM\Column(type="msdatetime") */
 	protected $DatumPlacila;
 
 	/** @ORM\Column(type="integer") */
@@ -110,7 +110,7 @@ class Vpis extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $OIVLIzbirnaSkupinaID;
 
-	/** @ORM\Column(type="Datetime") */
+	/** @ORM\Column(type="msdatetime") */
 	protected $DejanskiDatumVpisa;
 
 	/** @ORM\Column(type="integer") */
@@ -131,7 +131,7 @@ class Vpis extends BaseEntity
 	/** @ORM\Column(type="real") */
 	protected $MVZTDosezeneKT;
 
-	/** @ORM\Column(type="Datetime") */
+	/** @ORM\Column(type="msdatetime") */
 	protected $MVZTDatumSklepaPrehoda;
 
 	/** @ORM\Column(type="integer") */
@@ -161,7 +161,7 @@ class Vpis extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $VrstaVpisnegaStroskaID;
 
-	/** @ORM\Column(type="Datetime") */
+	/** @ORM\Column(type="msdatetime") */
 	protected $DatumPlacilaVpisnegaStroska;
 
 }

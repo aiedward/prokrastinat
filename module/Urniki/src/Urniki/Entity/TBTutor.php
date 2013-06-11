@@ -8,7 +8,7 @@ use Prokrastinat\Entity\BaseEntity;
 /** @ORM\Entity */
 class TBTutor extends BaseEntity
 {
-	/** @ORM\Column(type="Integer") */
+	/** @ORM\Column(type="integer") */
 	protected $Tutor_Id;
 
 	/** @ORM\Column(length=40) */
@@ -29,16 +29,16 @@ class TBTutor extends BaseEntity
 	/** @ORM\Column(length=40) */
 	protected $Email;
 
-	/** @ORM\Column(type="Integer") */
+	/** @ORM\Column(type="integer") */
 	protected $Room_Id;
 
-	/** @ORM\Column(type="Integer") */
+	/** @ORM\Column(type="integer") */
 	protected $City_Id;
 
-	/** @ORM\Column(type="Integer") */
+	/** @ORM\Column(type="integer") */
 	protected $Flags;
 
-	/** @ORM\Column(type="Integer") */
+	/** @ORM\Column(type="integer") */
 	protected $Merge_Id;
 
 }

@@ -32,19 +32,19 @@ class Profesor extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $GovorilneDan;
 
-	/** @ORM\Column(type="Datetime") */
+	/** @ORM\Column(type="msdatetime") */
 	protected $GovorilneUraOd;
 
-	/** @ORM\Column(type="Datetime") */
+	/** @ORM\Column(type="msdatetime") */
 	protected $GovorilneUraDo;
 
 	/** @ORM\Column(type="integer") */
 	protected $Govorilne2Dan;
 
-	/** @ORM\Column(type="Datetime") */
+	/** @ORM\Column(type="msdatetime") */
 	protected $Govorilne2UraOd;
 
-	/** @ORM\Column(type="Datetime") */
+	/** @ORM\Column(type="msdatetime") */
 	protected $Govorilne2UraDo;
 
 	/** @ORM\Column(length=10) */

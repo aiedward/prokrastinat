@@ -8,7 +8,7 @@ use Prokrastinat\Entity\BaseEntity;
 /** @ORM\Entity */
 class TBStudent extends BaseEntity
 {
-	/** @ORM\Column(type="Integer") */
+	/** @ORM\Column(type="integer") */
 	protected $Student_Id;
 
 	/** @ORM\Column(length=40) */
@@ -23,10 +23,10 @@ class TBStudent extends BaseEntity
 	/** @ORM\Column(length=20) */
 	protected $Branch_Code;
 
-	/** @ORM\Column(type="Integer") */
+	/** @ORM\Column(type="integer") */
 	protected $Year;
 
-	/** @ORM\Column(type="Integer") */
+	/** @ORM\Column(type="integer") */
 	protected $Merge_Id;
 
 }

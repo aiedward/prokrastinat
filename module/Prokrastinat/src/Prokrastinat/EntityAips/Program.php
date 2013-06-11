@@ -38,13 +38,13 @@ class Program extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $ProgramBID;
 
-	/** @ORM\Column(type="Datetime") */
+	/** @ORM\Column(type="msdatetime") */
 	protected $DatumSprejetja1;
 
-	/** @ORM\Column(type="Datetime") */
+	/** @ORM\Column(type="msdatetime") */
 	protected $DatumSprejetja2;
 
-	/** @ORM\Column(type="Datetime") */
+	/** @ORM\Column(type="msdatetime") */
 	protected $DatumSprejetja3;
 
 	/** @ORM\Column(length=1) */

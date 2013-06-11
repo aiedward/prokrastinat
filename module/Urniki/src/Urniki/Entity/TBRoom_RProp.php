@@ -8,10 +8,10 @@ use Prokrastinat\Entity\BaseEntity;
 /** @ORM\Entity */
 class TBRoom_RProp extends BaseEntity
 {
-	/** @ORM\Column(type="Integer") */
+	/** @ORM\Column(type="integer") */
 	protected $Room_Id;
 
-	/** @ORM\Column(type="Integer") */
+	/** @ORM\Column(type="integer") */
 	protected $RProp_Id;
 
 }

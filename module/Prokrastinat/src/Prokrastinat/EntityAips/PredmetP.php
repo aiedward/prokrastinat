@@ -110,10 +110,10 @@ class PredmetP extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $IzracunOcene;
 
-	/** @ORM\Column(type="Datetime") */
+	/** @ORM\Column(type="msdatetime") */
 	protected $DatumIzvedbeOd;
 
-	/** @ORM\Column(type="Datetime") */
+	/** @ORM\Column(type="msdatetime") */
 	protected $DatumIzvedbeDo;
 
 	/** @ORM\Column(type="float") */

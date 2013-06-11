@@ -225,4 +225,20 @@ class DeskaController extends BaseController
             'formType' => \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL,
         );
     }
+    
+    public function brisikategorijoAction()
+    {
+        if (!$this->isGranted('kategorije_brisi'))
+            $this->dostopZavrnjen();
+        
+        $id = (int)$this->params()->fromRoute('id', 0);
+        $this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
+        
+        $kategorija = $this->em->find('Prokrastinat\Entity\Kategorija', $id);
+        $this->em->remove($kategorija);
+        $this->em->flush();
+        
+        return $this->redirect()->toRoute('deska');
+        
+    }
 }

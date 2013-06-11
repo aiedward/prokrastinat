@@ -14,9 +14,25 @@
                 <td><?= $this->escapeHtml($kat->ime)?></td>
                 <td>
                     <a class="btn-small btn" href="<?= $this->url('deska', array('action' => 'uredikategorijo', 'id' => $kat->id))?>"><i class="icon-edit"></i>Uredi</a>
-                    <a class="btn-small btn" href="<?= $this->url('deska', array('action' => 'brisikategorijo', 'id' => $kat->id))?>"><i class="icon-remove"></i>Briši</a>
+                    <a class="btn-small btn" href="#brisanje?id=<?=$kat->id?>" role="button" data-toggle="modal"><i class="icon-remove"></i>Briši</a>
                 </td>
             </tr>
         <?php endforeach; ?>
     </table>
 
+<div id="brisanje" class="modal hide fade">
+    <div class="modal-header">
+        <h3>Izbriši kategorijo</h3>
+    </div>
+    
+    <div class="modal-body">
+        <p>
+            Ste prepričani, da želite izbrisati kategorijo <?= $kat->ime ?>? 
+        </p>
+    </div>
+    
+    <div class="modal-footer">
+        <a data-dismiss="modal" class="btn">Ne</a>
+        <a class="btn btn-primary" href="<?= $this->url('deska', array('action' => 'brisikategorijo', 'id' => _GET['id'])?>">Da</a>
+    </div>
+</div>

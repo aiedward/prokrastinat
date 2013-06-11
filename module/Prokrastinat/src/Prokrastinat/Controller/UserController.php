@@ -21,6 +21,7 @@ class UserController extends BaseController
 
         $this->authService = $this->getServiceLocator()->get('Prokrastinat\Authentication\AuthenticationService');
         $this->userRepository = $this->em->getRepository('Prokrastinat\Entity\User');
+        $this->roleRepository = $this->em->getRepository('Prokrastinat\Entity\Role');
         $this->studijRepository = $this->getServiceLocator()->get('doctrine.entitymanager.orm_aips')->getRepository('Prokrastinat\EntityAips\Studij');
     }
     
@@ -42,16 +43,23 @@ class UserController extends BaseController
                 $username = $form->get('username')->getValue();
                 $password = $form->get('password')->getValue();
 
-                # ce je uporabnik v aipsu, ga prenesmo ali posodobimo v nasi bazi
+                // ce je uporabnik v aipsu, ga prenesmo ali posodobimo v nasi bazi
                 $aips_user = $this->studijRepository->findOneBy(array('VpisnaStevilka' => $username));
                 if ($aips_user) {
                     $user = $this->userRepository->findOneBy(array('username' => $username));
-                    $user = ($user == null) ? new \Prokrastinat\Entity\User() : $user;
+
+                    // prvi login, dodamo student role
+                    if ($user == null) { 
+                        $memberRole = $this->roleRepository->findOneBy(array('name' => 'student'));
+                        $user = new \Prokrastinat\Entity\User();
+                        $user->roles->add($memberRole);
+                    }
+
                     $this->userRepository->syncUser($aips_user, $user);
                     $this->em->flush();
                 }
 
-                # uporabnika avtenticiramo
+                // uporabnika avtenticiramo
                 $adapter = $this->authService->getAdapter();
                 $adapter->setIdentityValue($username);
                 $adapter->setCredentialValue($password);

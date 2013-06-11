@@ -9,7 +9,7 @@ use Prokrastinat\Entity\BaseEntity;
  * @ORM\Entity
  * @ORM\Table(name="pisum.programi")
  */
-class programi extends BaseEntity
+class Programi extends BaseEntity
 {
     /**
      * @ORM\Id

@@ -8,6 +8,10 @@ class String1252Type extends StringType
 {
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        return mb_convert_encoding($value, 'UTF-8', 'Windows-1252');
+        if (mb_check_encoding($value, 'UTF-8')) {
+            return $value;
+        } else {
+            return mb_convert_encoding($value, 'UTF-8', 'Windows-1252');
+        }
     }
 }

@@ -52,7 +52,8 @@ class DeskaForm extends Form
                 'label' => 'Zapade ', //
             ),
             'attributes' => array(
-                'id' => 'dp1',
+                'class' => 'datepick',
+                'id' => 'Datum',
             ),
         ));
 

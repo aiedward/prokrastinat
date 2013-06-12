@@ -54,7 +54,7 @@ root {
 }
 
 .datotekeTable tr > td > a > i{
-    float: right;
+    text-align: right;
 }
 /*********************NOVICE********************/
 .novicaView{

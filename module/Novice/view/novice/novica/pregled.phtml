@@ -1,19 +1,32 @@
 <div class="novicaView">
     <h2><?php echo $novica->naslov ?></h2>
-      <a style="width: 120px;" class="btn btn-primary btn-small" href="https://www.facebook.com/dialog/feed?
-        app_id=517777868280656&
-        link=http://prokrastinat.kreten.si/<?php echo $this->url;?>&
-        picture=http://pridi-na-feri.si/ui/v2/logo-feri.png&
-        name=Prokrastinat&
-        caption=<?php echo $novica->naslov?>&
-        description=<?php if(is_null($novica->opis)){echo $novica->vsebina;} else{echo $novica->opis;}?>&
-        redirect_uri=http://prokrastinat.kreten.si/<?php echo $this->url;?>" target="_blank">
-        <i class="icon-white icon-thumbs-up"></i> 
-        Deli na Facebooku
-      </a>
-    <p></p>
-    <a style="width: 120px;" class="btn btn-info btn-small" target="_blank" href="http://twitter.com/home?status=Pravkar berem: http://prokrastinat.kreten.si/<?php echo $this->url;?> <?php echo $novica->naslov;?>" title="Click to share this post on Twitter"><i class="icon-white icon-plus-sign"></i> Deli na Twitterju  </a></a>
-    
+    <div class="novicaPregledIkone">
+        <div class="novicaPregledIkoneSocial">
+            <a style="width: 120px;" class="btn btn-primary btn-small" href="https://www.facebook.com/dialog/feed?
+            app_id=517777868280656&
+            link=http://prokrastinat.kreten.si/<?php echo $this->url;?>&
+            picture=http://pridi-na-feri.si/ui/v2/logo-feri.png&
+            name=Prokrastinat&
+            caption=<?php echo $novica->naslov?>&
+            description=<?php if(is_null($novica->opis)){echo $novica->vsebina;} else{echo $novica->opis;}?>&
+            redirect_uri=http://prokrastinat.kreten.si/<?php echo $this->url;?>" target="_blank">
+            <i class="icon-white icon-thumbs-up"></i> 
+            Deli na Facebooku
+            </a>
+            <p></p>
+            <a style="width: 120px;" class="btn btn-info btn-small" target="_blank" href="http://twitter.com/home?status=Pravkar berem: http://prokrastinat.kreten.si/<?php echo $this->url;?> <?php echo $novica->naslov;?>" title="Click to share this post on Twitter"><i class="icon-white icon-plus-sign"></i> Deli na Twitterju  </a></a>
+        </div>
+        <div class="ikone novicaPregledIkoneUredi">
+            <?php if ($this->imaPravico('novica_uredi', $novica->user)){ ?>
+                <a title="Uredi" href="<?php echo $this->url('novice_uredi', array('id'=>$novica->id));?>">
+                    <i class="icon-edit"></i>
+                </a>
+                <a title="Brisi" class="brisiPotrditev" href="#" data-toggle="modal" data-id="<?php echo $novica->id ?>">
+                    <i class="icon-trash"></i>
+                </a>
+            <?php } ?>
+        </div>
+    </div>
     
     <div class="novicaJedro">
         <b>Avtor: </b> <?php echo $novica->user->getPolnoIme() ?>
@@ -25,3 +38,18 @@
     </div>
 </div>
 <br/>
+
+<div id="modal-brisanje" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Briši novico</h3>
+    </div>
+    <div class="modal-body">
+        <p>Ali ste prepričani da želite izbrisati to novico?</p>
+        <p id="debug-url"></p>
+    </div>
+    <div class="modal-footer">
+        <a href="/novice/brisi/id" class="btn danger btn-primary">Da</a>
+        <a href="javascript:$('#modal-brisanje').modal('hide')" class="btn secondary">Ne</a>
+    </div>
+</div>

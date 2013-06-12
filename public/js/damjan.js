@@ -1,4 +1,4 @@
-$('#modal-from-dom').on('show', function() {
+$('#modal-brisanje').on('show', function() {
     var id = $(this).data('id'),
         removeBtn = $(this).find('.danger');
 
@@ -9,5 +9,5 @@ $('.brisiPotrditev').on('click', function(e) {
     e.preventDefault();
 
     var id = $(this).data('id');
-    $('#modal-from-dom').data('id', id).modal('show');
+    $('#modal-brisanje').data('id', id).modal('show');
 });

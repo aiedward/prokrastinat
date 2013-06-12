@@ -58,7 +58,7 @@ return array(
             'datoteke_pregled' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/datoteke/pregled/:id',
+                    'route' => '/datoteke/pregled/[:id]',
                     'constraints' => array(
                         'id'     => '[0-9]+'
                     ),
@@ -71,7 +71,7 @@ return array(
             'datoteke_uredi' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/datoteke/uredi/:id',
+                    'route' => '/datoteke/uredi/[:id]',
                     'constraints' => array(
                         'id'     => '[0-9]+'
                     ),
@@ -84,7 +84,7 @@ return array(
             'datoteke_download' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/datoteke/download/:id',
+                    'route' => '/datoteke/download/[:id]',
                     'constraints' => array(
                         'id'     => '[0-9]+'
                     ),
@@ -97,7 +97,7 @@ return array(
             'datoteke_brisi' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/datoteke/brisi/:id',
+                    'route' => '/datoteke/brisi/[:id]',
                     'constraints' => array(
                         'id'     => '[0-9]+'
                     ),

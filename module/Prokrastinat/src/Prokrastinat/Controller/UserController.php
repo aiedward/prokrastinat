@@ -139,15 +139,17 @@ class UserController extends BaseController
             if (!$this->auth->hasIdentity()) $this->dostopZavrnjen();
             $id = $this->getEvent()->getRouteMatch()->getParam('id');
             $user = $this->userRepository->find($id);
-            
+            $studij = $this->studijRepository->getStudij($user);
+			
             if ($user == null) {
                 return $this->dostopZavrnjen();
             }
             
+			$program = $studij->getVpisi()[0]->program->ProgramID;
             return new ViewModel(array(
                 'user' => $user,
                 'uid' => $this->auth->getIdentity()->id, 
-                'studij' => $this->studijRepository
+                'studij' => $program
             ));
         }
         

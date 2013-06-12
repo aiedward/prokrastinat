@@ -1,14 +1,20 @@
 <?php
-namespace AIPS\Entity;
+namespace Prokrastinat\EntityAips;
 
 use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Mapping as ORM;
 use Prokrastinat\Entity\BaseEntity;
 
-/** @ORM\Entity */
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="pisum.Program")
+ */
 class Program extends BaseEntity
 {
-	/** @ORM\Column(type="integer") */
+	/**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     */
 	protected $ProgramID;
 
 	/** @ORM\Column(length=10) */
@@ -92,4 +98,15 @@ class Program extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $DelProgramaEVSID;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Prokrastinat\EntityAips\Vpis", mappedBy="studij")
+     */
+    protected $vpisi;
+    
+    public function getVpisi() {
+        return $this->vpisi;
+    }
+    public function __construct() {
+        $this->vpisi = new Doctrine\Common\Collections\ArrayCollection();
+    }
 }

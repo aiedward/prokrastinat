@@ -8,6 +8,7 @@ class StudijRepository extends EntityRepository
 {
     public function getStudij(\Prokrastinat\Entity\User $user)
     {
-        return $this->findBy(array('VpisnaStevilka' => $user->vpisna_st));
+        return $this->findOneBy(array('VpisnaStevilka' => $user->vpisna_st));
     }
+    
 }

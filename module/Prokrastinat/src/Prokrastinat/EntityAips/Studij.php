@@ -112,5 +112,17 @@ class Studij extends BaseEntity
 
 	/** @ORM\Column(type="integer") */
 	protected $VpisMerilaZaPrehode;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Prokrastinat\EntityAips\Vpis", mappedBy="studij")
+     */
+    protected $vpisi;
+    
+    public function getVpisi() {
+        return $this->vpisi;
+    }
+    public function __construct() {
+        $this->vpisi = new Doctrine\Common\Collections\ArrayCollection();
+    }
 
 }

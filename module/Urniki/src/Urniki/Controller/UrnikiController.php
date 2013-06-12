@@ -25,9 +25,14 @@ class UrnikiController extends BaseController
         
         $form = new UrnikiForm($programi, $smeri, null);*/
         $form = null;
-        $em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_urniki');
-        $test = $em->getRepository('Urniki\Entity\TBCourse')->findAll();
-        
-        return new ViewModel(array('form' => $form, 'test' => $test));
+        $studijRepository = $this->getServiceLocator()->get('doctrine.entitymanager.orm_aips')->getRepository('Prokrastinat\EntityAips\Studij');
+
+        $user = $this->auth->getIdentity();
+        $program_id = $studijRepository->getStudij($user)->getVpisi()[0]->ProgramID;
+        //$em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_urniki');
+        //$test = $em->getRepository('Urniki\Entity\TBCourse')->findAll();
+        $programRepository = $this->getServiceLocator()->get('doctrine.entitymanager.orm_aips')->getRepository('Prokrastinat\EntityAips\Program');
+        $program = $programRepository->find(5);
+        return new ViewModel(array('form' => $form, 'test' => $program));
     }
 }

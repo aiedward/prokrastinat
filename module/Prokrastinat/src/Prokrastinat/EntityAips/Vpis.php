@@ -1,14 +1,20 @@
 <?php
-namespace AIPS\Entity;
+namespace Prokrastinat\EntityAips;
 
 use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Mapping as ORM;
 use Prokrastinat\Entity\BaseEntity;
 
-/** @ORM\Entity */
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="pisum.Vpis")
+ */
 class Vpis extends BaseEntity
 {
-	/** @ORM\Column(type="integer") */
+	/**
+	 * @ORM\Column(type="integer")
+	 * @ORM\Id
+	 */
 	protected $VpisID;
 
 	/** @ORM\Column(type="integer") */
@@ -56,8 +62,8 @@ class Vpis extends BaseEntity
 	/** @ORM\Column(length=1) */
 	protected $UgodnostiStudenta;
 
-	/** @ORM\Column(type="Datetime") */
-	protected $UgodSpremembaCas;
+	/** @ORM\Column(type="DateTime2") */
+	//protected $UgodSpremembaCas;
 
 	/** @ORM\Column(type="integer") */
 	protected $VrstaVpisaID;
@@ -68,11 +74,11 @@ class Vpis extends BaseEntity
 	/** @ORM\Column(length=1) */
 	protected $VpisPogojni;
 
-	/** @ORM\Column(type="Datetime") */
-	protected $DatumVpisa;
+	/** @ORM\Column(type="DateTime2") */
+	//protected $DatumVpisa;
 
-	/** @ORM\Column(type="Datetime") */
-	protected $VpisDo;
+	/** @ORM\Column(type="DateTime2") */
+	//protected $VpisDo;
 
 	/** @ORM\Column(type="integer") */
 	protected $MentorID;
@@ -92,8 +98,8 @@ class Vpis extends BaseEntity
 	/** @ORM\Column(type="float") */
 	protected $SolninaZnesek;
 
-	/** @ORM\Column(type="Datetime") */
-	protected $DatumPlacila;
+	/** @ORM\Column(type="DateTime2") */
+	//protected $DatumPlacila;
 
 	/** @ORM\Column(type="integer") */
 	protected $SolninaObrokov;
@@ -110,8 +116,8 @@ class Vpis extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $OIVLIzbirnaSkupinaID;
 
-	/** @ORM\Column(type="Datetime") */
-	protected $DejanskiDatumVpisa;
+	/** @ORM\Column(type="DateTime2") */
+	//protected $DejanskiDatumVpisa;
 
 	/** @ORM\Column(type="integer") */
 	protected $MVZTTujecSolnina;
@@ -128,11 +134,11 @@ class Vpis extends BaseEntity
 	/** @ORM\Column(length=1) */
 	protected $MVZTSofinanciranje;
 
-	/** @ORM\Column(type="real") */
+	/** @ORM\Column(type="decimal") */
 	protected $MVZTDosezeneKT;
 
-	/** @ORM\Column(type="Datetime") */
-	protected $MVZTDatumSklepaPrehoda;
+	/** @ORM\Column(type="DateTime2") */
+	//protected $MVZTDatumSklepaPrehoda;
 
 	/** @ORM\Column(type="integer") */
 	protected $Program1ID;
@@ -161,7 +167,18 @@ class Vpis extends BaseEntity
 	/** @ORM\Column(type="integer") */
 	protected $VrstaVpisnegaStroskaID;
 
-	/** @ORM\Column(type="Datetime") */
-	protected $DatumPlacilaVpisnegaStroska;
-
+	/** @ORM\Column(type="DateTime2") */
+	//protected $DatumPlacilaVpisnegaStroska;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Prokrastinat\EntityAips\Studij", inversedBy="vpisi")
+     * @ORM\JoinColumn(name="StudijID", referencedColumnName="StudijID")
+     */
+    protected $studij;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Prokrastinat\EntityAips\Program", inversedBy="vpisi")
+     * @ORM\JoinColumn(name="Program1ID", referencedColumnName="ProgramID")
+     */
+    protected $program;
 }

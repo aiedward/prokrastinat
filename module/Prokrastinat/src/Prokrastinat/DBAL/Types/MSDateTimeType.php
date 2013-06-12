@@ -1,6 +1,7 @@
 <?php
 namespace Prokrastinat\DBAL\Types;
 
+use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\DateTimeType;
 

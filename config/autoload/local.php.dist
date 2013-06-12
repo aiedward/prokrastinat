@@ -28,6 +28,7 @@ return array(
             ),
             // AIPS connection name
             'orm_aips' => array(
+                //'driverClass' => 'Doctrine\DBAL\Driver\PDOSqlsrv\Driver',     // windows
                 'driverClass' => 'Prokrastinat\DBAL\Driver\PDOSqlsrv\Driver',
                 'params' => array(
                     'host'     => 'studsrv.uni-mb.si',
@@ -39,6 +40,7 @@ return array(
             ),
             // Urniki connection name
             'orm_urniki' => array(
+                //'driverClass' => 'Doctrine\DBAL\Driver\PDOSqlsrv\Driver',     // windows
                 'driverClass' => 'Prokrastinat\DBAL\Driver\PDOSqlsrv\Driver',
                 'params' => array(
                     'host'     => 'studsrv.uni-mb.si',

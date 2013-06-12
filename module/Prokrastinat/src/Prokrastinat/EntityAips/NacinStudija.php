@@ -1,26 +1,32 @@
 <?php
-namespace AIPS\Entity;
+namespace Prokrastinat\EntityAips;
 
 use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Mapping as ORM;
 use Prokrastinat\Entity\BaseEntity;
 
-/** @ORM\Entity */
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="pisum.NacinStudija")
+ */
 class NacinStudija extends BaseEntity
 {
-	/** @ORM\Column(type="integer") */
-	protected $NacinStudijaID;
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     */
+    protected $NacinStudijaID;
 
-	/** @ORM\Column(length=10) */
-	protected $KodaNacinaStudija;
+    /** @ORM\Column(type="string1252", length=10) */
+    protected $KodaNacinaStudija;
 
-	/** @ORM\Column(length=30) */
-	protected $OpisNacinaStudija;
+    /** @ORM\Column(type="string1252", length=30) */
+    protected $OpisNacinaStudija;
 
-	/** @ORM\Column(length=10) */
-	protected $KodaNacinaStudijaA;
+    /** @ORM\Column(type="string1252", length=10) */
+    protected $KodaNacinaStudijaA;
 
-	/** @ORM\Column(length=30) */
-	protected $OpisNacinaStudijaA;
+    /** @ORM\Column(type="string1252", length=30) */
+    protected $OpisNacinaStudijaA;
 
 }

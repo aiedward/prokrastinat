@@ -23,7 +23,7 @@ class OglasRepository extends EntityRepository
     public function getOglasiByKategorija($kategorija)
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery('SELECT o FROM Deska\Entity\Oglas o WHERE o.kategorija = :kategorija_id');
+        $query = $em->createQuery('SELECT o FROM Deska\Entity\Oglas o WHERE o.kategorija = :kategorija_id ORDER BY o.datum_objave DESC');
         $query->setParameter('kategorija_id', $kategorija);
         
         return $query->getResult();
@@ -32,7 +32,7 @@ class OglasRepository extends EntityRepository
     public function getLastOglasi()
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery('SELECT o FROM Deska\Entity\Oglas o');
+        $query = $em->createQuery('SELECT o FROM Deska\Entity\Oglas o ORDER BY o.datum_objave DESC');
         $query->setMaxResults(3);
         
         return $query->getResult();

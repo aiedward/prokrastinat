@@ -1,8 +1,7 @@
 <h1>Oglasna deska</h1>
 
 <?php if ($this->isGranted('deska_dodaj')): ?>
-    <a class="btn btn-primary" href="<?php echo $this->url('deska', array('action' => 'kategorije')); ?>">Kategorije</a>
-    <a class="btn btn-primary" href="<?php echo $this->url('deska', array('action' => 'dodaj')); ?>" id="dodaj-oglas">Dodaj</a>
+    <a class="btn btn-primary" href="<?php echo $this->url('deska', array('action' => 'dodaj')); ?>" id="dodaj-oglas">Dodaj oglas</a>
 <?php endif; ?>
     <br /> <br />
     
@@ -47,3 +46,7 @@
         </tr>
     <?php endforeach; ?>
 </table>
+    
+<?php if ($this->isGranted('deska_dodaj')): ?>
+    <a class="btn btn-primary" href="<?php echo $this->url('deska', array('action' => 'kategorije')); ?>">Kategorije</a>
+<?php endif; ?>

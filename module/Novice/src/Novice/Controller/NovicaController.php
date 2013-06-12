@@ -9,6 +9,9 @@ use Prokrastinat\Controller\BaseController;
 use Novice\Form\UrediForm;
 use Novice\Form\ParseForm;
 use Zend;
+use Novice\Entity\ExtremeNovica;
+use Novice\Form\KategorijaForm;
+use Novice\Form\IskanjeForm;
 
 class NovicaController extends BaseController
 {
@@ -17,16 +20,15 @@ class NovicaController extends BaseController
         if (!$this->isGranted('novica_index')) {
             return $this->dostopZavrnjen();
         } 
-        $query = $this->em->createQuery("SELECT n FROM Novice\Entity\Novica n");
+        $query = $this->em->createQuery("SELECT n FROM Novice\Entity\Novica n ORDER BY n.datum_objave DESC");
         $novice = $query->getResult();
         $user = $this->auth->getIdentity();
         
-        return new ViewModel(array('novice' => $novice, 'user' => $user));
+        return new ViewModel(array('novice' => $novice, 'user' => $user, 'flashMessages' => $this->flashMessenger()->getMessages()));
     }
     
     public function dodajAction()
     {
-        
         if (!$this->isGranted('novica_dodaj')) {
             return $this->dostopZavrnjen();
         } 
@@ -64,8 +66,9 @@ class NovicaController extends BaseController
         
         $id = (int) $this->params()->fromRoute('id', 0);
         $novica = $this->em->find('Novice\Entity\Novica', $id);
+        $url = $this->getRequest()->getRequestUri();
 
-        return new ViewModel(array('novica' => $novica));
+        return new ViewModel(array('novica' => $novica, 'url' => $url));
     }
     
     
@@ -76,7 +79,7 @@ class NovicaController extends BaseController
         $id = (int) $this->params()->fromRoute('id', 0);
         $novica = $novicaRep->find($id);
         
-        if (!(($this->isGranted('novica_uredi'))||$this->jeAvtor($novica->user))) {
+        if (!($this->imaPravico('novica_uredi', $novica->user))) {
             return $this->dostopZavrnjen();
         } 
          
@@ -116,11 +119,10 @@ class NovicaController extends BaseController
                 $kategorija_ime = $options[$kategorija];
                 $client = new Zend\Soap\Client("http://localhost:63640/Service1.asmx?WSDL");
                 $result1 = $client->VrniNovice(array('kategorija' => $kategorija_ime, 'keywords'=>$form->get('isci')->getValue()))->vrniNoviceResult;
+                $stevec = 0;
                 foreach($result1->Novica as $nov)
                 {
                     $zeObstaja = false;
-                    /*$query = $this->em->createQuery("SELECT n FROM Novice\Entity\DodatnaNovica n");
-                    $novice = $query->getResult();*/
                     
                     $novice = $this->em->getRepository('Novice\Entity\DodatnaNovica')->findAll();
                     
@@ -143,9 +145,10 @@ class NovicaController extends BaseController
                         $novica->datum_objave = new \DateTime("now");
                         $this->em->persist($novica);
                         $this->em->flush();
+                        $stevec++;
                     }
                 }
-                    $this->flashMessenger()->addMessage('Test flashmessenger.');
+                    $this->flashMessenger()->addMessage('Dodanih je bilo '.$stevec. ' novic.');
                     return $this->redirect()->toRoute('novice', array('action' => 'ostale'));
                 }
         }
@@ -153,6 +156,18 @@ class NovicaController extends BaseController
     }
     
     public function ostaleAction()
+    {
+        if (!$this->isGranted('novica_index')) {
+            return $this->dostopZavrnjen();
+        } 
+        $query = $this->em->createQuery("SELECT n FROM Novice\Entity\DodatnaNovica n");
+        $novice = $query->getResult();
+        $user = $this->auth->getIdentity();
+        
+        return new ViewModel(array('novice' => $novice, 'action' => 'ostale', 'user' => $user,'flashMessages' => $this->flashMessenger()->getMessages()));
+    }
+    
+    public function studentskeAction()
     {
         if (!$this->isGranted('novica_index')) {
             return $this->dostopZavrnjen();
@@ -178,30 +193,63 @@ class NovicaController extends BaseController
     
     public function brisiAction()
     {
-       if (!$this->isGranted('novica_brisi')) 
-            $this->dostopZavrnjen();
+        $novRep = $this->em->getRepository('Novice\Entity\Novica');
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $novica = $novRep->find($id);
         
-        $id = (int)$this->params()->fromRoute('id', 0);
+        if (!($this->imaPravico('novica_brisi', $novica->user))) {
+            return $this->dostopZavrnjen();
+        } 
+        $novRep->deleteNovica($novica);
+        $this->em->flush();
+        $this->flashMessenger()->addMessage('Novica je bila uspešno izbrisana!');
+        return $this->redirect()->toRoute('novice');
+    }
+    
+    // eXtreme tech novice - MaTTo
+    public function extremeAction()
+    {
+        $client = new Zend\Soap\Client("http://localhost:59491/Service1.asmx?WSDL");
+        $novice = $client->getAll()->getAllResult;
+        
+        $kategorije = array('vse', 'gaming', 'deals', 'mobile', 'computing', 'extreme');
+        $form_kategorija = new KategorijaForm($kategorije);
+        $form_iskanje = new IskanjeForm();
         
         if ($this->request->isPost()) {
-            $del = $this->request->getPost('del', 'No');
+            $id = (int)$this->request->getPost('kategorija');
             
-            if ($del == 'Yes') {
-                $id = (int) $this->request->getPost('id');
+            if (!$id) {
+                // selectam glede na iskalni niz
+                $iskalni_niz = $this->request->getPost('iskalni_niz');
+                $novice = $client->getNoviceByIskalniNiz(array('iskalni_niz' => $iskalni_niz))->getNoviceByIskalniNizResult;
+            } else {
+                // selectam kategorijo
+                $kategorija_index = $this->request->getPost('kategorija');
+                //var_dump($kategorija_index);
+                //exit;
+                $kategorija = $kategorije[$kategorija_index];
+                //var_dump($kategorija);
+                //exit;
                 
-                $novica = $this->em->find('Novice\Entity\Novica', $id);
-                $this->em->remove($novica);
-                $this->em->flush();
+                $novice = $client->getNoviceByKategorija(array('kategorija' => $kategorija))->getNoviceByKategorijaResult;
             }
-            
-            return $this->redirect()->toRoute('novice');
-        }
+        }     
         
         return array(
-            'id' => $id,
-            'novica' => $this->em->find('Novice\Entity\Novica', $id)
+            'novice' => $novice, 
+            'form_kategorija' => $form_kategorija,
+            'form_iskanje' => $form_iskanje,
         );
     }
     
-
+    public function extremepregledAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        //$client = new Zend\Soap\Client("http://localhost:59491/Service1.asmx?WSDL");
+        //$novica = $client->getNovicaById(array('id' => $id))->getNovicaByIdResult;
+        $novica = $this->em->find('Novice\Entity\ExtremeNovica', $id);
+        
+        return array('novica' => $novica);
+    }
 }

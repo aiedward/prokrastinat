@@ -8,25 +8,28 @@ use Prokrastinat\Entity\BaseEntity;
 /** @ORM\Entity */
 class TBStudent extends BaseEntity
 {
-	/** @ORM\Column(type="Integer") */
-	protected $Student_Id;
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     */
+    protected $Student_Id;
 
-	/** @ORM\Column(length=40) */
-	protected $First_Name;
+    /** @ORM\Column(length=40) */
+    protected $First_Name;
 
-	/** @ORM\Column(length=40) */
-	protected $Last_Name;
+    /** @ORM\Column(length=40) */
+    protected $Last_Name;
 
-	/** @ORM\Column(length=16) */
-	protected $Student_Num;
+    /** @ORM\Column(length=16) */
+    protected $Student_Num;
 
-	/** @ORM\Column(length=20) */
-	protected $Branch_Code;
+    /** @ORM\Column(length=20) */
+    protected $Branch_Code;
 
-	/** @ORM\Column(type="Integer") */
-	protected $Year;
+    /** @ORM\Column(type="integer") */
+    protected $Year;
 
-	/** @ORM\Column(type="Integer") */
-	protected $Merge_Id;
+    /** @ORM\Column(type="integer") */
+    protected $Merge_Id;
 
 }

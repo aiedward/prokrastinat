@@ -1,29 +1,35 @@
 <?php
-namespace AIPS\Entity;
+namespace Prokrastinat\EntityAips;
 
 use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Mapping as ORM;
 use Prokrastinat\Entity\BaseEntity;
 
-/** @ORM\Entity */
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="pisum.NosilecPredmeta")
+ */
 class NosilecPredmeta extends BaseEntity
 {
-	/** @ORM\Column(type="Decimal") */
-	protected $NosilecPredmetaID;
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     */
+    protected $NosilecPredmetaID;
 
-	/** @ORM\Column(type="Decimal") */
-	protected $ZavodID;
+    /** @ORM\Column(type="integer") */
+    protected $ZavodID;
 
-	/** @ORM\Column(type="Decimal") */
-	protected $PredmetID;
+    /** @ORM\Column(type="integer") */
+    protected $PredmetID;
 
-	/** @ORM\Column(type="Decimal") */
-	protected $ZaposleniID;
+    /** @ORM\Column(type="integer") */
+    protected $ZaposleniID;
 
-	/** @ORM\Column(type="Decimal") */
-	protected $ZaporednaStevilka;
+    /** @ORM\Column(type="integer") */
+    protected $ZaporednaStevilka;
 
-	/** @ORM\Column(length=50) */
-	protected $Funkcija;
+    /** @ORM\Column(type="string1252", length=50) */
+    protected $Funkcija;
 
 }

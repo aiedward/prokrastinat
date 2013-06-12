@@ -1,47 +1,53 @@
 <?php
-namespace AIPS\Entity;
+namespace Prokrastinat\EntityAips;
 
 use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Mapping as ORM;
 use Prokrastinat\Entity\BaseEntity;
 
-/** @ORM\Entity */
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="pisum.programi")
+ */
 class Programi extends BaseEntity
 {
-	/** @ORM\Column(type="integer") */
-	protected $PredmetnikID;
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     */
+    protected $PredmetnikID;
 
-	/** @ORM\Column(type="integer") */
-	protected $SolskoLeto;
+    /** @ORM\Column(type="integer") */
+    protected $SolskoLeto;
 
-	/** @ORM\Column(type="integer") */
-	protected $CenterStudijaID;
+    /** @ORM\Column(type="integer") */
+    protected $CenterStudijaID;
 
-	/** @ORM\Column(type="integer") */
-	protected $VrstaStudijaID;
+    /** @ORM\Column(type="integer") */
+    protected $VrstaStudijaID;
 
-	/** @ORM\Column(type="integer") */
-	protected $NacinStudijaID;
+    /** @ORM\Column(type="integer") */
+    protected $NacinStudijaID;
 
-	/** @ORM\Column(type="integer") */
-	protected $ProgramID;
+    /** @ORM\Column(type="integer") */
+    protected $ProgramID;
 
-	/** @ORM\Column(length=60) */
-	protected $NazivPredmetnika;
+    /** @ORM\Column(type="string1252", length=60) */
+    protected $NazivPredmetnika;
 
-	/** @ORM\Column(length=20) */
-	protected $KraticaPredmetnika;
+    /** @ORM\Column(type="string1252", length=20) */
+    protected $KraticaPredmetnika;
 
-	/** @ORM\Column(length=4) */
-	protected $Zaporedje;
+    /** @ORM\Column(type="string1252", length=4) */
+    protected $Zaporedje;
 
-	/** @ORM\Column(length=1) */
-	protected $SeIzvaja;
+    /** @ORM\Column(type="string1252", length=1) */
+    protected $SeIzvaja;
 
-	/** @ORM\Column(length=150) */
-	protected $Opombe;
+    /** @ORM\Column(type="string1252", length=150) */
+    protected $Opombe;
 
-	/** @ORM\Column(length=1) */
-	protected $ObjaviNaSpletu;
+    /** @ORM\Column(type="string1252", length=1) */
+    protected $ObjaviNaSpletu;
 
 }

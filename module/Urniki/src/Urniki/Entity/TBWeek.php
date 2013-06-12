@@ -8,13 +8,16 @@ use Prokrastinat\Entity\BaseEntity;
 /** @ORM\Entity */
 class TBWeek extends BaseEntity
 {
-	/** @ORM\Column(type="Integer") */
-	protected $Week_Id;
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     */
+    protected $Week_Id;
 
-	/** @ORM\Column(type="Datetime") */
-	protected $First_Day;
+    /** @ORM\Column(type="smalldatetime") */
+    protected $First_Day;
 
-	/** @ORM\Column(type="Datetime") */
-	protected $Last_Day;
+    /** @ORM\Column(type="smalldatetime") */
+    protected $Last_Day;
 
 }

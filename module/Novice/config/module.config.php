@@ -25,11 +25,7 @@ return array(
             'novice' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/novice',
-                    'constraints' => array(
-                        'action' => '[a-zA-Z][a-zA-Z0-9]*',
-                        'id'     => '[0-9]+'
-                    ),
+                    'route' => '/novice/',
                     'defaults' => array(
                         'controller' => 'Novica',
                         'action' => 'index'
@@ -39,10 +35,30 @@ return array(
             'novice_index' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/novice/index',
+                    'route' => '/novice/index/',
                     'defaults' => array(
                         'controller' => 'Novica',
                         'action' => 'index'
+                    ),
+                ),
+            ),
+            'novice_dodaj' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/novice/dodaj/',
+                    'defaults' => array(
+                        'controller' => 'Novica',
+                        'action' => 'dodaj'
+                    ),
+                ),
+            ),
+            'novice_parse' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/novice/parse/',
+                    'defaults' => array(
+                        'controller' => 'Novica',
+                        'action' => 'parse'
                     ),
                 ),
             ),
@@ -59,10 +75,10 @@ return array(
                     ),
                 ),
             ),
-            'novice_edit' => array(
+            'novice_uredi' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/novice/ured/:id',
+                    'route' => '/novice/uredi/:id',
                     'constraints' => array(
                         'id'     => '[0-9]+'
                     ),
@@ -72,20 +88,27 @@ return array(
                     ),
                 ),
             ),
-            'novice_add' => array(
+            'novice_ostale' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/novice/dodaj/',
-                    'constraints' => array(
-                        'id'     => '[0-9]+'
-                    ),
+                    'route' => '/novice/ostale/',
                     'defaults' => array(
                         'controller' => 'Novica',
-                        'action' => 'dodaj'
+                        'action' => 'ostale'
                     ),
                 ),
             ),
-            'novice_delete' => array(
+            'novice_studentske' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/novice/ostale/studentske/',
+                    'defaults' => array(
+                        'controller' => 'Novica',
+                        'action' => 'studentske'
+                    ),
+                ),
+            ),
+            'novice_brisi' => array(
                 'type' => 'segment',
                 'options' => array(
                     'route' => '/novice/brisi/:id',
@@ -95,6 +118,42 @@ return array(
                     'defaults' => array(
                         'controller' => 'Novica',
                         'action' => 'brisi'
+                    ),
+                ),
+            ),
+            'novice_pregled' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/novice/pregled/:id',
+                    'constraints' => array(
+                        'id'     => '[0-9]+'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Novica',
+                        'action' => 'pregled'
+                    ),
+                ),
+            ),
+            'novice_extreme' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/novice/ostale/extreme/',
+                    'defaults' => array(
+                        'controller' => 'Novica',
+                        'action' => 'extreme'
+                    ),
+                ),
+            ),
+            'novice_extreme_pregled' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/novice/ostale/extreme/pregled/[:id]',
+                    'constraints' => array(
+                        'id' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Novica',
+                        'action' => 'extremepregled',
                     ),
                 ),
             ),

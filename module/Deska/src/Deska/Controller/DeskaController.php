@@ -17,14 +17,17 @@ class DeskaController extends BaseController
     
     public function indexAction() 
     {   
+        $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
         $this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
         $options = $this->kategorija_repository->getKategorijeInArray();
         
         $form = new FilterForm($options);
         $id = (int)$this->request->getPost('kategorija');
+        //var_dump($id);
+        //exit;
         
         if (!$id) {
-            $query = $this->em->createQuery("SELECT o FROM Deska\Entity\Oglas o WHERE o.datum_zapadlosti > CURRENT_DATE()");
+            $query = $this->em->createQuery("SELECT o FROM Deska\Entity\Oglas o WHERE o.datum_zapadlosti > CURRENT_DATE() ORDER BY o.datum_objave DESC");
             $oglasi = $query->getResult();
         } else {
             $oglasi = $this->deska_repository->getOglasiByKategorija($id);
@@ -154,7 +157,7 @@ class DeskaController extends BaseController
             $this->dostopZavrnjen();
         
         $this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
-        $kategorije = $this->deska_repository->getKategorije();
+        $kategorije = $this->kategorija_repository->getKategorije();
         
         return array('kategorije' => $kategorije);
     }
@@ -187,5 +190,55 @@ class DeskaController extends BaseController
             'form' => $form,
             'formType' => \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL,
         );
+    }
+    
+    public function uredikategorijoAction()
+    {
+        if (!$this->isGranted('kategorije_uredi'))
+            $this->dostopZavrnjen();
+        
+        $id = (int)$this->params()->fromRoute('id', 0);
+        $kategorija = $this->em->find('Prokrastinat\Entity\Kategorija', $id);
+        
+        $this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
+        $options = $this->kategorija_repository->getKategorijeInArray();
+        $form = new DodajKategorijoForm();
+        $form->fill($kategorija);
+        
+        if ($this->request->isPost()) {
+            // set input filter
+            $form->setData($this->request->getPost());
+            
+            // form is valid
+            $vals = array(
+                'ime' => $form->get('ime')->getValue(),
+            );
+            
+            $this->kategorija_repository->saveKategorija($kategorija, $vals);
+            $this->em->flush();
+            
+            return $this->redirect()->toRoute('deska');
+        }
+        
+        return array(
+            'form' => $form,
+            'formType' => \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL,
+        );
+    }
+    
+    public function brisikategorijoAction()
+    {
+        if (!$this->isGranted('kategorije_brisi'))
+            $this->dostopZavrnjen();
+        
+        $id = (int)$this->params()->fromRoute('id', 0);
+        $this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
+        
+        $kategorija = $this->em->find('Prokrastinat\Entity\Kategorija', $id);
+        $this->em->remove($kategorija);
+        $this->em->flush();
+        
+        return $this->redirect()->toRoute('deska');
+        
     }
 }

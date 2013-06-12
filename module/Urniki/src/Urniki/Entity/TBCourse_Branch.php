@@ -8,10 +8,13 @@ use Prokrastinat\Entity\BaseEntity;
 /** @ORM\Entity */
 class TBCourse_Branch extends BaseEntity
 {
-	/** @ORM\Column(type="Integer") */
-	protected $Course_Id;
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     */
+    protected $Course_Id;
 
-	/** @ORM\Column(type="Integer") */
-	protected $Branch_Id;
+    /** @ORM\Column(type="integer") */
+    protected $Branch_Id;
 
 }

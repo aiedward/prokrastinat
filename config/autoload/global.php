@@ -58,7 +58,11 @@ return array(
                 'generate_proxies'  => true,
                 'proxy_dir'         => 'data/DoctrineORMModule/Proxy',
                 'proxy_namespace'   => 'DoctrineORMModule\Proxy',
-                'filters'           => array()
+                'filters'           => array(),
+                'types' => array(
+                    'msdatetime' => 'Prokrastinat\DBAL\Types\MSDateTimeType',
+                    'string1252' => 'Prokrastinat\DBAL\Types\String1252Type'
+                )
             ),
             'orm_aips' => array(
                 'metadata_cache'    => 'array',
@@ -68,7 +72,11 @@ return array(
                 'generate_proxies'  => true,
                 'proxy_dir'         => 'data/DoctrineORMModule/Proxy',
                 'proxy_namespace'   => 'DoctrineORMModule\Proxy',
-                'filters'           => array()
+                'filters'           => array(),
+                'types' => array(
+                    'msdatetime' => 'Prokrastinat\DBAL\Types\MSDateTimeType',
+                    'string1252' => 'Prokrastinat\DBAL\Types\String1252Type'
+                )
             )
         ),
         'entitymanager' => array(

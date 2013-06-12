@@ -21,6 +21,7 @@ class UserController extends BaseController
 
         $this->authService = $this->getServiceLocator()->get('Prokrastinat\Authentication\AuthenticationService');
         $this->userRepository = $this->em->getRepository('Prokrastinat\Entity\User');
+        $this->roleRepository = $this->em->getRepository('Prokrastinat\Entity\Role');
         $this->studijRepository = $this->getServiceLocator()->get('doctrine.entitymanager.orm_aips')->getRepository('Prokrastinat\EntityAips\Studij');
     }
     
@@ -42,16 +43,23 @@ class UserController extends BaseController
                 $username = $form->get('username')->getValue();
                 $password = $form->get('password')->getValue();
 
-                # ce je uporabnik v aipsu, ga prenesmo ali posodobimo v nasi bazi
+                // ce je uporabnik v aipsu, ga prenesmo ali posodobimo v nasi bazi
                 $aips_user = $this->studijRepository->findOneBy(array('VpisnaStevilka' => $username));
                 if ($aips_user) {
                     $user = $this->userRepository->findOneBy(array('username' => $username));
-                    $user = ($user == null) ? new \Prokrastinat\Entity\User() : $user;
+
+                    // prvi login, dodamo student role
+                    if ($user == null) { 
+                        $memberRole = $this->roleRepository->findOneBy(array('name' => 'student'));
+                        $user = new \Prokrastinat\Entity\User();
+                        $user->roles->add($memberRole);
+                    }
+
                     $this->userRepository->syncUser($aips_user, $user);
                     $this->em->flush();
                 }
 
-                # uporabnika avtenticiramo
+                // uporabnika avtenticiramo
                 $adapter = $this->authService->getAdapter();
                 $adapter->setIdentityValue($username);
                 $adapter->setCredentialValue($password);
@@ -90,12 +98,12 @@ class UserController extends BaseController
     
     public function editAction()
     {
-            if (!$this->auth->hasIdentity()) $this->dostopZavrnjen();
+        if (!$this->auth->hasIdentity()) $this->dostopZavrnjen();
             $form = new \Prokrastinat\Form\EditForm();
             $form->setInputFilter(new \Prokrastinat\Form\EditFilter());
             $urejanje = false;
             
-            if (!$this->isGranted('user_uredi')) {
+            if (!$this->imaPravico('user_uredi')) {
                 $form->get('vpisna_st')->setAttributes(array('disabled' => true));
                 $form->get('ime')->setAttributes(array('disabled' => true));
                 $form->get('priimek')->setAttributes(array('disabled' => true));
@@ -109,7 +117,7 @@ class UserController extends BaseController
             $id = $this->getEvent()->getRouteMatch()->getParam('id');
             $user = $this->userRepository->find($id);
             
-            if ($this->isGranted('user_uredi') || $this->jeAvtor($user))
+            if ($this->imaPravico('user_uredi', $user))
             {
                 if ($this->request->isPost()) {
                     $form->setData($this->request->getPost());
@@ -194,7 +202,7 @@ class UserController extends BaseController
         
         public function listAction()
         {
-            if (!$this->isGranted('user_pregled')) $this->dostopZavrnjen();
+            if (!$this->imaPravico('user_pregled')) $this->dostopZavrnjen();
             $users = $this->userRepository->findAll();
             
             return new ViewModel(array(

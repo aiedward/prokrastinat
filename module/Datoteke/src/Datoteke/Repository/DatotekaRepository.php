@@ -20,10 +20,11 @@ class DatotekaRepository extends EntityRepository
     public function deleteDatoteka($datoteka) {
         $this->em = $this->getEntityManager();
         $this->em->remove($datoteka);
+        unlink(dirname(dirname(dirname(dirname(dirname(__DIR__))))).'/data/uploads/'.$datoteka->randomImeDatoteke);
     }
     
     public function downloadDatoteka($dat, &$response) {
-        $file = $_SERVER['DOCUMENT_ROOT'] .'prokrastinat/data/uploads/'.$dat->randomImeDatoteke;
+        $file = (dirname(dirname(dirname(dirname(dirname(__DIR__))))).'/data/uploads/'.$dat->randomImeDatoteke);
 
         if(!file_exists($file)) {
 

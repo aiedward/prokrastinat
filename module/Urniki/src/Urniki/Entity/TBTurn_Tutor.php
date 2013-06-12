@@ -8,10 +8,13 @@ use Prokrastinat\Entity\BaseEntity;
 /** @ORM\Entity */
 class TBTurn_Tutor extends BaseEntity
 {
-	/** @ORM\Column(type="Integer") */
-	protected $Turn_Id;
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     */
+    protected $Turn_Id;
 
-	/** @ORM\Column(type="Integer") */
-	protected $Tutor_Id;
+    /** @ORM\Column(type="integer") */
+    protected $Tutor_Id;
 
 }

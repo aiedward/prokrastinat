@@ -1,26 +1,32 @@
 <?php
-namespace AIPS\Entity;
+namespace Prokrastinat\EntityAips;
 
 use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Mapping as ORM;
 use Prokrastinat\Entity\BaseEntity;
 
-/** @ORM\Entity */
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="pisum.DodatniPodatekPredmeta")
+ */
 class DodatniPodatekPredmeta extends BaseEntity
 {
-	/** @ORM\Column(type="integer") */
-	protected $DodatniPodatekPredmetaID;
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     */
+    protected $DodatniPodatekPredmetaID;
 
-	/** @ORM\Column(type="integer") */
-	protected $PredmetID;
+    /** @ORM\Column(type="integer") */
+    protected $PredmetID;
 
-	/** @ORM\Column(type="integer") */
-	protected $KodaPodatka;
+    /** @ORM\Column(type="integer") */
+    protected $KodaPodatka;
 
-	/** @ORM\Column(type="text") */
-	protected $Besedilo;
+    /** @ORM\Column(type="text") */
+    protected $Besedilo;
 
-	/** @ORM\Column(type="text") */
-	protected $BesediloA;
+    /** @ORM\Column(type="text") */
+    protected $BesediloA;
 
 }

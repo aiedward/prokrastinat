@@ -3,6 +3,7 @@
 namespace Deska\Form;
 
 use Zend\Form\Form;
+use Prokrastinat\Entity\Kategorija;
 
 
 class DodajKategorijoForm extends Form
@@ -11,6 +12,12 @@ class DodajKategorijoForm extends Form
     {
         parent::__construct('dodaj_kategorijo');
         $this->setAttribute('method', 'post');
+        
+        // ID
+        $this->add(array(
+            'name' => 'id',
+            'type' => 'hidden',
+        ));
         
         // IME KATEGORIJE
         $this->add(array(
@@ -33,5 +40,11 @@ class DodajKategorijoForm extends Form
                 'class' => 'btn btn-primary',
             ),
         ));
+    }
+    
+    public function fill(Kategorija $k)
+    {
+        $this->get('id')->setValue($k->id);
+        $this->get('ime')->setValue($k->ime);
     }
 }

@@ -27,15 +27,19 @@ $this->headLink()->appendStylesheet($basePath . '/css/bootstrap-responsive.min.c
 $this->inlineScript()->appendFile($basePath . '/js/jquery-1.8.0.min.js');
 $this->inlineScript()->appendFile($basePath . '/js/bootstrap.min.js');
 // Datepicker
-$this->inlineScript()->appendFile($basePath . '/js/bootstrap-datepicker.js');
-$this->headLink()->appendStylesheet($basePath .'/css/datepicker.css');
+$this->inlineScript()->appendFile($basePath . '/js/bootstrap-datetimepicker.min.js');
+$this->inlineScript()->appendFile($basePath . '/js/bootstrap-datetimepicker.sl.js');
+$this->headLink()->appendStylesheet($basePath .'/css/bootstrap-datetimepicker.min.css');
 
 $this->inlineScript()->appendFile($basePath . '/js/tinymce.min.js');
 
 $this->inlineScript()->appendFile($basePath . '/js/prokrastinat.js');
 
-echo $this->doctype(); ?>
+// Urniki
+$this->headLink()->appendStylesheet($basePath . '/css/tribal-timetable.css');
+$this->inlineScript()->appendFile($basePath . '/js/tribal-timetable.js');
 
+echo $this->doctype(); ?>
 <html lang="en">
   <head>
     <meta charset="utf-8">

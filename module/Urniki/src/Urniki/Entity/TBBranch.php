@@ -38,4 +38,18 @@ class TBBranch extends BaseEntity
     /** @ORM\Column(type="integer") */
     protected $Merge_Id;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="TBCourse")
+     * @ORM\JoinTable(name="TBCourse_Branch",
+     *      joinColumns={
+     *          @ORM\JoinColumn(name="Branch_Id", referencedColumnName="Branch_Id")},
+     *      inverseJoinColumns={
+     *          @ORM\JoinColumn(name="Course_Id", referencedColumnName="Course_Id")}
+     * )
+     */
+    protected $courses;
+    
+    public function __construct() {
+        $this->courses = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 }

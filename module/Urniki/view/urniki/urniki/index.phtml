@@ -6,8 +6,100 @@
 ?>
 
 <script type="text/javascript">
-    alert("cman");
-    $(function () {
-        alert("IT LIVES");
+window.onload = function () {
+    $("#Datum").data('datetimepicker').setDate(new Date());
+    $("#select-program").change(function () {
+        url = document.URL + "get-smeri/" + $("#select-program").val();
+        $.getJSON(url, function(data) {
+            $('#select-smer').empty();
+            for (var smer_id in data.smeri) {
+                var opt = $('<option />', {
+                    value: smer_id,
+                    text: data.smeri[smer_id]
+                });
+                $('#select-smer').append(opt);
+                //$('#select-smer').append('<option />').val(1).text("LOL");
+                
+                console.log(opt);
+            }
+        });
     });
+    $("#showBtn").click(function () {
+        program = $("#select-program").val();
+        letnik = $("#select-letnik").val();
+        smer = $("#select-smer").val();
+        datum = $("#Datum").data('datetimepicker').getLocalDate();
+        
+        url = document.URL + "get-urniki/" + program + "/" + letnik + "/" + smer
+            + "/" + datum.getFullYear() + "-" + (datum.getMonth() + 1) + "-" + datum.getDate();
+        console.log(url);
+        $.getJSON(url, function(data) {
+            console.log(data);
+        });
+    });
+};
 </script>
+
+<div class="span10">
+    <div style="height: 329px;" class="timetable" data-days="6" data-hours="15">
+        <ul style="left: 40px; top: 29px;" class="tt-events">
+                        <li data-original-title="
+                            AS Applied Maths (ASAMath 1)&lt;br&gt;
+                            09:00 - 10:30&lt;br&gt;
+                            C318 ACL Lecture" style="-moz-user-select: none; height: 33px; top: 0px; left: 0px; width: 133.5px;" unselectable="on" rel="tooltip" class="tt-event btn-success" data-id="10" data-day="0" data-start="0" data-duration="1.5">
+                            AS Applied Maths (ASAMath 1)<br>
+                            09:00 - 10:30<br>
+                            C318 ACL Lecture</li>
+                        <li style="-moz-user-select: none; height: 33px; margin-top: 3px; left: 0px; width: 133.5px;" unselectable="on" rel="tooltip" class="tt-event btn-success" data-id="11" data-day="2" data-start="2" data-duration="2.5">
+                            AS Applied Maths (ASAMath 1)<br>
+                            09:00 - 10:30<br>
+                            C318 ACL Lecture</li>
+        </ul>
+        <div style="padding-left: 40px;" class="tt-times">
+            <div style="width: 84px; height: 318px; margin-bottom: -318px;" class="tt-time" data-time="0">
+                07<span class="hidden-phone">.00</span></div>
+            <div style="width: 84px; height: 318px; margin-bottom: -318px;" class="tt-time" data-time="1">
+                08<span class="hidden-phone">.00</span></div>
+            <div style="width: 84px; height: 318px; margin-bottom: -318px;" class="tt-time" data-time="2">
+                09<span class="hidden-phone">.00</span></div>
+            <div style="width: 84px; height: 318px; margin-bottom: -318px;" class="tt-time" data-time="3">
+                10<span class="hidden-phone">.00</span></div>
+            <div style="width: 84px; height: 318px; margin-bottom: -318px;" class="tt-time" data-time="4">
+                11<span class="hidden-phone">.00</span></div>
+            <div style="width: 84px; height: 318px; margin-bottom: -318px;" class="tt-time" data-time="5">
+                12<span class="hidden-phone">.00</span></div>
+            <div style="width: 84px; height: 318px; margin-bottom: -318px;" class="tt-time" data-time="6">
+                13<span class="hidden-phone">.00</span></div>
+            <div style="width: 84px; height: 318px; margin-bottom: -318px;" class="tt-time" data-time="7">
+                14<span class="hidden-phone">.00</span></div>
+            <div style="width: 84px; height: 318px; margin-bottom: -318px;" class="tt-time" data-time="8">
+                15<span class="hidden-phone">.00</span></div>
+            <div style="width: 84px; height: 318px; margin-bottom: -318px;" class="tt-time" data-time="9">
+                16<span class="hidden-phone">.00</span></div>
+            <div style="width: 84px; height: 318px; margin-bottom: -318px;" class="tt-time" data-time="10">
+                17<span class="hidden-phone">.00</span></div>
+            <div style="width: 84px; height: 318px; margin-bottom: -318px;" class="tt-time" data-time="11">
+                18<span class="hidden-phone">.00</span></div>
+            <div style="width: 84px; height: 318px; margin-bottom: -318px;" class="tt-time" data-time="12">
+                19<span class="hidden-phone">.00</span></div>
+            <div style="width: 84px; height: 318px; margin-bottom: -318px;" class="tt-time" data-time="13">
+                20<span class="hidden-phone">.00</span></div>
+            <div style="width: 91px;" class="tt-time" data-time="14">
+                21<span class="hidden-phone">.00</span></div>
+        </div>
+        <div style="width: 40px; top: 29px;" class="tt-days">
+            <div style="height: 37px; width: 796px; margin-right: -766px;" class="tt-day" data-day="0">
+                Pon<span class="hidden-phone">edeljek</span></div>
+            <div style="height: 37px; width: 796px; margin-right: -766px;" class="tt-day" data-day="1">
+                Tor<span class="hidden-phone">ek</span></div>
+            <div style="height: 37px; width: 796px; margin-right: -766px;" class="tt-day" data-day="2">
+                Sre<span class="hidden-phone">da</span></div>
+            <div style="height: 37px; width: 796px; margin-right: -766px;" class="tt-day" data-day="3">
+                Čet<span class="hidden-phone">rtek</span></div>
+            <div style="height: 37px; width: 796px; margin-right: -766px;" class="tt-day" data-day="4">
+                Pet<span class="hidden-phone">ek</span></div>
+            <div style="height: 37px; width: 796px; margin-right: -766px;" class="tt-day" data-day="5">
+                Sob<span class="hidden-phone">ota</span></div>
+        </div>
+    </div>
+</div>

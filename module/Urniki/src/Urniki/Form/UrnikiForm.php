@@ -9,13 +9,14 @@ class UrnikiForm extends Form
     public function __construct($programi, $smeri, $letniki)
     {
         parent::__construct('urniki');
-        $this->setAttribute('method', 'get');
+        //$this->setAttribute('method', 'get');
         
         $this->add(array(
             'name' => 'program',
             'type' => 'Zend\Form\Element\Select',
             'options' => array(
                 'label' => 'Izberi program: ',
+                'empty_option' => "",
                 'value_options' => $programi,
             ),
             'attributes' => array(
@@ -44,6 +45,18 @@ class UrnikiForm extends Form
             ),
             'attributes' => array(
                 'id' => 'select-smer',
+            ),
+        ));
+        
+        $this->add(array(
+            'name' => 'Datum',
+            'type' => 'Zend\Form\Element\Date',
+            'options' => array(
+                'label' => 'Datum: ',
+            ),
+            'attributes' => array(
+                'class' => 'datepick',
+                'data-format' => 'dd. MM. yyyy'
             ),
         ));
         

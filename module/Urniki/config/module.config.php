@@ -13,6 +13,9 @@ return array(
         'template_path_stack' => array(
             'urniki' => __DIR__ . '/../view',
         ),
+        'strategies' => array(
+            'ViewJsonStrategy'
+        )
     ),
     'router' => array(
         'routes' => array(
@@ -30,6 +33,34 @@ return array(
                     ),
                 ),
             ),
+            'get-smeri' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/urniki/get-smeri/:program',
+                    'constraints' => array(
+                        'program' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Urniki\Controller\Urniki',
+                        'action' => 'getSmeri'
+                    )
+                )
+            ),
+            'get-urniki' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/urniki/get-urniki/:program/:letnik/:smer/:datum',
+                    'constraints' => array(
+                        'program' => '[0-9]+',
+                        'letnik' => '[0-9]+',
+                        'smer' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Urniki\Controller\Urniki',
+                        'action' => 'getUrnik'
+                    )
+                )
+            )
         ),
     ),
     'doctrine' => array(

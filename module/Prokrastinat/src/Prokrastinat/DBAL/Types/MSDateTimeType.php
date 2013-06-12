@@ -17,8 +17,11 @@ class MSDateTimeType extends DateTimeType
         }
 
         $val = \DateTime::createFromFormat($this->datetimeFormat, $value);
-        if ( ! $val) {
-            throw ConversionException::conversionFailedFormat($value, $this->getName(), $this->datetimeFormat);
+        if (!$val) {
+            $val = \DateTime::createFromFormat($platform->getDateTimeFormatString(), $value);
+            if (!$val) {
+                throw ConversionException::conversionFailedFormat($value, $this->getName(), $this->datetimeFormat . ' or ' . $platform->getDateTimeFormatString());
+            }
         }
         return $val;
     }

@@ -78,7 +78,6 @@ use Prokrastinat\Entity\BaseEntity;
 
     /** @ORM\Column(type="msdatetime") */
     protected $VpisDo;
->>>>>>> 8a15ae566ff942864d8cff2cca423fb91910d7d0
 
     /** @ORM\Column(type="integer") */
     protected $MentorID;
@@ -134,7 +133,7 @@ use Prokrastinat\Entity\BaseEntity;
     /** @ORM\Column(type="string1252", length=1) */
     protected $MVZTSofinanciranje;
 
-    /** @ORM\Column(type="real") */
+    /** @ORM\Column(type="decimal") */
     protected $MVZTDosezeneKT;
 
     /** @ORM\Column(type="msdatetime") */

@@ -153,11 +153,10 @@ class UserController extends BaseController
                 return $this->dostopZavrnjen();
             }
             
-			$program = $studij->getVpisi()[0]->program->ProgramID;
             return new ViewModel(array(
                 'user' => $user,
                 'uid' => $this->auth->getIdentity()->id, 
-                'studij' => $program
+                'studij' => $studij
             ));
         }
         

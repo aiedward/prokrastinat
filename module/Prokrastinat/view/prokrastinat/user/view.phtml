@@ -1,4 +1,6 @@
-
+<?php
+$vpis = $studij->getVpisi()[0];
+?>
 <h1>Pregled uporabnika <i><?=$user->username?></i></h1>
 
 <?php if ($this->isGranted('user_uredi')): ?>
@@ -25,11 +27,11 @@
     </tr>
     <tr>
         <th>Program</th>
-        <td><?= var_dump($studij) ?></td>
+        <td><?= $vpis->program->NazivPrograma ?></td>
     </tr>
     <tr>
         <th>Letnik</th>
-        <td><?= $user->vpisna_st ?></td>
+        <td><?= $vpis->LetnikStudijaID ?></td>
     </tr>
     <?php endif; ?>
     <?= (!empty($user->naslov)) ? '<tr><th>Naslov</th><td>' . $user->naslov . '</td></tr>' : null ?>

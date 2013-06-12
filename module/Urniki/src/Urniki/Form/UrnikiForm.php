@@ -48,15 +48,14 @@ class UrnikiForm extends Form
         ));
         
         $this->add(array(
-            'name' => 'submit',
-            'attributes' => array(
-                'type' => 'submit',
-                'value' => 'Prikaži',
-                'id' => 'submitbutton',
-                'class' => 'btn btn-primary',
-            ),
+            'name' => 'show',
+            'type' => 'Zend\Form\Element\Button',
             'options' => array(
-                'primary' => true,
+                'label' => 'Prikaži',
+            ),
+            'attributes' => array(
+                'id' => 'showBtn',
+                'class' => 'btn btn-primary',
             ),
         ));
     }

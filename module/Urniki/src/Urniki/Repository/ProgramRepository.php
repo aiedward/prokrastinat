@@ -8,13 +8,12 @@ class ProgramRepository extends EntityRepository
 {
     public function getProgrami()
     {
-        $em = $this->getEntityManager();
-        $programi = $em->getRepository('Urniki\Entity\Program')->findAll();
+        $programi = $this->findAll();
         $progs = array();
         
         foreach ($programi as $prog)
         {
-            $progs[$prog->id] = $prog->ime;
+            $progs[$prog->Program_Id] = $prog->Name;
         }
         
         return $progs;

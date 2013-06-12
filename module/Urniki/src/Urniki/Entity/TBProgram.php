@@ -5,7 +5,11 @@ use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Mapping as ORM;
 use Prokrastinat\Entity\BaseEntity;
 
-/** @ORM\Entity */
+/**
+ * @ORM\Entity(repositoryClass="Urniki\Repository\ProgramRepository")
+ * @ORM\Table(name="dbo.TBProgram")
+ */
+
 class TBProgram extends BaseEntity
 {
     /**

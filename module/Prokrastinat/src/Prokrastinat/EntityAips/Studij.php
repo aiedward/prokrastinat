@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Prokrastinat\Entity\BaseEntity;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Prokrastinat\Repository\StudijRepository")
  * @ORM\Table(name="pisum.Studij")
  */
 class Studij extends BaseEntity

@@ -1,15 +1,13 @@
 <h1>Urniki</h1>
 
 <?php
-    /*$form = $this->form;
-    $form->prepare();
-    
-    echo $this->form()->openTag($form);
-    echo $this->formRow($form->get('program')).'<br />';
-    echo $this->formRow($form->get('letnik')).'<br />';
-    echo $this->formRow($form->get('smer')).'<br />';
-    echo $this->formSubmit($form->get('submit'));
-    echo $this->form()->closeTag();
-    */
-    var_dump($this->test);
+    $this->form->prepare();
+    echo $this->formTwb($this->form, \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL);
 ?>
+
+<script type="text/javascript">
+    alert("cman");
+    $(function () {
+        alert("IT LIVES");
+    });
+</script>

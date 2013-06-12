@@ -1,3 +1,13 @@
+<script>
+    window.onload = function(){
+        $('#brisibtn').click(function(){
+            alert("test");
+            var id = $(this).data('id');
+            $('.modal-body #kat-id').val(id);
+        });
+    }
+</script>
+
 <h2>Kategorije</h2>
 
 <a class="btn btn-primary" href="<?= $this->url('deska', array('action' => 'dodajkategorijo'))?>">Dodaj kategorijo</a>
@@ -14,8 +24,8 @@
                 <td><?= $this->escapeHtml($kat->ime)?></td>
                 <td>
                     <a class="btn-small btn" href="<?= $this->url('deska', array('action' => 'uredikategorijo', 'id' => $kat->id))?>"><i class="icon-edit"></i>Uredi</a>
-                    <a class="btn-small btn" href="#brisanje?id=<?=$kat->id?>" role="button" data-toggle="modal"><i class="icon-remove"></i>Briši</a>
-                </td>
+                    <a id="brisibtn" class="btn-small btn" href="#brisanje" role="button" data-toggle="modal"><i class="icon-remove"></i>Briši</a>
+                </td> 
             </tr>
         <?php endforeach; ?>
     </table>
@@ -27,12 +37,12 @@
     
     <div class="modal-body">
         <p>
-            Ste prepričani, da želite izbrisati kategorijo <?= $kat->ime ?>? 
+            Ste prepričani, da želite izbrisati kategorijo?
         </p>
     </div>
     
     <div class="modal-footer">
         <a data-dismiss="modal" class="btn">Ne</a>
-        <a class="btn btn-primary" href="<?= $this->url('deska', array('action' => 'brisikategorijo', 'id' => _GET['id'])?>">Da</a>
+        <a class="btn btn-primary">Da</a>
     </div>
 </div>

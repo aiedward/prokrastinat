@@ -147,6 +147,5 @@ root {
 
 
 /********************PAGINATOR********************/
-.paginatorIzpis{
-    text-align:right;
+.pagination ul{
 }

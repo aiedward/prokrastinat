@@ -40,29 +40,28 @@ $velikost_mb = $velikost/1024/1024;
     <td><?php echo $this->escapeHtml($datoteka->st_prenosov);?></td>
     <td>
         <?php if ($this->imaPravico('datoteke_uredi', $datoteka->user)){ ?>
-            <a class="btn btn-mini" href="<?php echo $this->url('datoteke_uredi', array('id'=>$datoteka->id));?>">
+            <a title="Uredi" href="<?php echo $this->url('datoteke_uredi', array('id'=>$datoteka->id));?>">
                 <i class="icon-edit"></i>
-                Uredi
             </a>
-            <a class="btn btn-mini" href="#brisiPotrditev" role="button" class="btn" data-toggle="modal">
+            <a title="Brisi" class="brisiPotrditev" href="#" data-toggle="modal" data-id="<?php echo $datoteka->id ?>">
                 <i class="icon-trash"></i>
-                Izbriši
             </a>
         <?php } ?>
     </td>
 </tr>
 <?php endforeach; ?>
 </table>
-<div id="brisiPotrditev" class="modal hide fade">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Briši datoteko</h3>
-  </div>
-  <div class="modal-body">
-    <p>Ali ste prepričani da želite izbrisati to datoteko?</p>
-  </div>
-  <div class="modal-footer">
-    <a data-dismiss="modal" class="btn">Ne</a>
-    <a href="<?php echo $this->url('datoteke_brisi', array('id'=>$datoteka->id));?>" class="btn btn-primary">Da</a>
-  </div>
+<div id="modal-brisanje" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Briši datoteko</h3>
+    </div>
+    <div class="modal-body">
+        <p>Ali ste prepričani da želite izbrisati to datoteko?</p>
+        <p id="debug-url"></p>
+    </div>
+    <div class="modal-footer">
+        <a href="brisi/id" class="btn danger btn-primary">Da</a>
+        <a href="javascript:$('#modal-brisanje').modal('hide')" class="btn secondary">Ne</a>
+    </div>
 </div>

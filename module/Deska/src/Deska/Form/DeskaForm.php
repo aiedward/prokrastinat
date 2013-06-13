@@ -46,17 +46,14 @@ class DeskaForm extends Form
         ));
 
         $this->add(array(
-            'type' => 'Zend\Form\Element\Date',
+            'type' => 'text',
             'name' => 'datum-zapadlosti',
             'options' => array(
                 'label' => 'Zapade ', //
             ),
             'attributes' => array(
-                'id' => 'dp-zapadlost',
-                'class' => 'input-append date',
-                'min' => '2013-01-01',
-                'max' => '2013-12-12',
-                'step' => '1',
+                'class' => 'datepick',
+                'id' => 'Datum',
             ),
         ));
 

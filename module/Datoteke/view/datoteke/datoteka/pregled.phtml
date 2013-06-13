@@ -11,18 +11,39 @@ $link = $_SERVER['DOCUMENT_ROOT'].$_SERVER['REQUEST_URI'] ;
     <a href="<?php echo $this->url('datoteke', array('action'=>'moje'));?>">Moje datoteke</a>
 </p>
 <div class="datotekaView">
-    <div style="font:22px Tahoma bold; text-align: center;"><?php echo $datoteke->imeDatoteke;?></div><p>
+    <div style="font:22px Tahoma bold; text-align: center;"><?php echo $datoteka->imeDatoteke;?></div><p>
     <p>
-    Avtor: <?php echo $datoteke->user->getPolnoIme() ?><p>
-    Opis: <?php echo $datoteke->opis ?><p>
-    Datum uploada: <?php echo $datoteke->datum_uploada->format('d-m-Y') ?><p>
-    Velikost: <?php echo round($datoteke->velikost/1024/1024, 2) ?> MB<p>
-    Ogledi: <?php echo $datoteke->st_ogledov ?><p>
-    Prenosi: <?php echo $datoteke->st_prenosov ?><p>
-    Kategorija: <?php echo $datoteke->kategorija->ime ?>
+    Avtor: <?php echo $datoteka->user->getPolnoIme() ?><p>
+    Opis: <?php echo $datoteka->opis ?><p>
+    Datum uploada: <?php echo $datoteka->datum_uploada->format('d-m-Y') ?><p>
+    Velikost: <?php echo round($datoteka->velikost/1024/1024, 2) ?> MB<p>
+    Ogledi: <?php echo $datoteka->st_ogledov ?><p>
+    Prenosi: <?php echo $datoteka->st_prenosov ?><p>
+    Kategorija: <?php echo $datoteka->kategorija->ime ?>
     <div class="prenosTextInButton">
-        <a href="<?php echo $this->url('datoteke', array('action'=>'download', 'id'=>$datoteka->id));?>">
+        <a title="Prenos" href="<?php echo $this->url('datoteke', array('action'=>'download', 'id'=>$datoteka->id));?>">
            <i class="icon-download"></i>
+           <?php if ($this->imaPravico('datoteke_brisi', $datoteka->user)){ ?>
+            <a title="Uredi" href="<?php echo $this->url('datoteke_uredi', array('id'=>$datoteka->id));?>">
+                <i class="icon-edit"></i>
+            </a>
+            <a title="Brisi" class="brisiPotrditev" href="#" data-toggle="modal" data-id="<?php echo $datoteka->id ?>">
+                <i class="icon-trash"></i>
+            </a>
+        <?php } ?>
         </a>
+    </div>
+</div><div id="modal-brisanje" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Briši datoteko</h3>
+    </div>
+    <div class="modal-body">
+        <p>Ali ste prepričani da želite izbrisati to datoteko?</p>
+        <p id="debug-url"></p>
+    </div>
+    <div class="modal-footer">
+        <a href="brisi/id" class="btn danger btn-primary">Da</a>
+        <a href="javascript:$('#modal-brisanje').modal('hide')" class="btn secondary">Ne</a>
     </div>
 </div>

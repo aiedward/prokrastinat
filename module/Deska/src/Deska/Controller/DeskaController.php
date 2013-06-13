@@ -63,6 +63,9 @@ class DeskaController extends BaseController
                     'datum-zapadlosti' => $form->get('datum-zapadlosti')->getValue(),
                     'kategorija' => $this->em->find('Prokrastinat\Entity\Kategorija', $form->get('kategorija')->getValue()),
                 );
+                
+                //var_dump($form->get('datum-zapadlosti')->getValue());
+                //exit;
                     
                 $this->deska_repository->saveOglas($oglas, $vals);
                 $this->em->flush();

@@ -31,9 +31,14 @@ $this->inlineScript()->appendFile($basePath . '/js/bootstrap-datetimepicker.min.
 $this->inlineScript()->appendFile($basePath . '/js/bootstrap-datetimepicker.sl.js');
 $this->headLink()->appendStylesheet($basePath .'/css/bootstrap-datetimepicker.min.css');
 
+$this->inlineScript()->appendFile($basePath . '/js/bootstrap-datepicker.js');
+$this->headLink()->appendStylesheet($basePath .'/css/datepicker.css');
+
 $this->inlineScript()->appendFile($basePath . '/js/tinymce.min.js');
 
 $this->inlineScript()->appendFile($basePath . '/js/prokrastinat.js');
+
+$this->inlineScript()->appendFile($basePath . '/js/damjan.js');
 
 // Urniki
 $this->headLink()->appendStylesheet($basePath . '/css/tribal-timetable.css');
@@ -90,7 +95,7 @@ echo $this->doctype(); ?>
               <li><a href="<?= $this->url('datoteke') ?>">Datoteke</a></li>
               <li><a href="<?=$this->url('map')?>">Zemljevid</a></li>
               <li><a href="<?= $this->url('aips') ?>">Zaposleni</a></li>
-              <?php if ($this->isGranted('user_uredi')): ?><li><a href="<?= $this->url('user_list') ?>">Uproabniki</a></li><?php endif; ?>
+              <?php if ($this->isGranted('user_uredi')): ?><li><a href="<?= $this->url('user_list') ?>">Uporabniki</a></li><?php endif; ?>
               <li><a href="<?= $this->url('urniki') ?>">Urniki</a></li>
               <li><a href="<?= $this->url('novice_ostale') ?>">Dodatne novice</a></li>
               <!--<li class="active"><a href="#">Novice</a></li>

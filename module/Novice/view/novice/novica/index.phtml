@@ -10,7 +10,8 @@ $this->headTitle($title);
     </p>
 <?php endif; ?>
 
-<?php foreach ($novice as $novica) : ?>
+
+<?php foreach ($this->paginator as $novica) : ?>
     <div class="well well-small novica">
         <div class="novicaHeader">
             <b> <?= $this->escapeHtml($novica->datum_objave->format('d-m-Y')); ?></b> 
@@ -20,16 +21,14 @@ $this->headTitle($title);
                 </a>
             </b>
             <div class="ikone">
-               <?php if ($this->imaPravico('novica_uredi', $novica->user)){ ?>
-                <a class="btn btn-mini" href="<?php echo $this->url('novice_uredi', array('id'=>$novica->id));?>">
+            <?php if ($this->imaPravico('novica_uredi', $novica->user)){ ?>
+                <a title="Uredi" href="<?php echo $this->url('novice_uredi', array('id'=>$novica->id));?>">
                     <i class="icon-edit"></i>
-                    Uredi
                 </a>
-                <a class="btn btn-mini" href="#brisiPotrditev" role="button" class="btn" data-toggle="modal">
-                    <i class="icon-remove"></i>
-                    Izbriši
+                <a title="Brisi" class="brisiPotrditev" href="#" data-toggle="modal" data-id="<?php echo $novica->id ?>">
+                    <i class="icon-trash"></i>
                 </a>
-               <?php } ?>
+            <?php } ?>
             </div>
             <br/>
         </div>
@@ -43,16 +42,21 @@ $this->headTitle($title);
         </p>
     </div>
 <?php endforeach; ?>
-<div id="brisiPotrditev" class="modal hide fade">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Briši novico</h3>
-  </div>
-  <div class="modal-body">
-    <p>Ali ste prepričani da želite izbrisati to novico?</p>
-  </div>
-  <div class="modal-footer">
-    <a data-dismiss="modal" class="btn">Ne</a>
-    <a href="<?php echo $this->url('novice_brisi', array('id'=>$novica->id));?>" class="btn btn-primary">Da</a>
-  </div>
+<div id="modal-brisanje" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Briši novico</h3>
+    </div>
+    <div class="modal-body">
+        <p>Ali ste prepričani da želite izbrisati to novico?</p>
+        <p id="debug-url"></p>
+    </div>
+    <div class="modal-footer">
+        <a href="/novice/brisi/id" class="btn danger btn-primary">Da</a>
+        <a href="javascript:$('#modal-brisanje').modal('hide')" class="btn secondary">Ne</a>
+    </div>
+</div>
+    
+<div class="paginatorIzpis">
+    <?= ( count($this->paginator) > 0 ) ? $this->paginationControl($this->paginator, 'Sliding', 'pager.phtml') : ""; ?>
 </div>

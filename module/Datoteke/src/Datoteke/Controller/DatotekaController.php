@@ -123,7 +123,7 @@ class DatotekaController extends BaseController
         $datRep->increaseViewCounter($dat);
         $this->em->flush();
         
-        return new ViewModel(array('datoteke' => $dat));        
+        return new ViewModel(array('datoteka' => $dat));        
     }
     
     public function urediAction(){        

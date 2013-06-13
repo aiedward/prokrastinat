@@ -10,7 +10,7 @@ use Novice\Entity\Novica;
  */
 class DodatnaNovica extends Novica
 {
-    /** @ORM\Column(length=300) */
+    /** @ORM\Column(length=301) */
     protected $opis;
     
     /** @ORM\Column(length=100) */

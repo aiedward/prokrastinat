@@ -58,5 +58,5 @@ $this->headTitle($title);
 </div>
     
 <div class="paginatorIzpis">
-    <?= ( count($this->paginator) > 0 ) ? $this->paginationControl($this->paginator, 'Sliding', 'pager.phtml') : ""; ?>
+    <?= ( count($this->paginator) > 0 ) ? $this->paginationControl($this->paginator, 'Sliding', 'pager.phtml', array('route' => '/novice/')) : ""; ?>
 </div>

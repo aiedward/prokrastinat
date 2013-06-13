@@ -1,4 +1,5 @@
 <?php
+$url = $this->route;
 $parameterGet = $this->Requesthelper();
 if ($parameterGet != ""){
   $parameterGet = "?".$parameterGet;
@@ -9,8 +10,8 @@ if ($parameterGet != ""){
     <ul>
         <!-- PREJŠNJA IN PRVA -->
       <?php if (isset($this->previous)): ?>
-        <li><a href="<?= 'stran/1'; ?>">&laquo;</a></li>&nbsp;
-        <li><a href="<?= 'stran/'.$this->previous.$parameterGet; ?>">&lt;</a></li>&nbsp;
+        <li><a href="<?= $url.'stran/1'; ?>">&laquo;</a></li>&nbsp;
+        <li><a href="<?= $url.'stran/'.$this->previous.$parameterGet; ?>">&lt;</a></li>&nbsp;
       <?php else: ?>
         <li class="disabled liStyle"><span>&laquo;</span></li>&nbsp;
         <li class="disabled"><span>&lt;</span></li>&nbsp;
@@ -18,7 +19,7 @@ if ($parameterGet != ""){
         <!-- ŠTEVILKE STRANI -->
       <?php foreach ($this->pagesInRange as $page): ?>
       <?php if ($page != $this->current): ?>
-        <li><a href="<?= 'stran/'.$page.$parameterGet; ?>">
+        <li><a href="<?= $url.'stran/'.$page.$parameterGet; ?>">
       <?= $page; ?>
         </li></a>&nbsp;
       <?php else: ?>
@@ -29,8 +30,8 @@ if ($parameterGet != ""){
       <?php endforeach; ?>
       <!-- NASLEDNJA IN ZADNJA -->
         <?php if (isset($this->next)): ?>
-        <li><a href="<?= 'stran/'.$this->next.$parameterGet; ?>">&gt;</a></li>&nbsp;
-        <li><a href="<?= 'stran/'.$this->pageCount.$parameterGet; ?>">&raquo;</a></li>&nbsp;
+        <li><a href="<?= $url.'stran/'.$this->next.$parameterGet; ?>">&gt;</a></li>&nbsp;
+        <li><a href="<?= $url.'stran/'.$this->pageCount.$parameterGet; ?>">&raquo;</a></li>&nbsp;
       <?php else: ?>
         <li class="disabled"><span>&gt;</span></li>&nbsp;
         <li class="disabled"><span>&raquo;</span></li>

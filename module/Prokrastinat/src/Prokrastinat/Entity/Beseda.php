@@ -19,5 +19,5 @@ class Beseda extends BaseEntity
     protected $frekvenca;
     
     /** @ORM\Column(type="decimal") */
-    protected $tf;
+    protected $idf;
 }

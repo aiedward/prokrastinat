@@ -144,3 +144,9 @@ root {
     margin-left: 4%;
     font-size: 3em;
 }
+
+
+/********************PAGINATOR********************/
+.paginatorIzpis{
+    text-align:right;
+}

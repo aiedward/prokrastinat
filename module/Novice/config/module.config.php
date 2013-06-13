@@ -35,10 +35,14 @@ return array(
             'novice_index' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/novice/index/',
+                    'route' => '/novice/[stran/:page]',
+                    'constraints' => array(
+                        'page'     => '[0-9]+'
+                    ),
                     'defaults' => array(
                         'controller' => 'Novica',
-                        'action' => 'index'
+                        'action' => 'index',
+                        'page' => 1
                     ),
                 ),
             ),
@@ -159,6 +163,18 @@ return array(
             ),
         ),
     ),
+    
+    'view_helpers' => array(
+        'factories' => array(
+                'Requesthelper' => function($sm){
+                    $helper = new \Novice\View\Helper\Requesthelper;
+                    $request = $sm->getServiceLocator()->get('Request');
+                    $helper->setRequest($request);
+                    return $helper;
+                }
+        )
+    ),
+    
     'view_manager' => array(
         'template_map' => array(
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',

@@ -10,7 +10,10 @@ $this->headTitle($title);
     </p>
 <?php endif; ?>
 
-<?php foreach ($novice as $novica) : ?>
+<div class="paginatorIzpis">
+    <?= ( count($this->paginator) > 0 ) ? $this->paginationControl($this->paginator, 'Sliding', 'pager.phtml') : ""; ?>
+</div>
+<?php foreach ($this->paginator as $novica) : ?>
     <div class="well well-small novica">
         <div class="novicaHeader">
             <b> <?= $this->escapeHtml($novica->datum_objave->format('d-m-Y')); ?></b> 

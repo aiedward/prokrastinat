@@ -12,6 +12,9 @@ use Zend;
 use Novice\Entity\ExtremeNovica;
 use Novice\Form\KategorijaForm;
 use Novice\Form\IskanjeForm;
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
+use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
+use Zend\Paginator\Paginator;
 
 class NovicaController extends BaseController
 {
@@ -20,11 +23,24 @@ class NovicaController extends BaseController
         if (!$this->isGranted('novica_index')) {
             return $this->dostopZavrnjen();
         } 
-        $query = $this->em->createQuery("SELECT n FROM Novice\Entity\Novica n ORDER BY n.datum_objave DESC");
-        $novice = $query->getResult();
-        $user = $this->auth->getIdentity();
+    $query = $this->em->createQuery("SELECT n FROM Novice\Entity\Novica n ORDER BY n.datum_objave DESC");
+    $novice = $query->getResult();
+    $user = $this->auth->getIdentity();
         
-        return new ViewModel(array('novice' => $novice, 'user' => $user, 'flashMessages' => $this->flashMessenger()->getMessages()));
+        
+    $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+    $repository = $entityManager->getRepository('Novice\Entity\Novica');
+    $adapter = new DoctrineAdapter(new ORMPaginator($repository->createQueryBuilder('novica')));
+    $paginator = new Paginator($adapter);
+    $paginator->setDefaultItemCountPerPage(5);
+   
+    $page = (int) $this->params()->fromRoute('page', 0);
+    if($page)
+    {
+        $paginator->setCurrentPageNumber($page);
+    }
+        
+        return new ViewModel(array('novice' => $novice, 'user' => $user, 'flashMessages' => $this->flashMessenger()->getMessages(), 'paginator' => $paginator));
     }
     
     public function dodajAction()

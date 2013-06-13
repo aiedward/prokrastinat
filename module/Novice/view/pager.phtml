@@ -6,38 +6,36 @@ if ($parameterGet != ""){
   $parameterGet = "?".$parameterGet;
 }
 ?>
- 
-<?php if ($this->pageCount): ?>
-<div class="paginationControl">
-    <p>
-        <!--<div style="float:left">-->
-      <!-- Previous page link -->
+
+<div class="pagination pagination-centered">
+    <ul>
+        <!-- PREJŠNJA IN PRVA -->
       <?php if (isset($this->previous)): ?>
-     <a class="first" href="<?= $url.'stran/1'; ?>">&lt;&lt; first&nbsp;&nbsp;</a>
-     <a class="Previous" href="<?= $url.'stran/'.$this->previous.$parameterGet; ?>">&lt; prev&nbsp;&nbsp;</a>      
+        <li><a href="<?= $url.'stran/1'; ?>">&laquo;</a></li>&nbsp;
+        <li><a href="<?= $url.'stran/'.$this->previous.$parameterGet; ?>">&lt;</a><li>&nbsp;
       <?php else: ?>
-      <b><i>&lt;&lt; first&nbsp;&nbsp;</i></b>
-      <b><i>&lt; prev&nbsp;&nbsp;</i></b>      
+        <li class="disabled"><span>&laquo;</span></li>&nbsp;
+        <li class="disabled"><span>&lt;</span></li>&nbsp;
       <?php endif; ?>
+        <!-- ŠTEVILKE STRANI -->
       <?php foreach ($this->pagesInRange as $page): ?>
       <?php if ($page != $this->current): ?>
-        <a class="nopage" href="<?= $url.'stran/'.$page.$parameterGet; ?>">
+        <li><a href="<?= $url.'stran/'.$page.$parameterGet; ?>">
       <?= $page; ?>
-      </a>&nbsp;
+        </li></a>&nbsp;
       <?php else: ?>
-            <span class="nopage">
-      <?= $page; ?>
-    </span>
-      </b>&nbsp;
+        <li class="active"><!-- TRENUTNA -->
+         <a href="#"><?= $page; ?></a>
+         </li>&nbsp;
       <?php endif; ?>
       <?php endforeach; ?>
-      <?php if (isset($this->next)): ?>
-      <a class="next" href="<?= $url.'stran/'.$this->next.$parameterGet; ?>">&nbsp;next &gt;</a>
-      <a class="next" href="<?= $url.'stran/'.$this->pageCount.$parameterGet; ?>">&nbsp;last &gt;&gt;</a>
-      <?php else: ?>          
-       <b><i>&nbsp;next &gt;&nbsp;</i></b>
-       <b><i>&nbsp;last &gt;&gt;&nbsp;</i></b>
+      <!-- NASLEDNJA IN ZADNJA -->
+        <?php if (isset($this->next)): ?>
+        <li><a href="<?= $url.'stran/'.$this->next.$parameterGet; ?>">&gt;</a></li>&nbsp;
+        <li><a href="<?= $url.'stran/'.$this->pageCount.$parameterGet; ?>">&raquo;</a></li>&nbsp;
+      <?php else: ?>
+        <li class="disabled"><span>&gt;</span></li>&nbsp;
+        <li class="disabled"><span>&raquo;</span></li>
       <?php endif; ?>
-    </p>
+    </ul>
 </div>
-<?php endif; ?>

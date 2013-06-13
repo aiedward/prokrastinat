@@ -10,9 +10,7 @@ $this->headTitle($title);
     </p>
 <?php endif; ?>
 
-<div class="paginatorIzpis">
-    <?= ( count($this->paginator) > 0 ) ? $this->paginationControl($this->paginator, 'Sliding', 'pager.phtml') : ""; ?>
-</div>
+
 <?php foreach ($this->paginator as $novica) : ?>
     <div class="well well-small novica">
         <div class="novicaHeader">
@@ -57,4 +55,8 @@ $this->headTitle($title);
         <a href="/novice/brisi/id" class="btn danger btn-primary">Da</a>
         <a href="javascript:$('#modal-brisanje').modal('hide')" class="btn secondary">Ne</a>
     </div>
+</div>
+    
+<div class="paginatorIzpis">
+    <?= ( count($this->paginator) > 0 ) ? $this->paginationControl($this->paginator, 'Sliding', 'pager.phtml') : ""; ?>
 </div>

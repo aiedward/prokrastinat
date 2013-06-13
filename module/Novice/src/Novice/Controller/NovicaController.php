@@ -23,14 +23,12 @@ class NovicaController extends BaseController
         if (!$this->isGranted('novica_index')) {
             return $this->dostopZavrnjen();
         } 
-    $query = $this->em->createQuery("SELECT n FROM Novice\Entity\Novica n ORDER BY n.datum_objave DESC");
-    $novice = $query->getResult();
     $user = $this->auth->getIdentity();
         
         
     $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
     $repository = $entityManager->getRepository('Novice\Entity\Novica');
-    $adapter = new DoctrineAdapter(new ORMPaginator($repository->createQueryBuilder('novica')));
+    $adapter = new DoctrineAdapter(new ORMPaginator($repository->createQueryBuilder('novica')->add('orderBy', 'novica.datum_objave DESC')));
     $paginator = new Paginator($adapter);
     $paginator->setDefaultItemCountPerPage(5);
    
@@ -40,7 +38,7 @@ class NovicaController extends BaseController
         $paginator->setCurrentPageNumber($page);
     }
         
-        return new ViewModel(array('novice' => $novice, 'user' => $user, 'flashMessages' => $this->flashMessenger()->getMessages(), 'paginator' => $paginator));
+        return new ViewModel(array('user' => $user, 'flashMessages' => $this->flashMessenger()->getMessages(), 'paginator' => $paginator));
     }
     
     public function dodajAction()
@@ -188,7 +186,7 @@ class NovicaController extends BaseController
         if (!$this->isGranted('novica_index')) {
             return $this->dostopZavrnjen();
         } 
-        $query = $this->em->createQuery("SELECT n FROM Novice\Entity\DodatnaNovica n");
+        $query = $this->em->createQuery("SELECT n FROM Novice\Entity\DodatnaNovica n ORDER BY n.datum_objave DESC");
         $novice = $query->getResult();
         $user = $this->auth->getIdentity();
         

@@ -4,7 +4,6 @@ tinymce.init({
 });
 
 $(".datepick").datetimepicker({
-    dateFormat: 'dd. mm. yyyy',
     language: 'sl',
     pickTime: false
 });

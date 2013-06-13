@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Prokrastinat\Entity\BaseEntity;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Urniki\Repository\WeekRepository");
  * @ORM\Table(name="dbo.TBWeek")
  */
 class TBWeek extends BaseEntity
@@ -17,10 +17,10 @@ class TBWeek extends BaseEntity
      */
     protected $Week_Id;
 
-    /** @ORM\Column(type="smalldatetime") */
+    /** @ORM\Column(type="msdatetime") */
     protected $First_Day;
 
-    /** @ORM\Column(type="smalldatetime") */
+    /** @ORM\Column(type="msdatetime") */
     protected $Last_Day;
 
 }

@@ -186,11 +186,21 @@ class NovicaController extends BaseController
         if (!$this->isGranted('novica_index')) {
             return $this->dostopZavrnjen();
         } 
-        $query = $this->em->createQuery("SELECT n FROM Novice\Entity\DodatnaNovica n ORDER BY n.datum_objave DESC");
-        $novice = $query->getResult();
+        
+        $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        $repository = $entityManager->getRepository('Novice\Entity\DodatnaNovica');
+        $adapter = new DoctrineAdapter(new ORMPaginator($repository->createQueryBuilder('novica')->add('orderBy', 'novica.datum_objave DESC')));
+        $paginator = new Paginator($adapter);
+        $paginator->setDefaultItemCountPerPage(5);
+
+        $page = (int) $this->params()->fromRoute('page', 0);
+        if($page)
+        {
+            $paginator->setCurrentPageNumber($page);
+        }
         $user = $this->auth->getIdentity();
         
-        return new ViewModel(array('novice' => $novice, 'action' => 'ostale', 'user' => $user,'flashMessages' => $this->flashMessenger()->getMessages()));
+        return new ViewModel(array('action' => 'ostale', 'user' => $user,'flashMessages' => $this->flashMessenger()->getMessages(), 'paginator' => $paginator));
     }
     
     public function ostalepregledAction()

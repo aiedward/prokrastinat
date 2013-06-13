@@ -105,10 +105,14 @@ return array(
             'novice_studentske' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/novice/ostale/studentske/',
+                    'route' => '/novice/ostale/studentske/[stran/:page]',
+                    'constraints' =>array(
+                        'id'     => '[0-9]+'
+                    ),
                     'defaults' => array(
                         'controller' => 'Novica',
-                        'action' => 'studentske'
+                        'action' => 'studentske',
+                        'page' => 1,
                     ),
                 ),
             ),

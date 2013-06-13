@@ -15,6 +15,6 @@ class Beseda extends BaseEntity
      */
     protected $beseda;
     
-    /** @ORM\Column(type="decimal") */
+    /** @ORM\Column(type="decimal", scale=6) */
     protected $idf;
 }

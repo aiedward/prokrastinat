@@ -31,5 +31,11 @@ class IndexController extends BaseController
         ));
     }
     
-    
+    public function iskanjeAction()
+    {
+        $form = new \Prokrastinat\Form\IskanjeForm();
+        $results = $this->getRequest()->getQuery('isci');
+        
+        return new ViewModel(array('form' => $form, 'iskanje' => $results));
+    }
 }

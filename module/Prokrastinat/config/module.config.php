@@ -51,19 +51,6 @@ return array(
                     ),
                 ),
             ),
-            'index' => array(
-                'type' => 'segment',
-                'options' => array(
-                    'route' => '/index[/:action]',
-                    'constraints' => array(
-                        'action' => '[a-zA-Z][a-zA-Z0-9]*'
-                    ),
-                    'defaults' => array(
-                        'controller' => 'Prokrastinat\Controller\Index',
-                        'action' => 'index',
-                    ),
-                ),
-            ),
             'map' => array(
                 'type' => 'segment',
                 'options' => array(
@@ -89,6 +76,16 @@ return array(
                     'defaults' => array(
                         'controller' => 'Prokrastinat\Controller\User',
                         'action' => 'list',
+                    ),
+                ),
+            ),
+            'iskanje' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/iskanje[/]',
+                    'defaults' => array(
+                        'controller' => 'Prokrastinat\Controller\Index',
+                        'action' => 'iskanje',
                     ),
                 ),
             ),

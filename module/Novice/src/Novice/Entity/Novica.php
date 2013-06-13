@@ -15,7 +15,7 @@ use Prokrastinat\Entity\User;
 class Novica extends Objava
 {
     
-    /** @ORM\Column(length=300) */
+    /** @ORM\Column(length=301) */
     protected $opis;
 
 }

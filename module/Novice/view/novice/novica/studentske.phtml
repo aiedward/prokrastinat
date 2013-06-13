@@ -36,7 +36,7 @@ $this->headTitle($title);
 <?php endforeach; ?>
     
 <div class="paginatorIzpis">
-    <?= ( count($this->paginator) > 0 ) ? $this->paginationControl($this->paginator, 'Sliding', 'pager.phtml', array('route' => '')) : ""; ?>
+    <?= ( count($this->paginator) > 0 ) ? $this->paginationControl($this->paginator, 'Sliding', 'pager.phtml', array('route' => '/novice/ostale/studentske/')) : ""; ?>
 </div>
 
 <div id="modal-brisanje" class="modal hide fade">

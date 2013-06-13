@@ -27,4 +27,7 @@ class ObjavaBeseda extends BaseEntity
 
     /** @ORM\Column(type="integer") */
     protected $frekvenca;
+    
+    /** @ORM\Column(type="decimal") */
+    protected $idf;
 }

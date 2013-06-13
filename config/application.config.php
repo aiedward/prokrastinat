@@ -16,7 +16,6 @@ return array(
         'Vprasanja',
         'Deska',
         'Datoteke',
-        'Aips',
         'Urniki',
         'Novice'
         ),

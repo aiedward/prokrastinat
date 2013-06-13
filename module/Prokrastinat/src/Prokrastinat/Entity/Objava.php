@@ -7,7 +7,18 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\Table(name="objava")
- * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="tip_objave", type="string")
+ * @ORM\DiscriminatorMap({
+ *      "objava" = "Objava",
+ *      "novica" = "Novice\Entity\Novica",
+ *      "exnovica" = "Novice\Entity\ExtremeNovica",
+ *      "dodatna_novica" = "Novice\Entity\DodatnaNovica",
+ *      "oglas" = "Deska\Entity\Oglas",
+ *      "vprasanje" = "Vprasanja\Entity\Vprasanje",
+ *      "stack_vprasanje" = "Vprasanja\Entity\StackVprasanje",
+ *      
+ * })
  */
 class Objava extends BaseEntity
 {

@@ -14,9 +14,6 @@ class Beseda extends BaseEntity
      * @ORM\Id @ORM\Column(type="string", unique=true)
      */
     protected $beseda;
-
-    /** @ORM\Column(type="integer") */
-    protected $frekvenca;
     
     /** @ORM\Column(type="decimal") */
     protected $tf;

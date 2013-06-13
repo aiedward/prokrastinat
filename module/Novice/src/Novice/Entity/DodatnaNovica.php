@@ -4,7 +4,7 @@ namespace Novice\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Novice\Entity\Novica;
 
-/** 
+/**
  * @ORM\Entity(repositoryClass="Novice\Repository\DodatnaNovicaRepository") 
  * @ORM\Table(name="dodatnanovica")
  */

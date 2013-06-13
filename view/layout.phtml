@@ -94,7 +94,7 @@ echo $this->doctype(); ?>
               <li><a href="<?= $this->url('vprasanje') ?>">Vprašanja</a></li>
               <li><a href="<?= $this->url('datoteke') ?>">Datoteke</a></li>
               <li><a href="<?=$this->url('map')?>">Zemljevid</a></li>
-              <li><a href="<?= $this->url('aips') ?>">Zaposleni</a></li>
+              <li><a href="#">Zaposleni</a></li>
               <?php if ($this->isGranted('user_uredi')): ?><li><a href="<?= $this->url('user_list') ?>">Uporabniki</a></li><?php endif; ?>
               <li><a href="<?= $this->url('urniki') ?>">Urniki</a></li>
               <li><a href="<?= $this->url('novice_ostale') ?>">Dodatne novice</a></li>

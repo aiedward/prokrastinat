@@ -75,7 +75,7 @@ class UserController extends BaseController
                     if ($first) {
                         return $this->redirect()->toRoute('user', array('action' => 'edit', 'id' => $user->id));
                     } else {
-                        return $this->redirect()->toRoute('index');
+                        return $this->redirect()->toRoute('home');
                     }
                 } else {
                     $form->get('password')->setMessages(array(
@@ -93,7 +93,7 @@ class UserController extends BaseController
     public function logoutAction()
     {
         $this->authService->clearIdentity();
-        return $this->redirect()->toRoute('index');
+        return $this->redirect()->toRoute('home');
     }
     
     public function editAction()

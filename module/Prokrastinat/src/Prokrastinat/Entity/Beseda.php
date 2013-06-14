@@ -5,7 +5,7 @@ use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Prokrastinat\Repository\BesedaRepository")
  * @ORM\Table(name="beseda", options={"collate"="utf8_slovenian_ci"})
  */
 class Beseda extends BaseEntity
@@ -15,9 +15,21 @@ class Beseda extends BaseEntity
      */
     protected $beseda;
 
-    /** @ORM\Column(type="integer") */
-    protected $frekvenca;
+    /**
+     * @ORM\OneToMany(targetEntity="ObjavaBeseda", mappedBy="beseda")
+     * @ORM\JoinColumn(referencedColumnName="id")
+     */
+    protected $objava_besede;
     
-    /** @ORM\Column(type="decimal") */
-    protected $tf;
+    /** @ORM\Column(type="decimal", scale=6) */
+    protected $idf;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="ObjavaBeseda", mappedBy="beseda")
+     */
+    protected $objave;
+    
+    public function __construct() {
+        $this->objave = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 }

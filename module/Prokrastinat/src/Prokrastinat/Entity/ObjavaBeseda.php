@@ -28,6 +28,11 @@ class ObjavaBeseda extends BaseEntity
     /** @ORM\Column(type="integer") */
     protected $frekvenca;
     
-    /** @ORM\Column(type="decimal") */
-    protected $idf;
+    /** @ORM\Column(type="decimal", scale=6) */
+    protected $tf;
+
+    public function TFIDF()
+    {
+        return $this->tf * $this->beseda->idf;
+    }
 }

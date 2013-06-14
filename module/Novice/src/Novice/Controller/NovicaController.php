@@ -59,6 +59,7 @@ class NovicaController extends BaseController
                 $novica->naslov = $form->get('naslov')->getValue();
                 $novica->vsebina = $form->get('vsebina')->getValue();
                 $novica->datum_objave = new \DateTime("now");
+                $novica->opis = "test";
 
                 $this->em->persist($novica);
                 $this->em->flush();

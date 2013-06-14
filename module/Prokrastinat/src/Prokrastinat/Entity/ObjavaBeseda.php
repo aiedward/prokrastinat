@@ -28,6 +28,6 @@ class ObjavaBeseda extends BaseEntity
     /** @ORM\Column(type="integer") */
     protected $frekvenca;
     
-    /** @ORM\Column(type="decimal") */
+    /** @ORM\Column(type="decimal", scale=6) */
     protected $tf;
 }

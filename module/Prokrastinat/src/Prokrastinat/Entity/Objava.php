@@ -4,12 +4,17 @@ namespace Prokrastinat\Entity;
 use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Mapping as ORM;
 
+use Zend\InputFilter\Factory as InputFactory;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="objava")
  * @ORM\InheritanceType("SINGLE_TABLE")
  */
-class Objava extends BaseEntity
+class Objava extends BaseEntity implements InputFilterAwareInterface
 {
     /**
      * @ORM\Id @ORM\Column(type="integer")
@@ -40,4 +45,68 @@ class Objava extends BaseEntity
      * @ORM\JoinTable(name="objava_oznaka")
      */
     protected $oznake;
+    
+    // VALIDACIJA PODATKOV
+    
+    protected $inputFilter;
+    
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        throw new \Exception("Not used");
+    }
+    
+    public function getInputFilter()
+    {
+        if (!$this->inputFilter) {
+            $inputFilter = new InputFilter();
+            $factory = new InputFactory();
+            
+            // ID
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'id',
+                'required' => true,
+                'filters' => array(
+                    array('name' => 'Int'),
+                ),
+            )));
+            
+            // NASLOV
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'naslov',
+                'required' => 'true',
+                'filters' => array(
+                    array('name' => 'StringTrim')
+                ),
+                'validators' => array(
+                    array(
+                        'name' => 'NotEmpty',
+                        'options' => array(
+                            'messages' => array(
+                                Validator\NotEmpty::IS_EMPTY => 'Vnesite naslov oglasa!',
+                            ),
+                        ),
+                    ),
+                ),
+            )));
+            
+            // VSEBINA
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'vsebina',
+                'required' => 'true',
+                'filters' => array(
+                    array('name' => 'StringTrim')
+                ),
+                'validators' => array(
+                    array(
+                        'name' => 'NotEmpty',
+                        'options' => array(
+                            'messages' => array(
+                                Validator\NotEmpty::IS_EMPTY => 'Vnesite vsebino oglasa!',
+                             ),
+                        ),
+                    ),
+                ),
+            )));
+        }
+    }
 }

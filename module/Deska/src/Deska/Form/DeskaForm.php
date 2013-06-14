@@ -52,8 +52,9 @@ class DeskaForm extends Form
                 'label' => 'Zapade ', //
             ),
             'attributes' => array(
-                'class' => 'datepick',
+                'class' => 'datepicker',
                 'id' => 'Datum',
+                //'data-format' => 'dd.MM.yyy',
             ),
         ));
 
@@ -142,7 +143,7 @@ class DeskaForm extends Form
         $this->get('id')->setValue($o->id);
         $this->get('naslov')->setValue($o->naslov);
         $this->get('vsebina')->setValue($o->vsebina);
-        $this->get('datum-zapadlosti')->setValue($o->datum_zapadlosti);
+        $this->get('datum-zapadlosti')->setValue($o->datum_zapadlosti->format('d.m.Y'));
         $this->get('kategorija')->setValue($o->kategorija->id);
     }
 }

@@ -1,4 +1,4 @@
-﻿{
+{
     "name": "prokrastinat",
     "description": "Študentski portal za FERI",
     "license": "GPL 3",
@@ -19,3 +19,4 @@
         "zf-commons/zfc-rbac": "dev-master"
     }
 }
+

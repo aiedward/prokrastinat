@@ -17,4 +17,13 @@ class Beseda extends BaseEntity
     
     /** @ORM\Column(type="decimal") */
     protected $idf;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="ObjavaBeseda", mappedBy="beseda")
+     */
+    protected $objave;
+    
+    public function __construct() {
+        $this->objave = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 }

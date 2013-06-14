@@ -34,7 +34,19 @@ class IndexController extends BaseController
     public function iskanjeAction()
     {
         $form = new \Prokrastinat\Form\IskanjeForm();
-        $results = $this->getRequest()->getQuery('isci');
+        $search = $this->getRequest()->getQuery('isci');
+        
+        $search = preg_replace('/ /', '%20', $search);
+        //$client = new \Zend\Soap\Client("http://localhost:8080/LemService.asmx?WSDL");
+        //$results = $client->Lematiziraj($search);
+        $client = new \Zend\Http\Client();
+        $req = new \Zend\Http\Request();
+        $req->setUri('http://localhost:8080/LemService.asmx/Lematiziraj?text=' . $search);
+        
+        $results = array();
+        $response = $client->dispatch($req);
+        $xml = simplexml_load_string($response->getBody());
+        $results = (array) $xml;
         
         return new ViewModel(array('form' => $form, 'iskanje' => $results));
     }

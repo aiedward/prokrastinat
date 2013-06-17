@@ -65,9 +65,8 @@ return array(
             'map' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/index/map[/:room]',
+                    'route' => '/map[/:room]',
                     'constraints' => array(
-                        'action' => '[a-zA-Z][a-zA-Z0-9]*',
                         'room' => '[a-zA-Z][a-zA-Z0-9]*[\-][a-zA-Z0-9]*[\-]?[a-zA-Z0-9]*'
                     ),
                     'defaults' => array(

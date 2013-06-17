@@ -30,6 +30,7 @@ return array(
         'invokables' => array(
             'Prokrastinat\Controller\Index' => 'Prokrastinat\Controller\IndexController',
             'Prokrastinat\Controller\User' => 'Prokrastinat\Controller\UserController',
+            'Prokrastinat\Controller\Kategorija' => 'Prokrastinat\Controller\KategorijaController',
         ),
     ),
     'view_helpers' => array(
@@ -48,6 +49,16 @@ return array(
                     'defaults' => array(
                         'controller' => 'Prokrastinat\Controller\Index',
                         'action' => 'index',
+                    ),
+                ),
+            ),
+            'kategorije_update' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/kategorije/update',
+                    'defaults' => array(
+                        'controller' => 'Prokrastinat\Controller\Kategorija',
+                        'action' => 'update',
                     ),
                 ),
             ),

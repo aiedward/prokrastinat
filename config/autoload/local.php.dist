@@ -28,7 +28,7 @@ return array(
             ),
             // AIPS connection name
             'orm_aips' => array(
-                //'driverClass' => 'Doctrine\DBAL\Driver\PDOSqlsrv\Driver',     // windows
+                //'driverClass' => 'Doctrine\DBAL\Driver\PDOSqlsrv\Driver',     // Windows
                 'driverClass' => 'Prokrastinat\DBAL\Driver\PDOSqlsrv\Driver',
                 'params' => array(
                     'host'     => 'studsrv.uni-mb.si',
@@ -40,7 +40,7 @@ return array(
             ),
             // Urniki connection name
             'orm_urniki' => array(
-                //'driverClass' => 'Doctrine\DBAL\Driver\PDOSqlsrv\Driver',     // windows
+                //'driverClass' => 'Doctrine\DBAL\Driver\PDOSqlsrv\Driver',     // Windows
                 'driverClass' => 'Prokrastinat\DBAL\Driver\PDOSqlsrv\Driver',
                 'params' => array(
                     'host'     => 'studsrv.uni-mb.si',
@@ -52,4 +52,15 @@ return array(
             )
         )
     ),
+    'aips' => array(
+        'zavodi' => array(
+            15, // Elektrotehnika
+            55, // Računalništvo in informatika
+            59, // Gospodarsko inženirstvo
+            60, // Telekomunikacije
+            61, // Računalništvo in informacijske tehnologije
+            62, // Informatika in tehnologije komuniciranja
+            70, // Medijske komunikacije
+        )
+    )
 );

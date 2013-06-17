@@ -110,7 +110,13 @@ echo $this->doctype(); ?>
               <li><a href="#">Alumni</a></li>-->
 
               <li class="nav-header">Sidebar</li>
-              <li><a href="<?= $this->url('novice_ostale') ?>">Dodatne novice</a></li>
+              <li class="dropdown-submenu">
+                  <a href="#">Dodatne novice</a>
+                  <ul class="dropdown-menu">
+                      <li><a href="<?= $this->url('novice_studentske');?>">Študentske novice</a></li>
+                      <li><a href="<?= $this->url('novice_extreme', array('action' => 'extreme'));?>">eXtreme novice</a></li>
+                  </ul>
+              </li>
               <li><a href="<?= $this->url('iskanje') ?>">Iskanje</a></li>
               <li><a href="#">Link</a></li>
               <li><a href="#">Link</a></li>

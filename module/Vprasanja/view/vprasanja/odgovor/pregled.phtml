@@ -7,7 +7,7 @@
     <p>
         <i class="icon-user"></i>
         <a href="<?= $this->url('user', array('action' => 'edit', 'id' => $odgovor->user->id)) ?>">
-        <?= $this->escapeHtml($imr) ?></a>
+        <?= $this->escapeHtml($ime) ?></a>
 
         | <i class="icon-calendar"></i> <?= $this->dateFormat($odgovor->datum_objave, IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT) ?>
         | Rating: <?= $this->rating ?>

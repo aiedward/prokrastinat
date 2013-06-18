@@ -2,6 +2,7 @@
 namespace Prokrastinat\Controller;
 
 use Zend\View\Model\ViewModel;
+use Prokrastinat\Form\MapForm;
 
 class IndexController extends BaseController
 {    
@@ -20,10 +21,13 @@ class IndexController extends BaseController
     
     public function mapAction()
     {
+        $mape_repository = $this->em->getRepository('Prokrastinat\Entity\Mape');
+        $mape = $mape_repository->getMaps();
         
+        $form = new MapForm($mape, null);
             
         return new ViewModel(array(
-            
+            'form' => $form,
         ));
     }
     

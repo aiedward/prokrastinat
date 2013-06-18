@@ -5,7 +5,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Prokrastinat\Entity\Objava;
 
 /** 
- * @ORM\Entity(repositoryClass="Deska\Repository\OglasRepository") 
+ * @ORM\Entity(repositoryClass="Deska\Repository\OglasRepository")
+ * @ORM\Table(name="oglas")
  */
 class Oglas extends Objava
 {

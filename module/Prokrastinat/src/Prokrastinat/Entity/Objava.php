@@ -13,7 +13,7 @@ use Zend\InputFilter\InputFilterInterface;
  * @ORM\Entity
  * @ORM\Table(name="objava")
  * @ORM\InheritanceType("JOINED")
- * @ORM\DiscriminatorColumn(name="tip_objave", type="string")
+ * @ORM\DiscriminatorColumn(name="tip", type="string")
  * @ORM\DiscriminatorMap({
  *      "objava" = "Objava",
  *      "novica" = "Novice\Entity\Novica",
@@ -21,8 +21,7 @@ use Zend\InputFilter\InputFilterInterface;
  *      "dodatna_novica" = "Novice\Entity\DodatnaNovica",
  *      "oglas" = "Deska\Entity\Oglas",
  *      "vprasanje" = "Vprasanja\Entity\Vprasanje",
- *      "stack_vprasanje" = "Vprasanja\Entity\StackVprasanje",
- *      
+ *      "stack_vprasanje" = "Vprasanja\Entity\StackVprasanje",  
  * })
  */
 class Objava extends BaseEntity implements InputFilterAwareInterface

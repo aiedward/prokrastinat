@@ -7,7 +7,12 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\Table(name="komentar")
- * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="tip", type="string")
+ * @ORM\DiscriminatorMap({
+ *      "odgovor" = "Vprasanja\Entity\Odgovor",
+ *      "stack_odgovor" = "Vprasanja\Entity\StackOdgovor",  
+ * })
  */
 class Komentar extends BaseEntity
 {

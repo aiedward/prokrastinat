@@ -51,21 +51,22 @@ class IndexController extends BaseController
             $search_strings = (array) $xml->string;
     
             $besede = $this->em->getRepository('Prokrastinat\Entity\Beseda')->getBesede($search_strings);
-            
-            foreach ($besede as $b) {
-                foreach ($b->objave as $o) {
-                    var_dump($o->objava);
-                    if (key_exists($o->objava->id, $objave)) {
-                        $objave[$o->objava->id]['idf'] += $b->idf * $o->tf;
-                    } else {
-                        $objave[$o->objava->id] = array('idf' => $b->idf * $o->tf, 'objava' => $o->objava);
+            if (!is_null($besede[0])) {
+                foreach ($besede as $b) {
+                    foreach ($b->objave as $o) {
+                        if (key_exists($o->objava->id, $objave)) {
+                            $objave[$o->objava->id]['tfidf'] += $b->idf * $o->tf;
+                        } else {
+                            $objave[$o->objava->id] = array('tfidf' => $b->idf * $o->tf, 'objava' => $o->objava);
+                        }
                     }
                 }
+                usort($objave, function($a, $b)
+                {
+                    return strcmp($b['tfidf'], $a['tfidf']);
+                });
             }
-            /*usort($results, function($a, $b)
-            {
-                return strcmp($b->TFIDF(), $a->TFIDF());
-            });*/
+            
         }
 /*
         foreach ($result as $ob) {
@@ -78,6 +79,6 @@ class IndexController extends BaseController
         //$form = new \Prokrastinat\Form\IskanjeForm();
         //$results = $this->getRequest()->getQuery('isci');
         
-        return new ViewModel(array('form' => $form, 'iskanje' => $objave));
+        return new ViewModel(array('form' => $form, 'objave' => $objave));
     }
 }

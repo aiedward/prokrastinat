@@ -100,7 +100,7 @@ class UserController extends BaseController
     {
         if (!$this->auth->hasIdentity()) $this->dostopZavrnjen();
             $form = new \Prokrastinat\Form\EditForm();
-            $form->setInputFilter(new \Prokrastinat\Form\EditFilter());
+            $form->setInputFilter(new \Prokrastinat\Form\EditFilter());           
             $urejanje = false;
             
             if (!$this->imaPravico('user_uredi')) {
@@ -119,6 +119,9 @@ class UserController extends BaseController
             
             if ($this->imaPravico('user_uredi', $user))
             {
+                $roleRep = $this->em->getRepository('Prokrastinat\Entity\Role');
+                $roles = $roleRep->getRoles();
+                
                 if ($this->request->isPost()) {
                     $form->setData($this->request->getPost());
                     
@@ -137,7 +140,8 @@ class UserController extends BaseController
             
             return new ViewModel(array(
                 'form' => $form,
-                'urejanje' => $urejanje
+                'urejanje' => $urejanje,
+                'user' => $user
             ));
 
     }

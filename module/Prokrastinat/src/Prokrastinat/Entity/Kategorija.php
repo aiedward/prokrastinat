@@ -16,7 +16,7 @@ class Kategorija extends BaseEntity
      */
     protected $id;
 
-    /** @ORM\Column(length=30) */
+    /** @ORM\Column(length=128) */
     protected $ime;
 
     /** @ORM\OneToMany(targetEntity="Objava", mappedBy="kategorija") */

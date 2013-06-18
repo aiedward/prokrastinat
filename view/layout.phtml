@@ -84,10 +84,10 @@ echo $this->doctype(); ?>
             </div>
         </div>
     </div>
-    <div class="container-fluid leftSidebar">
+    <div class="container-fluid">
       <div class="row-fluid">
         <div class="span2">
-          <div class="sidebar-nav">
+          <div class="sidebar-nav leftSidebar">
             <ul class="nav nav-tabs nav-stacked">
               <li><a href="<?= $this->url('novice') ?>">Novice</a></li>
               <li><a href="<?= $this->url('deska') ?>">Oglasna deska</a></li>
@@ -110,39 +110,46 @@ echo $this->doctype(); ?>
               <li><a href="#">Alumni</a></li>-->
 
               <li class="nav-header">Sidebar</li>
-              <li><a href="<?= $this->url('novice_ostale') ?>">Dodatne novice</a></li>
+              <li class="dropdown-submenu">
+                  <a href="#">Dodatne novice</a>
+                  <ul class="dropdown-menu">
+                      <li><a href="<?= $this->url('novice_studentske');?>">Študentske novice</a></li>
+                      <li><a href="<?= $this->url('novice_extreme', array('action' => 'extreme'));?>">eXtreme novice</a></li>
+                  </ul>
+              </li>
               <li><a href="<?= $this->url('iskanje') ?>">Iskanje</a></li>
               <li><a href="#">Link</a></li>
               <li><a href="#">Link</a></li>
 
-              <li class="nav-header">Sidebar</li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
+              <li class="nav-header">Inštituti</li>
+              <li><a href="http://www.au.feri.uni-mb.si/">Inštitut za avtomatiko</a></li>
+              <li><a href="http://ietk.feri.um.si/">Inštitut za elektroniko in telekomunikacije</a></li>
+              <li><a href="http://ii.uni-mb.si/">Inštitut za informatiko</a></li>
+              <li><a href="http://www.pe.feri.uni-mb.si/podrocje.aspx">Inštitut za močnostno elektrotehniko</a></li>
+              <li><a href="http://www.cs.feri.uni-mb.si/podrocje.aspx">Inštitut za računalništvo</a></li>
+              <li><a href="http://www.ro.feri.uni-mb.si/portal/index.php">Inštitut za robotiko</a></li>
+              <li><a href="http://www.mp.feri.uni-mb.si/">Inštitut za matematiko in fiziko</a></li>
+              <li><a href="http://medijske.uni-mb.si/">Inštitut za medijske komunikacije</a></li>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
         <div class="span8">
-          <div class="row-fluid">
-                <?php $children = $this->viewModel()
-                                  ->getCurrent()
-                                  ->getChildren();
-                  $ourView  = $children[0];
-                  if (isset($ourView->flashMessages) && count($ourView->flashMessages)) : ?>
-                  <ul class="alert alert-info">
-                      <?php foreach ($ourView->flashMessages as $fMessage) : ?>
-                      <li><?php echo $fMessage; ?></li>
-                      <?php endforeach; ?>
-                  </ul>
-                  <?php endif; ?>
-                <?= $this->content; ?>
-          </div><!--/row-->
+            <?php $children = $this->viewModel()
+                              ->getCurrent()
+                              ->getChildren();
+              $ourView  = $children[0];
+              if (isset($ourView->flashMessages) && count($ourView->flashMessages)) : ?>
+              <ul class="alert alert-info">
+                  <?php foreach ($ourView->flashMessages as $fMessage) : ?>
+                  <li><?php echo $fMessage; ?></li>
+                  <?php endforeach; ?>
+              </ul>
+              <?php endif; ?>
+            <?= $this->content; ?>
         </div><!--/span-->
         <div class="span2">
-            <div class="row-fluid">
-                <div class="desni-sidebar">
-                    <?php echo $this->sidebar() ?>
-                </div>
+            <div class="desni-sidebar">
+                <?php echo $this->sidebar() ?>
             </div>
         </div>
       </div><!--/row-->

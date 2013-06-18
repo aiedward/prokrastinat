@@ -159,8 +159,9 @@ class DeskaController extends BaseController
         if (!$this->isGranted('kategorije_pregled')) 
             $this->dostopZavrnjen();
         
-        $this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
-        $kategorije = $this->kategorija_repository->getKategorije();
+        //$this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
+        //$kategorije = $this->kategorija_repository->getKategorije();
+        $kategorije = $this->em->getRepository('Prokrastinat\Entity\Kategorija')->findAll();
         
         return array('kategorije' => $kategorije);
     }

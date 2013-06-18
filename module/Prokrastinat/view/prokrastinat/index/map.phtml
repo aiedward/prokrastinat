@@ -1,20 +1,34 @@
 <h1>Zemljevid učilnic</h1>
-<?php if($id == NULL): ?>
-<ul>
-    <li><a href="<?php echo $this->url('map', array('id' => 0)); ?>" id="g2-prt">G2 Prtličje</a></li>
-    <li><a href="<?php echo $this->url('map', array('id' => 1)); ?>" id="g2-1">G2 1. nadstropje</a></li>
-    <li><a href="<?php echo $this->url('map', array('id' => 5)); ?>" id="g2-med">G2 Medetaža</a></li>
-    <li><a href="<?php echo $this->url('map', array('id' => 2)); ?>" id="g2-2">G2 2. nadstropje</a></li>
-    <li><a href="<?php echo $this->url('map', array('id' => 3)); ?>" id="g2-3">G2 3. nadstropje</a></li>
-    <li><a href="<?php echo $this->url('map', array('id' => 4)); ?>" id="g2-4">G2 4. nadstropje</a></li>
-    <li><a href="<?php echo $this->url('map', array('id' => 6)); ?>" id="teh-faks">Tehniške fakultete</a></li>
-</ul>
-<?php else: ?>
-<ul>
-    <li><a href="<?php echo $this->url('map', array()); ?>" id="map-back">Nazaj</a></li>
-</ul>
-<div id="mapa">
-    <img src="/img/<?=$id?>.png" class="img-polaroid">
+
+<?php
+    $this->form->prepare();
+    echo $this->formTwb($this->form, \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL);
+?>
+
+<script type="text/javascript">
+window.onload = function () {
+    $("#select-zemljevid").change(function () {
+        url = document.URL + "/get-ucilnice/" + $("#select-zemljevid").val();
+        $.getJSON(url, function(data) {
+            $('#select-ucilnica').empty();
+            for (var uc_id in data.ucilnice) {
+                var opt = $('<option />', {
+                    value: uc_id,
+                    text: data.ucilnice[uc_id]
+                });
+                $('#select-ucilnica').append(opt);
+            }
+        });
+    });
+};
+</script>
+
+<?php if($map != null): ?>
+<div style="position: relative; top: 0; left: 0">
+    <img src="/img/<?=$map->pot ?>" style="position: absolute; top: 0; left: 0; max-width: none;">
+    <?php if($room != null): ?>
+    <img src="/img/map/krog.png" style="position: absolute; top: <?=$room->top ?>px; left: <?=$room->left ?>px; max-width: none">
+    <?php endif; ?>
 </div>
 <?php endif; ?>
 

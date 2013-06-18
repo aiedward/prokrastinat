@@ -1,7 +1,8 @@
 <?php
 namespace Prokrastinat\Entity;
 
-class BaseEntity {
+class BaseEntity 
+{
     public function __get($name) {
         return $this->$name;
     }

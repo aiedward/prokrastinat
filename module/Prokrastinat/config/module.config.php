@@ -30,6 +30,7 @@ return array(
         'invokables' => array(
             'Prokrastinat\Controller\Index' => 'Prokrastinat\Controller\IndexController',
             'Prokrastinat\Controller\User' => 'Prokrastinat\Controller\UserController',
+            'Prokrastinat\Controller\Kategorija' => 'Prokrastinat\Controller\KategorijaController',
         ),
     ),
     'view_helpers' => array(
@@ -51,20 +52,42 @@ return array(
                     ),
                 ),
             ),
+            'kategorije_update' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/kategorije/update',
+                    'defaults' => array(
+                        'controller' => 'Prokrastinat\Controller\Kategorija',
+                        'action' => 'update',
+                    ),
+                ),
+            ),
             'map' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/index/map[/:id][/:room]',
+                    'route' => '/map[/:room]',
                     'constraints' => array(
-                        'action' => '[a-zA-Z][a-zA-Z0-9]*',
-                        'id' => '[0-9]+',
-                        'room' => '[a-zA-Z][a-zA-Z0-9]*'
+                        'room' => '[a-zA-Z][a-zA-Z0-9]*[\-]?[a-zA-Z0-9]*[\-]?[a-zA-Z0-9]*'
                     ),
                     'defaults' => array(
                         'controller' => 'Prokrastinat\Controller\Index',
                         'action' => 'map',
                     ),
                 ),
+            ),
+            'get-ucilnice' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/map[/:room]/get-ucilnice/:mapa',
+                    'constraints' => array(
+                        'room' => '[a-zA-Z][a-zA-Z0-9]*[\-]?[a-zA-Z0-9]*[\-]?[a-zA-Z0-9]*',
+                        'mapa' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Prokrastinat\Controller\Index',
+                        'action' => 'getUcilnice'
+                    )
+                )
             ),
             'user' => array(
                 'type' => 'segment',

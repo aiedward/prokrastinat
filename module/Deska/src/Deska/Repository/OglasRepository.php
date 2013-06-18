@@ -14,7 +14,7 @@ class OglasRepository extends EntityRepository
         $oglas->naslov = ($data['naslov']);
         $oglas->vsebina = ($data['vsebina']);
         $oglas->datum_objave = (new \DateTime("now"));
-        $oglas->datum_zapadlosti = (\DateTime::createFromFormat('d-m-Y', $data['datum-zapadlosti']));
+        $oglas->datum_zapadlosti = (\DateTime::createFromFormat('d.m.Y', $data['datum-zapadlosti']));
         $oglas->kategorija = ($data['kategorija']);
 
         $em->persist($oglas);

@@ -1,1 +1,25 @@
 /* css? da bi bil? */
+
+.vprasanje-rating, .vprasanje-count {
+    text-align: center;
+}
+
+.vprasanje-podatki h4 {
+    padding-left: 10px;
+}
+
+.vprasanje-podatki p {
+    text-align: right;
+}
+
+.vprasanje-list hr {
+    margin-top: 1px;
+}
+
+.vprasanje-dodaj {
+    float: right;
+}
+
+/*.vprasanje {
+    border-bottom: 1px #eeeeee solid;
+} */

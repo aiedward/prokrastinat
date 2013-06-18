@@ -7,12 +7,9 @@
             <b> <?= $this->escapeHtml($novica->datum_objave->format('d-m-Y')); ?></b> 
             <b><a href="<?= $this->url('novice', array('action' => 'preglej', 'id' => $novica->id));?>"> <?= $novica->naslov; ?> </a></b><br />
             <p class="novicaVsebina">
-                <?php if(is_null($novica->opis)){
-                        echo $novica->vsebina;
-                    } 
-                    else{
-                        echo $novica->opis;
-                } ?>
+                <?php 
+                     echo $novica->vsebina;
+                ?>
             </p>
         </div>
     <?php endforeach; ?>

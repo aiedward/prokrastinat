@@ -26,8 +26,7 @@ class NovicaController extends BaseController
     $user = $this->auth->getIdentity();
         
         
-    $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-    $repository = $entityManager->getRepository('Novice\Entity\Novica');
+    $repository = $this->em->getRepository('Novice\Entity\Novica');
     $adapter = new DoctrineAdapter(new ORMPaginator($repository->createQueryBuilder('novica')
                                                                 ->add('where', 'novica instance of \Novice\Entity\Novica')
                                                                 ->add('orderBy', 'novica.datum_objave DESC')));

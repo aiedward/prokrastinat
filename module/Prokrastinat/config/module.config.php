@@ -80,7 +80,7 @@ return array(
                 'options' => array(
                     'route' => '/map[/:room]/get-ucilnice/:mapa',
                     'constraints' => array(
-                        'room' => '[a-zA-Z][a-zA-Z0-9]*[\-][a-zA-Z0-9]*[\-]?[a-zA-Z0-9]*',
+                        'room' => '[a-zA-Z][a-zA-Z0-9]*[\-]?[a-zA-Z0-9]*[\-]?[a-zA-Z0-9]*',
                         'mapa' => '[0-9]+',
                     ),
                     'defaults' => array(

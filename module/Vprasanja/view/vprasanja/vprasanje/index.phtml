@@ -1,23 +1,36 @@
-<h1>Vprašanja</h1>
+<h2>Vprašanja</h2>
+
 <?php if ($this->imaPravico('vprasanje_dodaj')): ?>
-    <div id="top-menu">
-        <a class="btn btn-primary" href="<?= $this->url('vprasanje', array('action' => 'dodaj')); ?>" id="dodaj-vprasanje">Dodaj</a>
-    </div>
+    <a class="vprasanje-dodaj btn btn-primary " href="<?= $this->url('vprasanje', array('action' => 'dodaj')); ?>" id="dodaj-vprasanje">Dodaj</a>
 <?php endif; ?>
-<div id="user-menu"></div>
-<br />
-<table class="table">
-	<tr>
-		<th>Naslov</th>
-		<th>Avtor</th>
-		<th>Datum objave</th>
-	</tr>
-	<?php foreach ($vprasanja as $vprasanje): ?>
-	<?php $link = $this->url('preglej', array('action' => 'preglej', 'id' => $vprasanje->id)) ?>
-	<tr>
-		<td><a href="<?= $link ?>"><?= $this->escapeHtml($vprasanje->naslov) ?></a></td>
-		<td><?= $this->escapeHtml($vprasanje->user->getPolnoIme()) ?></td>
-		<td><?= $this->dateFormat($vprasanje->datum_objave, IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT) ?></td>
-	</tr>
-	<?php endforeach; ?>
-</table>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#">Nova vprašanja</a></li>
+  <li><a href="#">Top teden</a></li>
+  <li><a href="#">Top mesec</a></li>
+  <li><a href="#">StackOverflow</a></li>
+</ul>
+
+<div class="vprasanje-list">
+    <?php foreach ($vprasanja as $vprasanje): ?>
+    <?php $link = $this->url('preglej', array('action' => 'preglej', 'id' => $vprasanje->id)) ?>
+    <div class="vprasanje row-fluid">
+        <div class="vprasanje-rating span1">
+            <h4><?= $vprasanje->rating ?></h4>
+            <p>glasov</p>
+        </div>
+        <div class="vprasanje-count span1">
+            <h4><?= count($vprasanje->komentarji) ?></h4>
+            <p>odgovorov</p>
+        </div>
+        <div class="vprasanje-podatki span10">
+            <h4><a href="<?= $link ?>"><?= $vprasanje->naslov ?></a></h4>
+            <p>
+                <?= $this->dateFormat($vprasanje->datum_objave, IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT) ?>,
+                <?= $vprasanje->user->getPolnoIme() ?>
+            </p>
+        </div>
+    </div>
+    <hr>
+    <?php endforeach; ?>
+</div>

@@ -14,6 +14,7 @@ class VprasanjeRepository extends EntityRepository
         $vprasanje->naslov = $form->get('naslov')->getValue();
         $vprasanje->vsebina = $form->get('vsebina')->getValue();
         $vprasanje->datum_objave = new \DateTime("now");
+        $vprasanje->rating = 0;
         $this->getEntityManager()->persist($vprasanje);
     }
 

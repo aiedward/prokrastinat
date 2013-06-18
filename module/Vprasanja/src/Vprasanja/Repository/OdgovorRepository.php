@@ -15,6 +15,7 @@ class OdgovorRepository extends EntityRepository
         $odgovor->objava = $vprasanje;
         $odgovor->vsebina = $form->get('vsebina')->getValue();
         $odgovor->datum_objave = new \DateTime("now");
+        $odgovor->rating = 0;
         $this->getEntityManager()->persist($odgovor);
     }
 

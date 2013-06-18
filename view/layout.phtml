@@ -84,10 +84,10 @@ echo $this->doctype(); ?>
             </div>
         </div>
     </div>
-    <div class="container-fluid leftSidebar">
+    <div class="container-fluid">
       <div class="row-fluid">
         <div class="span2">
-          <div class="sidebar-nav">
+          <div class="sidebar-nav leftSidebar">
             <ul class="nav nav-tabs nav-stacked">
               <li><a href="<?= $this->url('novice') ?>">Novice</a></li>
               <li><a href="<?= $this->url('deska') ?>">Oglasna deska</a></li>
@@ -134,26 +134,22 @@ echo $this->doctype(); ?>
           </div><!--/.well -->
         </div><!--/span-->
         <div class="span8">
-          <div class="row-fluid">
-                <?php $children = $this->viewModel()
-                                  ->getCurrent()
-                                  ->getChildren();
-                  $ourView  = $children[0];
-                  if (isset($ourView->flashMessages) && count($ourView->flashMessages)) : ?>
-                  <ul class="alert alert-info">
-                      <?php foreach ($ourView->flashMessages as $fMessage) : ?>
-                      <li><?php echo $fMessage; ?></li>
-                      <?php endforeach; ?>
-                  </ul>
-                  <?php endif; ?>
-                <?= $this->content; ?>
-          </div><!--/row-->
+            <?php $children = $this->viewModel()
+                              ->getCurrent()
+                              ->getChildren();
+              $ourView  = $children[0];
+              if (isset($ourView->flashMessages) && count($ourView->flashMessages)) : ?>
+              <ul class="alert alert-info">
+                  <?php foreach ($ourView->flashMessages as $fMessage) : ?>
+                  <li><?php echo $fMessage; ?></li>
+                  <?php endforeach; ?>
+              </ul>
+              <?php endif; ?>
+            <?= $this->content; ?>
         </div><!--/span-->
         <div class="span2">
-            <div class="row-fluid">
-                <div class="desni-sidebar">
-                    <?php echo $this->sidebar() ?>
-                </div>
+            <div class="desni-sidebar">
+                <?php echo $this->sidebar() ?>
             </div>
         </div>
       </div><!--/row-->

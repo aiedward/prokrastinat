@@ -5,7 +5,7 @@ use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Mapping as ORM;
 
 /** 
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Prokrastinat\Repository\UcilniceRepository")
  * @ORM\Table(name="ucilnice")
  */
 class Ucilnice extends BaseEntity

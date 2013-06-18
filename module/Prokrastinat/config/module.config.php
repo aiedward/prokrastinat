@@ -67,13 +67,27 @@ return array(
                 'options' => array(
                     'route' => '/map[/:room]',
                     'constraints' => array(
-                        'room' => '[a-zA-Z][a-zA-Z0-9]*[\-][a-zA-Z0-9]*[\-]?[a-zA-Z0-9]*'
+                        'room' => '[a-zA-Z][a-zA-Z0-9]*[\-]?[a-zA-Z0-9]*[\-]?[a-zA-Z0-9]*'
                     ),
                     'defaults' => array(
                         'controller' => 'Prokrastinat\Controller\Index',
                         'action' => 'map',
                     ),
                 ),
+            ),
+            'get-ucilnice' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/map[/:room]/get-ucilnice/:mapa',
+                    'constraints' => array(
+                        'room' => '[a-zA-Z][a-zA-Z0-9]*[\-][a-zA-Z0-9]*[\-]?[a-zA-Z0-9]*',
+                        'mapa' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Prokrastinat\Controller\Index',
+                        'action' => 'getUcilnice'
+                    )
+                )
             ),
             'user' => array(
                 'type' => 'segment',

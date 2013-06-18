@@ -15,6 +15,7 @@ class MapForm extends Form {
             'type' => 'Zend\Form\Element\Select',
             'options' => array(
                 'label' => 'Zemljevidi',
+                'empty_option' => "",
                 'value_options' => $maps,
                 'required' => true,
             ),

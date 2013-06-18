@@ -2,6 +2,7 @@
 namespace Prokrastinat\Controller;
 
 use Zend\View\Model\ViewModel;
+use Zend\View\Model\JsonModel;
 use Prokrastinat\Form\MapForm;
 
 class IndexController extends BaseController
@@ -21,14 +22,62 @@ class IndexController extends BaseController
     
     public function mapAction()
     {
-        $mape_repository = $this->em->getRepository('Prokrastinat\Entity\Mape');
-        $mape = $mape_repository->getMaps();
-        
+        $mapRepository = $this->em->getRepository('Prokrastinat\Entity\Mape');
+        $mape = $mapRepository->getMaps();
+        $roomGet = $this->getEvent()->getRouteMatch()->getParam('room');
         $form = new MapForm($mape, null);
+        $room = null;
+        $map = null;
+        
+        if($roomGet != null)
+        {
+            $roomRepository = $this->em->getRepository('Prokrastinat\Entity\Ucilnice');
+            $room = $roomRepository->findOneBy(array('ime' => $roomGet));
+            if(empty($room))
+            {
+                $map = $mapRepository->findOneBy(array('ime' => $roomGet));
+                if(empty($map))
+                {
+                    //TO-DO: Flash messenger
+                }
+            }else
+            {
+                $map = $room->mapa;
+            }
+        }
+        
+        if ($this->getRequest()->isPost()) {
+            $form->setData($this->request->getPost());
+            $mapaID = $form->get('zemljevid')->getValue();
+            $roomID = $form->get('ucilnica')->getValue();
+            if($roomID === "all")
+            {
+                $zemljevid = $mapRepository->find($mapaID);
+                return $this->redirect()->toRoute('map', array('room' => $zemljevid->ime));
+            }else
+            {
+                $roomRepository = $this->em->getRepository('Prokrastinat\Entity\Ucilnice');
+                $ucilnica = $roomRepository->find($roomID);
+                return $this->redirect()->toRoute('map', array('room' => $ucilnica->ime));
+            }
+        }
             
         return new ViewModel(array(
             'form' => $form,
+            'room' => $room,
+            'map' => $map,
         ));
+    }
+    
+    public function getUcilniceAction()
+    {
+        $mapa = $this->getEvent()->getRouteMatch()->getParam('mapa');
+        $roomRepository = $this->em->getRepository('Prokrastinat\Entity\Ucilnice');
+        $ucilnice = $roomRepository->getRooms($mapa);
+        return new JsonModel(array(
+            'ucilnice' => $ucilnice
+        ));
+        
     }
     
     public function iskanjeAction()

@@ -10,17 +10,35 @@ class IndexController extends BaseController
     public function indexAction() 
     {
 
-        $query = $this->em->createQuery("SELECT n FROM Novice\Entity\Novica n WHERE n INSTANCE OF \Novice\Entity\Novica ORDER BY n.datum_objave DESC");
-        $query->setMaxResults(5);
-        $novice = $query->getResult();
-        
-        $query2 = $this->em->createQuery("SELECT o FROM Deska\Entity\Oglas o WHERE o.datum_zapadlosti > CURRENT_DATE()");
-        $query2->setMaxResults(5);
-        $oglasi = $query2->getResult();
-        
-        return new ViewModel(array('novice' => $novice, 'oglasi' => $oglasi));
+        if(!$this->auth->hasIdentity())
+        {
+            $query = $this->em->createQuery("SELECT n FROM Novice\Entity\Novica n WHERE n INSTANCE OF \Novice\Entity\Novica ORDER BY n.datum_objave DESC");
+            $query->setMaxResults(5);
+            $novice = $query->getResult();
+            
+            return new ViewModel(array('novice' => $novice));
+        }
+        else{
+            $query = $this->em->createQuery("SELECT n FROM Novice\Entity\Novica n WHERE n INSTANCE OF \Novice\Entity\Novica ORDER BY n.datum_objave DESC");
+            $query->setMaxResults(5);
+            $novice1 = $query->getResult();
+
+            $query2 = $this->em->createQuery("SELECT o FROM Deska\Entity\Oglas o WHERE o.datum_zapadlosti > CURRENT_DATE()");
+            $query2->setMaxResults(5);
+            $oglasi = $query2->getResult();
+            
+            $novice = array_merge((array)$novice1, (array)$oglasi);
+            
+            foreach ($novice as $key => $row) {
+                $datum[$key]  = $row->datum_objave;
+            }
+            array_multisort($datum, SORT_DESC, $novice);
+            $novice = array_slice($novice, 0, 5);
+        }
+               
+        return new ViewModel(array('novice' => $novice));
     }
-    
+  
     public function mapAction()
     {
         $mapRepository = $this->em->getRepository('Prokrastinat\Entity\Mape');

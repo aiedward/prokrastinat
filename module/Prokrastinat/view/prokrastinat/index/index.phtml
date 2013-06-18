@@ -1,6 +1,6 @@
 <h1>Dobrodošli v prokrastinatu</h1>
 <hr/>
-<a href="<?= $this->url('novice') ?>"><h2>Novice</h2></a>
+<h2>Aktualno</h2>
 <?php if (count($novice) != 0): ?>
     <?php foreach($novice as $novica): ?>
         <div class="well well-small novica">
@@ -17,19 +17,5 @@
     <h4 style="padding-left: 15px">Ni novic</h4>
 <?php endif; ?>
 <!--a class='btn btn-primary' href='<?= $this->url('novice')?>'>Vse novice</a-->
-
-
-<a href="<?= $this->url('deska') ?>"><h2>Objave</h2></a>
-<?php if (count($oglasi)): ?>
-    <?php foreach($oglasi as $oglas): ?>
-        <div class="well well-small novica">
-            <b> <?= $this->escapeHtml($oglas->datum_objave->format('d-m-Y')); ?></b> 
-            <b><a href="<?= $this->url('deska', array('action' => 'preglej', 'id' => $oglas->id));?>"> <?= $oglas->naslov; ?> </a></b><br />
-            <p><?= $oglas->vsebina ?></p>
-        </div>
-    <?php endforeach; ?>
-<?php else: ?>
-    <h4 style="padding-left: 15px">Ni objav</h4>
-<?php endif; ?>
 
 <!--a class='btn btn-primary' href='<?= $this->url('deska')?>'>Oglasna deska</a-->

@@ -28,7 +28,9 @@ class NovicaController extends BaseController
         
     $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
     $repository = $entityManager->getRepository('Novice\Entity\Novica');
-    $adapter = new DoctrineAdapter(new ORMPaginator($repository->createQueryBuilder('novica')->add('orderBy', 'novica.datum_objave DESC')));
+    $adapter = new DoctrineAdapter(new ORMPaginator($repository->createQueryBuilder('novica')
+                                                                ->add('where', 'novica instance of \Novice\Entity\Novica')
+                                                                ->add('orderBy', 'novica.datum_objave DESC')));
     $paginator = new Paginator($adapter);
     $paginator->setDefaultItemCountPerPage(5);
    

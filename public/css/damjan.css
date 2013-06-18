@@ -84,12 +84,10 @@ root {
 .novica{
     border-top: 2px #0e90d2 solid;
     border-bottom: 2px #0e90d2 solid;
-}
-
-.well, .well-small{
     max-height: 125px;
     overflow: hidden;
 }
+
 /*********************IKONE********************/
 .ikone{
     text-align: right;

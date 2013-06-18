@@ -1,0 +1,9 @@
+<h1>Iskanje</h1>
+
+<?php //var_dump($this->objave);
+echo $this->formTwb($this->form, \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL);
+if (count($this->objave)):
+    foreach ($this->objave as $id => $objava): ?>
+        <a href="<?= $this->url('novice_pregled', array('id' => $objava['objava']->id)) ?>"><h2><?= $objava['objava']->naslov ?></h2></a>
+    <?php endforeach;
+endif;

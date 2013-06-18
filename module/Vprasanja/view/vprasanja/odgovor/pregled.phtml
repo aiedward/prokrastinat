@@ -1,9 +1,13 @@
+<?php
+    $ime = ($odgovor->user == null) ? $odgovor->avtor : $odgovor->user->getPolnoIme();
+?>
+
 <div class="well well-small">
     <p><?= $odgovor->vsebina ?></p>
     <p>
         <i class="icon-user"></i>
         <a href="<?= $this->url('user', array('action' => 'edit', 'id' => $odgovor->user->id)) ?>">
-        <?= $this->escapeHtml($odgovor->user->getPolnoIme()) ?></a>
+        <?= $this->escapeHtml($imr) ?></a>
 
         | <i class="icon-calendar"></i> <?= $this->dateFormat($odgovor->datum_objave, IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT) ?>
         | Rating: <?= $this->rating ?>
@@ -18,7 +22,7 @@
               <?= $this->translate("Briši") ?></a>
         <?php endif ?>
 
-        <?php if ($this->imaPravico('odgovor_vote')): ?>
+        <?php if ($this->imaPravico('odgovor_vote') && ($odgovor->user)): ?>
             <?php if ($this->has_rated): ?>
                 | <a href="<?= $this->url('odgovor', array('action' => 'unvote', 'ido' => $odgovor->objava->id, 'id' => $odgovor->id)) ?>">
                   <?= $this->translate("-1") ?></a>

@@ -15,6 +15,11 @@ return array(
             )
         )
     ),
+    'view_helpers' => array(
+        'invokables' => array(
+            'tab' => 'Vprasanja\View\Helper\Tab',
+        )
+    ),
     'controllers' => array(
         'invokables' => array(
             'Vprasanje' => 'Vprasanja\Controller\VprasanjeController',
@@ -64,6 +69,20 @@ return array(
                     'defaults' => array(
                         'controller' => 'Vprasanje',
                         'action' => 'pregled'
+                    ),
+                ),
+            ),
+
+            'list' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/vprasanje[/:tip]',
+                    'constraints' => array(
+                        'tip' => '[a-zA-Z]*',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Vprasanje',
+                        'action' => 'index'
                     ),
                 ),
             ),

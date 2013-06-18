@@ -15,6 +15,9 @@ class VprasanjeController extends BaseController
     /** @var Vprasanja\Repository\VprasanjeRepository */
     protected $vprasanjeRepository;
 
+    /** @var Vprasanja\Repository\StackVprasanjeRepository */
+    protected $stackVprasanjeRepository;
+
     /** @var Vprasanja\Repository\OdgovorRepository */
     protected $odgovorRepository;
 
@@ -23,6 +26,7 @@ class VprasanjeController extends BaseController
         parent::setEventManager($events);
 
         $this->vprasanjeRepository = $this->em->getRepository('Vprasanja\Entity\Vprasanje');
+        $this->stackVprasanjeRepository = $this->em->getRepository('Vprasanja\Entity\StackVprasanje');
         $this->odgovorRepository = $this->em->getRepository('Vprasanja\Entity\Odgovor');
      }
 
@@ -30,12 +34,26 @@ class VprasanjeController extends BaseController
     {
         if (!$this->imaPravico('vprasanje_index')) {
             return $this->dostopZavrnjen();
-        } 
+        }
 
-        $vprasanja = $this->vprasanjeRepository->findAll();
+        $tip = $this->params()->fromRoute('tip');
+        $tip = $tip == null ? 'novo' : $tip;
+
+        $vprasanja = array();
+        if ($tip == 'novo')
+            $vprasanja = $this->vprasanjeRepository->findAllNew();
+        else if ($tip == 'teden')
+            $vprasanja = $this->vprasanjeRepository->findTopWeekly();
+        else if ($tip == 'mesec')
+            $vprasanja = $this->vprasanjeRepository->findTopMonthly();
+        else if ($tip == 'stackoverflow')
+            $vprasanja = $this->stackVprasanjeRepository->findTopWeekly();
+        else
+            throw new \Exception('Neznani tip izpisa vprašanj');
 
         return new ViewModel(array(
-            'vprasanja' => $vprasanja
+            'vprasanja' => $vprasanja,
+            'selected' => $tip,
         ));
     }
 
@@ -49,8 +67,16 @@ class VprasanjeController extends BaseController
         $user = $this->auth->getIdentity();
 
         $vprasanje = $this->vprasanjeRepository->find($id);
-        $rating = $vprasanje->users_rated->rating;
-        $has_rated = $vprasanje->users_rated->contains($user);
+        $rating = null;
+        $has_rated = null;
+        if ($vprasanje) {
+            $rating = $vprasanje->users_rated->rating;
+            $has_rated = $vprasanje->users_rated->contains($user);
+        } else {
+            $vprasanje = $this->stackVprasanjeRepository->find($id);
+            $rating = $vprasanje->rating;
+        }
+        
 
         $form = new OdgovorForm();
         $form->setAttribute('action', $this->url()->fromRoute('odgovor', array('action' => 'dodaj', 'ido' => $id)));

@@ -8,6 +8,49 @@ use Vprasanja\Form\VprasanjeForm;
 
 class VprasanjeRepository extends EntityRepository
 {
+    public function findAllNew()
+    {
+        return $this->findBy(array(), array('datum_objave' => 'DESC'));
+    }
+
+    public function findTopWeekly()
+    {
+        $start = new \DateTime();
+        $end = new \DateTime();
+        $start->setTimestamp(strtotime('this week', time()));
+        $start->setTime(0, 0, 0);
+        $end->setTimestamp(strtotime('next week', time()));
+        $end->setTime(0, 0, 0);
+
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select('v')
+           ->from('Vprasanja\Entity\Vprasanje', 'v')
+           ->where("v.datum_objave BETWEEN :start AND :end")
+           ->orderBy('v.rating', 'DESC')
+           ->setParameter('start', $start)
+           ->setParameter('end', $end);
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findTopMonthly()
+    {
+        $start = new \DateTime();
+        $end = new \DateTime();
+        $start->setTimestamp(strtotime('this month', time()));
+        $start->setTime(0, 0, 0);
+        $end->setTimestamp(strtotime('next month', time()));
+        $end->setTime(0, 0, 0);
+
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select('v')
+           ->from('Vprasanja\Entity\Vprasanje', 'v')
+           ->where("v.datum_objave BETWEEN :start AND :end")
+           ->orderBy('v.rating', 'DESC')
+           ->setParameter('start', $start)
+           ->setParameter('end', $end);
+        return $qb->getQuery()->getResult();
+    }
+
     public function dodaj(Vprasanje $vprasanje, User $user, VprasanjeForm $form)
     {
         $vprasanje->user = $user;

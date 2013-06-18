@@ -1,7 +1,13 @@
-<div class="btn-toolbar">
-    <a href="#odgovori" class="btn btn-primary"><i class="icon-pencil icon-white"></i> Odgovori</a>
-    <button class="btn"><i class="icon-star"></i> Označi</button> 
-</div>
+<?php
+    $ime = ($vprasanje->user == null) ? $vprasanje->avtor : $vprasanje->user->getPolnoIme();
+?>
+
+<?php if ($this->imaPravico('odgovor_dodaj') && ($vprasanje->user)): ?>
+    <div class="btn-toolbar">
+        <a href="#odgovori" class="btn btn-primary"><i class="icon-pencil icon-white"></i> Odgovori</a>
+        <button class="btn"><i class="icon-star"></i> Označi</button> 
+    </div>
+<?php endif ?>
 
 <!-- Vprašanje -->
 <div class="well well-small">
@@ -9,7 +15,7 @@
     <p><?= $vprasanje->vsebina ?></p>
 
     <p>
-        <i class="icon-user"></i> <a href="#"><?= $this->escapeHtml($vprasanje->user->getPolnoIme()) ?></a>
+        <i class="icon-user"></i> <a href="#"><?= $this->escapeHtml($ime) ?></a>
         | <i class="icon-calendar"></i> <?= $this->dateFormat($vprasanje->datum_objave, IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT) ?>
         | <i class="icon-comment"></i> <a href="#"><?= count($vprasanje->komentarji) ?> odgovorov</a>
         | Rating: <?= $this->rating ?>
@@ -21,17 +27,17 @@
             <?php endforeach ?>
         <?php endif ?>
 
-        <?php if ($this->imaPravico('vprasanje_uredi', $vprasanje->user)): ?>
+        <?php if ($this->imaPravico('vprasanje_uredi', $vprasanje->user) && ($vprasanje->user)): ?>
             | <a href="<?= $this->url('vprasanje', array('action' => 'uredi', 'id' => $vprasanje->id)) ?>">
               <?= $this->translate("Uredi") ?></a>
         <?php endif ?>
 
-        <?php if ($this->imaPravico('vprasanje_brisi', $vprasanje->user)): ?>
+        <?php if ($this->imaPravico('vprasanje_brisi', $vprasanje->user) && ($vprasanje->user)): ?>
             | <a href="<?= $this->url('vprasanje', array('action' => 'brisi', 'id' => $vprasanje->id)) ?>">
               <?= $this->translate("Briši") ?></a>
         <?php endif ?>
 
-        <?php if ($this->imaPravico('vprasanje_vote')): ?>
+        <?php if ($this->imaPravico('vprasanje_vote') && ($vprasanje->user)): ?>
             <?php if ($this->has_rated): ?>
                 | <a href="<?= $this->url('vprasanje', array('action' => 'unvote', 'id' => $vprasanje->id)) ?>">
                   <?= $this->translate("-1") ?></a>
@@ -51,13 +57,13 @@
 <?php foreach ($vprasanje->komentarji as $odgovor): ?>
     <?= $this->partial('odgovor/pregled', array(
         'odgovor' => $odgovor,
-        'rating' => count($odgovor->users_rated),
-        'has_rated' => $odgovor->users_rated->contains($this->user)
+        'rating' => ($odgovor->users_rated == null) ? $odgovor->rating : count($odgovor->users_rated),
+        'has_rated' => ($odgovor->users_rated == null) ? null : $odgovor->users_rated->contains($this->user)
     )) ?>
 <?php endforeach ?>
 
 <!-- Form -->
-<?php if ($this->imaPravico('odgovor_dodaj')): ?>
+<?php if ($this->imaPravico('odgovor_dodaj') && ($vprasanje->user)): ?>
     <hr />
     <h3>Napiši odgovor</h3>
     <a id="odgovori"></a>

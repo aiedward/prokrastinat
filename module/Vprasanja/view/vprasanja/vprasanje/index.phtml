@@ -4,16 +4,17 @@
     <a class="vprasanje-dodaj btn btn-primary " href="<?= $this->url('vprasanje', array('action' => 'dodaj')); ?>" id="dodaj-vprasanje">Dodaj</a>
 <?php endif; ?>
 
-<ul class="nav nav-tabs">
-  <li class="active"><a href="#">Nova vprašanja</a></li>
-  <li><a href="#">Top teden</a></li>
-  <li><a href="#">Top mesec</a></li>
-  <li><a href="#">StackOverflow</a></li>
-</ul>
+<?= $this->tab(array(
+        array('name' => 'Nova vprašanja', 'url' => $this->url('list', array('tip' => 'novo')), 'id' => 'novo'),
+        array('name' => 'Top teden', 'url' => $this->url('list', array('tip' => 'teden')), 'id' => 'teden'),
+        array('name' => 'Top mesec', 'url' => $this->url('list', array('tip' => 'mesec')), 'id' => 'mesec'),
+        array('name' => 'StackOverflow', 'url' => $this->url('list', array('tip' => 'stackoverflow')), 'id' => 'stackoverflow'),
+    ), $selected)
+?>
 
 <div class="vprasanje-list">
     <?php foreach ($vprasanja as $vprasanje): ?>
-    <?php $link = $this->url('preglej', array('action' => 'preglej', 'id' => $vprasanje->id)) ?>
+    <?php $link = $this->url('preglej', array('id' => $vprasanje->id)) ?>
     <div class="vprasanje row-fluid">
         <div class="vprasanje-rating span1">
             <h4><?= $vprasanje->rating ?></h4>
@@ -27,7 +28,11 @@
             <h4><a href="<?= $link ?>"><?= $vprasanje->naslov ?></a></h4>
             <p>
                 <?= $this->dateFormat($vprasanje->datum_objave, IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT) ?>,
-                <?= $vprasanje->user->getPolnoIme() ?>
+                <?php if ($vprasanje->user): ?>
+                    <?= $vprasanje->user->getPolnoIme() ?>
+                <?php else: ?>
+                    <?= $vprasanje->avtor ?>
+                <?php endif; ?>
             </p>
         </div>
     </div>

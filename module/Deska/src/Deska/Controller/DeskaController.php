@@ -22,10 +22,15 @@ class DeskaController extends BaseController
         }
         
         $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
-        $this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
+        //$this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
         // $this->kategorija_repository->update();
-        $options = $this->kategorija_repository->getKategorijeInArray();
-        
+        //$options = $this->kategorija_repository->getKategorijeInArray();
+        $user = $this->auth->getIdentity();
+        $kategorije = ($user) ? $user->kategorije : array();
+        $options = array();
+        foreach ($kategorije as $kategorija) {
+            array_push($options, $kategorija->ime);
+        }
         
         $form = new FilterForm($options);
         $id = (int)$this->request->getPost('kategorija');

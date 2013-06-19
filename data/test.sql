@@ -30,7 +30,8 @@ INSERT INTO `rbac_permission` (`id`, `name`) VALUES
 (24, 'kategorije_dodaj'),
 (25, 'kategorije_pregled'),
 (26, 'vprasanje_vote'),
-(27, 'odgovor_vote');
+(27, 'odgovor_vote'),
+(28, 'user_dodaj');
  
 INSERT INTO `rbac_role` (`id`, `parent_role_id`, `name`) VALUES
 (1, NULL, 'admin'),
@@ -65,7 +66,8 @@ INSERT INTO `rbac_role_permission` (`id`, `role_id`, `permission_id`) VALUES
 (24, 2, 24),
 (25, 2, 25),
 (26, 3, 26),
-(27, 3, 27);
+(27, 3, 27),
+(28, 1, 28);
  
 INSERT INTO `rbac_user_roles` (`user_id`, `role_id`) VALUES
 (1, 1),

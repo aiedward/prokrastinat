@@ -4,6 +4,7 @@ namespace Prokrastinat\Repository;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Zend\Crypt\Password\Bcrypt;
+use Prokrastinat\Entity\User;
 
 class UserRepository extends EntityRepository
 {
@@ -87,5 +88,62 @@ class UserRepository extends EntityRepository
 
         $this->changePass($user, $aips_user->Geslo);
         $this->em->persist($user);
+    }
+    
+    public function addUser($form)
+    {
+        $user = new User();
+        $this->em = $this->getEntityManager();
+        
+        if ($val = $form->get('ime')->getValue())
+            $user->ime = $val;
+        if ($val = $form->get('priimek')->getValue())
+            $user->priimek = $val;
+        if ($val = $form->get('vpisna_st')->getValue())
+            $user->vpisna_st = $val;
+        if ($roles = $form->get('vloge')->getValue())
+        {
+            foreach($roles as $role)
+            {
+                $exists = false;
+                foreach($user->roles as $uroles)
+                {
+                    if($role == $uroles->id)
+                        $exists = true;
+                }
+                if(!$exists)
+                {
+                    $newRole = $this->em->find('Prokrastinat\Entity\Role', $role);
+                    $user->roles->add($newRole);
+                }
+            }
+            $roleArray = array();
+            foreach($user->roles as $uroles)
+            {
+                array_push($roleArray, "$uroles->id");
+            }
+            $results = array_diff($roleArray, $roles);
+            foreach($results as $res)
+            {
+                $remRole = $this->em->find('Prokrastinat\Entity\Role', $res);
+                $user->roles->removeElement($remRole);
+            }
+        }
+        $bcrypt = new Bcrypt();
+        $hashed = $bcrypt->create($form->get('geslo')->getValue());
+        $user->password = $hashed;
+        
+        $user->username = $form->get('uporabnisko')->getValue();    
+        $user->email = $form->get('email')->getValue();
+        $user->naslov = $form->get('naslov')->getValue();
+        $user->mesto = $form->get('mesto')->getValue();
+        $user->drzava = $form->get('drzava')->getValue();
+        $user->opis = $form->get('opis')->getValue();
+        $user->splet = $form->get('splet')->getValue();
+        $user->telefon = $form->get('telefon')->getValue();
+            
+        $this->em->persist($user);
+        $this->em->flush();
+        return $user->id;
     }
 }

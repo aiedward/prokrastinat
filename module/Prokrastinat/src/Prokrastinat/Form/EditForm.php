@@ -17,6 +17,22 @@ class EditForm extends Form {
             'name' => 'id',
             'type' => 'Hidden'
         ));
+        $this->add(array(
+            'name' => 'uporabnisko',
+            'type' => 'Text',
+            'options' => array(
+                'label' => 'Uporabniško ime*',
+                'required' => true,
+            ),
+        ));
+        $this->add(array(
+            'name' => 'geslo',
+            'type' => 'Password',
+            'options' => array(
+                'label' => 'Geslo*',
+                'required' => true,
+            )
+        ));
         //IME
         $this->add(array(
             'name' => 'ime',
@@ -40,7 +56,7 @@ class EditForm extends Form {
             'name' => 'vpisna_st',
             'type' => 'Text',
             'options' => array(
-                'label' => 'Vpisna številka*',
+                'label' => 'Vpisna številka',
                 'required' => true,
             ),
         ));

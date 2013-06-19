@@ -9,6 +9,40 @@ class EditFilter extends InputFilter {
     public function __construct ()
     {
         $this->add(array(
+            'name' => 'uporabnisko',
+            'required' => true,
+            'filters' => array(
+                array('name' => 'StringTrim')
+            ),
+            'validators' => array(
+                array(
+                    'name' => 'StringLength',
+                    'options' => array(
+                        'min' => 4,
+                        'max' => 30,
+                    )
+                )
+            )
+        ));
+        
+        $this->add(array(
+            'name' => 'geslo',
+            'required' => true,
+            'filters' => array(
+                array('name' => 'StringTrim')
+            ),
+            'validators' => array(
+                array(
+                    'name' => 'StringLength',
+                    'options' => array(
+                        'min' => 6,
+                        'max' => 16,
+                    )
+                )
+            )
+        ));
+        
+        $this->add(array(
             'name' => 'ime',
             'required' => true,
             'filters' => array(

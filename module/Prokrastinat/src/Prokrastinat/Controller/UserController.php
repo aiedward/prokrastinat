@@ -119,6 +119,11 @@ class UserController extends BaseController
             
             $form->setInputFilter(new \Prokrastinat\Form\EditFilter());           
             $urejanje = false;
+            $form->remove('uporabnisko');
+            $form->remove('geslo');
+            $form->getInputFilter()
+                      ->remove('geslo')
+                      ->remove('uporabnisko');
             
             if (!$this->imaPravico('user_uredi')) {
                 $form->get('vpisna_st')->setAttributes(array('disabled' => true));
@@ -154,7 +159,6 @@ class UserController extends BaseController
             return new ViewModel(array(
                 'form' => $form,
                 'urejanje' => $urejanje,
-                'user' => $user
             ));
 
     }
@@ -225,5 +229,38 @@ class UserController extends BaseController
                 'users' => $users
             ));
             
+        }
+        
+        public function addAction()
+        {
+            if (!$this->auth->hasIdentity()) $this->dostopZavrnjen();       
+                $roleRep = $this->em->getRepository('Prokrastinat\Entity\Role');
+                $roles = $roleRep->getRoles();
+
+                if($this->imaPravico('user_dodaj'))
+                {
+                    $form = new \Prokrastinat\Form\EditForm($roles, null);
+                    $form->setInputFilter(new \Prokrastinat\Form\EditFilter());
+
+                    $form->getInputFilter()
+                         ->remove('vpisna_st');
+          
+                    if ($this->request->isPost()) {
+                        $form->setData($this->request->getPost());
+
+                        if ($form->isValid()) {
+                            $newid = $this->userRepository->addUser($form);
+                            return $this->redirect()->toRoute('user', array('action' => 'view', 'id' => $newid));
+                        }
+                    }
+
+                } else {
+                    return $this->dostopZavrnjen();
+                }
+
+                return new ViewModel(array(
+                    'form' => $form,
+                ));
+
         }
 }

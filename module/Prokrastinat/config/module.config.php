@@ -125,6 +125,16 @@ return array(
                     ),
                 ),
             ),
+            'user_add' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/user/add[/]',
+                    'defaults' => array(
+                        'controller' => 'Prokrastinat\Controller\User',
+                        'action' => 'add',
+                    ),
+                ),
+            ),
             'user_list' => array(
                 'type' => 'segment',
                 'options' => array(

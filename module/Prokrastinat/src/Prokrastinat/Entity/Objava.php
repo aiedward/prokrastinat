@@ -118,7 +118,9 @@ class Objava extends BaseEntity implements InputFilterAwareInterface
                 ),
             )));
             
-            $this->inputFilter = $inputFilter;
+            $this->inputFilter = $inputFilter; 
         }
+        
+        return $this->inputFilter;
     }
 }

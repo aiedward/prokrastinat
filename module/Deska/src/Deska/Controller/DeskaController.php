@@ -55,12 +55,12 @@ class DeskaController extends BaseController
         $form = new DeskaForm($options);
         
         if ($this->request->isPost()) {
-            //$oglas = new Oglas();
-            $form->setInputFilter($form->getInputFilter());
+            $oglas = new Oglas();
+            $form->setInputFilter($oglas->getInputFilter());
             $form->setData($this->request->getPost());
             
             if ($form->isValid()) {
-                $oglas = new Oglas();
+                //$oglas = new Oglas();
                 $vals = array(
                     'user' => $this->auth->getIdentity(),
                     'naslov' => $form->get('naslov')->getValue(),

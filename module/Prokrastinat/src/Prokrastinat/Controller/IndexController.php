@@ -10,15 +10,13 @@ class IndexController extends BaseController
     public function indexAction() 
     {
 
-        if(!$this->auth->hasIdentity())
-        {
+        if(!$this->auth->hasIdentity()) {
             $query = $this->em->createQuery("SELECT n FROM Novice\Entity\Novica n WHERE n INSTANCE OF \Novice\Entity\Novica ORDER BY n.datum_objave DESC");
             $query->setMaxResults(5);
             $novice = $query->getResult();
             
             return new ViewModel(array('novice' => $novice));
-        }
-        else{
+        } else {
             $query = $this->em->createQuery("SELECT n FROM Novice\Entity\Novica n WHERE n INSTANCE OF \Novice\Entity\Novica ORDER BY n.datum_objave DESC");
             $query->setMaxResults(5);
             $novice1 = $query->getResult();
@@ -50,19 +48,15 @@ class IndexController extends BaseController
         $room = null;
         $map = null;
         
-        if($roomGet != null)
-        {
+        if($roomGet != null) {
             $roomRepository = $this->em->getRepository('Prokrastinat\Entity\Ucilnice');
             $room = $roomRepository->findOneBy(array('ime' => $roomGet));
-            if(empty($room))
-            {
+            if(empty($room)) {
                 $map = $mapRepository->findOneBy(array('ime' => $roomGet));
-                if(empty($map))
-                {
+                if(empty($map)) {
                     //TO-DO: Flash messenger
                 }
-            }else
-            {
+            } else {
                 $map = $room->mapa;
             }
         }
@@ -71,12 +65,10 @@ class IndexController extends BaseController
             $form->setData($this->request->getPost());
             $mapaID = $form->get('zemljevid')->getValue();
             $roomID = $form->get('ucilnica')->getValue();
-            if($roomID === "all")
-            {
+            if($roomID === "all") {
                 $zemljevid = $mapRepository->find($mapaID);
                 return $this->redirect()->toRoute('map', array('room' => $zemljevid->ime));
-            }else
-            {
+            } else {
                 $roomRepository = $this->em->getRepository('Prokrastinat\Entity\Ucilnice');
                 $ucilnica = $roomRepository->find($roomID);
                 return $this->redirect()->toRoute('map', array('room' => $ucilnica->ime));
@@ -103,7 +95,6 @@ class IndexController extends BaseController
     
     public function iskanjeAction()
     {
-        
         $form = new \Prokrastinat\Form\IskanjeForm();
         $search = $this->getRequest()->getQuery('isci');
         $objave = array();
@@ -132,21 +123,10 @@ class IndexController extends BaseController
                     }
                 }
             }
-            usort($results, function($a, $b)
-            {
+            usort($results, function($a, $b) {
                 return strcmp($b->TFIDF(), $a->TFIDF());
             });
         }
-/*
-        foreach ($result as $ob) {
-            echo $ob->beseda->beseda . '<br>';
-            echo $ob->TFIDF() . '<br>';
-            echo $ob->objava->naslov . '<br>';
-            echo '<br>';
-        }*/
-
-        //$form = new \Prokrastinat\Form\IskanjeForm();
-        //$results = $this->getRequest()->getQuery('isci');
         
         return new ViewModel(array('form' => $form, 'objave' => $objave));
     }

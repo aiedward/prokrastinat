@@ -98,7 +98,7 @@ class UserController extends BaseController
     
     public function editAction()
     {
-        if (!$this->auth->hasIdentity()) $this->dostopZavrnjen();
+        if (!$this->auth->hasIdentity()) $this->dostopZavrnjen();       
             $roleRep = $this->em->getRepository('Prokrastinat\Entity\Role');
             $roles = $roleRep->getRoles();
             $id = $this->getEvent()->getRouteMatch()->getParam('id');

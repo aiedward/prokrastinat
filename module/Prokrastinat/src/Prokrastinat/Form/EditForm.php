@@ -109,7 +109,7 @@ class EditForm extends Form {
         {
             $this->add(array(
                 'type' => 'Zend\Form\Element\MultiCheckbox',
-                'name' => 'role',
+                'name' => 'vloge',
                 'options' => array(
                     'label' => 'Vloge',
                     'value_options' => $roles,

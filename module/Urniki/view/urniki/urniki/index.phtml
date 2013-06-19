@@ -34,7 +34,7 @@ window.onload = function () {
             for (var predmet in data.urnik) {
                 var p = data.urnik[predmet];
                 var zacetek = parseInt(p.cas.substr(0, 2)) - 7;
-                var li = '<li data-original-title="' + p.ime + '" style="-moz-user-select: none; height: 33px; marin-top: 3px; left: 0px; width: 133.5px;" unselectable="on" rel="tooltip" class="tt-event btn-success" data-id="' + predmet + '" data-day="' + p.dan + '" data-start="' + zacetek + '" data-duration="' + p.trajanje + '">'
+                var li = '<li data-original-title="' + p.ime + '" style="-moz-user-select: none; height: 33px; marin-top: 3px; left: 0px; width: 133.5px;" unselectable="on" rel="tooltip" class="tt-event btn-success" data-id="' + predmet + '" data-day="' + p.dan + '" data-start="' + zacetek + '" data-duration="' + p.duration + '">'
                     + p.ime + '<br />'
                     + p.cas + ' - ' + p.cas_do + '<br />'
                     + p.ucilnica + '</li>';

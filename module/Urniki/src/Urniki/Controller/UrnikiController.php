@@ -84,7 +84,7 @@ class UrnikiController extends BaseController
                 'ime' => $u->predmet->Name,
                 'cas' => $u->cas->Start_Hour,
                 'cas_do' => $konec['Start_Hour'],
-                'duration' => $u->Duration,
+                'duration' => $u->Duration / 2,
                 'ucilnica' => $u->ucilnica->Name,
                 'dan' => $u->Day_Id - 1,
                 //'profesor_ime' => $u->izvajalec->First_Name,

@@ -39,8 +39,8 @@
             <td><?php echo $this->escapeHtml($oglas->datum_zapadlosti->format('d.m.Y')) ?></td>
             <?php if ($this->isGranted('deska_dodaj')): ?>
                 <td>
-                    <a href="<?= $this->url('deska', array('action' => 'uredi', 'id' => $oglas->id)); ?>">Uredi</a>
-                    <a href="<?= $this->url('deska', array('action' => 'brisi', 'id' => $oglas->id)); ?>">Briši</a>
+                    <a href="<?= $this->url('deska', array('action' => 'uredi', 'id' => $oglas->id)); ?>"><i class="icon-edit"></i></a>
+                    <a href="<?= $this->url('deska', array('action' => 'brisi', 'id' => $oglas->id)); ?>"><i class="icon-trash"></i></a>
                 </td>
             <?php endif; ?>
         </tr>

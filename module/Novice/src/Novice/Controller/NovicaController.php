@@ -165,23 +165,12 @@ class NovicaController extends BaseController
                     }
                 }
                     $this->flashMessenger()->addMessage('Dodanih je bilo '.$stevec. ' novic.');
-                    return $this->redirect()->toRoute('novice', array('action' => 'ostale'));
+                    return $this->redirect()->toRoute('novice', array('action' => 'studentske'));
                 }
         }
         return array('form' => $form);
     }
     
-    public function ostaleAction()
-    {
-        if (!$this->isGranted('novica_index')) {
-            return $this->dostopZavrnjen();
-        } 
-        $query = $this->em->createQuery("SELECT n FROM Novice\Entity\DodatnaNovica n");
-        $novice = $query->getResult();
-        $user = $this->auth->getIdentity();
-        
-        return new ViewModel(array('novice' => $novice, 'action' => 'ostale', 'user' => $user,'flashMessages' => $this->flashMessenger()->getMessages()));
-    }
     
     public function studentskeAction()
     {
@@ -202,10 +191,10 @@ class NovicaController extends BaseController
         }
         $user = $this->auth->getIdentity();
         
-        return new ViewModel(array('action' => 'ostale', 'user' => $user,'flashMessages' => $this->flashMessenger()->getMessages(), 'paginator' => $paginator));
+        return new ViewModel(array('action' => 'studentske', 'user' => $user,'flashMessages' => $this->flashMessenger()->getMessages(), 'paginator' => $paginator));
     }
     
-    public function ostalepregledAction()
+    public function studentskepregledAction()
     {
         if (!$this->isGranted('novica_pregled')) {
             return $this->dostopZavrnjen();

@@ -25,7 +25,7 @@ class IsciForm extends Form
             'name' => 'submit',
             'attributes' => array(
                 'type' => 'submit',
-                'value' => 'Isci',
+                'value' => 'Išči',
                 'id' => 'submitbutton',
                 'class' => 'btn btn-primary',
             ),

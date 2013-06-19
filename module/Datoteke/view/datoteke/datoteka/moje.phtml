@@ -7,13 +7,13 @@ $velikost_mb = $velikost/1024/1024;
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 <p>
     <a href="<?php echo $this->url('datoteke');?>">Vse datoteke</a>
-    <a href="<?php echo $this->url('datoteke_dodaj');?>">Nalozi datoteko</a>
+    <a href="<?php echo $this->url('datoteke_dodaj');?>">Naloži datoteko</a>
 </p>
 <div id="kvota" style="text-align: right; font-weight: bold; font-size: 14px">
         <?php echo $this->escapeHtml(round($velikost_mb, 2));?> / 20MB
 </div>
 
-<table class="datotekeTable">
+<table class="table table-striped datotekeTable">
 <tr>
     <th><a href="?orderBy=imeDatoteke&sort=asc"><i class="icon-chevron-up"></i></a>Datoteka<a href="?orderBy=imeDatoteke&sort=DESC"><i class="icon-chevron-down"></i></a></th>
     <th><a href="?orderBy=user&sort=asc"><i class="icon-chevron-up"></i></a>Avtor<a href="?orderBy=avtor&sort=desc"><i class="icon-chevron-down"></i></a></th>

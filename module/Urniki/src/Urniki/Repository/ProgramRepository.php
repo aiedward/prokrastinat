@@ -18,4 +18,19 @@ class ProgramRepository extends EntityRepository
         
         return $progs;
     }
+    /*
+    public function getLetnikSmer($program, int $letnik) {
+        $em = $this->getEntityManager();
+        
+        $smer_repository = $em->getRepository("Urniki\Entity\TBBranch");
+        $smer_q = $smer_repository->findBy(array(
+            'Program_Id' => $program,
+            'Letnik' => $letnik));
+        $smeri = array();
+        
+        foreach ($smer_q as $smer)
+        {
+            $smeri[$smer->Branch_Id] = $smer->Name;
+        }
+    }*/
 }

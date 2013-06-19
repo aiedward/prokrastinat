@@ -1,5 +1,6 @@
 ============
-prokrastinat
+Študentski spletni portal
 ============
+### Fakulteta za elektrotehniko, računalništvo in informatiko
 
-Študentski spletni portal (nartabolši)
+Implementacija študentskega spletnega portala v okviru diplomske naloge smeri Računalniške in informacijske tehnologije, Fakultete za elektrotehniko, računalništvo in informatiko.

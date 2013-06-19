@@ -165,7 +165,7 @@ class NovicaController extends BaseController
                     }
                 }
                     $this->flashMessenger()->addMessage('Dodanih je bilo '.$stevec. ' novic.');
-                    return $this->redirect()->toRoute('novice', array('action' => 'studentske'));
+                    return $this->redirect()->toRoute('novice_studentske');
                 }
         }
         return array('form' => $form);

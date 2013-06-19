@@ -61,6 +61,15 @@ class User extends BaseEntity
     /** @ORM\Column(length=64, nullable=true) */
     protected $naslov;
 
+    /** @ORM\Column(type="integer") */
+    protected $urnik_program;
+    
+    /** @ORM\Column(type="integer") */
+    protected $urnik_letnik;
+    
+    /** @ORM\Column(type="integer") */
+    protected $urnik_smer;
+    
     /**
      * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
      * @ORM\JoinTable(name="rbac_user_roles")

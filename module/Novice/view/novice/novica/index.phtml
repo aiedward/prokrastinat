@@ -6,7 +6,7 @@ $this->headTitle($title);
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 <?php if ($this->isGranted('novica_dodaj')): ?>
     <p>
-    <a href="<?php echo $this->url('novice_dodaj'); ?>" id="dodaj-novico" class="btn btn-large"><i class="icon-plus"></i> Nova novica</a>
+    <a href="<?php echo $this->url('novice_dodaj'); ?>" id="dodaj-novico" class="btn btn-primary">Dodaj novico</a>
     </p>
 <?php endif; ?>
 

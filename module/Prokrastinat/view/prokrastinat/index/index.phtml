@@ -6,9 +6,9 @@
         <div class="well well-small novica">
             <b> <?= $this->escapeHtml($novica->datum_objave->format('d-m-Y')); ?></b> 
             <?php if($novica->tip == 'novica'):?>
-            <b><a href="<?= $this->url('novice_pregled', array('id' => $novica->id));?>"> <?= $novica->naslov; ?> </a></b><br />
+            <i class="icon-star"></i><b><a href="<?= $this->url('novice_pregled', array('id' => $novica->id));?>"> <?= $novica->naslov; ?> </a></b><br />
             <?php elseif($novica->tip == 'oglas'):?>
-            <b><a href="<?= $this->url('deska', array('action' => 'preglej', 'id' => $novica->id));?>"> <?= $novica->naslov; ?> </a></b><br />
+            <i class="icon-eye-open"></i><b><a href="<?= $this->url('deska', array('action' => 'preglej', 'id' => $novica->id));?>"> <?= $novica->naslov; ?> </a></b><br />
             <?php endif; ?>
             <p class="novicaVsebina">
                 <?php 

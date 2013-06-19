@@ -29,13 +29,15 @@ class IndexController extends BaseController
             
             $novice = array_merge((array)$novice1, (array)$oglasi);
             
-            foreach ($novice as $key => $row) {
-                $datum[$key]  = $row->datum_objave;
+            if (count($novice)) {
+                foreach ($novice as $key => $row) {
+                    $datum[$key]  = $row->datum_objave;
+                }
+                array_multisort($datum, SORT_DESC, $novice);
+                $novice = array_slice($novice, 0, 5);
             }
-            array_multisort($datum, SORT_DESC, $novice);
-            $novice = array_slice($novice, 0, 5);
         }
-               
+        
         return new ViewModel(array('novice' => $novice));
     }
   

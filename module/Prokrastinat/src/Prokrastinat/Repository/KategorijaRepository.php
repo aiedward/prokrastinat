@@ -26,6 +26,17 @@ class KategorijaRepository extends EntityRepository
         return $options;
     }
 
+    public function search($query)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder('k');
+        $qb->select('k')
+           ->from('Prokrastinat\Entity\Kategorija', 'k')
+           ->where('k.ime LIKE :ime')
+           ->setParameter('ime', "%{$query}%");
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function update($predmeti)
     {
         $kategorija_list = array();
@@ -42,6 +53,20 @@ class KategorijaRepository extends EntityRepository
                 $this->getEntityManager()->persist($kategorija);
             }
         }
+    }
+
+    public function getKategorijeByList($list_id)
+    {
+        $result = array();
+
+        foreach ($list_id as $id) {
+            $kategorija = $this->find($id);
+            if ($kategorija) {
+                array_push($result, $kategorija);
+            }
+        }
+
+        return $result;
     }
 
     private function capitalize($string, $encoding)

@@ -67,6 +67,12 @@ class User extends BaseEntity
      */
     protected $roles;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Kategorija", inversedBy="users")
+     * @ORM\JoinTable(name="kategorija_user")
+     */
+    protected $kategorije;
+
     public function __construct () {
         $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
     }

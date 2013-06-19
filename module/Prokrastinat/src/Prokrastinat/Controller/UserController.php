@@ -12,6 +12,9 @@ class UserController extends BaseController
     /** @var Prokrastinat\Repository\StudijRepository */
     protected $studijRepository;
 
+    /** @var Prokrastinat\Repository\KategorijaRepository */
+    protected $kategorijaRepository;
+
     /** @var Zend\Authentication\AuthenticationService */
     protected $authService;
 
@@ -22,6 +25,7 @@ class UserController extends BaseController
         $this->authService = $this->getServiceLocator()->get('Prokrastinat\Authentication\AuthenticationService');
         $this->userRepository = $this->em->getRepository('Prokrastinat\Entity\User');
         $this->roleRepository = $this->em->getRepository('Prokrastinat\Entity\Role');
+        $this->kategorijaRepository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
         $this->studijRepository = $this->getServiceLocator()->get('doctrine.entitymanager.orm_aips')->getRepository('Prokrastinat\EntityAips\Studij');
     }
     
@@ -95,6 +99,46 @@ class UserController extends BaseController
         $this->authService->clearIdentity();
         return $this->redirect()->toRoute('home');
     }
+
+    public function kategorijeAction()
+    {
+        $id = $this->getEvent()->getRouteMatch()->getParam('id');
+        $user = $this->userRepository->find($id);
+
+        if ($this->request->isPost()) {
+            // odstranimo neoznacene kategorije
+            $kategorije_ids = $this->request->getPost('kategorije');
+            $kategorije = $this->kategorijaRepository->getKategorijeByList($kategorije_ids);
+            $user->kategorije->clear();
+            foreach ($kategorije as $kategorija) {
+                $user->kategorije->add($kategorija);
+            }
+
+            // dodamo novo kategorijo
+            $kategorija_ime = $this->request->getPost('kategorija');
+            if ($kategorija_ime && !$this->userRepository->imaKategorijo($user, $kategorija_ime)) {
+                $kategorija = $this->kategorijaRepository->findOneBy(array('ime' => $kategorija_ime));
+                if (!$kategorija) throw new \Exception('Kategorija ne obstaja');
+                $user->kategorije->add($kategorija);
+            }
+
+            $this->em->persist($user);
+            $this->em->flush();
+
+            return $this->redirect()->toRoute('user', array('action' => 'kategorije', 'id' => $id));
+        }
+
+        $kategorije = array();
+        foreach ($user->kategorije as $kategorija) {
+            $kategorije[$kategorija->id] = $kategorija->ime;
+        }
+
+        $form = new \Prokrastinat\Form\KategorijeForm($kategorije);
+
+        return new ViewModel(array(
+            'form' => $form,
+        ));
+    }
     
     public function editAction()
     {
@@ -117,7 +161,7 @@ class UserController extends BaseController
                 $form = new \Prokrastinat\Form\EditForm(null, null);   
             }
             
-            $form->setInputFilter(new \Prokrastinat\Form\EditFilter());           
+            $form->setInputFilter(new \Prokrastinat\Form\EditFilter());
             $urejanje = false;
             $form->remove('uporabnisko');
             $form->remove('geslo');
@@ -135,9 +179,7 @@ class UserController extends BaseController
                      ->remove('priimek')
                      ->remove('vpisna_st');
             }
-            
-            
-            
+                        
             if ($this->imaPravico('user_uredi', $user))
             {               
                 if ($this->request->isPost()) {

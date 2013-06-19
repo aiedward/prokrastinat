@@ -146,4 +146,23 @@ class UserRepository extends EntityRepository
         $this->em->flush();
         return $user->id;
     }
+
+    public function imaKategorijo($user, $ime)
+    {
+        foreach ($user->kategorije as $kategorija) {
+            if ($kategorija->ime == $ime)
+                return true;
+        }
+
+        return false;
+    }
+
+    public function posodobiKategorije($user, $kategorije)
+    {
+        $user->kategorije->clear();
+
+        foreach ($list as $id) {
+
+        }
+    }
 }

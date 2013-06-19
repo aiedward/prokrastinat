@@ -2,6 +2,7 @@
 namespace Prokrastinat\Controller;
 
 use Zend\View\Model\ViewModel;
+use Zend\View\Model\JsonModel;
 use Zend\EventManager\EventManagerInterface;
 
 class KategorijaController extends BaseController
@@ -18,6 +19,21 @@ class KategorijaController extends BaseController
 
         $this->kategorijaRepository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
         $this->predmetRepository = $this->getServiceLocator()->get('doctrine.entitymanager.orm_aips')->getRepository('Prokrastinat\EntityAips\Predmet');
+    }
+
+    public function serializeAction()
+    {
+        $query = $this->getRequest()->getQuery('query');
+        $kategorije = $this->kategorijaRepository->search($query);
+
+        $kategorije_list = array();
+        foreach ($kategorije as $kategorija) {
+            array_push($kategorije_list, $kategorija->ime);
+        }
+
+        return new JsonModel(array(
+            'options' => $kategorije_list
+        ));
     }
     
     public function updateAction()

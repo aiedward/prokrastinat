@@ -135,6 +135,7 @@ class EditForm extends Form {
                 )
             ));
         }
+
         //GUMB
         $this->add(array(
             'name' => 'submit',
@@ -322,6 +323,10 @@ class EditForm extends Form {
         $this->get('opis')->setValue($user->opis);
         $this->get('splet')->setValue($user->splet);
         $this->get('telefon')->setValue($user->telefon);
+
+
+
+
         
         if ($el = $this->get('vpisna_st')) $el->setValue($user->vpisna_st);
     }

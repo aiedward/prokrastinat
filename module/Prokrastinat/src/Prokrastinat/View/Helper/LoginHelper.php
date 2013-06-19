@@ -37,6 +37,7 @@ class LoginHelper extends AbstractHelper implements ServiceLocatorAwareInterface
             $menu = '<ul class="dropdown-menu">'
                 . '<li><a href="' . $url('user', array('action' => 'view', 'id' => $user->id )) . '">Profil</a></li>'
                 . '<li><a href="' . $url('user', array('action' => 'edit', 'id' => $user->id )) . '">Uredi profil</a></li>'
+                . '<li><a href="' . $url('user', array('action' => 'kategorije', 'id' => $user->id )) . '">Uredi kategorije</a></li>'
                 . '<li><a href="' . $url('user', array('action' => 'changepassword')) . '">Spremeni geslo</a></li>'
                 . $adminMenu
                 . '<li><a href="' . $url('user', array('action' => 'logout')) . '">Izpis</a></li>'

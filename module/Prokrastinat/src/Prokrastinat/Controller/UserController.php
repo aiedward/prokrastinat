@@ -99,7 +99,24 @@ class UserController extends BaseController
     public function editAction()
     {
         if (!$this->auth->hasIdentity()) $this->dostopZavrnjen();
-            $form = new \Prokrastinat\Form\EditForm();
+            $roleRep = $this->em->getRepository('Prokrastinat\Entity\Role');
+            $roles = $roleRep->getRoles();
+            $id = $this->getEvent()->getRouteMatch()->getParam('id');
+            $user = $this->userRepository->find($id);
+            
+            if($this->imaPravico('user_uredi'))
+            {
+                $userRoles = array();
+                foreach($user->roles as $role)
+                {
+                    array_push($userRoles, $role->id);
+                }
+                $form = new \Prokrastinat\Form\EditForm($roles, $userRoles);
+            }else
+            {
+                $form = new \Prokrastinat\Form\EditForm(null, null);   
+            }
+            
             $form->setInputFilter(new \Prokrastinat\Form\EditFilter());           
             $urejanje = false;
             
@@ -114,14 +131,10 @@ class UserController extends BaseController
                      ->remove('vpisna_st');
             }
             
-            $id = $this->getEvent()->getRouteMatch()->getParam('id');
-            $user = $this->userRepository->find($id);
+            
             
             if ($this->imaPravico('user_uredi', $user))
-            {
-                $roleRep = $this->em->getRepository('Prokrastinat\Entity\Role');
-                $roles = $roleRep->getRoles();
-                
+            {               
                 if ($this->request->isPost()) {
                     $form->setData($this->request->getPost());
                     

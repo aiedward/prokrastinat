@@ -9,7 +9,7 @@ use Zend\InputFilter\InputFilter;
 use Zend\Validator;
 
 class EditForm extends Form {
-    public function __construct () {
+    public function __construct ($roles, $userRoles) {
         parent::__construct('EditForm');
         $this->setAttribute('method', 'post');
         //ID
@@ -105,6 +105,20 @@ class EditForm extends Form {
                 'label' => 'Telefon',
             ),
         ));
+        if($roles != null)
+        {
+            $this->add(array(
+                'type' => 'Zend\Form\Element\MultiCheckbox',
+                'name' => 'role',
+                'options' => array(
+                    'label' => 'Vloge',
+                    'value_options' => $roles,
+                ),
+                'attributes' => array(
+                    'value' => $userRoles
+                )
+            ));
+        }
         //GUMB
         $this->add(array(
             'name' => 'submit',

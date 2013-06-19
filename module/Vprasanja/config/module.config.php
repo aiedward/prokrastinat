@@ -76,7 +76,7 @@ return array(
             'list' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/vprasanje[/:tip]',
+                    'route' => '/vprasanja[/:tip]',
                     'constraints' => array(
                         'tip' => '[a-zA-Z]*',
                     ),

@@ -68,9 +68,6 @@ class DeskaController extends BaseController
                     'datum-zapadlosti' => $form->get('datum-zapadlosti')->getValue(),
                     'kategorija' => $this->em->find('Prokrastinat\Entity\Kategorija', $form->get('kategorija')->getValue()),
                 );
-                
-                //var_dump($form->get('datum-zapadlosti')->getValue());
-                //exit;
                     
                 $this->deska_repository->saveOglas($oglas, $vals);
                 $this->em->flush();
@@ -142,26 +139,12 @@ class DeskaController extends BaseController
         if (!$this->isGranted('deska_brisi')) 
             $this->dostopZavrnjen();
         
-        $id = (int)$this->params()->fromRoute('id', 0);
-        
-        if ($this->request->isPost()) {
-            $del = $this->request->getPost('del', 'No');
+        $id = (int)$this->params()->fromRoute('id', 0);   
+        $oglas = $this->em->find('Deska\Entity\Oglas', $id);
+        $this->em->remove($oglas);
+        $this->em->flush();    
             
-            if ($del == 'Yes') {
-                $id = (int) $this->request->getPost('id');
-                
-                $oglas = $this->em->find('Deska\Entity\Oglas', $id);
-                $this->em->remove($oglas);
-                $this->em->flush();
-            }
-            
-            return $this->redirect()->toRoute('deska');
-        }
-        
-        return array(
-            'id' => $id,
-            'oglas' => $this->em->find('Deska\Entity\Oglas', $id)
-        );
+        return $this->redirect()->toRoute('deska');   
     }
     
     public function kategorijeAction()

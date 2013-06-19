@@ -166,21 +166,24 @@ class DeskaController extends BaseController
         
         $this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
         $form = new DodajKategorijoForm();
-        
+                
         if ($this->request->isPost()) {
             // set input filter
-            $form->setData($this->request->getPost());
-            
-            // is valid
             $kategorija = new Kategorija();
-            $vals = array(
-                'ime' => $form->get('ime')->getValue(),
-            );
-            
-            $this->kategorija_repository->saveKategorija($kategorija, $vals);
-            $this->em->flush();
-            
-            return $this->redirect()->toRoute('deska');
+            $form->setInputFilter($kategorija->getInputFilter());
+            $form->setData($this->request->getPost());
+
+            if ($form->isValid()) {
+                //$kategorija = new Kategorija();
+                $vals = array(
+                    'ime' => $form->get('ime')->getValue(),
+                );
+
+                $this->kategorija_repository->saveKategorija($kategorija, $vals);
+                $this->em->flush();
+
+                return $this->redirect()->toRoute('deska', array('action' => 'kategorije'));
+            }
         }
         
         return array(
@@ -199,22 +202,26 @@ class DeskaController extends BaseController
         
         $this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
         $options = $this->kategorija_repository->getKategorijeInArray();
+        
         $form = new DodajKategorijoForm();
+        $form->get('dodaj')->setAttribute('Value', 'Uredi');
         $form->fill($kategorija);
         
         if ($this->request->isPost()) {
-            // set input filter
+            $form->setInputFilter($kategorija->getInputFilter());
             $form->setData($this->request->getPost());
             
             // form is valid
-            $vals = array(
-                'ime' => $form->get('ime')->getValue(),
-            );
-            
-            $this->kategorija_repository->saveKategorija($kategorija, $vals);
-            $this->em->flush();
-            
-            return $this->redirect()->toRoute('deska');
+            if ($form->isValid()) {
+                $vals = array(
+                    'ime' => $form->get('ime')->getValue(),
+                );
+
+                $this->kategorija_repository->saveKategorija($kategorija, $vals);
+                $this->em->flush();
+
+                return $this->redirect()->toRoute('deska', array('action' => 'kategorije'));
+            }
         }
         
         return array(

@@ -71,5 +71,21 @@ class UrnikiForm extends Form
                 'class' => 'btn btn-primary',
             ),
         ));
+        
+        $this->add(array(
+            'name' => 'save',
+            'type' => 'Zend\Form\Element\Submit',
+            'attributes' => array(
+                'value' => 'Shrani urnik',
+                'class' => 'btn',
+            ),
+        ));
+    }
+    
+    public function setDefaults ($user) {
+        $this->get('program')->setValue($user->urnik_program);
+        $this->get('letnik')->setValue($user->urnik_letnik);
+        $this->get('smer')->setValue($user->urnik_smer);
+        
     }
 }

@@ -29,10 +29,27 @@ window.onload = function () {
         
         url = document.URL + "get-urniki/" + program + "/" + letnik + "/" + smer
             + "/" + datum.getFullYear() + "-" + (datum.getMonth() + 1) + "-" + datum.getDate();
-        console.log(url);
         $.getJSON(url, function(data) {
-            console.log(data);
+            $('.tt-events').empty();
+            for (var predmet in data.urnik) {
+                var p = data.urnik[predmet];
+                var zacetek = parseInt(p.cas.substr(0, 2)) - 7;
+                var li = '<li data-original-title="' + p.ime + '" style="-moz-user-select: none; height: 33px; marin-top: 3px; left: 0px; width: 133.5px;" unselectable="on" rel="tooltip" class="tt-event btn-success" data-id="' + predmet + '" data-day="' + p.dan + '" data-start="' + zacetek + '" data-duration="' + p.trajanje + '">'
+                    + p.ime + '<br />'
+                    + p.cas + ' - ' + p.cas_do + '<br />'
+                    + p.ucilnica + '</li>';
+                $('.tt-events').append(li);
+                
+                $('.timetable').each(function (e) {
+                    $(this).initialiseTT();
+                    $(this).resizeTimetable();
+                });
+            }
         });
+    });
+    $('.timetable').each(function (e) {
+        $(this).initialiseTT();
+        $(this).resizeTimetable();
     });
 };
 </script>
@@ -40,7 +57,7 @@ window.onload = function () {
 <div class="span10">
     <div style="height: 329px;" class="timetable" data-days="6" data-hours="15">
         <ul style="left: 40px; top: 29px;" class="tt-events">
-                        <li data-original-title="
+                        <!--li data-original-title="
                             AS Applied Maths (ASAMath 1)&lt;br&gt;
                             09:00 - 10:30&lt;br&gt;
                             C318 ACL Lecture" style="-moz-user-select: none; height: 33px; top: 0px; left: 0px; width: 133.5px;" unselectable="on" rel="tooltip" class="tt-event btn-success" data-id="10" data-day="0" data-start="0" data-duration="1.5">
@@ -50,7 +67,7 @@ window.onload = function () {
                         <li style="-moz-user-select: none; height: 33px; margin-top: 3px; left: 0px; width: 133.5px;" unselectable="on" rel="tooltip" class="tt-event btn-success" data-id="11" data-day="2" data-start="2" data-duration="2.5">
                             AS Applied Maths (ASAMath 1)<br>
                             09:00 - 10:30<br>
-                            C318 ACL Lecture</li>
+                            C318 ACL Lecture</li-->
         </ul>
         <div style="padding-left: 40px;" class="tt-times">
             <div style="width: 84px; height: 318px; margin-bottom: -318px;" class="tt-time" data-time="0">

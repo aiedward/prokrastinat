@@ -7,7 +7,7 @@ use Prokrastinat\Entity\BaseEntity;
 
 /**
  * @ORM\Entity(repositoryClass="Urniki\Repository\ScheduleRepository")
- * @ORM\Table(name=dbo.TBSchedule)
+ * @ORM\Table(name="dbo.TBSchedule")
  */
 class TBSchedule extends BaseEntity
 {
@@ -64,4 +64,22 @@ class TBSchedule extends BaseEntity
      * @ORM\JoinColumn(name="Valid_To", referencedColumnName="Week_Id")
      */
     protected $week_to;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="TBTime")
+     * @ORM\JoinColumn(name="Time_Id", referencedColumnName="Time_Id")
+     */
+    protected $cas;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="TBRoom")
+     * @ORM\JoinColumn(name="Room_Id", referencedColumnName="Room_Id")
+     */
+    protected $ucilnica;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="TBTutor")
+     * @ORM\JoinColumn(name="Tutor_Id", referencedColumnName="Tutor_Id")
+     */
+    //protected $izvajalec;
 }

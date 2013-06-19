@@ -70,7 +70,7 @@ class VprasanjeController extends BaseController
         $rating = null;
         $has_rated = null;
         if ($vprasanje) {
-            $rating = $vprasanje->users_rated->rating;
+            $rating = count($vprasanje->users_rated);
             $has_rated = $vprasanje->users_rated->contains($user);
         } else {
             $vprasanje = $this->stackVprasanjeRepository->find($id);

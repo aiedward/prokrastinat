@@ -4,6 +4,7 @@ namespace Deska\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Prokrastinat\Entity\Objava;
 
+
 /** 
  * @ORM\Entity(repositoryClass="Deska\Repository\OglasRepository")
  * @ORM\Table(name="oglas")
@@ -24,7 +25,7 @@ class Oglas extends Objava
     {
         return $this->datum_zapadlosti;
     }
-    
+    /*
     public function getInputFilter()
     {
         if (!$this->inputFilter) {
@@ -86,6 +87,8 @@ class Oglas extends Objava
                     
                 ),
             )));
+            
+            $this->inputFilter = $inputFilter;
         }
-    }
+    }*/
 }

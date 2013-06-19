@@ -46,7 +46,7 @@ class DeskaForm extends Form
         ));
 
         $this->add(array(
-            'type' => 'text',
+            'type' => 'Zend\Form\Element\Date',
             'name' => 'datum-zapadlosti',
             'options' => array(
                 'label' => 'Zapade ', //
@@ -54,6 +54,7 @@ class DeskaForm extends Form
             'attributes' => array(
                 'class' => 'datepicker',
                 'id' => 'Datum',
+                'required' => true,
                 //'data-format' => 'dd.MM.yyy',
             ),
         ));
@@ -85,7 +86,7 @@ class DeskaForm extends Form
             ),
         ));
     }
-    
+   
     public function getInputFilter()
     {
         $factory = new Factory();

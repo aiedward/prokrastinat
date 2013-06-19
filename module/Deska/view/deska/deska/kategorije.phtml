@@ -24,13 +24,13 @@
                 <td><?= $this->escapeHtml($kat->ime)?></td>
                 <td>
                     <a class="btn-small btn" href="<?= $this->url('deska', array('action' => 'uredikategorijo', 'id' => $kat->id))?>"><i class="icon-edit"></i>Uredi</a>
-                    <a id="brisibtn" class="btn-small btn" href="#brisanje" role="button" data-toggle="modal"><i class="icon-remove"></i>Briši</a>
+                    <a id="brisibtn" class="btn-small btn brisiPotrditev" href="#" data-id="<?= $kat->id?>" role="button" data-toggle="modal"><i class="icon-remove"></i>Briši</a>
                 </td> 
             </tr>
         <?php endforeach; ?>
     </table>
 
-<div id="brisanje" class="modal hide fade">
+<div id="modal-brisanje" class="modal hide fade">
     <div class="modal-header">
         <h3>Izbriši kategorijo</h3>
     </div>
@@ -39,10 +39,11 @@
         <p>
             Ste prepričani, da želite izbrisati kategorijo?
         </p>
+        <p id="debug-url"></p>
     </div>
     
     <div class="modal-footer">
-        <a data-dismiss="modal" class="btn">Ne</a>
-        <a class="btn btn-primary">Da</a>
+        <a href="javascript:$('#modal-brisanje').modal('hide')" class="btn secondary">Ne</a>
+        <a href="/deska/brisikategorijo/id" class="btn danger btn-primary">Da</a>
     </div>
 </div>

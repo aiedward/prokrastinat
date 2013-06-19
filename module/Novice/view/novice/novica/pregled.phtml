@@ -16,6 +16,8 @@
             <p></p>
             <a style="width: 120px;" class="btn btn-info btn-small" target="_blank" href="http://twitter.com/home?status=Pravkar berem: http://prokrastinat.kreten.si/<?php echo $this->url;?> <?php echo $novica->naslov;?>" title="Click to share this post on Twitter"><i class="icon-white icon-plus-sign"></i> Deli na Twitterju  </a></a>
         </div>
+    </div>
+    <div class="well novicaPregled">
         <div class="ikone novicaPregledIkoneUredi">
             <?php if ($this->imaPravico('novica_uredi', $novica->user)){ ?>
                 <a title="Uredi" href="<?php echo $this->url('novice_uredi', array('id'=>$novica->id));?>">
@@ -26,7 +28,6 @@
                 </a>
             <?php } ?>
         </div>
-    </div>
     
     <div class="novicaJedro">
         <b>Avtor: </b> <?php echo $novica->user->getPolnoIme() ?>
@@ -35,6 +36,7 @@
         <div class="novicaVsebina">
             <?php echo $novica->vsebina ?>
         </div>
+    </div>
     </div>
 </div>
 <br/>

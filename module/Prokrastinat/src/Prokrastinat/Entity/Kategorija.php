@@ -21,4 +21,10 @@ class Kategorija extends BaseEntity
 
     /** @ORM\OneToMany(targetEntity="Objava", mappedBy="kategorija") */
     protected $objave;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="kategorije")
+     * @ORM\JoinTable(name="kategorija_user")
+     */
+    protected $users;
 }

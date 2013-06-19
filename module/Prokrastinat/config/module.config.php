@@ -62,6 +62,16 @@ return array(
                     ),
                 ),
             ),
+            'kategorije_serialize' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/kategorije/serialize',
+                    'defaults' => array(
+                        'controller' => 'Prokrastinat\Controller\Kategorija',
+                        'action' => 'serialize',
+                    ),
+                ),
+            ),
             'map' => array(
                 'type' => 'segment',
                 'options' => array(

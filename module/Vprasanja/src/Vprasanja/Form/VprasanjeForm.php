@@ -33,6 +33,20 @@ class VprasanjeForm extends Form {
             )
         ));
 
+        /**$this->add(array(
+            'name' => 'kategorija',
+            'type' => 'Text',
+            'options' => array(
+                'label' => 'Kategorija',
+                'required' => true
+
+            ),
+            'attributes' => array(
+                'class' => 'kategorija input-xxlarge',
+                'data-provide' => 'typeahead',
+            )
+        ));**/
+
         $this->add(array(
             'name' => 'vsebina',
             'type' => 'Textarea',

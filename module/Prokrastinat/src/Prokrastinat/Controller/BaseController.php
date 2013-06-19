@@ -40,7 +40,10 @@ abstract class BaseController extends AbstractActionController
 
     public function imaPravico($permission, $owner = null)
     {
-        return $this->isGranted($permission) || $this->auth->getIdentity() === $owner;
+        if ($this->auth->getIdentity() === null)
+            return $this->isGranted($permission);
+        else 
+            return $this->isGranted($permission) || $this->auth->getIdentity() === $owner;
     }
 
     public function jeAvtor($user)

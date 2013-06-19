@@ -8,6 +8,7 @@ use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
+use Zend\Validator;
 
 /**
  * @ORM\Entity
@@ -56,8 +57,7 @@ class Objava extends BaseEntity implements InputFilterAwareInterface
      */
     protected $oznake;
     
-    // VALIDACIJA PODATKOV
-    
+    // VALIDACIJA PODATKOV   
     protected $inputFilter;
     
     public function setInputFilter(InputFilterInterface $inputFilter)
@@ -117,6 +117,10 @@ class Objava extends BaseEntity implements InputFilterAwareInterface
                     ),
                 ),
             )));
+            
+            $this->inputFilter = $inputFilter; 
         }
+        
+        return $this->inputFilter;
     }
 }

@@ -1,5 +1,6 @@
 <?php
-$vpis = $studij->getVpisi()[0];
+if(!empty($studij))
+    $vpis = $studij->getVpisi()[0];
 ?>
 <h1>Pregled uporabnika <i><?=$user->username?></i></h1>
 
@@ -25,6 +26,7 @@ $vpis = $studij->getVpisi()[0];
         <th>Vpisna številka</th>
         <td><?= $user->vpisna_st ?></td>
     </tr>
+    <?php if(!empty($studij)): ?>
     <tr>
         <th>Program</th>
         <td><?= $vpis->program->NazivPrograma ?></td>
@@ -34,12 +36,13 @@ $vpis = $studij->getVpisi()[0];
         <td><?= $vpis->LetnikStudijaID ?></td>
     </tr>
     <?php endif; ?>
-    <?= (!empty($user->naslov)) ? '<tr><th>Naslov</th><td>' . $user->naslov . '</td></tr>' : null ?>
-    <?= (!empty($user->mesto)) ? '<tr><th>Mesto</th><td>' . $user->mesto . '</td></tr>' : null ?>
-    <?= (!empty($user->drzava)) ? '<tr><th>Država</th><td>' . $user->drzava . '</td></tr>' : null ?>
-    <?= (!empty($user->opis)) ? '<tr><th>Opis</th><td>' . $user->opis . '</td></tr>' : null ?>
-    <?= (!empty($user->splet)) ? '<tr><th>Spletna stran</th><td><a href="http://' . $user->splet . '">' . $user->splet . '</a></td></tr>' : null ?>
-    <?= (!empty($user->telefon)) ? '<tr><th>Telefon</th><td>' . $user->telefon . '</td></tr>' : null ?>
+    <?php endif; ?>
+    <?= (($user->naslov != '')&&($user->naslov != null)) ? '<tr><th>Naslov</th><td>' . $user->naslov . '</td></tr>' : null ?>
+    <?= (($user->mesto != '')&&($user->mesto != null)) ? '<tr><th>Mesto</th><td>' . $user->mesto . '</td></tr>' : null ?>
+    <?= (($user->drzava != '')&&($user->drzava != null)) ? '<tr><th>Država</th><td>' . $user->drzava . '</td></tr>' : null ?>
+    <?= (($user->opis != '')&&($user->opis != null)) ? '<tr><th>Opis</th><td>' . $user->opis . '</td></tr>' : null ?>
+    <?= (($user->splet != '')&&($user->splet != null)) ? '<tr><th>Spletna stran</th><td><a href="http://' . $user->splet . '">' . $user->splet . '</a></td></tr>' : null ?>
+    <?= (($user->telefon != '')&&($user->telefon != null)) ? '<tr><th>Telefon</th><td>' . $user->telefon . '</td></tr>' : null ?>
     <tr>
         <th>Datum zadnje prijave</th>
         <td><?= $this->dateFormat($user->datum_logina, IntlDateFormatter::LONG, IntlDateFormatter::NONE, 'sl_SI') ?></td>

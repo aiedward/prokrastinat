@@ -24,7 +24,7 @@ class Oglas extends Objava
     {
         return $this->datum_zapadlosti;
     }
-    
+    /*
     public function getInputFilter()
     {
         if (!$this->inputFilter) {
@@ -86,6 +86,8 @@ class Oglas extends Objava
                     
                 ),
             )));
+            
+            $this->inputFilter = $inputFilter;
         }
-    }
+    }*/
 }

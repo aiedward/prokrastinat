@@ -17,14 +17,18 @@ class DeskaController extends BaseController
     
     public function indexAction() 
     {   
+        if (!$this->isGranted('deska_index')) {
+            return $this->dostopZavrnjen();
+        }
+        
         $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
         $this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
+        // $this->kategorija_repository->update();
         $options = $this->kategorija_repository->getKategorijeInArray();
+        
         
         $form = new FilterForm($options);
         $id = (int)$this->request->getPost('kategorija');
-        //var_dump($id);
-        //exit;
         
         if (!$id) {
             $query = $this->em->createQuery("SELECT o FROM Deska\Entity\Oglas o WHERE o.datum_zapadlosti > CURRENT_DATE() ORDER BY o.datum_objave DESC");
@@ -51,6 +55,7 @@ class DeskaController extends BaseController
         $form = new DeskaForm($options);
         
         if ($this->request->isPost()) {
+            //$oglas = new Oglas();
             $form->setInputFilter($form->getInputFilter());
             $form->setData($this->request->getPost());
             
@@ -79,6 +84,10 @@ class DeskaController extends BaseController
 
     public function preglejAction() 
     {
+        if (!$this->isGranted('deska_pregled')) {
+            return $this->dostopZavrnjen();
+        }
+        
         $id = (int) $this->params()->fromRoute('id', 0);
         $oglas = $this->em->find('Deska\Entity\Oglas', $id);
 
@@ -86,12 +95,13 @@ class DeskaController extends BaseController
     }
     
     public function urediAction()
-    {
-        if (!$this->isGranted('deska_dodaj')) 
-            $this->dostopZavrnjen();
-        
+    {     
         $id = (int)$this->params()->fromRoute('id', 0);
         $oglas = $this->em->find('Deska\Entity\Oglas', $id);
+        
+        if (!($this->imaPravico('deska_uredi', $oglas->user))) {
+            return $this->dostopZavrnjen();
+        } 
         
         $this->deska_repository = $this->em->getRepository('Deska\Entity\Oglas');
         $this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
@@ -102,7 +112,7 @@ class DeskaController extends BaseController
         $form->get('submit')->setAttribute('value', 'Uredi');
         
         if ($this->request->isPost()) {
-            $form->setInputFilter($form->getInputFilter());
+            $form->setInputFilter($oglas->getInputFilter());
             $form->setData($this->request->getPost());
 
             if ($form->isValid()) {
@@ -129,7 +139,7 @@ class DeskaController extends BaseController
     
     public function brisiAction()
     {
-        if (!$this->isGranted('deska_dodaj')) 
+        if (!$this->isGranted('deska_brisi')) 
             $this->dostopZavrnjen();
         
         $id = (int)$this->params()->fromRoute('id', 0);

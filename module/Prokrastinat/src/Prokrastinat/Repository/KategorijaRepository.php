@@ -13,17 +13,10 @@ class KategorijaRepository extends EntityRepository
         $em->persist($kategorija);
     }
     
-    public function getKategorije()
-    {
-        $em = $this->getEntityManager();
-        $kategorije = $em->getRepository('Prokrastinat\Entity\Kategorija')->findAll();
-        
-        return $kategorije;
-    }
-    
     public function getKategorijeInArray()
     {
-        $kategorije = $this->getKategorije();        
+        $em = $this->getEntityManager();
+        $kategorije = $em->getRepository('Prokrastinat\Entity\Kategorija')->findAll();        
         $options = array();
 
         foreach ($kategorije as $kat) {

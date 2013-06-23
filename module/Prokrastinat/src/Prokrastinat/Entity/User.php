@@ -61,13 +61,13 @@ class User extends BaseEntity
     /** @ORM\Column(length=64, nullable=true) */
     protected $naslov;
 
-    /** @ORM\Column(type="integer") */
+    /** @ORM\Column(type="integer", nullable=true) */
     protected $urnik_program;
     
-    /** @ORM\Column(type="integer") */
+    /** @ORM\Column(type="integer", nullable=true) */
     protected $urnik_letnik;
     
-    /** @ORM\Column(type="integer") */
+    /** @ORM\Column(type="integer", nullable=true) */
     protected $urnik_smer;
     
     /**

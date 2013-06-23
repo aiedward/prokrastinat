@@ -195,4 +195,19 @@ class VprasanjeController extends BaseController
 
         return $this->redirect()->toRoute('preglej', array('id' => $vprasanje->id));
     }
+
+    // stack overflow
+    public function updateAction()
+    {
+        if (!$this->imaPravico('vprasanje_update')) {
+            return $this->dostopZavrnjen();
+        }
+
+        $config = $this->getServiceLocator()->get('config');
+        $wsdl = $config['stackoverflow']['wsdl'];
+
+        $client = new \SoapClient($wsdl);
+        $client->Update();
+        return $this->redirect()->toRoute('list', array('tip' => 'stackoverflow'));
+    }
 }

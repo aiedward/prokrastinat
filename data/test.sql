@@ -37,7 +37,8 @@ INSERT INTO `rbac_permission` (`id`, `name`) VALUES
 (33, 'deska_uredi'),
 (34, 'deska_brisi'),
 (35, 'deska_pregled'),
-(36, 'deska_index');
+(36, 'deska_index'),
+(37, 'vprasanje_update');
  
 INSERT INTO `rbac_role` (`id`, `parent_role_id`, `name`) VALUES
 (1, NULL, 'admin'),
@@ -79,7 +80,8 @@ INSERT INTO `rbac_role_permission` (`id`, `role_id`, `permission_id`) VALUES
 (33, 2, 33),
 (34, 2, 34),
 (35, 4, 35),
-(36, 4, 36);
+(36, 4, 36),
+(37, 1, 37);
  
 INSERT INTO `rbac_user_roles` (`user_id`, `role_id`) VALUES
 (1, 1),

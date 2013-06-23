@@ -16,8 +16,9 @@
     margin-top: 1px;
 }
 
-.vprasanje-dodaj {
+.vprasanje-tipke {
     float: right;
+    margin-right: 5px
 }
 
 /*.vprasanje {

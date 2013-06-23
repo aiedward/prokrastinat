@@ -1,7 +1,15 @@
 <h2>Vprašanja</h2>
 
+
 <?php if ($this->imaPravico('vprasanje_dodaj')): ?>
-    <a class="vprasanje-dodaj btn btn-primary " href="<?= $this->url('vprasanje', array('action' => 'dodaj')); ?>" id="dodaj-vprasanje">Dodaj</a>
+    <div class="btn-group vprasanje-tipke">
+        <a class="btn btn-primary" href="<?= $this->url('vprasanje', array('action' => 'dodaj')); ?>">Dodaj</a>
+    </div>
+<?php endif; ?>
+<?php if ($selected == 'stackoverflow' && $this->imaPravico('vprasanje_update')): ?>
+    <div class="btn-group vprasanje-tipke">
+        <a class="btn" href="<?= $this->url('vprasanje', array('action' => 'update')); ?>">Posodobi</a>
+    </div>
 <?php endif; ?>
 
 <?= $this->tab(array(

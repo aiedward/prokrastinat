@@ -165,6 +165,20 @@ return array(
                     ),
                 ),
             ),
+            'novice_iw' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/novice/ostale/infoworld/[stran/:page]',
+                    'constraints' =>array(
+                        'stran'     => '[0-9]+'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Novica',
+                        'action' => 'infoworld',
+                        'page' => 1,
+                    ),
+                ),
+            ),
         ),
     ),
     

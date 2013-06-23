@@ -20,6 +20,7 @@ use Zend\Validator;
  *      "novica" = "Novice\Entity\Novica",
  *      "exnovica" = "Novice\Entity\ExtremeNovica",
  *      "dodatna_novica" = "Novice\Entity\DodatnaNovica",
+ *      "iwnovica" = "Novice\Entity\IWNovica",
  *      "oglas" = "Deska\Entity\Oglas",
  *      "vprasanje" = "Vprasanja\Entity\Vprasanje",
  *      "stack_vprasanje" = "Vprasanja\Entity\StackVprasanje",  

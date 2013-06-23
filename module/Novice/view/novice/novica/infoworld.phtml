@@ -1,0 +1,34 @@
+<?php
+
+$title = 'InfoWorld Novice';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php if ($this->isGranted('novica_dodaj')): ?>
+    <?php //TO SE LAHKO LEPŠE NAPIŠE, DA
+        $this->form->prepare();
+        echo $this->formTwb($this->form, \DluTwBootstrap\Form\FormUtil::FORM_TYPE_VERTICAL);
+    ?>
+<?php endif; ?>
+
+<?php foreach ($this->paginator as $novica) : ?>
+    <div class="well well-small">
+        <div class="novicaHeader">
+            <b> <?= $this->escapeHtml($novica->datum_objave->format('d-m-Y')); ?></b> 
+            <b>
+                <a href="<?= $this->url('novice_pregled', array('id' => $novica->id));?>">
+                    <?= $novica->naslov; ?>
+                </a>
+            </b>
+            <br/>
+        </div>
+        <p><?= ($novica->opis); ?> <a href="<?=$novica->link?>" target="_blank">VIR</a></p>
+    </div>
+<?php endforeach; ?>
+    
+<div class="paginatorIzpis">
+    <?= ( count($this->paginator) > 0 ) ? $this->paginationControl($this->paginator, 'Sliding', 'pager.phtml', array('route' => '/novice/ostale/infoworld/')) : ""; ?>
+</div>
+<br/>
+<br/>
+<br/>

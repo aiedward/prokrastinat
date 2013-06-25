@@ -14,7 +14,6 @@ $this->headTitle($title);
 <?php foreach ($this->paginator as $novica) : ?>
     <div class="well well-small">
         <div class="novicaHeader">
-            <b> <?= $this->escapeHtml($novica->datum_objave->format('d-m-Y')); ?></b> 
             <b>
                 <a href="<?= $this->url('novice_pregled', array('id' => $novica->id));?>">
                     <?= $novica->naslov; ?>
@@ -22,7 +21,8 @@ $this->headTitle($title);
             </b>
             <br/>
         </div>
-        <p><?= ($novica->opis); ?> <a href="<?=$novica->link?>" target="_blank">VIR</a></p>
+        <p><?= ($novica->opis); ?></p>
+        <small><?= $this->escapeHtml($novica->datum_objave->format('d-m-Y')); ?> | <a href="<?=$novica->link?>" target="_blank">Povezava</a></small>
     </div>
 <?php endforeach; ?>
     

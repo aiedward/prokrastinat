@@ -198,72 +198,6 @@ class NovicaController extends BaseController
         return new ViewModel(array('action' => 'studentske', 'user' => $user,'flashMessages' => $this->flashMessenger()->getMessages(), 'paginator' => $paginator));
     }
     
-    public function infoworldAction()
-    {
-        if (!$this->isGranted('novica_index')) {
-            return $this->dostopZavrnjen();
-        } 
-        
-        $form = new IWForm();
-        $repository = $this->em->getRepository('Novice\Entity\IWNovica');
-        $adapter = new DoctrineAdapter(new ORMPaginator($repository->createQueryBuilder('novica')->add('orderBy', 'novica.datum_objave DESC')));
-        $paginator = new Paginator($adapter);
-        $paginator->setDefaultItemCountPerPage(10);
-
-        $page = (int) $this->params()->fromRoute('page', 0);
-        if($page)
-        {
-            $paginator->setCurrentPageNumber($page);
-        }
-        $user = $this->auth->getIdentity();
-        
-        if ($this->request->isPost())
-        {
-            $client = new \SoapClient("http://localhost:4762/Service1.svc?wsdl");
-            $result = $client->pridobiNovice(array('strani' => 1));
-            $result = get_object_vars($result->pridobiNoviceResult);
-	    $result = $result["ArrayOfstring"];
-            $max = count($result);
-            if($result)
-            {
-                $counter = 0;
-                $stareNovice = $this->em->getRepository('Novice\Entity\IWNovica')->findAll();
-                for($i=0; $i < $max; $i++)
-                {
-                    $exists = false;
-                    $novica = get_object_vars($result[$i]);
-                    $novica = $novica["string"];
-                    foreach($stareNovice as $sNovica)
-                    {
-                        if($sNovica->naslov == $novica[0])
-                        {
-                            $exists = true;
-                            break;
-                        }
-                    }
-                    
-                    if(!$exists)
-                    {
-                        $iwnovica = new IWNovica();
-                        $iwnovica->user = $this->auth->getIdentity();
-                        $iwnovica->naslov = $novica[0];
-                        $iwnovica->opis = $novica[1];
-                        $iwnovica->vsebina = $novica[2];
-                        $iwnovica->datum = $novica[3];
-                        $iwnovica->link = $novica[4];
-                        $iwnovica->datum_objave = new \DateTime("now");
-                        $this->em->persist($iwnovica);
-                        $this->em->flush();
-                        $counter++;
-                    }
-                }
-                $this->flashMessenger()->addMessage('Dodanih je bilo '. $counter. ' IW novic.');
-            }     
-        }
-        
-        return new ViewModel(array('user' => $user,'flashMessages' => $this->flashMessenger()->getMessages(), 'paginator' => $paginator, 'form' => $form));
-    }
-    
     public function studentskepregledAction()
     {
         if (!$this->isGranted('novica_pregled')) {
@@ -336,5 +270,71 @@ class NovicaController extends BaseController
         $novica = $this->em->find('Novice\Entity\ExtremeNovica', $id);
         
         return array('novica' => $novica);
+    }
+    
+    public function infoworldAction()
+    {
+        if (!$this->isGranted('novica_index')) {
+            return $this->dostopZavrnjen();
+        } 
+        
+        $form = new IWForm();
+        $repository = $this->em->getRepository('Novice\Entity\IWNovica');
+        $adapter = new DoctrineAdapter(new ORMPaginator($repository->createQueryBuilder('novica')->add('orderBy', 'novica.datum_objave DESC')));
+        $paginator = new Paginator($adapter);
+        $paginator->setDefaultItemCountPerPage(10);
+
+        $page = (int) $this->params()->fromRoute('page', 0);
+        if($page)
+        {
+            $paginator->setCurrentPageNumber($page);
+        }
+        $user = $this->auth->getIdentity();
+        
+        if ($this->request->isPost())
+        {
+            $client = new \SoapClient("http://localhost:4762/Service1.svc?wsdl");
+            $result = $client->pridobiNovice(array('strani' => 1));
+            $result = get_object_vars($result->pridobiNoviceResult);
+	    $result = $result["ArrayOfstring"];
+            $max = count($result);
+            if($result)
+            {
+                $counter = 0;
+                $stareNovice = $this->em->getRepository('Novice\Entity\IWNovica')->findAll();
+                for($i=0; $i < $max; $i++)
+                {
+                    $exists = false;
+                    $novica = get_object_vars($result[$i]);
+                    $novica = $novica["string"];
+                    foreach($stareNovice as $sNovica)
+                    {
+                        if($sNovica->naslov == $novica[0])
+                        {
+                            $exists = true;
+                            break;
+                        }
+                    }
+                    
+                    if(!$exists)
+                    {
+                        $iwnovica = new IWNovica();
+                        $iwnovica->user = $this->auth->getIdentity();
+                        $iwnovica->naslov = $novica[0];
+                        $iwnovica->opis = $novica[1];
+                        $iwnovica->vsebina = $novica[2];
+                        $iwnovica->datum = $novica[3];
+                        $iwnovica->link = $novica[4];
+                        $iwnovica->datum_objave = new \DateTime("now");
+                        $this->em->persist($iwnovica);
+                        $this->em->flush();
+                        $counter++;
+                    }
+                }
+                $this->flashMessenger()->addMessage('Dodanih je bilo '. $counter. ' IW novic.');
+            }     
+        }
+        
+        return new ViewModel(array('user' => $user,'flashMessages' => $this->flashMessenger()->getMessages(), 'paginator' => $paginator, 'form' => $form));
     }
 }

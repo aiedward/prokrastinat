@@ -41,7 +41,10 @@ class IndexController extends BaseController
             foreach ($skupno as $key => $vrstica) {
                 $datum[$key]  = $vrstica->datum_objave;
             }
-            array_multisort($datum, SORT_DESC, $skupno);
+            
+            if (count($novice) != 0)
+                array_multisort($datum, SORT_DESC, $skupno);
+
             $skupno = array_slice($skupno, 0, 5);
         }
                

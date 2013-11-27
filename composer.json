@@ -16,7 +16,8 @@
         "zendframework/zend-developer-tools": "dev-master",
         "dlu/dlutwbootstrap": "dev-master",
         "dlu/dlutwbootstrapdemo": "dev-master",
-        "zf-commons/zfc-rbac": "dev-master"
+        "zf-commons/zfc-rbac": "dev-master",
+		"phpmd/phpmd" : "1.4.*"
     }
 }
 

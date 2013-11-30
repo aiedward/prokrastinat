@@ -16,8 +16,8 @@ class UrediForm extends Form
         /*$this->setAttribute('method', 'post');
         $this->setAttribute('enctype','multipart/form-data');*/
     }
-     
-    public function addElements()
+
+    public function addElements($sup)
     {
         $this->add(array(
             'name' => 'naslov',

@@ -303,6 +303,5 @@ class UserController extends BaseController
                 return new ViewModel(array(
                     'form' => $form,
                 ));
-
         }
 }

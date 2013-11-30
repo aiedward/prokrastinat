@@ -114,7 +114,7 @@ class IndexController extends BaseController
         if (!empty($search)) {
             $search = preg_replace('/ /', '%20', $search);
             //$client = new \Zend\Soap\Client("http://localhost:8080/LemService.asmx?WSDL");
-            //$results = $client->Lematiziraj($search);
+            
             $client = new \Zend\Http\Client();
             $req = new \Zend\Http\Request();
             $req->setUri('http://localhost:8080/LemService.asmx/Lematiziraj?text=' . $search);

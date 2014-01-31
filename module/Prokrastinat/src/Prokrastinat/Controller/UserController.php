@@ -172,19 +172,25 @@ class UserController extends BaseController
                 {
                     array_push($userRoles, $role->id);
                 }
+                
+                
+                
                 $form = new \Prokrastinat\Form\EditForm($roles, $userRoles);
             }else
             {
                 $form = new \Prokrastinat\Form\EditForm(null, null);   
             }
             
+            if($user->authentiator)
+                    $form->get('authenticator')->setChecked(true);
             $form->setInputFilter(new \Prokrastinat\Form\EditFilter());
             $urejanje = false;
             $form->remove('uporabnisko');
             $form->remove('geslo');
             $form->getInputFilter()
                       ->remove('geslo')
-                      ->remove('uporabnisko');
+                      ->remove('uporabnisko')
+                      ->remove('authenticator');
             
             if (!$this->imaPravico('user_uredi')) {
                 $form->get('vpisna_st')->setAttributes(array('disabled' => true));

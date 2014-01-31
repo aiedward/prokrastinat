@@ -121,6 +121,15 @@ class EditForm extends Form {
                 'label' => 'Telefon',
             ),
         ));
+        $this->add(array(
+            'type' => 'Zend\Form\Element\Checkbox',
+            'name' => 'authenticator',
+            'options' => array(
+                'label' => 'Authenticator',
+                'checked_value' => true,
+                'unchecked_value' => false
+            )
+         ));
         if($roles != null)
         {
             $this->add(array(

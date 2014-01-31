@@ -177,7 +177,6 @@ class UserRepository extends EntityRepository
         $hextime = base_convert($time, 10, 16);
         $authcode = crc32(hex2bin($hexkey) . strrev(hex2bin($hextime)));
         $authstring = sprintf("%u",$authcode);
-        var_dump($hexkey);
         return $authstring;
     }
 

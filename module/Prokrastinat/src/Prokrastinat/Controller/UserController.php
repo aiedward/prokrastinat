@@ -53,8 +53,6 @@ class UserController extends BaseController
                     if($user->authentiator)
                     {
                         $genauth = $this->userRepository->generateAuthcode($user);
-                        var_dump($genauth);
-                        var_dump($authcode);
                         if($authcode != $genauth)
                             $validAuth = false;
                     }

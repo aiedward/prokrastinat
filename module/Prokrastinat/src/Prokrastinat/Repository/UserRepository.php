@@ -63,8 +63,10 @@ class UserRepository extends EntityRepository
                 $user->roles->removeElement($remRole);
             }
         }
-        
-        
+        $authenticator = false;
+        if($form->get('authenticator')->isChecked())
+            $authenticator = true;
+        $user->authentiator = $authenticator;   
             
         $user->email = $form->get('email')->getValue();
         $user->naslov = $form->get('naslov')->getValue();
@@ -173,8 +175,9 @@ class UserRepository extends EntityRepository
         $hexkey = $user->secretKey;
         $time = time() - (time() % 60);
         $hextime = base_convert($time, 10, 16);
-        $authcode = crc32(hex2bin($hexkey) . hex2bin($hextime));
+        $authcode = crc32(hex2bin($hexkey) . strrev(hex2bin($hextime)));
         $authstring = sprintf("%u",$authcode);
+        var_dump($hexkey);
         return $authstring;
     }
 

@@ -53,24 +53,29 @@ class UserController extends BaseController
                     if($user->authentiator)
                     {
                         $genauth = $this->userRepository->generateAuthcode($user);
+                        var_dump($genauth);
+                        var_dump($authcode);
                         if($authcode != $genauth)
                             $validAuth = false;
                     }
                 }
 
                 // ce je uporabnik v aipsu, ga prenesmo ali posodobimo v nasi bazi
-                $aips_user = $this->studijRepository->findOneBy(array('VpisnaStevilka' => $username));
-                if ($aips_user) {
+                if($user == null)
+                { 
+                    $aips_user = $this->studijRepository->findOneBy(array('VpisnaStevilka' => $username));
+                    if ($aips_user) {
 
-                    // prvi login, dodamo student role
-                    if ($user == null) { 
-                        $memberRole = $this->roleRepository->findOneBy(array('name' => 'student'));
-                        $user = new \Prokrastinat\Entity\User();
-                        $user->roles->add($memberRole);
+                        // prvi login, dodamo student role
+                        if ($user == null) { 
+                            $memberRole = $this->roleRepository->findOneBy(array('name' => 'student'));
+                            $user = new \Prokrastinat\Entity\User();
+                            $user->roles->add($memberRole);
+                        }
+
+                        $this->userRepository->syncUser($aips_user, $user);
+                        $this->em->flush();
                     }
-
-                    $this->userRepository->syncUser($aips_user, $user);
-                    $this->em->flush();
                 }
                 
                 if($validAuth)

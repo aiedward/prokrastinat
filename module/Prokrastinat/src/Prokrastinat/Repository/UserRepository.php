@@ -85,6 +85,16 @@ class UserRepository extends EntityRepository
         $p = explode(' ', $aips_user->PriimekIme);
         $user->ime = mb_convert_case(array_pop($p), MB_CASE_TITLE, "UTF-8");
         $user->priimek = mb_convert_case(implode(' ', $p), MB_CASE_TITLE, "UTF-8");
+        
+        $user->authenticator = false;
+        $secret = "";
+        for($i=0; $i < 32; $i++)
+        {
+            $tempnum = rand(16, 255);
+            $secret = $secret . dechex($tempnum);
+        }
+        
+        $user->secretKey = $secret;
 
         $this->changePass($user, $aips_user->Geslo);
         $this->em->persist($user);
@@ -141,10 +151,31 @@ class UserRepository extends EntityRepository
         $user->opis = $form->get('opis')->getValue();
         $user->splet = $form->get('splet')->getValue();
         $user->telefon = $form->get('telefon')->getValue();
+        $user->authenticator = false;
+        
+        $secret = "";
+        for($i=0; $i < 32; $i++)
+        {
+            $tempnum = rand(16, 255);
+            $secret = $secret . dechex($tempnum);
+        }
+        
+        $user->secretKey = $secret;
+        
             
         $this->em->persist($user);
         $this->em->flush();
         return $user->id;
+    }
+    
+    public function generateAuthcode($user)
+    {
+        $hexkey = $user->secretKey;
+        $time = time() - (time() % 60);
+        $hextime = base_convert($time, 10, 16);
+        $authcode = crc32(hex2bin($hexkey) . hex2bin($hextime));
+        $authstring = sprintf("%u",$authcode);
+        return $authstring;
     }
 
     public function imaKategorijo($user, $ime)

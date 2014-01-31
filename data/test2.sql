@@ -1,29 +1,12 @@
--- phpMyAdmin SQL Dump
--- version 3.5.2.2
--- http://www.phpmyadmin.net
---
--- Host: 127.0.0.1
--- Generation Time: Jun 25, 2013 at 10:35 PM
--- Server version: 5.5.27
--- PHP Version: 5.4.7
-
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
---
--- Database: `prokrastinat`
---
-
---
--- Dumping data for table `dodatnanovica`
---
 
 INSERT INTO `dodatnanovica` (`id`, `vir`, `date`) VALUES
 (36, 'http://www.studentske-novice.si/k4-na-poti-komercializacije/', 'maj 31, 2013'),
@@ -51,10 +34,6 @@ INSERT INTO `dodatnanovica` (`id`, `vir`, `date`) VALUES
 (58, 'http://www.studentske-novice.si/cuker-afterwork-cetrtki-slike/', 'maj 11, 2013'),
 (59, 'http://www.studentske-novice.si/aljaz-pegan-bilo-je-lepo-video/', 'maj 8, 2013');
 
---
--- Dumping data for table `iwnovica`
---
-
 INSERT INTO `iwnovica` (`id`, `link`, `datum`) VALUES
 (69, 'http://www.infoworld.com/t/mobile-security/ransomware-android-it-was-only-matter-of-time-221285', 'June 21, 2013'),
 (70, 'http://www.infoworld.com/d/data-management/oracle-charge-extra-12c-databases-fundamental-feature-221', 'June 21, 2013'),
@@ -69,10 +48,6 @@ INSERT INTO `iwnovica` (`id`, `link`, `datum`) VALUES
 (79, 'http://www.infoworld.com/d/security/aarons-law-would-revamp-computer-fraud-penalties-221182', 'June 21, 2013'),
 (80, 'http://www.infoworld.com/d/mobile-technology/wi-fis-fast-80211ac-standard-may-pay-big-in-mobile-2212', 'June 21, 2013'),
 (81, 'http://www.infoworld.com/d/data-management/ellison-spills-beans-oracles-upcoming-sap-hana-competitor', 'June 21, 2013');
-
---
--- Dumping data for table `kategorija`
---
 
 INSERT INTO `kategorija` (`id`, `ime`) VALUES
 (1, 'Adaptivni sistemi'),
@@ -1215,16 +1190,8 @@ INSERT INTO `kategorija` (`id`, `ime`) VALUES
 (1138, 'Zgodovina vizualnih komunikacij'),
 (1139, 'Znanost, mišljenje in komunikacija');
 
---
--- Dumping data for table `komentar`
---
-
 INSERT INTO `komentar` (`id`, `user_id`, `objava_id`, `vsebina`, `datum_objave`, `tip`) VALUES
 (1, 2, 67, '<p>Zaženi to datoteko,....</p>', '2013-06-19 13:27:40', 'odgovor');
-
---
--- Dumping data for table `mape`
---
 
 INSERT INTO `mape` (`id`, `ime`, `pot`) VALUES
 (1, 'Vsi', 'map/ALL.png'),
@@ -1248,10 +1215,6 @@ INSERT INTO `mape` (`id`, `ime`, `pot`) VALUES
 (19, 'G2-4nadstropje', 'map/G2-4N.png'),
 (20, 'G2-medetaza', 'map/G2-M.png'),
 (21, 'G2-prtlicje', 'map/G2-P.png');
-
---
--- Dumping data for table `novica`
---
 
 INSERT INTO `novica` (`id`, `opis`) VALUES
 (36, 'Klub K4 je že dobrih 24 let gojilnica ljubljanske alternative zato ne preseneča plaz kritik in obtožb, ki so se na novo vodstvo usule po napovedi njegovega zaprtja 15.3.2013.'),
@@ -1295,10 +1258,6 @@ INSERT INTO `novica` (`id`, `opis`) VALUES
 (79, 'The new legislation would prevent prosecutors from targeting computer users for terms of service violations...'),
 (80, 'The new wireless technology could cause phone makers and carriers to jump into a rich set of new channels...'),
 (81, 'Database 12c.1 will focus on in-memory computing, according to Ellison...');
-
---
--- Dumping data for table `objava`
---
 
 INSERT INTO `objava` (`id`, `user_id`, `kategorija_id`, `naslov`, `vsebina`, `datum_objave`, `tip`) VALUES
 (36, 2, NULL, 'K4 na poti komercializacije?', '<strong>Začelo se je z zamenjavo vodstva.</strong><br/>Zamenjava vodstva <strong>Zavoda K6/4</strong>, katerega del je poleg <strong>Kiberpipe</strong>, kavarne <strong>Metropol</strong> in galerije <strong>Kapelica</strong> tudi klub<strong> K4</strong>, se je sicer začelo že lansko leto, ko je ljubljanski ŠOU prvič poskušal zamenjati direktorja, a mu to ni uspelo, saj nobeden izmed kandidatov ni pridobil zahtevane količine glasov sveta. Dokončno izvedeni drugi krog volitev se je zato zgodil marca letošnjega leta, ko je bil z večino za novega direktorja Zavoda izbran <strong>Aleš Logar</strong>. Kot novi direktor je na tem mestu zamenjal <strong>Miloša Krajnca</strong>.<br/>Po navedbah slednjega v odprtem pismu javnosti naj bi Logar po hitrem postopku s kadrovskim cunamijem na ključna mesta nove ekipe postavil svoje prijatelje. Navaja tudi, da naj bi bila večina vključena v študentsko organizacijo <strong>Povezani</strong>, ki naj bi bila tudi odgovorna za <strong>Logarjevo umestitev</strong> na direktorski stolček. Obtoženi navedbe zavrača.<br/><strong>Zaprtje K4</strong><br/>Novo vodstvo se je po umestitvi odločilo, da<strong> klub K4</strong> do nadaljnega zapre zaradi ugotovljenih nepravilnosti, nejasnosti v dosedanjem poslovanju in na novo ugotovljenem slabem finančnem stanju ter nepripravljenosti dosedanje ekipe na dogovor o sodelovanju. Tudi ob to se <strong>Krajnc</strong> v svojem pismu obregne, saj naj bi bil<strong> Logar</strong> v prvem razpisu za direktorja celo povabljen na pregled finančnega stanja, vendar je povabilo zavrnil. Prav tako je bil<strong> Zavod K6/4</strong> dolžan letno poročati ŠOU v Ljubljani trenutno stanje financ, zato nastali primanjkljaj, katerega je Logar ocenil na skorajda pol milijona evrov nikakor ne bi smel biti nov podatek. Če ne drugega je bivši direktor na ljubljanski ŠOU celo apeliral prošnjo za pomoč sanacije nastalega stanja, vendar mu potrebnega denarja niso odobrili. Ob nestrinjanju stare ekipe z že omenjenim kadrovskim cunamijem tako zaprtje kluba sploh ni presenetljivo.<br/><strong>Polemike okoli novega programa in ljudska iniciativa</strong><br/>Ljudska iniciativa se je še pred zaprtjem kluba organizirala in poleg peticije, katero je podpisalo čez 2000 ljudi organiziralo tudi 1. klubsko vstajo, na katero je prišlo okoli 150 ljudi. V peticiji so zapisali, da se zavzemajo za ohranitev kluba K4 kot prostora progresivne in neodvisne kulturne ter glasbene produkcije, ohranitev Zavoda K6/4 kot neprofitne, odprte, urbane platforme za vse vrste umetnosti, odstop novega vodstva Zavoda K6/4 in ustanovne ter vodstvene spremembe v delovanju Zavoda.<br/>Morda bi bilo vse pozabljeno a v tednih po zaprtju kluba je novo vodstvo predstavilo nov program za klub K4 in njemu sorodne projekte. Le teh programi se niso spremenili, klub K4 pa je doživel močan preskok v polkomercialno glasbo. To je privedlo do še večjega ogorčenja, ne samo s strani javnosti, temveč tudi s strani sodelujoči DJ ekip. Večina jih namreč ali ni bila pripravljena sodelovati zaradi novega programa in vizije ali pa k sodelovanju sploh niso bile povabljeni, kljub zagotovilom novega direktorja, da K4 ne bo postal novi Cirkus, saj je njegova vloga na alternativni kulturni sceni prevelika.<br/><strong>Sanacija nastalih razmer</strong><br/>Po besedah <strong>Logarja</strong> je naročena zunanja revizija Zavoda, prav tako se izvaja krizni management. <strong>Kavarna Metropol</strong> zaradi premajhnega profita ne bo več del <strong>Zavoda K6/4</strong> in naj bi se spremenila v t.i. študentsko menzo. Pogovori potekajo tudi o odprtju <strong>hotela </strong>na Kersnikovi 4, v katerega naj bi ŠOU vložil zajetnih <strong>500 tisočakov</strong>, obetal pa si <strong>letni promet</strong> v višini<strong> 80.000 evrov</strong>. ŠOU v Ljubljani je Zavodu <strong>odpisal 73.000 dolga</strong>, za kar jih je prosil že <strong>Krajnc</strong>, hkrati pa znižal najemnino za prostore do septembra letošnjega leta za 60%. Zavod naj bi ob vseh ukrepih in pomoči ŠOUa, ki mu je namenil <strong>50.000 evrov</strong> za sanacijo in <strong>110.000 evrov</strong> za redno dejavnost, preživel.<br/><strong>Kdo je kriv?</strong><br/>Vprašanje ostaja, kdo je torej krivec, ki je <strong>K4</strong> postavil na rob obstoja in s tem ogrozil tudi celotni, za njim stoječi Zavod. Nekateri, vključno s ŠOU, to pripisujejo nekomercializiranosti samega kluba, ki zaradi svoje alternativnosti pač privlači omejen krog obiskovalcev. <strong>Galerija Kapelica</strong> je namreč sposobna preživeti sama, <strong>Kiberpipa</strong> prav tako. Kot kaže naj bi se kultura zopet morala umakniti ekonomiji, ker to od nas pač zahteva čas. Vprašanje pa je, ali od nas zahteva čas tudi to, da je ljubljanski ŠOU namerno Zavodu skozi leta zmanjševala svojo pomoč, čeravno naj bi na letni bazi zagotovil vsaj stroške »hladnega pogona«. Med leti 2004 in 2007 naj bi se tako zmanjšalo financiranje Zavoda za 170.000 evrov, kavarni Metropol se je začela zaračunavati kom', '2013-06-19 13:19:27', 'dodatna_novica'),
@@ -1347,34 +1306,19 @@ INSERT INTO `objava` (`id`, `user_id`, `kategorija_id`, `naslov`, `vsebina`, `da
 (78, 1, NULL, 'Google and Red Hat collaborate on App Engine in private clouds', 'Google is hoping to appease developers that want better portability for their hosted apps by working with Red Hat on running App Engine in private clouds. The Google Cloud Platform team has been working with Red Hat''s JBoss Application Server team to help create an alternate implementation of Google App Engine running on top of JBoss, said Google software engineer Ludovic Champenois in a blog post.[ Learn how to install Apache on Linux in InfoWorld Test Center''s step-by-step guide. | Track the latest trends in open source with InfoWorld''s Open Sources blog and Technology: Open Source newsletter. ] The public version of App Engine lets users run Web applications on Google''s infrastructure. The bulk of Google''s and Red Hat''s joint effort has been aimed at beefing up the open source App Engine Test Compatibility Kit (TCK). Google engineers provided many of the tests of the internal App Engine product, while Red Hat engineers added several tests to verify that their implementation of App Engine is correct, Champenois said. The tests can in turn be used to verify third party implementations of the App Engine SDKs, such as Red Hat''s CapeDwarf. CapeDwarf is what will improve application portability. It is currently under development and lets developers run their Java-based App Engine applications without modification on a JBoss Application Server cluster or on Red Hat''s OpenShift cloud. The ultimate goal of is to fully implement all the APIs of the Google App Engine. The projects website shows that storage, task queue, search and multitenancy APIs have already been completed. Red Hat isn''t alone in expanding where App Engine applications can run. On Friday, AppScale released version 1.8 of its open source implementation of App Engine. The platform is primarily written using the Python programming language and allows apps to run in an enterprise''s datacenter as well as other public or private clouds. Version 1.8 of AppScale can be downloaded for the company''s website and beta 4 of CapeDwarf 1.0 can be downloaded from the JBoss website. Send news tips and comments to mikael_ricknas@idg.com.', '2013-06-24 00:48:12', 'iwnovica'),
 (79, 1, NULL, 'Aaron&#039;s Law would revamp computer fraud penalties', 'Two U.S. lawmakers have introduced a bill that would prevent the Department of Justice from prosecuting people for violating terms of service for Web-based products, website notices or employment agreements under the Computer Fraud and Abuse Act (CFAA). On Thursday, Representative Zoe Lofgren, a California Democrat, and Senator Ron Wyden, an Oregon Democrat, introduced Aaron''s Law, a bill aimed at removing some types of prosecutions under the CFAA.[ Also read: In memory of Aaron Swartz: Stealing is not stealing. | And: Aaron Swartz: A life remembered, a legacy debated. | Stay ahead of the key tech business news with InfoWorld''s Today''s Headlines: First Look newsletter. | Read Bill Snyder''s Tech''s Bottom Line blog for what the key business trends mean to you. ]&nbsp; The bill is named after Internet activist Aaron Swartz, who committed suicide in January while facing federal prosecution for allegedly hacking into a Massachusetts Institute of Technology network and downloading millions of scholarly articles from the JSTOR subscription service. The bill would remove the charge of "exceeds authorized access" from the CFAA, instead creating a definition for "access without authorization." Access without authorization would include bypassing technology and physical measures through deception or through gaining access to an authorized person''s credentials. "Aaron''s Law is not just about Aaron Swartz, but rather about refocusing the law away from common computer and Internet activity and toward damaging hacks," Lofgren and Wyden wrote in a joint statement. "It establishes a clear line that''s needed for the law to distinguish the difference between common online activities and harmful attacks." The bill would also narrow the penalty enhancement provisions in the CFAA, making it tougher for prosectors to seek enhanced penalties for crimes involving little financial gain. Lofgren released a draft bill to amend the CFAA back in January, days after Swartz killed himself. The sponsors of the bill posted drafts on Reddit. Digital rights groups have called on lawmakers to soften the CFAA after prosecutors in Massachusetts threatened Swartz with a lengthy jail sentence. "In drafting Aaron''s Law ... we did not opt for a quick fix of the CFAA that could bring with it unintended consequences," Wyden and Lofgren wrote. "Instead, we undertook a deliberative process for crafting this legislation. We reviewed extensive input from a broad swath of technical experts, businesses, advocacy groups, current and former government officials, and the public." Demand Progress, the digital rights group Swartz cofounded, praised the legislation. "Since we lost Aaron in January there have been good days and there have been bad days," David Segal, the group''s executive director, said in an email. "This is a good day. When Aaron''s Law is signed into law it will mean that Aaron will continue to do in death what he always did in life, protect the freedoms and rights of all people." The Center for Democracy and Technology also applauded the bill. "Breaking a promise is not the same as breaking into a computer, and fibbing about your age on Facebook&nbsp;shouldn''t be a federal crime," Kevin Bankston, director of CDT''s Free Expression Project, said in an email. "The courts, sensibly, have already started to reject prosecutors'' attempts to charge computer crimes based on violation of a web site''s terms of service or an employer''s computer use policy. Aaron''s Law'' would eliminate any ambiguity and make those courts'' decisions the law of the land." Grant Gross covers technology and telecom policy in the U.S. government for The IDG News Service. Follow Grant on Twitter at GrantGross. Grant''s e-mail address is grant_gross@idg.com.', '2013-06-24 00:48:12', 'iwnovica'),
 (80, 1, NULL, 'Wi-Fi&#039;s fast 802.11ac standard may pay off big in mobile', 'The emerging IEEE 802.11ac wireless LAN standard will be able to deliver faster connections wherever it''s used, but the biggest benefit may come at public hotspots -- eventually. On Wednesday, the Wi-Fi Alliance started certifying pre-standard 802.11ac products for interoperability with other Wi-Fi gear. Assuming nothing unexpected happens in the standards process, that means all products the Alliance approves as 11ac gear will work with each other and with older versions of Wi-Fi.[ Get expert advice about planning and implementing your BYOD strategy with InfoWorld''s 29-page "Mobile and BYOD Deep Dive" PDF special report. | Keep up on key mobile developments and insights with the Mobilize newsletter. ] The Wi-Fi Alliance claims 802.11ac can offer two or three times the speed users get on most of today''s networks, though real-world results can vary because of a wide range of factors. A second wave of 802.11ac, which the group isn''t certifying yet, is expected to offer even higher speeds. The new standard boosts performance through several improvements, including wider channels and better modulation techniques. But one reason 802.11ac can go faster is that it operates only in the 5GHz spectrum band, which has more channels and less competition for airspace than the 2.4GHz band most frequently used in Wi-Fi. The 5GHz band is nothing new in Wi-Fi, and manufacturers can implement it with the current 802.11n standard. But in handsets, they usually don''t. The iPhone 5, with dual-band 802.11n, and Samsung''s Galaxy S4, which already has prestandard 11ac built in, are exceptions. Even many laptops aren''t equipped to use the higher band, analysts say. Adding frequencies costs money, and device margins are slim. Just as most mobile devices haven''t tapped into the 5GHz band, Wi-Fi hotspots that serve those devices often don''t either. But the performance boost promised by 11ac, combined with growing demands on Wi-Fi hotspots, may prove too enticing to pass up. "It''s running on a completely different set of channels than most hotspots are currently ... so the capacity is more than doubled for the user devices there," said Greg Ennis, technical director of the Wi-Fi Alliance. Capacity is key for mobile operators, especially in crowded locations with many heavy users of mobile data. Carriers are picking up some additional frequencies through expensive auctions of private spectrum, but Wi-Fi networks running on free, unlicensed spectrum are a key element of their strategies. In busy places with heavy mobile users, such as airport lounges, the 2.4GHz band is starting to fall short, according to Yankee Group analyst Ken Rehbehn. "The older Wi-Fi bands are just hideously overcrowded right now," Rehbehn said. The 5GHz band, by contrast, has 25 distinct channels totalling about 500MHz of spectrum. It hasn''t been used as heavily for Wi-Fi and isn''t as crowded with other technologies, such as Bluetooth. It takes both network operators and device makers to embrace a new technology. The carriers, primarily, will drive adoption of 11ac in mobile, Rehbehn said. "That''s where the bets are being made," he said. Most manufacturers will follow cautiously, when it''s clear there are places where users will benefit from it, he said. AT&amp;T, Verizon Wireless and T-Mobile USA, the U.S. carriers that have invested most heavily in Wi-Fi, were not able to share any information about the types of infrastructure deployed in their hotspots.', '2013-06-24 00:48:12', 'iwnovica'),
-(81, 1, NULL, 'Ellison spills beans on Oracle&#039;s upcoming SAP HANA competitor and Database 12c plans', 'Oracle hasn''t even officially released its 12c database yet, but CEO Larry Ellison has already revealed plans for the version that will follow, 12.1c, which apparently will be Oracle''s most direct response yet to SAP''s HANA in-memory platform. Oracle Database 12.1c will be a "columnar, compressed, high-speed, in-memory database," Ellison said during Oracle''s quarterly earnings call Thursday. "One reason I was confident SAP HANA could never compete with Oracle was because of 12.1c."[ Discover what''s new in business applications with InfoWorld''s Technology: Applications newsletter. | Get the latest insight on the tech news that matters from InfoWorld''s Tech Watch blog. ] Oracle will couple 12.1c with new systems containing large amounts of DRAM, Ellison said. HANA systems also use a lot of DRAM, holding information in main memory rather than reading it off of slower storage mediums, providing a performance boost SAP has deemed remarkable. It wasn''t immediately clear Thursday when 12.1c will be released. Until now, Oracle has touted its Exadata database machine and Exalytics in-memory appliance as alternatives to HANA. SAP spokesman James Dever downplayed Ellison''s remarks, saying in an email that HANA has seen a faster relative growth rate than Exadata, and that it offers customers a broader range of capabilities. Ellison also hinted strongly Thursday that the long-anticipated launch of Oracle Database 12c may be imminent. Asked on the earnings call Thursday how 12c will affect Oracle''s license revenue growth, Ellison said the vendor will make a series of "startling" announcements next week with "the largest and most important SaaS companies and infrastructure companies in the cloud." Those vendors, including Salesforce.com and Netsuite, will be "committing to our technology for years to come," he said. Database 12c will serve as the "foundation of a modern cloud," allowing for application delivery with a higher degree of efficiency, according to Ellison. He didn''t offer many more details about next week''s announcement. Observers might be wise to temper their expectations, as many of the top SaaS (software as a service) vendors, including NetSuite and Salesforce.com, have long used Oracle''s database to build their services. It would be more surprising if they were to rip out their Oracle software, than if they upgrade it to 12c. That said, there has been some evidence that Salesforce.com is looking for alternatives to Oracle''s database, but next week''s announcement may mean those plans are on the back burner or simply not wide-scale. Version 12c incorporates the notion of "pluggable databases," which will enable multiple databases to run securely inside a single database instance. Ellison also revealed that the pluggable databases in 12c will be a "separately priced option," rather than included under annual maintenance fees. The move might not be a surprise to many customers given how many features, such as Real Application Clusters, are already licensed separately from the core database. Chris Kanaracus covers enterprise software and general technology breaking news for The IDG News Service. Chris'' email address is Chris_Kanaracus@idg.com.', '2013-06-24 00:48:12', 'iwnovica');
-
---
--- Dumping data for table `odgovor`
---
+(81, 1, NULL, 'Ellison spills beans on Oracle&#039;s upcoming SAP HANA competitor and Database 12c plans', 'Oracle hasn''t even officially released its 12c database yet, but CEO Larry Ellison has already revealed plans for the version that will follow, 12.1c, which apparently will be Oracle''s most direct response yet to SAP''s HANA in-memory platform. Oracle Database 12.1c will be a "columnar, compressed, high-speed, in-memory database," Ellison said during Oracle''s quarterly earnings call Thursday. "One reason I was confident SAP HANA could never compete with Oracle was because of 12.1c."[ Discover what''s new in business applications with InfoWorld''s Technology: Applications newsletter. | Get the latest insight on the tech news that matters from InfoWorld''s Tech Watch blog. ] Oracle will couple 12.1c with new systems containing large amounts of DRAM, Ellison said. HANA systems also use a lot of DRAM, holding information in main memory rather than reading it off of slower storage mediums, providing a performance boost SAP has deemed remarkable. It wasn''t immediately clear Thursday when 12.1c will be released. Until now, Oracle has touted its Exadata database machine and Exalytics in-memory appliance as alternatives to HANA. SAP spokesman James Dever downplayed Ellison''s remarks, saying in an email that HANA has seen a faster relative growth rate than Exadata, and that it offers customers a broader range of capabilities. Ellison also hinted strongly Thursday that the long-anticipated launch of Oracle Database 12c may be imminent. Asked on the earnings call Thursday how 12c will affect Oracle''s license revenue growth, Ellison said the vendor will make a series of "startling" announcements next week with "the largest and most important SaaS companies and infrastructure companies in the cloud." Those vendors, including Salesforce.com and Netsuite, will be "committing to our technology for years to come," he said. Database 12c will serve as the "foundation of a modern cloud," allowing for application delivery with a higher degree of efficiency, according to Ellison. He didn''t offer many more details about next week''s announcement. Observers might be wise to temper their expectations, as many of the top SaaS (software as a service) vendors, including NetSuite and Salesforce.com, have long used Oracle''s database to build their services. It would be more surprising if they were to rip out their Oracle software, than if they upgrade it to 12c. That said, there has been some evidence that Salesforce.com is looking for alternatives to Oracle''s database, but next week''s announcement may mean those plans are on the back burner or simply not wide-scale. Version 12c incorporates the notion of "pluggable databases," which will enable multiple databases to run securely inside a single database instance. Ellison also revealed that the pluggable databases in 12c will be a "separately priced option," rather than included under annual maintenance fees. The move might not be a surprise to many customers given how many features, such as Real Application Clusters, are already licensed separately from the core database. Chris Kanaracus covers enterprise software and general technology breaking news for The IDG News Service. Chris'' email address is Chris_Kanaracus@idg.com.', '2013-06-24 00:48:12', 'iwnovica'),
+(82, 4, NULL, 'fffffffffffffffffsdffsfsdfsdf', '<p>gggggggggggggggggggggggggggggggggggggsdfsdfsdff sdf sdf sdf sdfsdf</p>', '2013-12-15 20:06:38', 'vprasanje');
 
 INSERT INTO `odgovor` (`id`, `rating`) VALUES
 (1, 1);
 
---
--- Dumping data for table `odgovor_user_rated`
---
-
 INSERT INTO `odgovor_user_rated` (`odgovor_id`, `user_id`) VALUES
 (1, 1);
-
---
--- Dumping data for table `oglas`
---
 
 INSERT INTO `oglas` (`id`, `datum_zapadlosti`) VALUES
 (64, '2013-06-27'),
 (65, '2013-06-27'),
 (66, '2013-07-25');
-
---
--- Dumping data for table `rbac_permission`
---
 
 INSERT INTO `rbac_permission` (`id`, `name`) VALUES
 (12, 'datoteke_brisi'),
@@ -1412,19 +1356,11 @@ INSERT INTO `rbac_permission` (`id`, `name`) VALUES
 (4, 'vprasanje_uredi'),
 (26, 'vprasanje_vote');
 
---
--- Dumping data for table `rbac_role`
---
-
 INSERT INTO `rbac_role` (`id`, `parent_role_id`, `name`) VALUES
 (1, NULL, 'admin'),
 (2, 1, 'moderator'),
 (3, 2, 'student'),
 (4, 3, 'anonymous');
-
---
--- Dumping data for table `rbac_role_permission`
---
 
 INSERT INTO `rbac_role_permission` (`id`, `role_id`, `permission_id`) VALUES
 (1, 4, 1),
@@ -1462,18 +1398,12 @@ INSERT INTO `rbac_role_permission` (`id`, `role_id`, `permission_id`) VALUES
 (35, 4, 35),
 (36, 4, 36);
 
---
--- Dumping data for table `rbac_user_roles`
---
-
 INSERT INTO `rbac_user_roles` (`user_id`, `role_id`) VALUES
 (1, 1),
 (2, 2),
-(3, 3);
-
---
--- Dumping data for table `ucilnice`
---
+(3, 3),
+(4, 3),
+(5, 3);
 
 INSERT INTO `ucilnice` (`id`, `mapa_id`, `ime`, `top`, `left`) VALUES
 (1, 2, 'A-001', 214, 612),
@@ -1635,26 +1565,17 @@ INSERT INTO `ucilnice` (`id`, `mapa_id`, `ime`, `top`, `left`) VALUES
 (157, 21, 'G2-P1-Alfa', 185, 46),
 (158, 21, 'G2-P2-Beta', 354, 35);
 
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`id`, `email`, `username`, `vpisna_st`, `ime`, `priimek`, `password`, `datum_logina`, `enabled`, `confirmation`, `mesto`, `drzava`, `opis`, `splet`, `telefon`, `naslov`, `urnik_program`, `urnik_letnik`, `urnik_smer`) VALUES
-(1, 'admin@borkovic.com', 'admin', 'E000000', 'Admin', 'Borkovič', '$2y$14$RFN75HJ0rK4V4fAJ5jnrdeXZsiLrHAdBCuhmQY.P4dGmBDSaYZvBi', '2013-06-24 00:53:03', 1, NULL, NULL, NULL, 'To je neki dolgi opis, kao', NULL, NULL, 'To je cesta 9', 0, 0, 0),
-(2, 'moderator@borkovic.com', 'moderator', 'E000001', 'Moderator', 'Borkovich', '$2y$14$RFN75HJ0rK4V4fAJ5jnrdeXZsiLrHAdBCuhmQY.P4dGmBDSaYZvBi', '2013-05-21 20:50:40', 1, NULL, NULL, 'Slovenija', NULL, NULL, '040932921', NULL, 0, 0, 0),
-(3, 'student@borkovic.com', 'student', 'E000002', 'Študent', 'Borkovichevich', '$2y$14$RFN75HJ0rK4V4fAJ5jnrdeXZsiLrHAdBCuhmQY.P4dGmBDSaYZvBi', '2013-05-21 20:49:25', 1, NULL, 'Maribor', NULL, NULL, 'www.kreten.si', NULL, NULL, 0, 0, 0);
-
---
--- Dumping data for table `vprasanje`
---
+INSERT INTO `user` (`id`, `email`, `username`, `vpisna_st`, `ime`, `priimek`, `password`, `datum_logina`, `enabled`, `confirmation`, `mesto`, `drzava`, `opis`, `splet`, `telefon`, `naslov`, `urnik_program`, `urnik_letnik`, `urnik_smer`, `authentiator`, `secretKey`) VALUES
+(1, 'admin@borkovic.com', 'admin', 'E000001', 'Admin', 'Borkovič', '$2y$14$Y1cIYKmK6PMYfHPG994EGOrx/YYfh21POOjjlPIJ.f08RykBS2RSy', '2013-12-15 21:43:58', 1, NULL, '', '', 'To je neki dolgi opis, kao.', '', '04527117', 'To je cesta 9', 0, 0, 0, 0, 'dc640d416857fa89e64150f742b908eee6ade8cf68164b4e86807cb46b7efc89'),
+(2, 'moderator@borkovic.com', 'moderator', 'E000001', 'Moderator', 'Borkovich', '$2y$14$RFN75HJ0rK4V4fAJ5jnrdeXZsiLrHAdBCuhmQY.P4dGmBDSaYZvBi', '2013-05-21 20:50:40', 1, NULL, NULL, 'Slovenija', NULL, NULL, '040932921', NULL, 0, 0, 0, 0, 'dc640d416857fa89e64150f742b908eee6ade8cf68164b4e86807cb46b7efc88'),
+(3, 'student@borkovic.com', 'student', 'E000002', 'Študent', 'Borkovichevich', '$2y$14$RFN75HJ0rK4V4fAJ5jnrdeXZsiLrHAdBCuhmQY.P4dGmBDSaYZvBi', '2013-05-21 20:49:25', 1, NULL, 'Maribor', NULL, NULL, 'www.kreten.si', NULL, NULL, 0, 0, 0, 0, 'dc640d416857fa89e64150f742b908eee6ade8cf68164b4e86807cb46b7efc87'),
+(4, NULL, 'E1054462', 'E1054462', 'Simon', 'Žlender', '$2y$14$.5iED3t8pBx0a/riofyL1O5K06Q2bkJF8.negIlDFB9jxSQXzoW/O', '2013-12-15 19:58:57', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'dc640d416857fa89e64150f742b908eee6ade8cf68164b4e86807cb46b7efc86'),
+(5, 'profil@testiranje.com', 'profiliranje', NULL, 'Profiliranje', 'Testiranje', '$2y$14$PJ3W.OFVddQr/eCcPPBCouadXXmYr.zP/OHyhbPHu88Y9W8NaOBOe', NULL, 1, NULL, 'Mesta', '', 'Nekaj', '', '', 'Brez', NULL, NULL, NULL, 0, 'dc640d416857fa89e64150f742b908eee6ade8cf68164b4e86807cb46b7efc85');
 
 INSERT INTO `vprasanje` (`id`, `rating`) VALUES
 (67, 2),
-(68, 0);
-
---
--- Dumping data for table `vprasanje_user_rated`
---
+(68, 0),
+(82, 0);
 
 INSERT INTO `vprasanje_user_rated` (`vprasanje_id`, `user_id`) VALUES
 (67, 1),

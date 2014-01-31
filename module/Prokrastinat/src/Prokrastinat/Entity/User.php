@@ -39,6 +39,12 @@ class User extends BaseEntity
 
     /** @ORM\Column(type="boolean") */
     protected $enabled = true;
+    
+    /** @ORM\Column(type="boolean") */
+    protected $authentiator = false;
+    
+    /** @ORM\Column(length=100, nullable=true) */
+    protected $secretKey;
 
     /** @ORM\Column(length=32, nullable=true) */
     protected $confirmation;

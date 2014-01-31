@@ -32,6 +32,15 @@ class LoginForm extends Form {
                 'required' => true,
             )
         ));
+        
+        $this->add(array(
+            'name' => 'authcode',
+            'type' => 'Text',
+            'options' => array(
+                'label' => 'Authenticator code (opcijsko)',
+                'required' => true,
+            ),
+        ));
 
         $this->add(array(
             'name' => 'submit',

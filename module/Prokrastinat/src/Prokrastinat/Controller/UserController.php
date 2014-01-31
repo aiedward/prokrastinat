@@ -46,11 +46,21 @@ class UserController extends BaseController
             if ($form->isValid()) {
                 $username = $form->get('username')->getValue();
                 $password = $form->get('password')->getValue();
+                $authcode = $form->get('authcode')->getValue();
+                $validAuth = true;
+                $user = $this->userRepository->findOneBy(array('username' => $username));
+                if($user != null){
+                    if($user->authentiator)
+                    {
+                        $genauth = $this->userRepository->generateAuthcode($user);
+                        if($authcode != $genauth)
+                            $validAuth = false;
+                    }
+                }
 
                 // ce je uporabnik v aipsu, ga prenesmo ali posodobimo v nasi bazi
                 $aips_user = $this->studijRepository->findOneBy(array('VpisnaStevilka' => $username));
                 if ($aips_user) {
-                    $user = $this->userRepository->findOneBy(array('username' => $username));
 
                     // prvi login, dodamo student role
                     if ($user == null) { 
@@ -62,28 +72,35 @@ class UserController extends BaseController
                     $this->userRepository->syncUser($aips_user, $user);
                     $this->em->flush();
                 }
+                
+                if($validAuth)
+                {
+                    // uporabnika avtenticiramo
+                    $adapter = $this->authService->getAdapter();
+                    $adapter->setIdentityValue($username);
+                    $adapter->setCredentialValue($password);
+                    $result = $this->authService->authenticate();
 
-                // uporabnika avtenticiramo
-                $adapter = $this->authService->getAdapter();
-                $adapter->setIdentityValue($username);
-                $adapter->setCredentialValue($password);
-                $result = $this->authService->authenticate();
+                    if ($result->isValid()) {
+                        $user = $this->authService->getIdentity();
+                        $first = ($user->datum_logina == null);
+                        $user->datum_logina = new \DateTime("now");
+                        $this->em->persist($user);
+                        $this->em->flush();
 
-                if ($result->isValid()) {
-                    $user = $this->authService->getIdentity();
-                    $first = ($user->datum_logina == null);
-                    $user->datum_logina = new \DateTime("now");
-                    $this->em->persist($user);
-                    $this->em->flush();
-
-                    if ($first) {
-                        return $this->redirect()->toRoute('user', array('action' => 'edit', 'id' => $user->id));
+                        if ($first) {
+                            return $this->redirect()->toRoute('user', array('action' => 'edit', 'id' => $user->id));
+                        } else {
+                            return $this->redirect()->toRoute('home');
+                        }
                     } else {
-                        return $this->redirect()->toRoute('home');
+                        $form->get('password')->setMessages(array(
+                            'Kombinacija uporabniškega imena in gesla je napačna'
+                        ));
                     }
-                } else {
-                    $form->get('password')->setMessages(array(
-                        'Kombinacija uporabniškega imena in gesla je napačna'
+                }else{
+                    $form->get('authcode')->setMessages(array(
+                            'Neveljavnja avtentikacijska koda'
                     ));
                 }
             }

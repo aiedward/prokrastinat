@@ -42,9 +42,9 @@ class DodajKategorijoForm extends Form
         ));
     }
     
-    public function fill(Kategorija $k)
+    public function fill(Kategorija $kat)
     {
-        $this->get('id')->setValue($k->id);
-        $this->get('ime')->setValue($k->ime);
+        $this->get('id')->setValue($kat->id);
+        $this->get('ime')->setValue($kat->ime);
     }
 }

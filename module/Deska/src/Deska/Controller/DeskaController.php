@@ -204,7 +204,6 @@ class DeskaController extends BaseController
         $kategorija = $this->em->find('Prokrastinat\Entity\Kategorija', $id);
         
         $this->kategorija_repository = $this->em->getRepository('Prokrastinat\Entity\Kategorija');
-        $options = $this->kategorija_repository->getKategorijeInArray();
         
         $form = new DodajKategorijoForm();
         $form->get('dodaj')->setAttribute('Value', 'Uredi');

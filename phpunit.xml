@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="init_autoloader.php" colors="true">
+    <testsuites>
+        <testsuite name="prokrastinat">
+            <directory>./module/Prokrastinat/test/Prokrastinat</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

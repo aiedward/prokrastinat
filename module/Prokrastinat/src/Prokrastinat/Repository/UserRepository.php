@@ -153,7 +153,11 @@ class UserRepository extends EntityRepository
         $user->opis = $form->get('opis')->getValue();
         $user->splet = $form->get('splet')->getValue();
         $user->telefon = $form->get('telefon')->getValue();
-        $user->authenticator = false;
+        
+        $authenticator = false;
+        if($form->get('authenticator')->isChecked())
+            $authenticator = true;
+        $user->authentiator = $authenticator;
         
         $secret = "";
         for($i=0; $i < 32; $i++)

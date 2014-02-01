@@ -126,7 +126,7 @@ class EditForm extends Form {
             'name' => 'authenticator',
             'options' => array(
                 'label' => 'Authenticator',
-                'checked_value' => true,
+                'checked_value' => '1',
                 'unchecked_value' => false
             )
          ));

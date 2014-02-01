@@ -181,7 +181,7 @@ class UserController extends BaseController
                 $form = new \Prokrastinat\Form\EditForm($roles, $userRoles);
             }else
             {
-                $form = new \Prokrastinat\Form\EditForm(null, null);   
+                $form = new \Prokrastinat\Form\EditForm(null, null);
             }
             
             if($user->authentiator)

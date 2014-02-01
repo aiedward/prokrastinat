@@ -125,18 +125,18 @@ class IndexController extends BaseController
     
             $besede = $this->em->getRepository('Prokrastinat\Entity\Beseda')->getBesede($search_strings);
             
-            foreach ($besede as $b) {
-                foreach ($b->objave as $o) {
-                    var_dump($o->objava);
-                    if (key_exists($o->objava->id, $objave)) {
-                        $objave[$o->objava->id]['idf'] += $b->idf * $o->tf;
+            foreach ($besede as $bes) {
+                foreach ($bes->objave as $obj) {
+                    var_dump($obj->objava);
+                    if (key_exists($obj->objava->id, $objave)) {
+                        $objave[$obj->objava->id]['idf'] += $bes->idf * $obj->tf;
                     } else {
-                        $objave[$o->objava->id] = array('idf' => $b->idf * $o->tf, 'objava' => $o->objava);
+                        $objave[$obj->objava->id] = array('idf' => $bes->idf * $obj->tf, 'objava' => $obj->objava);
                     }
                 }
             }
-            usort($results, function($a, $b) {
-                return strcmp($b->TFIDF(), $a->TFIDF());
+            usort($results, function($avred, $bvred) {
+                return strcmp($bvred->TFIDF(), $avred->TFIDF());
             });
         }
         

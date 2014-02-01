@@ -246,7 +246,6 @@ class DeskaController extends BaseController
         $this->em->flush();
         
         return $this->redirect()->toRoute('deska');
-        
     }
 }
 ?>

@@ -64,6 +64,6 @@
     <div class="modal-footer">
         
         <a href="javascript:$('#modal-brisanje').modal('hide')" class="btn secondary">Ne</a>
-        <a href="/deska/brisi/id" class="btn danger btn-primary">Da</a>
+        <a href="<?=$this->url('deska', array('action' => 'brisi', 'id' => $oglas->id))?>" class="btn danger btn-primary">Da</a>
     </div>
 </div>  

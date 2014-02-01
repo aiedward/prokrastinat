@@ -143,6 +143,11 @@ class EditForm extends Form {
                     'value' => $userRoles
                 )
             ));
+        }else{
+             $this->add(array(
+                'name' => 'vloge',
+                'type' => 'Hidden'
+            ));
         }
 
         //GUMB

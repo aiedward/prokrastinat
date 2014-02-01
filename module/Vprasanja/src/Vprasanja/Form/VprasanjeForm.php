@@ -116,7 +116,6 @@ class VprasanjeForm extends Form {
 
     public function fill(Vprasanje $vprasanje) {
         $this->setData(array(
-            'id' => $odgovor->id,
             'naslov' => $vprasanje->naslov,
             'vsebina' => $vprasanje->vsebina
         ));

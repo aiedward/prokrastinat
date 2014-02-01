@@ -15,8 +15,8 @@ class VprasanjeController extends BaseController
     /** @var Vprasanja\Repository\VprasanjeRepository */
     protected $vprasanjeRepository;
 
-    /** @var Vprasanja\Repository\StackVprasanjeRepository */
-    protected $stackVprasanjeRepository;
+    /** @var Vprasanja\Repository\stackVprasanjeRep */
+    protected $stackVprasanjeRep;
 
     /** @var Vprasanja\Repository\OdgovorRepository */
     protected $odgovorRepository;
@@ -26,7 +26,7 @@ class VprasanjeController extends BaseController
         parent::setEventManager($events);
 
         $this->vprasanjeRepository = $this->em->getRepository('Vprasanja\Entity\Vprasanje');
-        $this->stackVprasanjeRepository = $this->em->getRepository('Vprasanja\Entity\StackVprasanje');
+        $this->stackVprasanjeRep = $this->em->getRepository('Vprasanja\Entity\StackVprasanje');
         $this->odgovorRepository = $this->em->getRepository('Vprasanja\Entity\Odgovor');
      }
 
@@ -47,7 +47,7 @@ class VprasanjeController extends BaseController
         else if ($tip == 'mesec')
             $vprasanja = $this->vprasanjeRepository->findTopMonthly();
         else if ($tip == 'stackoverflow')
-            $vprasanja = $this->stackVprasanjeRepository->findTopWeekly();
+            $vprasanja = $this->stackVprasanjeRep->findTopWeekly();
         else
             throw new \Exception('Neznani tip izpisa vprašanj');
 
@@ -73,7 +73,7 @@ class VprasanjeController extends BaseController
             $rating = count($vprasanje->users_rated);
             $has_rated = $vprasanje->users_rated->contains($user);
         } else {
-            $vprasanje = $this->stackVprasanjeRepository->find($id);
+            $vprasanje = $this->stackVprasanjeRep->find($id);
             $rating = $vprasanje->rating;
         }
         

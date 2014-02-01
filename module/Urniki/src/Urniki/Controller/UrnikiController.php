@@ -55,9 +55,7 @@ class UrnikiController extends BaseController
         $smer_repository = $em->getRepository('Urniki\Entity\TBBranch');
         //$program_repository = $em->getRepository('Urniki\Entity\TBProgram');
         $week_repository = $em->getRepository('Urniki\Entity\TBWeek');
-        
-        $program = $this->getEvent()->getRouteMatch()->getParam("program");
-        $letnik = $this->getEvent()->getRouteMatch()->getParam("letnik");
+
         $smer = $this->getEvent()->getRouteMatch()->getParam("smer");
         $datum = new \DateTime($this->getEvent()->getRouteMatch()->getParam("datum"));
         

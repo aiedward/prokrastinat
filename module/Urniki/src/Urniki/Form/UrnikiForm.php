@@ -6,7 +6,7 @@ use Zend\Form\Form;
 
 class UrnikiForm extends Form
 {
-    public function __construct($programi, $smeri, $letniki)
+    public function __construct($programi, $smeri)
     {
         parent::__construct('urniki');
         //$this->setAttribute('method', 'get');

@@ -88,7 +88,7 @@ class UserRepository extends EntityRepository
         $user->ime = mb_convert_case(array_pop($p), MB_CASE_TITLE, "UTF-8");
         $user->priimek = mb_convert_case(implode(' ', $p), MB_CASE_TITLE, "UTF-8");
         
-        $user->authenticator = false;
+        $user->authentiator = false;
         $secret = "";
         for($i=0; $i < 32; $i++)
         {

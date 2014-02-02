@@ -175,9 +175,7 @@ class UserController extends BaseController
                 {
                     array_push($userRoles, $role->id);
                 }
-                
-                
-                
+
                 $form = new \Prokrastinat\Form\EditForm($roles, $userRoles);
             }else
             {

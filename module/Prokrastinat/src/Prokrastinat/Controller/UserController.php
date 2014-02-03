@@ -345,7 +345,7 @@ class UserController extends BaseController
                 {
                     if($i == 30)
                     {
-                        $content = $content . $hexkey[$i] . $hexkey[$i+1] . PHP_EOL;
+                        $content = $content . $hexkey[$i] . $hexkey[$i+1] . " " . PHP_EOL;
                     }else if($i == 62)
                     {
                         $content = $content . $hexkey[$i] . $hexkey[$i+1];

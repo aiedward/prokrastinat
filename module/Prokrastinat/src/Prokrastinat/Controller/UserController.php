@@ -328,4 +328,44 @@ class UserController extends BaseController
                     'form' => $form,
                 ));
         }
+        
+        public function keydownloadAction()
+        {
+            if (!$this->auth->hasIdentity()) $this->dostopZavrnjen();       
+            $id = $this->getEvent()->getRouteMatch()->getParam('id');
+            $user = $this->userRepository->find($id);
+            
+            if ($this->imaPravico('user_uredi', $user))
+            {       
+                $content = "";
+                $hexkey = $user->secretKey;
+                $response = $this->getResponse();
+                
+                for($i=0; $i < 64; $i=$i+2)
+                {
+                    if($i == 30)
+                    {
+                        $content = $content . $hexkey[$i] . $hexkey[$i+1] . PHP_EOL;
+                    }else if($i == 62)
+                    {
+                        $content = $content . $hexkey[$i] . $hexkey[$i+1];
+                    }else
+                    {
+                        $content = $content . $hexkey[$i] . $hexkey[$i+1] . " ";
+                    }
+                }
+                
+                $response->setContent($content);
+                $headers = $response->getHeaders();
+                $headers->clearHeaders()
+                    ->addHeaderLine('Content-Type', 'text/plain')
+                    ->addHeaderLine('Content-Disposition', 'attachment; filename="kljuc.key"');
+                    //->addHeaderLine('Content-Length', strlen($fileContents));
+                
+                return $response;
+            } else {
+                return $this->dostopZavrnjen();
+            }
+            
+        }
 }

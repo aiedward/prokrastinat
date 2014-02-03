@@ -155,6 +155,19 @@ return array(
                     ),
                 ),
             ),
+            'user_key' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/user/edit/:id/key',
+                    'constraints' => array(
+                        'id' => '[0-9]+'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Prokrastinat\Controller\User',
+                        'action' => 'keydownload',
+                    ),
+                ),
+            ),
         ),
     ),
     'view_manager' => array(
